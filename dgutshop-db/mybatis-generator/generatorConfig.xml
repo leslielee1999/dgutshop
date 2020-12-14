@@ -65,17 +65,61 @@
 <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
 <!--        </table>-->
 
+<!--        <table tableName="dgutshop_admin">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
 
+<!--        <table tableName="dgutshop_role">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
 
-        <table tableName="dgutshop_category">
+<!--        <table tableName="dgutshop_category">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+
+<!--        <table tableName="dgutshop_category_item">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+
+<!--        <table tableName="dgutshop_topping">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+
+<!--        <table tableName="dgutshop_activity">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+
+<!--        <table tableName="dgutshop_address">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+
+<!--        <table tableName="dgutshop_order">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+
+<!--        <table tableName="dgutshop_order_item">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--            <columnOverride column="topping_id" javaType="java.lang.Integer[]"-->
+<!--                            typeHandler="org.dgutstu.dgutshop.db.util.JsonIntegerArrayTypeHandler"/>-->
+<!--            <columnOverride column="topping_name" javaType="java.lang.String[]"-->
+<!--                            typeHandler="org.dgutstu.dgutshop.db.util.JsonStringArrayTypeHandler"/>-->
+<!--        </table>-->
+
+<!--        <table tableName="dgutshop_user">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+
+<!--        <table tableName="dgutshop_address">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+
+<!--        <table tableName="dgutshop_slideshow">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+
+        <table tableName="dgutshop_log">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
-
-        <table tableName="dgutshop_category_item">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
-
-
     </context>
 
-</generatorConfiguration>K
+</generatorConfiguration>

@@ -87,4 +87,8 @@ public class ResponseUtil {
     public static Object badArgument(){
         return fail(401, "参数不对");
     }
+
+    public static Object updatedDataFailed() {
+        return fail(505, "更新数据失败");
+    }
 }

@@ -1,5 +1,7 @@
 package org.dgutstu.dgutshop.admin.controller;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.dgutstu.dgutshop.admin.service.AdminProductService;
 import org.dgutstu.dgutshop.core.validator.Order;
 import org.dgutstu.dgutshop.core.validator.Sort;
@@ -18,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @Validated  //完成前后台交互的HTTP参数校验
 //自定义两个校验注解@Sort与@Order
 public class AdminProductController {
-
+    private final Log logger = LogFactory.getLog(AdminProductController.class);
     @Autowired
     private AdminProductService productService;
 

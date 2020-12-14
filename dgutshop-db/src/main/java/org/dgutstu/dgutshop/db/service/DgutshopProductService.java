@@ -76,7 +76,7 @@ public class DgutshopProductService {
     }
 
     /**
-     * 更新一种饮品信息
+     * 编辑一种饮品信息
      * @param product
      * @return
      */
