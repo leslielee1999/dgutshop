@@ -8,10 +8,10 @@
 3.  根据饮品名查询某种饮品
 `GET http://localhost:8083/admin/products/list?name=`
 * 关于分页
-    * 指定页数（默认为第1页）：`GET http://localhost:8083/admin/products/list?page=`
-    * 指定每页获得多少种饮品（默认为10种）：`GET http://localhost:8083/admin/products/list?limit=`
-    * 排序方式默认为降序，也可以指定为升序：`GET http://localhost:8083/admin/products/list?limit=`
-    * 排序字段默认为id，也可以指定为按日期：`GET http://localhost:8083/admin/products/list?limit=`
+    * 指定页数（默认为第1页）：<br/>`GET http://localhost:8083/admin/products/list?page=`
+    * 指定每页获得多少种饮品（默认为10种）：<br/>`GET http://localhost:8083/admin/products/list?limit=`
+    * 排序方式默认为降序，也可以指定为升序：<br/>`GET http://localhost:8083/admin/products/list?limit=`
+    * 排序字段默认为id，也可以指定为按日期：<br/>`GET http://localhost:8083/admin/products/list?limit=`
 
 #### 1.2 增加功能
 * 传递json
@@ -64,4 +64,62 @@
       "deleted": 0
     }
     ```
+### 二、管理员管理
+#### 2.1 查询功能
+1.  列举所有管理员：
+`GET http://localhost:8083/admin/admin/list`
+2.  根据账户名查询某个员工（模糊查询）
+`GET http://localhost:8083/admin/admin/list?nickname`
+3.  根据真实姓名查询某个员工（模糊查询）
+`GET http://localhost:8083/admin/admin/list?name`
+* 关于分页
+    * 指定页数（默认为第1页）：<br/>`GET http://localhost:8083/admin/admin/list?page=`
+    * 指定每页获得多少种饮品（默认为10种）：<br/>`GET http://localhost:8083/admin/admin/list?limit=`
+    * 排序方式默认为降序，也可以指定为升序：<br/>`GET http://localhost:8083/admin/admin/list?limit=`
+    * 排序字段默认为id，也可以指定为按日期：<br/>`GET http://localhost:8083/admin/admin/list?limit=`
+#### 2.2 增加功能
+* nickname：昵称，用作登录账号，范围必须为6~20
+* 传递json
+    ```
+    POST http://localhost:8083/admin/admin/create
+    Content-Type: application/json
+    
+    {
+      "id": 3,
+      "roleId": 1,
+      "name": "林一",
+      "nickname": "liyiiii",
+      "password": "11231123",
+      "code": "dgut-4",
+      "picture":"http://yanxuan.nosdn.127.net/8ab2d3287af0cefa2cc539e40600621d.png",
+      "create_time": null,
+      "update_time": null,
+      "lastLoginIp": null,
+      "lastLoginTime": null,
+      "deleted": 0
+    }
+    ```
+#### 2.3 删除功能
+* 给个id字段即可：`POST http://localhost:8083/admin/admin/delete?id=`
 
+#### 2.4 修改功能
+* 传递json
+    ```
+    POST http://localhost:8083/admin/admin/update
+    Content-Type: application/json
+    
+    {
+      "id": 1,
+      "roleId": 1,
+      "name": "林一",
+      "nickname": "linyiii",
+      "password": "11231123",
+      "code": "dgut-1",
+      "picture":"http://yanxuan.nosdn.127.net/8ab2d3287af0cefa2cc539e40600621d.png",
+      "create_time": null,
+      "update_time": null,
+      "lastLoginIp": null,
+      "lastLoginTime": null,
+      "deleted": 0
+    }
+    ```
