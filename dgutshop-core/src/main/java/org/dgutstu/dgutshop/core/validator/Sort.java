@@ -10,7 +10,7 @@ import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 /**
  * @Author: leesk
- * @Description:校验用户请求参数值只能是add_time或者id
+ * @Description:校验用户请求参数值只能是create_time或者id
  * @Date: Create in 19:29 2020/12/12
  */
 @Target({METHOD, FIELD, PARAMETER})
