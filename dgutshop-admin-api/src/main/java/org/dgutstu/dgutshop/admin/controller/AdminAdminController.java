@@ -58,10 +58,12 @@ public class AdminAdminController {
         if (StringUtils.isEmpty(code)) {
             return ResponseUtil.badArgument();
         }
-        String password = dgutshopAdmin.getPassword();
-        if (StringUtils.isEmpty(password) || password.length() < 6) {
-            return ResponseUtil.fail(ADMIN_INVALID_PASSWORD, "管理员密码长度不能小于6");
-        }
+
+
+//        String password = dgutshopAdmin.getPassword();
+//        if (StringUtils.isEmpty(password) || password.length() < 6) {
+//            return ResponseUtil.fail(ADMIN_INVALID_PASSWORD, "管理员密码长度不能小于6");
+//        }
 
         //  如果需要添加其它限制可以继续添加
         //  ...
@@ -81,6 +83,7 @@ public class AdminAdminController {
         if (adminList.size() > 0) {
             return ResponseUtil.fail(ADMIN_NAME_EXIST, "管理员已经存在");
         }
+
 
         String rawPassword = admin.getPassword();
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
