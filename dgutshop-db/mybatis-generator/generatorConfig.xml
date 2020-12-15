@@ -73,21 +73,21 @@
 <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
 <!--        </table>-->
 
-<!--        <table tableName="dgutshop_category">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
+        <table tableName="dgutshop_category">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
 
-<!--        <table tableName="dgutshop_category_item">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
+        <table tableName="dgutshop_category_item">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
 
 <!--        <table tableName="dgutshop_topping">-->
 <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
 <!--        </table>-->
 
-<!--        <table tableName="dgutshop_activity">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
+        <table tableName="dgutshop_activity">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
 
 <!--        <table tableName="dgutshop_address">-->
 <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
@@ -113,13 +113,13 @@
 <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
 <!--        </table>-->
 
-<!--        <table tableName="dgutshop_slideshow">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-
-        <table tableName="dgutshop_log">
+        <table tableName="dgutshop_slideshow">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
+
+<!--        <table tableName="dgutshop_log">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
     </context>
 
 </generatorConfiguration>

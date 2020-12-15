@@ -23,7 +23,7 @@ import java.util.List;
 @Service
 public class DgutshopAdminService {
     //  限制返回前台的数据，不允许展示密码等私人信息
-    private final Column[] result = new Column[]{Column.id, Column.name, Column.nickname, Column.picture, Column.roleId};
+    private final Column[] result = new Column[]{Column.id, Column.name, Column.nickname, Column.code, Column.picture, Column.roleId, Column.createTime, Column.updateTime, Column.lastLoginIp, Column.lastLoginTime};
     @Autowired
     private DgutshopAdminMapper adminMapper;
 
@@ -109,5 +109,12 @@ public class DgutshopAdminService {
         example.or().andNameEqualTo(name).andDeletedEqualTo(false);
         return adminMapper.selectByExample(example);
     }
+
+    public List<DgutshopAdmin> all(){
+        DgutshopAdminExample example = new DgutshopAdminExample();
+        example.or().andDeletedEqualTo(false);
+        return adminMapper.selectByExample(example);
+    }
+
 
 }
