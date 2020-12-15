@@ -29,7 +29,8 @@ public class AdminResponseCode {
     public static final Integer ROLE_USER_EXIST = 642;
     public static final Integer CATEGORY_NAME_EXIST = 650;
     public static final Integer CATEGORY_INDEX_EXIST = 651;
-    public static final Integer GROUPON_GOODS_OFFLINE = 652;
+    public static final Integer CATEGORYITEM_NAME_EXIST = 652;
+    public static final Integer CATEGORYITEM_INDEX_EXIST = 653;
     public static final Integer NOTICE_UPDATE_NOT_ALLOWED = 660;
     public static final Integer AFTERSALE_NOT_ALLOWED = 670;
 }

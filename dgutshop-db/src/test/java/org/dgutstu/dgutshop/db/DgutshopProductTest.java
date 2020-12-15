@@ -1,6 +1,7 @@
 package org.dgutstu.dgutshop.db;
 
 import org.dgutstu.dgutshop.db.domain.DgutshopProduct;
+import org.dgutstu.dgutshop.db.service.DgutshopCategoryItemService;
 import org.dgutstu.dgutshop.db.service.DgutshopProductService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,6 +29,8 @@ public class DgutshopProductTest {
 
     @Autowired
     private DgutshopProductService dgutshopProductService;
+    @Autowired
+    private DgutshopCategoryItemService categoryItemService;
 
     @Test
     public void test(){
@@ -41,5 +44,10 @@ public class DgutshopProductTest {
         DgutshopProduct product = new DgutshopProduct();
         product.setCode("kkk");
         product.setBigOriginalPrice(new BigDecimal(4));
+    }
+
+    @Test
+    public void list(){
+
     }
 }

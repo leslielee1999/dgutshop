@@ -91,5 +91,13 @@ public class DgutshopProductService {
         return productMapper.countByExample(example) != 0;
     }
 
+    /**
+     * 根据产品id获取某个产品
+     * @param id
+     * @return
+     */
+    public DgutshopProduct get(int id){
+        return productMapper.selectByPrimaryKey(id);
+    }
 
 }
