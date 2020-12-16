@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.dgutstu.dgutshop.db.dao.OrderMapper">
+<!--    <update id="updateWithOptimisticLocker" parameterType="map">-->
+<!--        update litemall_order-->
+<!--        <set>-->
+<!--            <if test="order.id != null">-->
+<!--                id = #{order.id,jdbcType=INTEGER},-->
+<!--            </if>-->
+<!--            <if test="order.userId != null">-->
+<!--                user_id = #{order.userId,jdbcType=INTEGER},-->
+<!--            </if>-->
+<!--            <if test="order.orderSn != null">-->
+<!--                order_sn = #{order.orderSn,jdbcType=VARCHAR},-->
+<!--            </if>-->
+<!--            <if test="order.orderStatus != null">-->
+<!--                order_status = #{order.orderStatus,jdbcType=SMALLINT},-->
+<!--            </if>-->
+<!--            <if test="order.aftersaleStatus != null">-->
+<!--                aftersale_status = #{order.aftersaleStatus,jdbcType=SMALLINT},-->
+<!--            </if>-->
+<!--            <if test="order.consignee != null">-->
+<!--                consignee = #{order.consignee,jdbcType=VARCHAR},-->
+<!--            </if>-->
+<!--            <if test="order.mobile != null">-->
+<!--                mobile = #{order.mobile,jdbcType=VARCHAR},-->
+<!--            </if>-->
+<!--            <if test="order.address != null">-->
+<!--                address = #{order.address,jdbcType=VARCHAR},-->
+<!--            </if>-->
+<!--            <if test="order.message != null">-->
+<!--                message = #{order.message,jdbcType=VARCHAR},-->
+<!--            </if>-->
+<!--            <if test="order.goodsPrice != null">-->
+<!--                goods_price = #{order.goodsPrice,jdbcType=DECIMAL},-->
+<!--            </if>-->
+<!--            <if test="order.freightPrice != null">-->
+<!--                freight_price = #{order.freightPrice,jdbcType=DECIMAL},-->
+<!--            </if>-->
+<!--            <if test="order.couponPrice != null">-->
+<!--                coupon_price = #{order.couponPrice,jdbcType=DECIMAL},-->
+<!--            </if>-->
+<!--            <if test="order.integralPrice != null">-->
+<!--                integral_price = #{order.integralPrice,jdbcType=DECIMAL},-->
+<!--            </if>-->
+<!--            <if test="order.grouponPrice != null">-->
+<!--                groupon_price = #{order.grouponPrice,jdbcType=DECIMAL},-->
+<!--            </if>-->
+<!--            <if test="order.orderPrice != null">-->
+<!--                order_price = #{order.orderPrice,jdbcType=DECIMAL},-->
+<!--            </if>-->
+<!--            <if test="order.actualPrice != null">-->
+<!--                actual_price = #{order.actualPrice,jdbcType=DECIMAL},-->
+<!--            </if>-->
+<!--            <if test="order.payId != null">-->
+<!--                pay_id = #{order.payId,jdbcType=VARCHAR},-->
+<!--            </if>-->
+<!--            <if test="order.payTime != null">-->
+<!--                pay_time = #{order.payTime,jdbcType=TIMESTAMP},-->
+<!--            </if>-->
+<!--            <if test="order.shipSn != null">-->
+<!--                ship_sn = #{order.shipSn,jdbcType=VARCHAR},-->
+<!--            </if>-->
+<!--            <if test="order.shipChannel != null">-->
+<!--                ship_channel = #{order.shipChannel,jdbcType=VARCHAR},-->
+<!--            </if>-->
+<!--            <if test="order.shipTime != null">-->
+<!--                ship_time = #{order.shipTime,jdbcType=TIMESTAMP},-->
+<!--            </if>-->
+<!--            <if test="order.refundAmount != null">-->
+<!--                refund_amount = #{order.refundAmount,jdbcType=DECIMAL},-->
+<!--            </if>-->
+<!--            <if test="order.refundType != null">-->
+<!--                refund_type = #{order.refundType,jdbcType=VARCHAR},-->
+<!--            </if>-->
+<!--            <if test="order.refundContent != null">-->
+<!--                refund_content = #{order.refundContent,jdbcType=VARCHAR},-->
+<!--            </if>-->
+<!--            <if test="order.refundTime != null">-->
+<!--                refund_time = #{order.refundTime,jdbcType=TIMESTAMP},-->
+<!--            </if>-->
+<!--            <if test="order.confirmTime != null">-->
+<!--                confirm_time = #{order.confirmTime,jdbcType=TIMESTAMP},-->
+<!--            </if>-->
+<!--            <if test="order.comments != null">-->
+<!--                comments = #{order.comments,jdbcType=SMALLINT},-->
+<!--            </if>-->
+<!--            <if test="order.endTime != null">-->
+<!--                end_time = #{order.endTime,jdbcType=TIMESTAMP},-->
+<!--            </if>-->
+<!--            <if test="order.addTime != null">-->
+<!--                add_time = #{order.addTime,jdbcType=TIMESTAMP},-->
+<!--            </if>-->
+<!--            <if test="order.updateTime != null">-->
+<!--                update_time = #{order.updateTime,jdbcType=TIMESTAMP},-->
+<!--            </if>-->
+<!--            <if test="order.deleted != null">-->
+<!--                deleted = #{order.deleted,jdbcType=BIT},-->
+<!--            </if>-->
+<!--        </set>-->
+<!--        where id = #{order.id,jdbcType=INTEGER} and update_time = #{lastUpdateTime,jdbcType=INTEGER}-->
+<!--    </update>-->
+
+    <select id="getOrderIds" resultType="hashmap">
+        select o.id, o.create_time
+        from dgutshop_order o
+        left join dgutshop_user u
+        on o.user_id = u.id
+        left join dgutshop_order_item oi
+        on o.id = oi.oid
+        <where>
+            <if test="query != null">
+                ${query}
+            </if>
+        </where>
+        group by o.id
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <resultMap type="org.dgutstu.dgutshop.db.domain.OrderVo" id="orderList">
+        <id column="id" property="id"/>
+        <result column="code" property="code"/>
+        <result column="type" property="type"/>
+        <result column="order_status" property="orderStatus"/>
+        <result column="product_price" property="productPrice"/>
+        <result column="delivery_price" property="deliveryPrice"/>
+        <result column="order_price" property="orderPrice"/>
+        <result column="create_time" property="createTime"/>
+        <result column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+        <result column="consignee" property="consignee"/>
+        <result column="consignee_address" property="consigneeAddress"/>
+        <result column="consignee_room" property="consigneeRoom"/>
+        <result column="consignee_phone" property="consigneePhone"/>
+        <result column="delivery_company" property="deliveryCompany"/>
+        <result column="delivery_code" property="deliveryCode"/>
+        <result column="message" property="message"/>
+        <result column="pay_date" property="payDate"/>
+
+        <collection property="orderItemList" ofType="org.dgutstu.dgutshop.db.domain.DgutshopOrderItem">
+            <id column="id" jdbcType="INTEGER" property="id" />
+            <result column="oid" jdbcType="INTEGER" property="oid" />
+            <result column="pid" jdbcType="INTEGER" property="pid" />
+            <result column="product_name" jdbcType="VARCHAR" property="productName" />
+            <result column="size" jdbcType="TINYINT" property="size" />
+            <result column="product_original_price" jdbcType="DECIMAL" property="productOriginalPrice" />
+            <result column="product_promote_price" jdbcType="DECIMAL" property="productPromotePrice" />
+            <result column="topping_id" jdbcType="VARCHAR" property="toppingId" typeHandler="org.dgutstu.dgutshop.db.util.JsonIntegerArrayTypeHandler" />
+            <result column="topping_name" jdbcType="VARCHAR" property="toppingName" typeHandler="org.dgutstu.dgutshop.db.util.JsonStringArrayTypeHandler" />
+            <result column="topping_price" jdbcType="DECIMAL" property="toppingPrice" />
+            <result column="product_actual_price" jdbcType="DECIMAL" property="productActualPrice" />
+            <result column="product_picture" jdbcType="VARCHAR" property="productPicture" />
+            <result column="sum" jdbcType="INTEGER" property="sum" />
+            <result column="note" jdbcType="VARCHAR" property="note" />
+            <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+            <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+            <result column="deleted" jdbcType="BIT" property="deleted" />
+        </collection>
+    </resultMap>
+    <select id="getOrderList" resultMap="orderList">
+        select o.id, o.code, o.type, o.order_status, o.product_price, o.delivery_price, o.order_price, o.create_time,
+        o.consignee, o.consignee_address, o.consignee_room, o.consignee_phone, o.delivery_company, o.delivery_code,o.message, o.pay_date,
+        u.id, user_id, u.nickname user_name,
+        oi.id, oid, oi.pid, oi.product_name, oi.size, oi.product_original_price, oi.product_promote_price, oi.topping_id, oi.topping_name
+        , oi.topping_price, oi.product_actual_price, oi.product_picture, oi.sum, oi.note, oi.create_time, oi.update_time, oi.deleted
+        from dgutshop_order o
+        left join dgutshop_user u
+        on o.user_id = u.id
+        left join dgutshop_order_item oi
+        on o.id = oi.oid
+        left join dgutshop_product p
+        on oi.pid = p.id
+        <where>
+            <if test="query != null">
+                ${query}
+            </if>
+        </where>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+</mapper>

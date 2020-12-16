@@ -20,6 +20,8 @@
     <result column="product_picture" jdbcType="VARCHAR" property="productPicture" />
     <result column="sum" jdbcType="INTEGER" property="sum" />
     <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -171,7 +173,7 @@
     -->
     id, oid, pid, product_name, `size`, product_original_price, product_promote_price, 
     topping_id, topping_name, topping_price, product_actual_price, product_picture, `sum`, 
-    note, deleted
+    note, create_time, update_time, deleted
   </sql>
   <select id="selectByExample" parameterType="org.dgutstu.dgutshop.db.domain.DgutshopOrderItemExample" resultMap="BaseResultMap">
     <!--
@@ -297,13 +299,15 @@
       topping_id, 
       topping_name, 
       topping_price, product_actual_price, product_picture, 
-      `sum`, note, deleted)
+      `sum`, note, create_time, 
+      update_time, deleted)
     values (#{oid,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{productName,jdbcType=VARCHAR}, 
       #{size,jdbcType=TINYINT}, #{productOriginalPrice,jdbcType=DECIMAL}, #{productPromotePrice,jdbcType=DECIMAL}, 
       #{toppingId,jdbcType=VARCHAR,typeHandler=org.dgutstu.dgutshop.db.util.JsonIntegerArrayTypeHandler}, 
       #{toppingName,jdbcType=VARCHAR,typeHandler=org.dgutstu.dgutshop.db.util.JsonStringArrayTypeHandler}, 
       #{toppingPrice,jdbcType=DECIMAL}, #{productActualPrice,jdbcType=DECIMAL}, #{productPicture,jdbcType=VARCHAR}, 
-      #{sum,jdbcType=INTEGER}, #{note,jdbcType=VARCHAR}, #{deleted,jdbcType=BIT})
+      #{sum,jdbcType=INTEGER}, #{note,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="org.dgutstu.dgutshop.db.domain.DgutshopOrderItem">
     <!--
@@ -354,6 +358,12 @@
       <if test="note != null">
         note,
       </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
       <if test="deleted != null">
         deleted,
       </if>
@@ -397,6 +407,12 @@
       </if>
       <if test="note != null">
         #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="deleted != null">
         #{deleted,jdbcType=BIT},
@@ -462,6 +478,12 @@
       <if test="record.note != null">
         note = #{record.note,jdbcType=VARCHAR},
       </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="record.deleted != null">
         deleted = #{record.deleted,jdbcType=BIT},
       </if>
@@ -490,6 +512,8 @@
       product_picture = #{record.productPicture,jdbcType=VARCHAR},
       `sum` = #{record.sum,jdbcType=INTEGER},
       note = #{record.note,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       deleted = #{record.deleted,jdbcType=BIT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -541,6 +565,12 @@
       <if test="note != null">
         note = #{note,jdbcType=VARCHAR},
       </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
       <if test="deleted != null">
         deleted = #{deleted,jdbcType=BIT},
       </if>
@@ -566,6 +596,8 @@
       product_picture = #{productPicture,jdbcType=VARCHAR},
       `sum` = #{sum,jdbcType=INTEGER},
       note = #{note,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>

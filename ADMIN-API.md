@@ -10,8 +10,8 @@
 * 关于分页
     * 指定页数（默认为第1页）：<br/>`GET http://localhost:8083/admin/products/list?page=`
     * 指定每页获得多少种饮品（默认为10种）：<br/>`GET http://localhost:8083/admin/products/list?limit=`
-    * 排序方式默认为降序，也可以指定为升序：<br/>`GET http://localhost:8083/admin/products/list?limit=`
-    * 排序字段默认为id，也可以指定为按日期：<br/>`GET http://localhost:8083/admin/products/list?limit=`
+    * 排序方式默认为降序，也可以指定为升序：<br/>`GET http://localhost:8083/admin/products/list?sort=`
+    * 排序字段默认为id，也可以指定为按日期：<br/>`GET http://localhost:8083/admin/products/list?order=`
 
 #### 1.2 增加功能
 * 传递json
@@ -75,8 +75,8 @@
 * 关于分页
     * 指定页数（默认为第1页）：<br/>`GET http://localhost:8083/admin/admin/list?page=`
     * 指定每页获得多少种饮品（默认为10种）：<br/>`GET http://localhost:8083/admin/admin/list?limit=`
-    * 排序方式默认为降序，也可以指定为升序：<br/>`GET http://localhost:8083/admin/admin/list?limit=`
-    * 排序字段默认为id，也可以指定为按日期：<br/>`GET http://localhost:8083/admin/admin/list?limit=`
+    * 排序方式默认为降序，也可以指定为升序：<br/>`GET http://localhost:8083/admin/admin/list?sort=`
+    * 排序字段默认为id，也可以指定为按日期：<br/>`GET http://localhost:8083/admin/admin/list?order=`
 #### 2.2 增加功能
 * nickname：昵称，用作登录账号，范围必须为6~20
 * 传递json
@@ -132,8 +132,8 @@
 * 关于分页
     * 指定页数（默认为第1页）：<br/>`GET http://localhost:8083/admin/role/list?page=`
     * 指定每页获得多少种饮品（默认为10种）：<br/>`GET http://localhost:8083/admin/role/list?limit=`
-    * 排序方式默认为降序，也可以指定为升序：<br/>`GET http://localhost:8083/admin/role/list?limit=`
-    * 排序字段默认为id，也可以指定为按日期：<br/>`GET http://localhost:8083/admin/role/list?limit=`
+    * 排序方式默认为降序，也可以指定为升序：<br/>`GET http://localhost:8083/admin/role/list?sort=`
+    * 排序字段默认为id，也可以指定为按日期：<br/>`GET http://localhost:8083/admin/role/list?order=`
 #### 3.2 增加功能
 * 传递json（仅作示例）
     ```
@@ -333,8 +333,8 @@
 * 关于分页
     * 指定页数（默认为第1页）：<br/>`GET http://localhost:8083/admin/category/list?page=`
     * 指定每页获得多少种饮品（默认为10种）：<br/>`GET http://localhost:8083/admin/category/list?limit=`
-    * 排序方式默认为降序，也可以指定为升序：<br/>`GET http://localhost:8083/admin/category/list?limit=`
-    * 排序字段默认为id，也可以指定为按日期：<br/>`GET http://localhost:8083/admin/category/list?limit=`
+    * 排序方式默认为降序，也可以指定为升序：<br/>`GET http://localhost:8083/admin/category/list?sort=`
+    * 排序字段默认为id，也可以指定为按日期：<br/>`GET http://localhost:8083/admin/category/list?order=`
 #### 4.2 增加功能
 * 传递json
     ```
@@ -384,3 +384,137 @@
 POST http://localhost:8083/admin/category/categoryitem/create?index=4&cid=2&pid=8
 #### 4.6 分类单项的删除功能
 * 给个id字段即可：`POST http://localhost:8083/admin/category/categoryitem/delete?id=`
+
+//  TODO：<br/>
+//  1. 更改菜单项的顺序时前端可能会传来多个菜单项，解决接收多个菜单项并更新菜单项表的问题，排序问题不考虑，由前端保证；<br/>
+//  2. 添加菜单单项时前端可能会传来多个菜单单项，解决接收多个菜单单项并更新菜单单项的问题，排序问题不考虑，由前端保证；
+
+### 五、订单管理
+* 后台管理人员只拥有查询功能
+#### 5.1 查询订单
+1.  列举所有订单：<br/>
+`GET http://localhost:8083/admin/order/list`
+    * 获取到的数据
+    > 根据`orderItemList`可以获取订单项
+    ```$xslt
+    {
+      "errno": 0,
+      "data": {
+        "limit": 10,
+        "total": 2,
+        "page": 1,
+        "list": [
+          {
+            "id": 2,
+            "code": "edfs",
+            "type": "1",
+            "orderStatus": 101,
+            "productPrice": 22.00,
+            "deliveryPrice": 1.00,
+            "orderPrice": 23.00,
+            "createTime": "2020-12-16T21:30:13",
+            "userId": 1,
+            "userName": "kseel",
+            "consignee": "小李",
+            "consigneeAddress": "广东汕头",
+            "consigneeRoom": "松山湖",
+            "consigneePhone": "14444444444",
+            "deliveryCompany": "饿了么",
+            "deliveryCode": "3433333",
+            "message": "好",
+            "payDate": "2020-12-17T19:00:22",
+            "orderItemList": [
+              {
+                "id": 2,
+                "oid": 2,
+                "pid": 2,
+                "productName": "抹茶奶盖",
+                "size": 0,
+                "productOriginalPrice": 10.00,
+                "productPromotePrice": 8.00,
+                "toppingId": [
+                  1,
+                  2
+                ],
+                "toppingName": [
+                  "珍珠",
+                  "冰沙"
+                ],
+                "toppingPrice": 4.00,
+                "productActualPrice": 12.00,
+                "productPicture": "",
+                "sum": 3,
+                "note": "",
+                "createTime": "2020-12-16T21:30:13",
+                "updateTime": null,
+                "deleted": false
+              }
+            ]
+          },
+          {
+            "id": 1,
+            "code": "reqww",
+            "type": "1",
+            "orderStatus": 101,
+            "productPrice": 200.00,
+            "deliveryPrice": 10.00,
+            "orderPrice": 210.00,
+            "createTime": "2018-02-01T00:00:00",
+            "userId": 2,
+            "userName": "bbbbbb",
+            "consignee": "小王",
+            "consigneeAddress": "广东东莞",
+            "consigneeRoom": "松山湖",
+            "consigneePhone": "12222222222",
+            "deliveryCompany": "美团",
+            "deliveryCode": "123333",
+            "message": "不错",
+            "payDate": "2020-12-16T18:57:53",
+            "orderItemList": [
+              {
+                "id": 1,
+                "oid": 1,
+                "pid": 1,
+                "productName": "抹茶奶盖",
+                "size": 0,
+                "productOriginalPrice": 10.00,
+                "productPromotePrice": 8.00,
+                "toppingId": [
+                  1,
+                  2
+                ],
+                "toppingName": [
+                  "珍珠",
+                  "冰沙"
+                ],
+                "toppingPrice": 4.00,
+                "productActualPrice": 12.00,
+                "productPicture": "",
+                "sum": 2,
+                "note": "",
+                "createTime": "2018-02-01T00:00:00",
+                "updateTime": null,
+                "deleted": false
+              }
+            ]
+          }
+        ]
+      },
+      "errmsg": "成功"
+    }
+    
+    Response code: 200; Time: 434ms; Content length: 1469 bytes
+    ```
+2.  根据用户昵称名（网名）查询某个订单（模糊查询）<br/>
+`GET http://localhost:8083/admin/order/list?nickname=`
+3.  根据外卖配送员查询某些订单（模糊查询）<br/>
+`GET http://localhost:8083/admin/order/list?consignee=`
+4.  根据订单编号查询某个订单<br/>
+`GET http://localhost:8083/admin/order/list?code=`
+5.  根据订单的创建时间和结束时间查询某些订单<br/>
+`GET http://localhost:8083/admin/order/list?start=2018-02-01 00:00:00&end=2019-02-01 00:00:00`
+* 关于分页
+    * 指定页数（默认为第1页）：<br/>`GET http://localhost:8083/admin/order/list?page=`
+    * 指定每页获得多少个订单（默认为10种）：<br/>`GET http://localhost:8083/admin/order/list?limit=`
+    * 排序方式默认为降序，也可以指定为升序：<br/>`GET http://localhost:8083/admin/order/list?sort=`
+    * 排序字段默认为id，也可以指定为按日期：<br/>`GET http://localhost:8083/admin/order/list?order=`
