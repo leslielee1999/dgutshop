@@ -5,10 +5,7 @@ import org.dgutstu.dgutshop.core.util.ResponseUtil;
 import org.dgutstu.dgutshop.core.util.bcrypt.BCryptPasswordEncoder;
 import org.dgutstu.dgutshop.core.validator.Order;
 import org.dgutstu.dgutshop.core.validator.Sort;
-import org.dgutstu.dgutshop.db.domain.DgutshopAdmin;
-import org.dgutstu.dgutshop.db.domain.DgutshopCategory;
-import org.dgutstu.dgutshop.db.domain.DgutshopCategoryItem;
-import org.dgutstu.dgutshop.db.domain.DgutshopProduct;
+import org.dgutstu.dgutshop.db.domain.*;
 import org.dgutstu.dgutshop.db.service.DgutshopCategoryItemService;
 import org.dgutstu.dgutshop.db.service.DgutshopCategoryService;
 import org.dgutstu.dgutshop.db.service.DgutshopProductService;
@@ -17,7 +14,9 @@ import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import static org.dgutstu.dgutshop.admin.util.AdminResponseCode.*;
 
@@ -64,11 +63,11 @@ public class AdminCategoryController {
             return ResponseUtil.badArgument();
         }
 
-        List<DgutshopCategory> categoryList = categoryService.findByName(name);
+//        List<DgutshopCategory> categoryList = categoryService.findByName(name);
 
-        if (categoryList.size() > 0) {
-            return ResponseUtil.fail(CATEGORY_NAME_EXIST, "分类已经存在");//650
-        }
+//        if (categoryList.size() > 0) {
+//            return ResponseUtil.fail(CATEGORY_NAME_EXIST, "分类已经存在");//650
+//        }
         //  如果需要添加其它限制可以继续添加
         //  ...
 
@@ -109,51 +108,37 @@ public class AdminCategoryController {
     }
 
     @PostMapping("/update")
-    public Object update(@RequestBody DgutshopCategory category) {
-        Object error = validate(category);
-        if (error != null) {
-            return error;
-        }
-        Integer adminId = category.getId();
-        if (adminId == null) {
-            return ResponseUtil.badArgument();
-        }
-        int index = category.getIndex();//分类顺序
-        List<DgutshopCategory> categoryList = categoryService.findByIndex(index);
-        for (DgutshopCategory dgutshopCategory : categoryList) {
-            if (dgutshopCategory.getId() != category.getId()){
-                return ResponseUtil.fail(CATEGORY_INDEX_EXIST, "分类顺序已被占用");//651
+    public Object update(@RequestBody List<DgutshopCategory> categoryList) {
+        for (DgutshopCategory category : categoryList) {
+            Object error = validate(category);
+            if (error != null) {
+                return error;
             }
-        }
-
-        if (categoryService.update(category) == 0) {
-            return ResponseUtil.updatedDataFailed();
+            Integer id = category.getId();
+            if (id == null) {
+                return ResponseUtil.badArgument();
+            }
+            if (categoryService.update(category) == 0) {
+                return ResponseUtil.updatedDataFailed();
+            }
         }
         //  记录日志
         //  用spring security 实现
         //  logHelper.logAuthSucceed("编辑分类", admin.getName());
-        return ResponseUtil.ok(category);
+        return ResponseUtil.okList(categoryList);
     }
 
 
     //  校验添加分类项所提交数据
-    private Object validate(Integer index, Integer cid, Integer pid) {
-        if (StringUtils.isEmpty(index) || StringUtils.isEmpty(cid) || StringUtils.isEmpty(pid)) {
+    private Object validate(OrderItemVo orderItemVo) {
+        int cid = orderItemVo.getCid();
+        int[] pids = orderItemVo.getPids();
+        if (StringUtils.isEmpty(cid)) {
             return ResponseUtil.badArgument();
         }
-
-        //  根据分类项获取对应分类下的所有分类单项
-        DgutshopCategory category = categoryService.get(cid);
-        System.out.println(category);
-        categoryItemService.fill(category);
-        List<DgutshopCategoryItem> items = category.getCategoryItems();
-        System.out.println(items);
-        List<DgutshopCategoryItem> categoryItems = categoryService.get(cid).getCategoryItems();
-        if (items != null){
-            for (DgutshopCategoryItem item : items) {
-                if (item.getPid() == pid){
-                    return ResponseUtil.fail(CATEGORYITEM_NAME_EXIST, "分类项已经存在");//652
-                }
+        for (int pid : pids) {
+            if (StringUtils.isEmpty(pid)) {
+                return ResponseUtil.badArgument();
             }
         }
 
@@ -164,23 +149,59 @@ public class AdminCategoryController {
     }
 
     @PostMapping("/categoryitem/create")
-    public Object create(@RequestParam Integer index, @RequestParam Integer cid, @RequestParam Integer pid){
-        Object error = validate(index, cid, pid);
+    public Object create(@RequestBody OrderItemVo orderItemVo){
+        Object error = validate(orderItemVo);
         if (error != null) {
             return error;
         }
-        List<DgutshopCategoryItem> categoryItemList = categoryItemService.findByIndex(index);
-        if (categoryItemList.size() > 0){
-            return ResponseUtil.fail(CATEGORYITEM_INDEX_EXIST, "分类顺序已被占用");//653
+        int cid = orderItemVo.getCid();
+        int pid = 0;
+        int index = -1;
+        int[] pids = orderItemVo.getPids();
+        List<DgutshopCategoryItem> categoryItemList = new LinkedList<>();
+        //  根据分类项获取对应分类下的所有分类单项
+        DgutshopCategory category = categoryService.get(cid);
+        System.out.println(category);
+        categoryItemService.fill(category);
+        List<DgutshopCategoryItem> items = category.getCategoryItems();
+        System.out.println(items);
+//        List<DgutshopCategoryItem> categoryItems = categoryService.get(cid).getCategoryItems();
+        for (DgutshopCategoryItem item : items) {
+            if (index < item.getIndex()){
+                index = item.getIndex();
+            }
+            for (int i : pids) {
+                if (i == item.getPid()){
+                    return ResponseUtil.fail(111, "请删除已存在分类单项");
+                }
+            }
         }
-        DgutshopProduct product = productService.get(pid);
-        DgutshopCategoryItem categoryItem = new DgutshopCategoryItem();
-        categoryItem.setIndex(index);
-        categoryItem.setCid(cid);
-        categoryItem.setPid(pid);
-        categoryItem.setProduct(product);
-        categoryItemService.add(categoryItem);
-        return ResponseUtil.ok(categoryItem);
+        for (int i = 0; i < pids.length; i++) {
+            pid = pids[i];
+            index++;
+            DgutshopCategoryItem item = new DgutshopCategoryItem();
+            DgutshopProduct product = productService.get(pid);
+            item.setCid(cid);
+            item.setPid(pid);
+            item.setIndex(index);
+            item.setProduct(product);
+            categoryItemService.add(item);
+        }
+        return ResponseUtil.okList(categoryItemList);
+    }
+
+    @PostMapping("/categoryitem/update")
+    public Object updateCategoryItem(@RequestBody List<DgutshopCategoryItem> categoryItemList){
+        for (DgutshopCategoryItem categoryItem : categoryItemList) {
+            Integer id = categoryItem.getId();
+            if (id == null) {
+                return ResponseUtil.badArgument();
+            }
+            if (categoryItemService.update(categoryItem) == 0) {
+                return ResponseUtil.updatedDataFailed();
+            }
+        }
+        return ResponseUtil.okList(categoryItemList);
     }
 
     @PostMapping("/categoryitem/delete")

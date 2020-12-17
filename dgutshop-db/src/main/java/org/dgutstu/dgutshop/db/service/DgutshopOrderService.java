@@ -47,7 +47,7 @@ public class DgutshopOrderService {
         }
         if (!StringUtils.isEmpty(code)){
             System.out.println(code);
-            querys.add(" o.code = '" + code + "' ");
+            querys.add(" o.code like '%" + code + "%' ");
         }
         DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         if (start != null) {

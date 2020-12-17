@@ -1,6 +1,7 @@
 package org.dgutstu.dgutshop.db.domain;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 
 /**
  * @Author: leesk
@@ -8,84 +9,30 @@ import java.math.BigDecimal;
  * @Date: Create in 15:49 2020/12/16
  */
 public class OrderItemVo {
-    private Integer id;
-    private String goodsName;
-    private String picUrl;
-    private Integer goodsId;
-    private Integer productId;
-    private String[] specifications;
-    private Integer number;
-    private BigDecimal price;
-    private String location;
+    private int cid;
+    private int[] pids;
 
-    public Integer getProductId() {
-        return productId;
+    public int getCid() {
+        return cid;
     }
 
-    public void setProductId(Integer productId) {
-        this.productId = productId;
+    public void setCid(int cid) {
+        this.cid = cid;
     }
 
-    public Integer getGoodsId() {
-        return goodsId;
+    public int[] getPids() {
+        return pids;
     }
 
-    public void setGoodsId(Integer goodsId) {
-        this.goodsId = goodsId;
+    public void setPids(int[] pids) {
+        this.pids = pids;
     }
 
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-    public String getPicUrl() {
-        return picUrl;
-    }
-
-    public void setPicUrl(String picUrl) {
-        this.picUrl = picUrl;
-    }
-
-    public String getGoodsName() {
-        return goodsName;
-    }
-
-    public void setGoodsName(String goodsName) {
-        this.goodsName = goodsName;
-    }
-
-    public String[] getSpecifications() {
-        return specifications;
-    }
-
-    public void setSpecifications(String[] specifications) {
-        this.specifications = specifications;
-    }
-
-    public Integer getNumber() {
-        return number;
-    }
-
-    public void setNumber(Integer number) {
-        this.number = number;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    @Override
+    public String toString() {
+        return "OrderItemVo{" +
+                "cid=" + cid +
+                ", pids=" + Arrays.toString(pids) +
+                '}';
     }
 }

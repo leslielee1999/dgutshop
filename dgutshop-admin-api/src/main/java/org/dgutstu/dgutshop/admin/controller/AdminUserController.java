@@ -25,12 +25,12 @@ public class AdminUserController {
     private DgutshopUserService userService;
 
     @GetMapping("/list")
-    public Object list(String username, String mobile,
+    public Object list(String name, String phone,
                        @RequestParam(defaultValue = "1") Integer page,
                        @RequestParam(defaultValue = "10") Integer limit,
-                       @Sort @RequestParam(defaultValue = "add_time") String sort,
+                       @Sort @RequestParam(defaultValue = "create_time") String sort,
                        @Order @RequestParam(defaultValue = "desc") String order) {
-        List<DgutshopUser> userList = userService.querySelective(username, mobile, page, limit, sort, order);
+        List<DgutshopUser> userList = userService.querySelective(name, phone, page, limit, sort, order);
         return ResponseUtil.okList(userList);
     }
 

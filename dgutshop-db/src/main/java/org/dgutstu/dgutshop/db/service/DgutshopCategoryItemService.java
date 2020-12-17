@@ -89,4 +89,14 @@ public class DgutshopCategoryItemService {
         DgutshopProduct product = productService.get(categoryItem.getPid());
         categoryItem.setProduct(product);
     }
+
+    /**
+     * 编辑一种分类单项
+     * @param categoryItem
+     * @return
+     */
+    public int update(DgutshopCategoryItem categoryItem){
+        categoryItem.setUpdateTime(LocalDateTime.now());
+        return categoryItemMapper.updateByPrimaryKeySelective(categoryItem);
+    }
 }

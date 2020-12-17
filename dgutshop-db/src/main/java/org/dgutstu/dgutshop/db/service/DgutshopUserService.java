@@ -39,7 +39,7 @@ public class DgutshopUserService {
             criteria.andNameLike("%" + name + "%");
         }
         if (!StringUtils.isEmpty(phone)) {
-            criteria.andPhoneEqualTo(phone);
+            criteria.andPhoneLike("%" + phone + "%");
         }
         criteria.andDeletedEqualTo(false);
 

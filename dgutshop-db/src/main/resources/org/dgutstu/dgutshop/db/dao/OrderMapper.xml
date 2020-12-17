@@ -139,7 +139,7 @@
         <result column="pay_date" property="payDate"/>
 
         <collection property="orderItemList" ofType="org.dgutstu.dgutshop.db.domain.DgutshopOrderItem">
-            <id column="id" jdbcType="INTEGER" property="id" />
+            <id column="oiid" jdbcType="INTEGER" property="id" />
             <result column="oid" jdbcType="INTEGER" property="oid" />
             <result column="pid" jdbcType="INTEGER" property="pid" />
             <result column="product_name" jdbcType="VARCHAR" property="productName" />
@@ -160,9 +160,9 @@
     </resultMap>
     <select id="getOrderList" resultMap="orderList">
         select o.id, o.code, o.type, o.order_status, o.product_price, o.delivery_price, o.order_price, o.create_time,
-        o.consignee, o.consignee_address, o.consignee_room, o.consignee_phone, o.delivery_company, o.delivery_code,o.message, o.pay_date,
-        u.id, user_id, u.nickname user_name,
-        oi.id, oid, oi.pid, oi.product_name, oi.size, oi.product_original_price, oi.product_promote_price, oi.topping_id, oi.topping_name
+        o.consignee, o.consignee_address, o.consignee_room, o.consignee_phone, o.delivery_company, o.delivery_code, o.message, o.pay_date,
+        u.id user_id, u.nickname user_name,
+        oi.id oiid, oi.oid, oi.pid, oi.product_name, oi.size, oi.product_original_price, oi.product_promote_price, oi.topping_id, oi.topping_name
         , oi.topping_price, oi.product_actual_price, oi.product_picture, oi.sum, oi.note, oi.create_time, oi.update_time, oi.deleted
         from dgutshop_order o
         left join dgutshop_user u
