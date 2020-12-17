@@ -405,44 +405,127 @@
 #### 4.4 修改功能
 * 传递json
     ```
-    #errno与errmsg对应：
-    #650：分类名已存在
-    #651：菜单分类的顺序已被占用
     ###
     POST http://localhost:8083/admin/category/update
     Content-Type: application/json
     
+    [
     {
-      "id": 3,
-      "index": 3,
-      "name": "秋季特惠",
+    "id": 1,
+    "index": 6,
+    "name": "热销",
+    "icon": "",
+    "createTime": null,
+    "updateTime": null,
+    "deleted": false
+    },
+    {
+    "id": 2,
+    "index": 5,
+    "name": "现磨咖啡",
+    "icon": "",
+    "createTime": null,
+    "updateTime": null,
+    "deleted": false
+    },
+    {
+    "id": 3,
+    "index": 4,
+    "name": "秋季特惠",
+    "icon": "",
+    "createTime": null,
+    "updateTime": null,
+    "deleted": false
+    },
+    {
+    "id": 4,
+    "index": 3,
+    "name": "冬季特惠",
+    "icon": "",
+    "createTime": null,
+    "updateTime": null,
+    "deleted": false
+    },
+    {
+    "id": 5,
+    "index": 2,
+    "name": "春季特惠",
+    "icon": "",
+    "createTime": null,
+    "updateTime": null,
+    "deleted": false
+    },
+    {
+      "id": 6,
+      "index": 1,
+      "name": "爆款",
       "icon": "",
       "createTime": null,
       "updateTime": null,
       "deleted": false
     }
+    ]
     ```
 <big>注：</big><strong>分类单项只有增加和删除功能</strong>
 #### 4.5 分类单项的增加功能
 * 传递JSON
-    ```js
-    ###
-    POST http://localhost:8083/admin/category/categoryitem/create
-    Content-Type: application/json
-    
-    {
-      "cid": 2,
-      "pids": [
-      11,12,13
-      ]
-    }
+    ```
+      ###
+      POST http://localhost:8083/admin/category/categoryitem/create
+      Content-Type: application/json
+      
+      {
+        "cid": 2,
+        "pids": [
+        11,12,13
+        ]
+      }
     ```
 #### 4.6 分类单项的删除功能
 * 给个id字段即可：`POST http://localhost:8083/admin/category/categoryitem/delete?id=`
 
+#### 4.7 分类单项更改顺序功能
+* 传递JSON
+    ```
+    ###
+    POST http://localhost:8083/admin/category/categoryitem/update
+    Content-Type: application/json
+    
+    [
+      {
+        "id": 1,
+        "index": 1,
+        "cid": 2,
+        "pid": 8,
+        "createTime": null,
+        "updateTime": null,
+        "deleted": false
+      },
+      {
+        "id": 2,
+        "index": 3,
+        "cid": 2,
+        "pid": 4,
+        "createTime": null,
+        "updateTime": null,
+        "deleted": false
+      },
+      {
+        "id": 3,
+        "index": 2,
+        "cid": 2,
+        "pid": 6,
+        "createTime": null,
+        "updateTime": null,
+        "deleted": false
+      }
+    ]
+    ```
+
 //  TODO：<br/>
 //  1. 更改菜单项的顺序时前端可能会传来多个菜单项，解决接收多个菜单项并更新菜单项表的问题，排序问题不考虑，由前端保证；<br/>
 //  2. 添加菜单单项时前端可能会传来多个菜单单项，解决接收多个菜单单项并更新菜单单项的问题；
+//  3. 添加更改菜单单项顺序功能的API
 > 解决，详见上方更新的API
 
 ### 五、订单管理
