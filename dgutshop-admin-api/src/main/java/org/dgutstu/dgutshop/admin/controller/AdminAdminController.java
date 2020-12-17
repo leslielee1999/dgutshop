@@ -11,10 +11,12 @@ import org.dgutstu.dgutshop.core.validator.Sort;
 import org.dgutstu.dgutshop.db.domain.DgutshopAdmin;
 import org.dgutstu.dgutshop.db.service.DgutshopAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.dgutstu.dgutshop.admin.util.AdminResponseCode.*;
@@ -37,11 +39,13 @@ public class AdminAdminController {
 
     @GetMapping("/list")
     public Object list(String name, String nickname,
+                       @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime start,
+                       @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime end,
                        @RequestParam(defaultValue = "1") Integer page,
                        @RequestParam(defaultValue = "10") Integer limit,
                        @Sort @RequestParam(defaultValue = "id") String sort,
                        @Order @RequestParam(defaultValue = "desc") String order) {
-        List<DgutshopAdmin> adminList = adminService.querySelective(name, nickname, page, limit, sort, order);
+        List<DgutshopAdmin> adminList = adminService.querySelective(name, nickname, start, end, page, limit, sort, order);
         return ResponseUtil.okList(adminList);
     }
 

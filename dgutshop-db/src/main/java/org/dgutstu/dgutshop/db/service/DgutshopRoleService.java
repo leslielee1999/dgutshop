@@ -29,13 +29,20 @@ public class DgutshopRoleService {
      * @param order
      * @return
      */
-    public List<DgutshopRole> querySelective(String name, Integer page, Integer limit, String sort, String order){
+    public List<DgutshopRole> querySelective(String name, LocalDateTime start, LocalDateTime end, Integer page, Integer limit, String sort, String order){
         DgutshopRoleExample example = new DgutshopRoleExample();
         DgutshopRoleExample.Criteria criteria = example.createCriteria();
 
         //  判断是否为模糊查询
         if (!StringUtils.isEmpty(name)){
             criteria.andNameLike("%" + name + "%");
+        }
+
+        if (!StringUtils.isEmpty(start)){
+            criteria.andCreateTimeGreaterThanOrEqualTo(start);
+        }
+        if (!StringUtils.isEmpty(end)){
+            criteria.andCreateTimeLessThanOrEqualTo(end);
         }
 
         //  判断是否为逻辑删除的角色

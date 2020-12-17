@@ -29,7 +29,7 @@ public class DgutshopProductService {
         return productMapper.selectByExample(example);
     }
 
-    public List<DgutshopProduct> querySelective(Integer productId, String name,
+    public List<DgutshopProduct> querySelective(Integer productId, String name, LocalDateTime start, LocalDateTime end,
                                                 Integer page, Integer limit, String sort, String order){
         DgutshopProductExample example = new DgutshopProductExample();
         DgutshopProductExample.Criteria criteria = example.createCriteria();
@@ -42,6 +42,13 @@ public class DgutshopProductService {
         //  判断是否为模糊查询
         if(!StringUtils.isEmpty(name)){
             criteria.andNameLike("%" + name + "%");
+        }
+
+        if (!StringUtils.isEmpty(start)){
+            criteria.andCreateTimeGreaterThanOrEqualTo(start);
+        }
+        if (!StringUtils.isEmpty(end)){
+            criteria.andCreateTimeLessThanOrEqualTo(end);
         }
 
         //  判断是否为逻辑删除的饮品

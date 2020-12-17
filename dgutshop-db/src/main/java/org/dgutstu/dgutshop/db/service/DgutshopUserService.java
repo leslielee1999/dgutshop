@@ -31,15 +31,31 @@ public class DgutshopUserService {
         return userMapper.updateByPrimaryKeySelective(user);
     }
 
-    public List<DgutshopUser> querySelective(String name, String phone, Integer page, Integer size, String sort, String order){
+    public List<DgutshopUser> querySelective(Integer id, String name, String phone, String wechatId, String nickname, LocalDateTime start, LocalDateTime end,
+                                             Integer page, Integer size, String sort, String order){
         DgutshopUserExample example = new DgutshopUserExample();
         DgutshopUserExample.Criteria criteria = example.createCriteria();
 
+        if (!StringUtils.isEmpty(id)){
+            criteria.andIdEqualTo(id);
+        }
         if (!StringUtils.isEmpty(name)) {
             criteria.andNameLike("%" + name + "%");
         }
         if (!StringUtils.isEmpty(phone)) {
             criteria.andPhoneLike("%" + phone + "%");
+        }
+        if (!StringUtils.isEmpty(wechatId)) {
+            criteria.andWechatIdLike("%" + wechatId + "%");
+        }
+        if (!StringUtils.isEmpty(nickname)) {
+            criteria.andNicknameLike("%" + nickname + "%");
+        }
+        if (!StringUtils.isEmpty(start)){
+            criteria.andCreateTimeGreaterThanOrEqualTo(start);
+        }
+        if (!StringUtils.isEmpty(end)){
+            criteria.andCreateTimeLessThanOrEqualTo(end);
         }
         criteria.andDeletedEqualTo(false);
 
@@ -50,4 +66,5 @@ public class DgutshopUserService {
         PageHelper.startPage(page, size);
         return userMapper.selectByExample(example);
     }
+
 }

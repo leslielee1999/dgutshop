@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -25,9 +26,9 @@ public class AdminProductService {
     @Autowired
     private DgutshopProductService productService;
 
-    public Object list(Integer productId, String name,
+    public Object list(Integer productId, String name, LocalDateTime start, LocalDateTime end,
                        Integer page, Integer limit, String sort, String order){
-        List<DgutshopProduct> productList = productService.querySelective(productId, name, page, limit, sort, order);
+        List<DgutshopProduct> productList = productService.querySelective(productId, name, start, end, page, limit, sort, order);
         return ResponseUtil.okList(productList);
     }
 

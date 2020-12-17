@@ -650,10 +650,303 @@
 `GET http://localhost:8083/admin/order/list?consignee=`
 4.  根据订单编号查询某个订单<br/>
 `GET http://localhost:8083/admin/order/list?code=`
-5.  根据订单的创建时间和结束时间查询某些订单<br/>
+5.  根据给定的订单的创建时间范围查询某些订单<br/>
 `GET http://localhost:8083/admin/order/list?start=2018-02-01 00:00:00&end=2019-02-01 00:00:00`
+6.  根据订单状态（可以一次输入多个）查询某些订单
+* 订单状态
+    * 101待支付
+    * 201待出货
+    * 301已出货
+    * 401已完成<br/>
+`GET http://localhost:8083/admin/order/list?orderStatusArray[]=101&orderStatusArray[]=201`
 * 关于分页
     * 指定页数（默认为第1页）：<br/>`GET http://localhost:8083/admin/order/list?page=`
     * 指定每页获得多少个订单（默认为10种）：<br/>`GET http://localhost:8083/admin/order/list?limit=`
     * 排序方式默认为降序，也可以指定为升序：<br/>`GET http://localhost:8083/admin/order/list?sort=`
     * 排序字段默认为id，也可以指定为按日期：<br/>`GET http://localhost:8083/admin/order/list?order=`
+    
+> 记录：<br/>
+> 1. 增加订单状态的查询，一次可输入多个（见上方）<br/>
+> 2. 新增用户管理功能<br/>
+> 3. 所有查询功能均支持综合查询
+> 4. 增加未有按时间查询的已有功能的时间查询功能，统一所有时间查询功能为：按给定创建某记录时间的范围来查找
+>   1. 订单管理完成；<br/>
+>       `GET http://localhost:8083/admin/order/list?start=2018-02-01 00:00:00&end=2019-02-01 00:00:00`
+>   2. 管理员管理完成
+>       `GET http://localhost:8083/admin/admin/list?start=2020-12-12 23:11:10&end=2020-12-14 23:11:10`
+>   3. 侧边栏完成
+>       `GET http://localhost:8083/admin/category/list?start=2020-12-15 20:19:46&end=2020-12-15 20:40:46`
+>   4. 饮品完成
+>       `GET http://localhost:8083/admin/products/list?start=2020-12-13 09:51:50&end=2020-12-13 10:30:49`
+>   5. 用户详见下方
+
+### 六、用户管理
+* 后台管理人员拥有查询功能、查看用户详情功能和设置用户状态权限功能
+#### 6.1 查询用户
+1. 列举所有用户<br/>
+`GET http://localhost:8083/admin/user/list` 
+    ```
+    {
+      "errno": 0,
+      "data": {
+        "total": 3,
+        "pages": 1,
+        "limit": 10,
+        "page": 1,
+        "list": [
+          {
+            "id": 1,
+            "name": "leesk",
+            "password": "123",
+            "gender": 1,
+            "phone": "18025534180",
+            "wechatId": "kk545771383",
+            "nickname": "kseel",
+            "sessionKey": "asdasdqa",
+            "createTime": null,
+            "updateTime": null,
+            "lastLoginTime": null,
+            "status": 0,
+            "lastLoginIp": "",
+            "deleted": false
+          },
+          {
+            "id": 2,
+            "name": "qwqwe",
+            "password": "123123",
+            "gender": 0,
+            "phone": "21312312312",
+            "wechatId": "efdasdasd",
+            "nickname": "bbbbbb",
+            "sessionKey": "sdsd11",
+            "createTime": null,
+            "updateTime": null,
+            "lastLoginTime": null,
+            "status": 0,
+            "lastLoginIp": "",
+            "deleted": false
+          },
+          {
+            "id": 3,
+            "name": "rqqsasxj",
+            "password": "11231",
+            "gender": 0,
+            "phone": "7777777777",
+            "wechatId": "qweqwe",
+            "nickname": "sadfhg",
+            "sessionKey": "32523",
+            "createTime": null,
+            "updateTime": null,
+            "lastLoginTime": null,
+            "status": 0,
+            "lastLoginIp": "",
+            "deleted": false
+          }
+        ]
+      },
+      "errmsg": "成功"
+    }
+    ```
+2. 根据用户id精准查找某个用户<br/>
+`GET http://localhost:8083/admin/user/list?id=1`
+    ```
+    {
+      "errno": 0,
+      "data": {
+        "total": 1,
+        "pages": 1,
+        "limit": 10,
+        "page": 1,
+        "list": [
+          {
+            "id": 1,
+            "name": "leesk",
+            "password": "123",
+            "gender": 1,
+            "phone": "18025534180",
+            "wechatId": "kk545771383",
+            "nickname": "kseel",
+            "sessionKey": "asdasdqa",
+            "createTime": null,
+            "updateTime": null,
+            "lastLoginTime": null,
+            "status": 0,
+            "lastLoginIp": "",
+            "deleted": false
+          }
+        ]
+      },
+      "errmsg": "成功"
+    }
+    ```
+3. 根据用户姓名、用户昵称、用户微信号进行模糊查询<br/>
+`GET http://localhost:8083/admin/user/list?name=q&nickname=a`
+    ```
+    {
+      "errno": 0,
+      "data": {
+        "total": 1,
+        "pages": 1,
+        "limit": 10,
+        "page": 1,
+        "list": [
+          {
+            "id": 3,
+            "name": "rqqsasxj",
+            "password": "11231",
+            "gender": 0,
+            "phone": "7777777777",
+            "wechatId": "qweqwe",
+            "nickname": "sadfhg",
+            "sessionKey": "32523",
+            "createTime": null,
+            "updateTime": null,
+            "lastLoginTime": null,
+            "status": 0,
+            "lastLoginIp": "",
+            "deleted": false
+          }
+        ]
+      },
+      "errmsg": "成功"
+    }
+    ```
+    `GET http://localhost:8083/admin/user/list?name=q&wechatId=a`
+    ```
+   {
+     "errno": 0,
+     "data": {
+       "total": 1,
+       "pages": 1,
+       "limit": 10,
+       "page": 1,
+       "list": [
+         {
+           "id": 2,
+           "name": "qwqwe",
+           "password": "123123",
+           "gender": 0,
+           "phone": "21312312312",
+           "wechatId": "efdasdasd",
+           "nickname": "bbbbbb",
+           "sessionKey": "sdsd11",
+           "createTime": null,
+           "updateTime": null,
+           "lastLoginTime": null,
+           "status": 0,
+           "lastLoginIp": "",
+           "deleted": false
+         }
+       ]
+     },
+     "errmsg": "成功"
+   }
+   ```
+4. 按给定创建时间的范围来查找<br/>
+`GET http://localhost:8083/admin/user/list?start=2020-09-12 23:11:10&end=2020-12-14 23:11:10`
+    ```
+   {
+     "errno": 0,
+     "data": {
+       "total": 2,
+       "pages": 1,
+       "limit": 10,
+       "page": 1,
+       "list": [
+         {
+           "id": 1,
+           "name": "leesk",
+           "password": "123",
+           "gender": 1,
+           "phone": "18025534180",
+           "wechatId": "kk545771383",
+           "nickname": "kseel",
+           "sessionKey": "asdasdqa",
+           "createTime": "2020-11-14T23:11:10",
+           "updateTime": null,
+           "lastLoginTime": null,
+           "status": 0,
+           "lastLoginIp": "",
+           "deleted": false
+         },
+         {
+           "id": 2,
+           "name": "qwqwe",
+           "password": "123123",
+           "gender": 0,
+           "phone": "21312312312",
+           "wechatId": "efdasdasd",
+           "nickname": "bbbbbb",
+           "sessionKey": "sdsd11",
+           "createTime": "2020-10-14T23:11:10",
+           "updateTime": null,
+           "lastLoginTime": null,
+           "status": 0,
+           "lastLoginIp": "",
+           "deleted": false
+         }
+       ]
+     },
+     "errmsg": "成功"
+   }
+    ```
+#### 6.2 获取某个用户的详情信息
+> 这里前端可根据id通过之前获得的list来获取某个用户的信息，也可以通过下面的api
+
+`GET http://localhost:8083/admin/user/detail?id=2`
+```
+{
+  "errno": 0,
+  "data": {
+    "id": 2,
+    "name": "qwqwe",
+    "password": "123123",
+    "gender": 0,
+    "phone": "21312312312",
+    "wechatId": "efdasdasd",
+    "nickname": "bbbbbb",
+    "sessionKey": "sdsd11",
+    "createTime": "2020-10-14T23:11:10",
+    "updateTime": null,
+    "lastLoginTime": null,
+    "status": 0,
+    "lastLoginIp": "",
+    "deleted": false
+  },
+  "errmsg": "成功"
+}
+```
+#### 6.3 更改某个用户的状态
+> 这里前端应当设置用户信息除了状态都不能改动
+
+* 用户状态【0 可用, 1 不可登录, 2 不可交易】
+
+```
+POST http://localhost:8083/admin/user/update
+Content-Type: application/json
+
+{
+"id": 2,
+"name": "qwqwe",
+"password": "123123",
+"gender": 0,
+"phone": "21312312312",
+"wechatId": "efdasdasd",
+"nickname": "bbbbbb",
+"sessionKey": "sdsd11",
+"createTime": "2020-10-14T23:11:10",
+"updateTime": null,
+"lastLoginTime": null,
+"status": 2,
+"lastLoginIp": "",
+"deleted": false
+}
+```
+* 返回信息
+```
+{
+  "errno": 0,
+  "data": 1,
+  "errmsg": "成功"
+}
+```

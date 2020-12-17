@@ -6,10 +6,12 @@ import org.dgutstu.dgutshop.core.validator.Sort;
 import org.dgutstu.dgutshop.db.domain.DgutshopUser;
 import org.dgutstu.dgutshop.db.service.DgutshopUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -25,12 +27,14 @@ public class AdminUserController {
     private DgutshopUserService userService;
 
     @GetMapping("/list")
-    public Object list(String name, String phone,
+    public Object list(Integer id, String name, String phone, String wechatId, String nickname,
+                       @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime start,
+                       @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime end,
                        @RequestParam(defaultValue = "1") Integer page,
                        @RequestParam(defaultValue = "10") Integer limit,
                        @Sort @RequestParam(defaultValue = "create_time") String sort,
                        @Order @RequestParam(defaultValue = "desc") String order) {
-        List<DgutshopUser> userList = userService.querySelective(name, phone, page, limit, sort, order);
+        List<DgutshopUser> userList = userService.querySelective(id, name, phone, wechatId, nickname, start, end, page, limit, sort, order);
         return ResponseUtil.okList(userList);
     }
 

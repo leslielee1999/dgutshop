@@ -9,9 +9,12 @@ import org.dgutstu.dgutshop.db.domain.DgutshopRole;
 import org.dgutstu.dgutshop.db.service.DgutshopAdminService;
 import org.dgutstu.dgutshop.db.service.DgutshopRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import static org.dgutstu.dgutshop.admin.util.AdminResponseCode.*;
 
@@ -32,11 +35,13 @@ public class AdminRoleController {
 
     @GetMapping("/list")
     public Object list(String name,
+                       @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime start,
+                       @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime end,
                        @RequestParam(defaultValue = "1") Integer page,
                        @RequestParam(defaultValue = "10") Integer limit,
                        @Sort @RequestParam(defaultValue = "id") String sort,
                        @Order @RequestParam(defaultValue = "desc") String order){
-        List<DgutshopRole> roleList = roleService.querySelective(name, page, limit, sort, order);
+        List<DgutshopRole> roleList = roleService.querySelective(name, start, end, page, limit, sort, order);
         return ResponseUtil.okList(roleList);
     }
 

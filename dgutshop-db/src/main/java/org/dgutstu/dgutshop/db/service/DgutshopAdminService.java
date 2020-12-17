@@ -36,7 +36,7 @@ public class DgutshopAdminService {
      * @param order
      * @return
      */
-    public List<DgutshopAdmin> querySelective(String name, String nickname, Integer page, Integer limit, String sort, String order){
+    public List<DgutshopAdmin> querySelective(String name, String nickname, LocalDateTime start, LocalDateTime end, Integer page, Integer limit, String sort, String order){
         DgutshopAdminExample example = new DgutshopAdminExample();
         DgutshopAdminExample.Criteria criteria = example.createCriteria();
 
@@ -46,6 +46,12 @@ public class DgutshopAdminService {
         }
         if (!StringUtils.isEmpty(name)){
             criteria.andNameLike("%" + name + "%");
+        }
+        if (!StringUtils.isEmpty(start)){
+            criteria.andCreateTimeGreaterThanOrEqualTo(start);
+        }
+        if (!StringUtils.isEmpty(end)){
+            criteria.andCreateTimeLessThanOrEqualTo(end);
         }
 
         //  判断是否为逻辑删除的饮品

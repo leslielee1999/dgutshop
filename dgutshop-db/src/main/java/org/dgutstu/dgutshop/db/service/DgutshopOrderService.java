@@ -54,7 +54,7 @@ public class DgutshopOrderService {
             querys.add(" o.create_time >= '" + df.format(start) + "' ");
         }
         if (end != null) {
-            querys.add(" o.end_time < '" + df.format(end) + "' ");
+            querys.add(" o.create_time <= '" + df.format(end) + "' ");
         }
         if (orderStatusArray != null && orderStatusArray.size() > 0) {
             querys.add(" o.order_status in (" + StringUtils.collectionToDelimitedString(orderStatusArray, ",") + ") ");

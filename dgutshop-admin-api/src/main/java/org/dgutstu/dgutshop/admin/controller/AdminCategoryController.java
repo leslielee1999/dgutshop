@@ -10,10 +10,12 @@ import org.dgutstu.dgutshop.db.service.DgutshopCategoryItemService;
 import org.dgutstu.dgutshop.db.service.DgutshopCategoryService;
 import org.dgutstu.dgutshop.db.service.DgutshopProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -43,11 +45,13 @@ public class AdminCategoryController {
 
     @GetMapping("/list")
     public Object list(String name, Integer index,
+                       @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime start,
+                       @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime end,
                        @RequestParam(defaultValue = "1") Integer page,
                        @RequestParam(defaultValue = "10") Integer limit,
                        @Sort @RequestParam(defaultValue = "id") String sort,
                        @Order @RequestParam(defaultValue = "desc") String order) {
-        List<DgutshopCategory> categoryList = categoryService.querySelective(name, index, page, limit, sort, order);
+        List<DgutshopCategory> categoryList = categoryService.querySelective(name, index, start, end, page, limit, sort, order);
         categoryItemService.fill(categoryList);
         return ResponseUtil.okList(categoryList);
     }
