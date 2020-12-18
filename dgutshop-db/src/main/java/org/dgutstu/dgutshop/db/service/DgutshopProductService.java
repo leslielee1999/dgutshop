@@ -21,6 +21,7 @@ import java.util.List;
 @Service
 public class DgutshopProductService {
 
+
     @Resource
     private DgutshopProductMapper productMapper;
 
@@ -61,6 +62,42 @@ public class DgutshopProductService {
 
         //  设置分页
         PageHelper.startPage(page, limit);
+        return productMapper.selectByExample(example);
+    }
+
+
+    public List<DgutshopProduct> querySelective(Integer categoryId, String keyword, Integer userId,
+                                                Integer page, Integer limit, String sort, String order){
+        DgutshopProductExample example = new DgutshopProductExample();
+        DgutshopProductExample.Criteria criteria1 = example.createCriteria();
+        DgutshopProductExample.Criteria criteria2 = example.createCriteria();
+
+//        if (StringUtils.isEmpty(categoryId) && categoryId != 0){
+//            criteria1.and
+//        }
+//
+//        //  判断是否为模糊查询
+//        if(!StringUtils.isEmpty(name)){
+//            criteria.andNameLike("%" + name + "%");
+//        }
+//
+//        if (!StringUtils.isEmpty(start)){
+//            criteria.andCreateTimeGreaterThanOrEqualTo(start);
+//        }
+//        if (!StringUtils.isEmpty(end)){
+//            criteria.andCreateTimeLessThanOrEqualTo(end);
+//        }
+//
+//        //  判断是否为逻辑删除的饮品
+//        criteria.andDeletedEqualTo(false);
+//
+//        //  设置排序
+//        if(!StringUtils.isEmpty(sort) && !StringUtils.isEmpty(order)){
+//            example.setOrderByClause(sort + " " + order);
+//        }
+//
+//        //  设置分页
+//        PageHelper.startPage(page, limit);
         return productMapper.selectByExample(example);
     }
 
