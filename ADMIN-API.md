@@ -1,4 +1,4 @@
-## API
+## Admin-Api
 ### 一、饮品管理
 #### 1.1 查询功能
 1.  列举所有饮品：<br/>
@@ -966,3 +966,552 @@ Content-Type: application/json
   "deleted": false
 }
 ```
+
+
+### 七、小料管理
+#### 7.1 查询功能
+1.  列举所有小料：<br/>
+`GET http://localhost:8083/admin/toppings/list`
+    ```
+    {
+      "errno": 0,
+      "data": {
+        "total": 4,
+        "pages": 1,
+        "limit": 10,
+        "page": 1,
+        "list": [
+          {
+            "id": 4,
+            "code": "yyyyuw",
+            "name": "绿豆",
+            "price": 2.00,
+            "description": "好吃",
+            "status": 1,
+            "picture": "",
+            "createTime": "2020-08-18T10:25:44",
+            "updateTime": "2020-12-18T10:26:55",
+            "deleted": false
+          },
+          {
+            "id": 3,
+            "code": "ssqqsa",
+            "name": "珍珠",
+            "price": 2.00,
+            "description": "黑糖的",
+            "status": 0,
+            "picture": "",
+            "createTime": "2020-09-18T10:25:44",
+            "updateTime": null,
+            "deleted": false
+          },
+          {
+            "id": 2,
+            "code": "oowiak",
+            "name": "布丁",
+            "price": 2.00,
+            "description": "韧性好",
+            "status": 1,
+            "picture": "",
+            "createTime": "2020-10-18T10:25:44",
+            "updateTime": null,
+            "deleted": false
+          },
+          {
+            "id": 1,
+            "code": "xxaaqq",
+            "name": "红豆",
+            "price": 2.00,
+            "description": "甜度适中",
+            "status": 0,
+            "picture": "",
+            "createTime": "2020-11-18T10:25:44",
+            "updateTime": null,
+            "deleted": false
+          }
+        ]
+      },
+      "errmsg": "成功"
+    }
+    ```
+2.  根据id查询某种小料<br/>
+`GET http://localhost:8083/admin/toppings/list?toppingId=`
+    ```
+    {
+      "errno": 0,
+      "data": {
+        "total": 1,
+        "pages": 1,
+        "limit": 10,
+        "page": 1,
+        "list": [
+          {
+            "id": 2,
+            "code": "oowiak",
+            "name": "布丁",
+            "price": 2.00,
+            "description": "韧性好",
+            "status": 1,
+            "picture": "",
+            "createTime": "2020-10-18T10:25:44",
+            "updateTime": null,
+            "deleted": false
+          }
+        ]
+      },
+      "errmsg": "成功"
+    }
+    ```
+3.  根据小料名查询某种小料（模糊查询）<br/>
+`GET http://localhost:8083/admin/toppings/list?name=`
+    ```
+    {
+      "errno": 0,
+      "data": {
+        "total": 1,
+        "pages": 1,
+        "limit": 10,
+        "page": 1,
+        "list": [
+          {
+            "id": 3,
+            "code": "ssqqsa",
+            "name": "珍珠",
+            "price": 2.00,
+            "description": "黑糖的",
+            "status": 0,
+            "picture": "",
+            "createTime": "2020-09-18T10:25:44",
+            "updateTime": null,
+            "deleted": false
+          }
+        ]
+      },
+      "errmsg": "成功"
+    }
+    ```
+4.  根据小料编号查询某种小料（模糊查询）<br/>
+`GET http://localhost:8083/admin/toppings/list?code=q`
+    ```
+    {
+      "errno": 0,
+      "data": {
+        "total": 2,
+        "pages": 1,
+        "limit": 10,
+        "page": 1,
+        "list": [
+          {
+            "id": 3,
+            "code": "ssqqsa",
+            "name": "珍珠",
+            "price": 2.00,
+            "description": "黑糖的",
+            "status": 0,
+            "picture": "",
+            "createTime": "2020-09-18T10:25:44",
+            "updateTime": null,
+            "deleted": false
+          },
+          {
+            "id": 1,
+            "code": "xxaaqq",
+            "name": "红豆",
+            "price": 2.00,
+            "description": "甜度适中",
+            "status": 0,
+            "picture": "",
+            "createTime": "2020-11-18T10:25:44",
+            "updateTime": null,
+            "deleted": false
+          }
+        ]
+      },
+      "errmsg": "成功"
+    }
+    ```
+5.  根据商品状态查询某些小料商品状态【0：正常；1：下架】<br/>
+`GET http://localhost:8083/admin/toppings/list?status=1`
+    ```
+    {
+      "errno": 0,
+      "data": {
+        "total": 2,
+        "pages": 1,
+        "limit": 10,
+        "page": 1,
+        "list": [
+          {
+            "id": 4,
+            "code": "yyyyuw",
+            "name": "绿豆",
+            "price": 2.00,
+            "description": "好吃",
+            "status": 1,
+            "picture": "",
+            "createTime": "2020-08-18T10:25:44",
+            "updateTime": "2020-12-18T10:26:55",
+            "deleted": false
+          },
+          {
+            "id": 2,
+            "code": "oowiak",
+            "name": "布丁",
+            "price": 2.00,
+            "description": "韧性好",
+            "status": 1,
+            "picture": "",
+            "createTime": "2020-10-18T10:25:44",
+            "updateTime": null,
+            "deleted": false
+          }
+        ]
+      },
+      "errmsg": "成功"
+    }
+    ```
+6.  按给定创建时间的范围来查找<br/>
+`GET http://localhost:8083/admin/toppings/list?start=2020-10-13 09:51:50&end=2020-12-13 10:30:49`
+    ```
+    {
+      "errno": 0,
+      "data": {
+        "total": 2,
+        "pages": 1,
+        "limit": 10,
+        "page": 1,
+        "list": [
+          {
+            "id": 2,
+            "code": "oowiak",
+            "name": "布丁",
+            "price": 2.00,
+            "description": "韧性好",
+            "status": 1,
+            "picture": "",
+            "createTime": "2020-10-18T10:25:44",
+            "updateTime": null,
+            "deleted": false
+          },
+          {
+            "id": 1,
+            "code": "xxaaqq",
+            "name": "红豆",
+            "price": 2.00,
+            "description": "甜度适中",
+            "status": 0,
+            "picture": "",
+            "createTime": "2020-11-18T10:25:44",
+            "updateTime": null,
+            "deleted": false
+          }
+        ]
+      },
+      "errmsg": "成功"
+    }
+    ```
+
+* 关于分页
+    * 指定页数（默认为第1页）：<br/>`GET http://localhost:8083/admin/toppings/list?page=`
+    * 指定每页获得多少种小料（默认为10种）：<br/>`GET http://localhost:8083/admin/toppings/list?limit=`
+    * 排序方式默认为降序，也可以指定为升序：<br/>`GET http://localhost:8083/admin/toppings/list?sort=`
+    * 排序字段默认为id，也可以指定为按日期：<br/>`GET http://localhost:8083/admin/toppings/list?order=`
+
+#### 7.2 增加功能
+* 传递json
+    ```
+    POST http://localhost:8083/admin/toppings/create
+    Content-Type: application/json
+    
+    {
+      "id": 1,
+      "code": "iuuuou",
+      "name": "仙草",
+      "price": 2.00,
+      "description": "黑色",
+      "status": 1,
+      "picture": "",
+      "createTime": null,
+      "updateTime": null,
+      "deleted": false
+    }
+    ```
+* 输出
+    ```
+  {
+    "errno": 0,
+    "errmsg": "成功"
+  }
+  ```
+#### 7.3 删除功能
+* 给个id字段即可：`POST http://localhost:8083/admin/toppings/delete?id=4`
+* 输出
+    ```
+  {
+    "errno": 0,
+    "errmsg": "成功"
+  }
+  ```
+
+#### 7.4 修改功能
+* 传递json
+    ```
+    POST http://localhost:8083/admin/toppings/update
+    Content-Type: application/json
+    
+    {
+      "id": 4,
+      "code": "yyyyuw",
+      "name": "绿豆",
+      "price": 2.00,
+      "description": "好吃",
+      "status": 1,
+      "picture": "",
+      "createTime": null,
+      "updateTime": null,
+      "deleted": false
+    }
+    ```
+* 输出
+    ```
+    {
+      "errno": 0,
+      "errmsg": "成功"
+    }
+  ```
+  
+### 八、用户地址管理
+* 后台管理人员只拥有查询功能
+#### 8.1 查询功能
+1.  列举所有用户地址：<br/>
+`GET http://localhost:8083/admin/address/list`
+    * 获取到的数据
+    ```
+    {
+      "errno": 0,
+      "data": {
+        "total": 3,
+        "pages": 1,
+        "limit": 10,
+        "page": 1,
+        "list": [
+          {
+            "id": 3,
+            "userId": 2,
+            "wechatId": "efdasdasd",
+            "userName": "冰冰",
+            "userPhone": "12222222222",
+            "userAddress": "内蒙古",
+            "userRoom": "胡同2号",
+            "isDefault": false,
+            "createTime": "2020-10-13T09:51:50",
+            "updateTime": null,
+            "deleted": false
+          },
+          {
+            "id": 2,
+            "userId": 1,
+            "wechatId": "kk545771383",
+            "userName": "琳琳",
+            "userPhone": "19999999999",
+            "userAddress": "北京",
+            "userRoom": "胡同1号",
+            "isDefault": false,
+            "createTime": "2020-11-13T09:51:50",
+            "updateTime": null,
+            "deleted": false
+          },
+          {
+            "id": 1,
+            "userId": 1,
+            "wechatId": "kk545771383",
+            "userName": "小卡",
+            "userPhone": "13333333333",
+            "userAddress": "广东东莞松山湖",
+            "userRoom": "东莞理工学院大学路1号",
+            "isDefault": true,
+            "createTime": "2020-12-13T09:51:50",
+            "updateTime": null,
+            "deleted": false
+          }
+        ]
+      },
+      "errmsg": "成功"
+    }
+    ```
+2.  根据用户id查询某些用户地址<br/>
+`GET http://localhost:8083/admin/address/list?userId=2`
+    ```
+    {
+      "errno": 0,
+      "data": {
+        "total": 1,
+        "pages": 1,
+        "limit": 10,
+        "page": 1,
+        "list": [
+          {
+            "id": 3,
+            "userId": 2,
+            "wechatId": "efdasdasd",
+            "userName": "冰冰",
+            "userPhone": "12222222222",
+            "userAddress": "内蒙古",
+            "userRoom": "胡同2号",
+            "isDefault": false,
+            "createTime": "2020-10-13T09:51:50",
+            "updateTime": null,
+            "deleted": false
+          }
+        ]
+      },
+      "errmsg": "成功"
+    }
+    ``` 
+3.  根据用户微信号查询某些用户地址（模糊查询）<br/>
+`GET http://localhost:8083/admin/address/list?wechatId=3`
+    ```
+    {
+      "errno": 0,
+      "data": {
+        "total": 2,
+        "pages": 1,
+        "limit": 10,
+        "page": 1,
+        "list": [
+          {
+            "id": 2,
+            "userId": 1,
+            "wechatId": "kk545771383",
+            "userName": "琳琳",
+            "userPhone": "19999999999",
+            "userAddress": "北京",
+            "userRoom": "胡同1号",
+            "isDefault": false,
+            "createTime": "2020-11-13T09:51:50",
+            "updateTime": null,
+            "deleted": false
+          },
+          {
+            "id": 1,
+            "userId": 1,
+            "wechatId": "kk545771383",
+            "userName": "小卡",
+            "userPhone": "13333333333",
+            "userAddress": "广东东莞松山湖",
+            "userRoom": "东莞理工学院大学路1号",
+            "isDefault": true,
+            "createTime": "2020-12-13T09:51:50",
+            "updateTime": null,
+            "deleted": false
+          }
+        ]
+      },
+      "errmsg": "成功"
+    }
+    ```
+4.  根据收货人姓名查询某些用户地址（模糊查询）<br/>
+`GET http://localhost:8083/admin/address/list?userName=卡`
+    ```
+    {
+      "errno": 0,
+      "data": {
+        "total": 1,
+        "pages": 1,
+        "limit": 10,
+        "page": 1,
+        "list": [
+          {
+            "id": 1,
+            "userId": 1,
+            "wechatId": "kk545771383",
+            "userName": "小卡",
+            "userPhone": "13333333333",
+            "userAddress": "广东东莞松山湖",
+            "userRoom": "东莞理工学院大学路1号",
+            "isDefault": true,
+            "createTime": "2020-12-13T09:51:50",
+            "updateTime": null,
+            "deleted": false
+          }
+        ]
+      },
+      "errmsg": "成功"
+    }
+    ```
+5.  根据收货人手机号码查询某些用户地址（模糊查询）<br/>
+`GET http://localhost:8083/admin/address/list?phone=2`
+    ```
+    {
+      "errno": 0,
+      "data": {
+        "total": 1,
+        "pages": 1,
+        "limit": 10,
+        "page": 1,
+        "list": [
+          {
+            "id": 3,
+            "userId": 2,
+            "wechatId": "efdasdasd",
+            "userName": "冰冰",
+            "userPhone": "12222222222",
+            "userAddress": "内蒙古",
+            "userRoom": "胡同2号",
+            "isDefault": false,
+            "createTime": "2020-10-13T09:51:50",
+            "updateTime": null,
+            "deleted": false
+          }
+        ]
+      },
+      "errmsg": "成功"
+    }
+    ```
+6.  按给定创建时间的范围来查找<br/>
+`GET http://localhost:8083/admin/address/list?start=2020-11-13 09:51:50&end=2020-12-13 10:30:49`
+    ```
+    {
+      "errno": 0,
+      "data": {
+        "total": 2,
+        "pages": 1,
+        "limit": 10,
+        "page": 1,
+        "list": [
+          {
+            "id": 2,
+            "userId": 1,
+            "wechatId": "kk545771383",
+            "userName": "琳琳",
+            "userPhone": "19999999999",
+            "userAddress": "北京",
+            "userRoom": "胡同1号",
+            "isDefault": false,
+            "createTime": "2020-11-13T09:51:50",
+            "updateTime": null,
+            "deleted": false
+          },
+          {
+            "id": 1,
+            "userId": 1,
+            "wechatId": "kk545771383",
+            "userName": "小卡",
+            "userPhone": "13333333333",
+            "userAddress": "广东东莞松山湖",
+            "userRoom": "东莞理工学院大学路1号",
+            "isDefault": true,
+            "createTime": "2020-12-13T09:51:50",
+            "updateTime": null,
+            "deleted": false
+          }
+        ]
+      },
+      "errmsg": "成功"
+    }
+    ```
+* 关于分页
+    * 指定页数（默认为第1页）：<br/>`GET http://localhost:8083/admin/address/list?page=`
+    * 指定每页获得多少个订单（默认为10种）：<br/>`GET http://localhost:8083/admin/address/list?limit=`
+    * 排序方式默认为降序，也可以指定为升序：<br/>`GET http://localhost:8083/admin/address/list?sort=`
+    * 排序字段默认为id，也可以指定为按日期：<br/>`GET http://localhost:8083/admin/address/list?order=`

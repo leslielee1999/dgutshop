@@ -10,6 +10,7 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -75,7 +76,14 @@ public class DgutshopCategoryItemService {
         List<DgutshopCategoryItem> categoryItems = categoryItemMapper.selectByExample(example);
         //  为所有分类项设置饮品属性
         setProduct(categoryItems);
-        category.setCategoryItems(categoryItems);
+        List<DgutshopCategoryItem> itemList = new LinkedList<>();
+        for (DgutshopCategoryItem categoryItem : categoryItems) {
+            if (!categoryItem.getDeleted()){
+//                categoryItems.remove(categoryItem);
+                itemList.add(categoryItem);
+            }
+        }
+        category.setCategoryItems(itemList);
     }
 
 
