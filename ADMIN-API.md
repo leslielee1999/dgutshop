@@ -950,3 +950,19 @@ Content-Type: application/json
   "errmsg": "成功"
 }
 ```
+> 记录，完善：
+> 创建类目的时候，新建的index自动为比原有类目最大的index还大1的值<br/>
+```
+POST http://localhost:8083/admin/category/create
+Content-Type: application/json
+
+{
+  "id": 3,
+  "index": 1,
+  "name": "折扣",
+  "icon": "",
+  "createTime": null,
+  "updateTime": null,
+  "deleted": false
+}
+```

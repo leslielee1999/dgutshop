@@ -35,7 +35,7 @@ public class DgutshopCategoryService {
      * @param order
      * @return
      */
-    public List<DgutshopCategory> querySelective(String name, Integer index, Integer page, Integer limit, String sort, String order){
+    public List<DgutshopCategory> querySelective(String name, Integer index, LocalDateTime start, LocalDateTime end, Integer page, Integer limit, String sort, String order){
         DgutshopCategoryExample example = new DgutshopCategoryExample();
         DgutshopCategoryExample.Criteria criteria = example.createCriteria();
 
@@ -46,6 +46,13 @@ public class DgutshopCategoryService {
 
         if (index != null){
             criteria.andIndexEqualTo(index);
+        }
+
+        if (!StringUtils.isEmpty(start)){
+            criteria.andCreateTimeGreaterThanOrEqualTo(start);
+        }
+        if (!StringUtils.isEmpty(end)){
+            criteria.andCreateTimeLessThanOrEqualTo(end);
         }
 
         //  匹配不为逻辑删除的分类
@@ -59,6 +66,16 @@ public class DgutshopCategoryService {
         //  设置分页
         PageHelper.startPage(page, limit);
         return categoryMapper.selectByExampleSelective(example);
+    }
+
+
+    /**
+     * 列出菜单分类
+     * @return
+     */
+    public List<DgutshopCategory> list(){
+        DgutshopCategoryExample example = new DgutshopCategoryExample();
+        return categoryMapper.selectByExample(example);
     }
 
     /**

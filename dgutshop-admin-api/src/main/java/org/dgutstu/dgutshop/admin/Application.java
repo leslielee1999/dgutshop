@@ -14,8 +14,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication(scanBasePackages = {"org.dgutstu.dgutshop.db",
                     "org.dgutstu.dgutshop.core", "org.dgutstu.dgutshop.admin"})
 @MapperScan("org.dgutstu.dgutshop.db.dao")
-//@EnableTransactionManagement
-//@EnableScheduling
+@EnableTransactionManagement
+@EnableScheduling
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);

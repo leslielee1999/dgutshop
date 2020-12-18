@@ -84,11 +84,14 @@ public class AdminCategoryController {
         if (error != null) {
             return error;
         }
-        int index = category.getIndex();//分类顺序
-        List<DgutshopCategory> categoryList = categoryService.findByIndex(index);
-        if (categoryList.size() > 0){
-            return ResponseUtil.fail(CATEGORY_INDEX_EXIST, "分类顺序已被占用");//651
+        int index = -1;
+        List<DgutshopCategory> categoryList = categoryService.list();
+        for (DgutshopCategory dgutshopCategory : categoryList) {
+            if (index < dgutshopCategory.getIndex()){
+                index = dgutshopCategory.getIndex();
+            }
         }
+        category.setIndex(++index);
         categoryService.add(category);
         //  记录日志
         //  改用spring security实现
