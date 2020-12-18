@@ -1205,7 +1205,7 @@ public class DgutshopAddressExample {
             return (Criteria) this;
         }
 
-        public Criteria andIsDefaultEqualTo(Boolean value) {
+        public Criteria andIsDefaultEqualTo(Byte value) {
             addCriterion("is_default =", value, "isDefault");
             return (Criteria) this;
         }
@@ -1221,7 +1221,7 @@ public class DgutshopAddressExample {
             return (Criteria) this;
         }
 
-        public Criteria andIsDefaultNotEqualTo(Boolean value) {
+        public Criteria andIsDefaultNotEqualTo(Byte value) {
             addCriterion("is_default <>", value, "isDefault");
             return (Criteria) this;
         }
@@ -1237,7 +1237,7 @@ public class DgutshopAddressExample {
             return (Criteria) this;
         }
 
-        public Criteria andIsDefaultGreaterThan(Boolean value) {
+        public Criteria andIsDefaultGreaterThan(Byte value) {
             addCriterion("is_default >", value, "isDefault");
             return (Criteria) this;
         }
@@ -1253,7 +1253,7 @@ public class DgutshopAddressExample {
             return (Criteria) this;
         }
 
-        public Criteria andIsDefaultGreaterThanOrEqualTo(Boolean value) {
+        public Criteria andIsDefaultGreaterThanOrEqualTo(Byte value) {
             addCriterion("is_default >=", value, "isDefault");
             return (Criteria) this;
         }
@@ -1269,7 +1269,7 @@ public class DgutshopAddressExample {
             return (Criteria) this;
         }
 
-        public Criteria andIsDefaultLessThan(Boolean value) {
+        public Criteria andIsDefaultLessThan(Byte value) {
             addCriterion("is_default <", value, "isDefault");
             return (Criteria) this;
         }
@@ -1285,7 +1285,7 @@ public class DgutshopAddressExample {
             return (Criteria) this;
         }
 
-        public Criteria andIsDefaultLessThanOrEqualTo(Boolean value) {
+        public Criteria andIsDefaultLessThanOrEqualTo(Byte value) {
             addCriterion("is_default <=", value, "isDefault");
             return (Criteria) this;
         }
@@ -1301,22 +1301,22 @@ public class DgutshopAddressExample {
             return (Criteria) this;
         }
 
-        public Criteria andIsDefaultIn(List<Boolean> values) {
+        public Criteria andIsDefaultIn(List<Byte> values) {
             addCriterion("is_default in", values, "isDefault");
             return (Criteria) this;
         }
 
-        public Criteria andIsDefaultNotIn(List<Boolean> values) {
+        public Criteria andIsDefaultNotIn(List<Byte> values) {
             addCriterion("is_default not in", values, "isDefault");
             return (Criteria) this;
         }
 
-        public Criteria andIsDefaultBetween(Boolean value1, Boolean value2) {
+        public Criteria andIsDefaultBetween(Byte value1, Byte value2) {
             addCriterion("is_default between", value1, value2, "isDefault");
             return (Criteria) this;
         }
 
-        public Criteria andIsDefaultNotBetween(Boolean value1, Boolean value2) {
+        public Criteria andIsDefaultNotBetween(Byte value1, Byte value2) {
             addCriterion("is_default not between", value1, value2, "isDefault");
             return (Criteria) this;
         }

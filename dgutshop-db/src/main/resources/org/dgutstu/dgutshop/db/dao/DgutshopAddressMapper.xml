@@ -13,7 +13,7 @@
     <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
     <result column="user_address" jdbcType="VARCHAR" property="userAddress" />
     <result column="user_room" jdbcType="VARCHAR" property="userRoom" />
-    <result column="is_default" jdbcType="BIT" property="isDefault" />
+    <result column="is_default" jdbcType="TINYINT" property="isDefault" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
@@ -217,7 +217,7 @@
       deleted)
     values (#{userId,jdbcType=INTEGER}, #{wechatId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
       #{userPhone,jdbcType=VARCHAR}, #{userAddress,jdbcType=VARCHAR}, #{userRoom,jdbcType=VARCHAR}, 
-      #{isDefault,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{isDefault,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{deleted,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="org.dgutstu.dgutshop.db.domain.DgutshopAddress">
@@ -281,7 +281,7 @@
         #{userRoom,jdbcType=VARCHAR},
       </if>
       <if test="isDefault != null">
-        #{isDefault,jdbcType=BIT},
+        #{isDefault,jdbcType=TINYINT},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -333,7 +333,7 @@
         user_room = #{record.userRoom,jdbcType=VARCHAR},
       </if>
       <if test="record.isDefault != null">
-        is_default = #{record.isDefault,jdbcType=BIT},
+        is_default = #{record.isDefault,jdbcType=TINYINT},
       </if>
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
@@ -362,7 +362,7 @@
       user_phone = #{record.userPhone,jdbcType=VARCHAR},
       user_address = #{record.userAddress,jdbcType=VARCHAR},
       user_room = #{record.userRoom,jdbcType=VARCHAR},
-      is_default = #{record.isDefault,jdbcType=BIT},
+      is_default = #{record.isDefault,jdbcType=TINYINT},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       deleted = #{record.deleted,jdbcType=BIT}
@@ -396,7 +396,7 @@
         user_room = #{userRoom,jdbcType=VARCHAR},
       </if>
       <if test="isDefault != null">
-        is_default = #{isDefault,jdbcType=BIT},
+        is_default = #{isDefault,jdbcType=TINYINT},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -422,7 +422,7 @@
       user_phone = #{userPhone,jdbcType=VARCHAR},
       user_address = #{userAddress,jdbcType=VARCHAR},
       user_room = #{userRoom,jdbcType=VARCHAR},
-      is_default = #{isDefault,jdbcType=BIT},
+      is_default = #{isDefault,jdbcType=TINYINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       deleted = #{deleted,jdbcType=BIT}
