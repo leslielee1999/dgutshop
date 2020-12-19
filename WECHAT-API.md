@@ -765,3 +765,389 @@
       },
       "errmsg": "成功"
     }
+
+### 三、小料服务
+
+#### 3.1 小料列表
+
+接口链接
+
+    GET http://localhost:8082/wechat/topping/list
+    
+请求参数
+
+    无
+    
+响应内容
+
+    [
+      {
+        "id": 1,
+        "code": "xxaaqq",
+        "name": "红豆",
+        "price": 2.00,
+        "description": "甜度适中",
+        "status": 0,
+        "picture": "",
+        "createTime": "2020-11-18T10:25:44",
+        "updateTime": null,
+        "deleted": false
+      },
+      {
+        "id": 2,
+        "code": "oowiak",
+        "name": "布丁",
+        "price": 2.00,
+        "description": "韧性好",
+        "status": 1,
+        "picture": "",
+        "createTime": "2020-10-18T10:25:44",
+        "updateTime": null,
+        "deleted": false
+      },
+      {
+        "id": 3,
+        "code": "ssqqsa",
+        "name": "珍珠",
+        "price": 2.00,
+        "description": "黑糖的",
+        "status": 0,
+        "picture": "",
+        "createTime": "2020-09-18T10:25:44",
+        "updateTime": null,
+        "deleted": false
+      },
+      {
+        "id": 4,
+        "code": "yyyyuw",
+        "name": "绿豆",
+        "price": 2.00,
+        "description": "好吃",
+        "status": 1,
+        "picture": "",
+        "createTime": "2020-08-18T10:25:44",
+        "updateTime": "2020-12-18T10:26:55",
+        "deleted": true
+      },
+      {
+        "id": 5,
+        "code": "iuuuou",
+        "name": "仙草",
+        "price": 2.00,
+        "description": "黑色的，非常好吃",
+        "status": 1,
+        "picture": "",
+        "createTime": "2020-12-18T10:40:32",
+        "updateTime": "2020-12-18T10:43:21",
+        "deleted": false
+      }
+    ]
+    
+### 四、轮播图服务
+
+#### 4.1 轮播图列表
+
+接口链接
+
+    GET http://localhost:8082/wechat/slideshow/list
+    
+请求参数
+
+    无
+    
+响应内容
+
+    [
+      {
+        "id": 1,
+        "index": 4,
+        "picture": "",
+        "createTime": null,
+        "updateTime": "2020-12-19T13:17:22",
+        "deleted": false
+      },
+      {
+        "id": 2,
+        "index": 3,
+        "picture": "",
+        "createTime": null,
+        "updateTime": "2020-12-19T13:17:22",
+        "deleted": false
+      },
+      {
+        "id": 3,
+        "index": 3,
+        "picture": "",
+        "createTime": "2020-12-19T13:10:56",
+        "updateTime": "2020-12-19T13:10:56",
+        "deleted": true
+      },
+      {
+        "id": 4,
+        "index": 1,
+        "picture": "",
+        "createTime": "2020-12-19T13:11:13",
+        "updateTime": "2020-12-19T13:17:22",
+        "deleted": false
+      },
+      {
+        "id": 5,
+        "index": 6,
+        "picture": "",
+        "createTime": "2020-12-19T14:52:06",
+        "updateTime": "2020-12-19T14:52:06",
+        "deleted": true
+      }
+    ]
+    
+### 五、商家信息服务
+
+#### 5.1 商家信息列表
+
+接口链接
+
+    GET http://localhost:8082/wechat/config/mall
+    
+请求参数
+
+    无
+    
+响应内容
+
+    {
+      "errno": 0,
+      "data": {
+        "dgutshop_shop_latitude": "31.201900",
+        "dgutshop_shop_longitude": "121.587839",
+        "dgutshop_shop_qq": "545771383",
+        "dgutshop_shop_address": "东莞",
+        "dgutshop_shop_phone": "021-xxxx-xxxx",
+        "dgutshop_shop_businesshours": "周一至周五，早上9点~晚上9点",
+        "dgutshop_shop_name": "dgutshop"
+      },
+      "errmsg": "成功"
+    }
+
+### 六、订单服务
+
+#### 6.1 订单列表
+
+接口链接
+
+    GET http://localhost:8082/wechat/order/list
+    
+请求参数
+
+    userId
+    
+响应内容
+
+    [
+      {
+        "orderItemList": [
+          {
+            "product": {
+              "id": 5,
+              "code": "ccc",
+              "name": "波波奶绿",
+              "bigOriginalPrice": null,
+              "bigPromotePrice": null,
+              "mediumOriginalPrice": null,
+              "mediumPromotePrice": null,
+              "description": "波波好吃",
+              "status": true,
+              "picture": "http://yanxuan.nosdn.127.net/8ab2d3287af0cefa2cc539e40600621d.png",
+              "sales": 1,
+              "createTime": "2020-12-13T00:26:31",
+              "updateTime": "2020-12-13T00:26:31",
+              "heated": false,
+              "deleted": false
+            },
+            "id": 4,
+            "oid": 1,
+            "pid": 5,
+            "productName": "抹茶奶盖4",
+            "size": 0,
+            "productOriginalPrice": 10.00,
+            "productPromotePrice": 8.00,
+            "toppingId": [
+              1,
+              2
+            ],
+            "toppingName": [
+              "珍珠",
+              "仙草"
+            ],
+            "toppingPrice": 0.00,
+            "productActualPrice": 8.00,
+            "productPicture": "",
+            "sum": 2,
+            "note": "",
+            "createTime": null,
+            "updateTime": null,
+            "deleted": false
+          },
+          {
+            "product": {
+              "id": 1,
+              "code": "aaa",
+              "name": "珍珠奶茶",
+              "bigOriginalPrice": 10.00,
+              "bigPromotePrice": 9.00,
+              "mediumOriginalPrice": 8.00,
+              "mediumPromotePrice": 7.00,
+              "description": "黑珍珠",
+              "status": true,
+              "picture": "",
+              "sales": 1,
+              "createTime": "2018-02-01T00:00:00",
+              "updateTime": "2018-02-01T00:00:00",
+              "heated": false,
+              "deleted": false
+            },
+            "id": 2,
+            "oid": 1,
+            "pid": 1,
+            "productName": "抹茶奶盖2",
+            "size": 0,
+            "productOriginalPrice": 10.00,
+            "productPromotePrice": 8.00,
+            "toppingId": [
+              1,
+              2
+            ],
+            "toppingName": [
+              "珍珠",
+              "冰沙"
+            ],
+            "toppingPrice": 4.00,
+            "productActualPrice": 12.00,
+            "productPicture": "",
+            "sum": 2,
+            "note": "",
+            "createTime": null,
+            "updateTime": null,
+            "deleted": false
+          }
+        ],
+        "id": 1,
+        "userId": 2,
+        "code": "reqww",
+        "type": 1,
+        "orderStatus": 401,
+        "aftersaleStatus": 0,
+        "consignee": "小王",
+        "consigneePhone": "12222222222",
+        "consigneeAddress": "广东东莞",
+        "consigneeRoom": "松山湖",
+        "message": "不错",
+        "payId": "31111",
+        "payDate": "2020-12-16T18:57:53",
+        "deliveryCode": "123333",
+        "deliveryCompany": "自家配送",
+        "deliverymanName": "林一",
+        "deliverymanPhone": "16432234546",
+        "deliveryTime": "2020-12-19T17:15:17",
+        "productPrice": 200.00,
+        "deliveryPrice": 10.00,
+        "orderPrice": 210.00,
+        "takeCode": "3111",
+        "createTime": "2018-02-01T00:00:00",
+        "updateTime": "2020-12-19T17:15:17",
+        "refundAmount": null,
+        "refundType": "",
+        "refundContent": "",
+        "refundTime": null,
+        "confirmTime": "2020-12-17T18:59:22",
+        "comments": null,
+        "endTime": "2018-12-19T21:30:13",
+        "deleted": false
+      }
+    ]
+
+#### 6.2 提交订单
+
+接口链接
+
+    POST http://localhost:8082/wechat/order/submit
+    
+请求参数
+
+    Content-Type: application/json
+    
+      {
+        "userId": 1,
+        "type": 0,
+        "productPrice": 12.00,
+        "deliveryPrice": 2.00,
+        "orderPrice": 14.00,
+        "consignee": "小卡",
+        "consigneeAddress": "广东东莞松山湖",
+        "consigneeRoom": "东莞理工学院大学路1号",
+        "consigneePhone": "13333333333",
+        "message": "加糖",
+        "orderItemList": [
+          {
+            "product": {
+              "id": 4,
+              "code": "mmm",
+              "name": "热摩卡咖啡",
+              "bigOriginalPrice": 15.00,
+              "bigPromotePrice": 14.00,
+              "mediumOriginalPrice": 13.00,
+              "mediumPromotePrice": 12.00,
+              "description": "热的好吃",
+              "status": true,
+              "picture": "http://yanxuan.nosdn.127.net/8ab2d3287af0cefa2cc539e40600621d.png",
+              "sales": 1,
+              "createTime": "2020-12-13T00:26:10",
+              "updateTime": "2020-12-13T13:14:01",
+              "heated": true,
+              "deleted": false
+            },
+            "size": 0,
+            "productOriginalPrice": 12.00,
+            "productPromotePrice": 10.00,
+            "toppingPrice": 1.00,
+            "productActualPrice": 13.00,
+            "sum": 1,
+            "note": ""
+          },
+          {
+            "product": {
+              "id": 2,
+              "code": "bbb",
+              "name": "抹茶奶盖",
+              "bigOriginalPrice": 12.00,
+              "bigPromotePrice": 10.00,
+              "mediumOriginalPrice": 10.00,
+              "mediumPromotePrice": 8.00,
+              "description": "",
+              "status": true,
+              "picture": "",
+              "sales": 1,
+              "createTime": "2018-02-02T00:00:00",
+              "updateTime": "2018-02-02T00:00:00",
+              "heated": false,
+              "deleted": false
+            },
+            "size": 0,
+            "productOriginalPrice": 10.00,
+            "productPromotePrice": 8.00,
+            "toppingPrice": 4.00,
+            "productActualPrice": 12.00,
+            "sum": 3,
+            "note": ""
+          }
+        ]
+      }
+    
+响应内容
+
+    {
+      "errno": 0,
+      "data": {
+        "orderId": 7
+      },
+      "errmsg": "成功"
+    }

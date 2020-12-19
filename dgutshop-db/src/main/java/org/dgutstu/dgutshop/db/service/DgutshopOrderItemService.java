@@ -25,7 +25,7 @@ public class DgutshopOrderItemService {
      * 增加一个订单单项
      * @param orderItem
      */
-    public void add(DgutshopOrderItem orderItem){
+    public void create(DgutshopOrderItem orderItem){
         orderItem.setCreateTime(LocalDateTime.now());
         orderItem.setUpdateTime(LocalDateTime.now());
         orderItemMapper.insertSelective(orderItem);
@@ -40,38 +40,38 @@ public class DgutshopOrderItemService {
     }
 
 
-//    public void fill(List<DgutshopOrder> orderList){
-//        for (DgutshopOrder order : orderList) {
-//            fill(order);
-//        }
-//    }
+    public void fill(List<DgutshopOrder> orderList){
+        for (DgutshopOrder order : orderList) {
+            fill(order);
+        }
+    }
 
     /**
      * 完成订单与其订单项一对多关系的实现
      * @param order
      */
-//    public void fill(DgutshopOrder order){
-//        // 根据分类id找出归属于它的所有分类项
-//        DgutshopOrderItemExample example = new DgutshopOrderItemExample();
-//        example.createCriteria().andOidEqualTo(order.getId());
-//        example.setOrderByClause("id desc");
-//        List<DgutshopOrderItem> orderItems = orderItemMapper.selectByExample(example);
-//        //  为所有分类项设置饮品属性
-//        setProduct(orderItems);
-//        order.setOrderItemList(orderItems);
-//    }
-//
-//
-//    public void setProduct(List<DgutshopOrderItem> orderItems){
-//        for (DgutshopOrderItem orderItem : orderItems) {
-//            setProduct(orderItem);
-//        }
-//    }
-//
-//    public void setProduct(DgutshopOrderItem orderItem){
-//        DgutshopProduct product = productService.get(orderItem.getPid());
-//        orderItem.setProduct(product);
-//    }
+    public void fill(DgutshopOrder order){
+        // 根据分类id找出归属于它的所有分类项
+        DgutshopOrderItemExample example = new DgutshopOrderItemExample();
+        example.createCriteria().andOidEqualTo(order.getId());
+        example.setOrderByClause("id desc");
+        List<DgutshopOrderItem> orderItems = orderItemMapper.selectByExample(example);
+        //  为所有分类项设置饮品属性
+        setProduct(orderItems);
+        order.setOrderItemList(orderItems);
+    }
+
+
+    public void setProduct(List<DgutshopOrderItem> orderItems){
+        for (DgutshopOrderItem orderItem : orderItems) {
+            setProduct(orderItem);
+        }
+    }
+
+    public void setProduct(DgutshopOrderItem orderItem){
+        DgutshopProduct product = productService.get(orderItem.getPid());
+        orderItem.setProduct(product);
+    }
 
     /**
      * 获取销量和

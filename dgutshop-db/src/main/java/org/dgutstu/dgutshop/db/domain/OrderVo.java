@@ -7,7 +7,7 @@ import java.util.List;
 public class OrderVo {
     private Integer id;
     private String code;
-    private String type;
+    private Byte type;
     private Integer orderStatus;
     private BigDecimal productPrice;
     private BigDecimal deliveryPrice;
@@ -41,11 +41,11 @@ public class OrderVo {
         this.code = code;
     }
 
-    public String getType() {
+    public Byte getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Byte type) {
         this.type = type;
     }
 

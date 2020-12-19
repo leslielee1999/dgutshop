@@ -1303,7 +1303,7 @@ Content-Type: application/json
             "userPhone": "12222222222",
             "userAddress": "内蒙古",
             "userRoom": "胡同2号",
-            "isDefault": false,
+            "isDefault": 1,
             "createTime": "2020-10-13T09:51:50",
             "updateTime": null,
             "deleted": false
@@ -1316,7 +1316,7 @@ Content-Type: application/json
             "userPhone": "19999999999",
             "userAddress": "北京",
             "userRoom": "胡同1号",
-            "isDefault": false,
+            "isDefault": 1,
             "createTime": "2020-11-13T09:51:50",
             "updateTime": null,
             "deleted": false
@@ -1329,7 +1329,7 @@ Content-Type: application/json
             "userPhone": "13333333333",
             "userAddress": "广东东莞松山湖",
             "userRoom": "东莞理工学院大学路1号",
-            "isDefault": true,
+            "isDefault": 0,
             "createTime": "2020-12-13T09:51:50",
             "updateTime": null,
             "deleted": false
@@ -1358,7 +1358,7 @@ Content-Type: application/json
             "userPhone": "12222222222",
             "userAddress": "内蒙古",
             "userRoom": "胡同2号",
-            "isDefault": false,
+            "isDefault": 1,
             "createTime": "2020-10-13T09:51:50",
             "updateTime": null,
             "deleted": false
@@ -1387,7 +1387,7 @@ Content-Type: application/json
             "userPhone": "19999999999",
             "userAddress": "北京",
             "userRoom": "胡同1号",
-            "isDefault": false,
+            "isDefault": 1,
             "createTime": "2020-11-13T09:51:50",
             "updateTime": null,
             "deleted": false
@@ -1400,7 +1400,7 @@ Content-Type: application/json
             "userPhone": "13333333333",
             "userAddress": "广东东莞松山湖",
             "userRoom": "东莞理工学院大学路1号",
-            "isDefault": true,
+            "isDefault": 0,
             "createTime": "2020-12-13T09:51:50",
             "updateTime": null,
             "deleted": false
@@ -1429,7 +1429,7 @@ Content-Type: application/json
             "userPhone": "13333333333",
             "userAddress": "广东东莞松山湖",
             "userRoom": "东莞理工学院大学路1号",
-            "isDefault": true,
+            "isDefault": 0,
             "createTime": "2020-12-13T09:51:50",
             "updateTime": null,
             "deleted": false
@@ -1458,7 +1458,7 @@ Content-Type: application/json
             "userPhone": "12222222222",
             "userAddress": "内蒙古",
             "userRoom": "胡同2号",
-            "isDefault": false,
+            "isDefault": 1,
             "createTime": "2020-10-13T09:51:50",
             "updateTime": null,
             "deleted": false
@@ -1487,7 +1487,7 @@ Content-Type: application/json
             "userPhone": "19999999999",
             "userAddress": "北京",
             "userRoom": "胡同1号",
-            "isDefault": false,
+            "isDefault": 1,
             "createTime": "2020-11-13T09:51:50",
             "updateTime": null,
             "deleted": false
@@ -1500,7 +1500,7 @@ Content-Type: application/json
             "userPhone": "13333333333",
             "userAddress": "广东东莞松山湖",
             "userRoom": "东莞理工学院大学路1号",
-            "isDefault": true,
+            "isDefault": 0,
             "createTime": "2020-12-13T09:51:50",
             "updateTime": null,
             "deleted": false
@@ -1515,3 +1515,212 @@ Content-Type: application/json
     * 指定每页获得多少个订单（默认为10种）：<br/>`GET http://localhost:8083/admin/address/list?limit=`
     * 排序方式默认为降序，也可以指定为升序：<br/>`GET http://localhost:8083/admin/address/list?sort=`
     * 排序字段默认为id，也可以指定为按日期：<br/>`GET http://localhost:8083/admin/address/list?order=`
+    
+### 九、小程序的轮播图管理
+#### 9.1 查询功能
+1.  列举所有图片：<br/>
+
+    `GET http://localhost:8083/admin/slideshow/list`
+    ```
+    {
+      "errno": 0,
+      "data": {
+        "total": 3,
+        "pages": 1,
+        "limit": 10,
+        "page": 1,
+        "list": [
+          {
+            "id": 4,
+            "index": 1,
+            "picture": "",
+            "createTime": "2020-12-19T13:11:13",
+            "updateTime": "2020-12-19T13:17:22",
+            "deleted": false
+          },
+          {
+            "id": 2,
+            "index": 3,
+            "picture": "",
+            "createTime": null,
+            "updateTime": "2020-12-19T13:17:22",
+            "deleted": false
+          },
+          {
+            "id": 1,
+            "index": 4,
+            "picture": "",
+            "createTime": null,
+            "updateTime": "2020-12-19T13:17:22",
+            "deleted": false
+          }
+        ]
+      },
+      "errmsg": "成功"
+    }
+    ```
+    
+#### 9.2 增加功能
+* 传递json
+    ```
+    ###
+    POST http://localhost:8083/admin/slideshow/create
+    Content-Type: application/json
+    
+    {
+      "id": 2,
+      "index": 6,
+      "picture": ""
+    }
+    ```
+
+#### 9.3 删除功能
+* 给个id字段即可：
+    `POST http://localhost:8083/admin/slideshow/delete?id=5`
+    
+#### 9.4 修改功能（一次传递多个以更改顺序）
+* 传递json
+    ```
+  ###
+  POST http://localhost:8083/admin/slideshow/update
+  Content-Type: application/json
+  
+  [
+    {
+      "id": 1,
+      "index": 4,
+      "picture": ""
+    },
+    {
+      "id": 2,
+      "index": 3,
+      "picture": ""
+    },
+    {
+      "id": 4,
+      "index": 1,
+      "picture": ""
+    }
+  ]
+  ```
+  
+### 十、后台管理员的发货功能
+
+* 点击发货后获取到所有配送员的列表
+
+接口链接
+
+    GET http://localhost:8083/admin/delivery/list
+    
+请求参数
+
+    无
+    
+响应内容
+
+    {
+      "errno": 0,
+      "data": {
+        "total": 3,
+        "pages": 1,
+        "limit": 3,
+        "page": 1,
+        "list": [
+          {
+            "id": 1,
+            "name": "林林",
+            "phone": "14523441344"
+          },
+          {
+            "id": 2,
+            "name": "王王",
+            "phone": "17284483913"
+          },
+          {
+            "id": 3,
+            "name": "张张",
+            "phone": "19283381782"
+          }
+        ]
+      },
+      "errmsg": "成功"
+    }
+    
+* 选择好配送员后将相关信息用json传给后台
+
+接口链接
+
+    POST http://localhost:8083/admin/order/delivery
+    
+请求参数
+
+    Content-Type: application/json
+    
+    {
+      "orderId": "2",
+      "orderCode": "edfs",
+      "deliverymanName": "林一",
+      "deliverymanPhone": "16432234546"
+    }
+    
+响应内容
+
+    {
+      "errno": 0,
+      "errmsg": "成功"
+    }
+
+### 十一、商家信息管理
+
+#### 1. 查看商家信息
+
+接口链接
+
+    GET http://localhost:8083/admin/config/mall
+    
+请求参数
+
+    无
+    
+响应内容
+
+    {
+      "errno": 0,
+      "data": {
+        "dgutshop_shop_latitude": "31.201900",
+        "dgutshop_shop_longitude": "121.587839",
+        "dgutshop_shop_qq": "545771383",
+        "dgutshop_shop_address": "广东东莞松山湖校区",
+        "dgutshop_shop_phone": "021-xxxx-xxxx",
+        "dgutshop_shop_businesshours": "周一至周五，早上9点~晚上9点",
+        "dgutshop_shop_name": "请你喝"
+      },
+      "errmsg": "成功"
+    }
+    
+#### 2. 修改商家信息
+
+接口链接
+
+    POST http://localhost:8083/admin/config/mall
+    
+请求参数
+
+    Content-Type: application/json
+    
+    {
+      "dgutshop_shop_latitude": "31.201900",
+      "dgutshop_shop_longitude": "121.587839",
+      "dgutshop_shop_qq": "545771383",
+      "dgutshop_shop_address": "东莞理工学院",
+      "dgutshop_shop_phone": "021-xxxx-xxxx",
+      "dgutshop_shop_businesshours": "周一至周五，早上9点~晚上9点",
+      "dgutshop_shop_name": "请你喝"
+    }
+    
+响应内容
+
+    {
+      "errno": 0,
+      "errmsg": "成功"
+    }

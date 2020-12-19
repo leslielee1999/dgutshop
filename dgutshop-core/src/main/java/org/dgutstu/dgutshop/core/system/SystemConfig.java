@@ -17,10 +17,10 @@ public class SystemConfig {
     public final static String LITEMALL_WX_INDEX_CATLOG_GOODS = "litemall_wx_catlog_goods";
     public final static String LITEMALL_WX_SHARE = "litemall_wx_share";
     // 运费相关配置
-    public final static String LITEMALL_EXPRESS_FREIGHT_VALUE = "litemall_express_freight_value";
-    public final static String LITEMALL_EXPRESS_FREIGHT_MIN = "litemall_express_freight_min";
+    public final static String DGUTSHOP_DELIVERY_VALUE = "dgutshop_delivery_value";
+//    public final static String LITEMALL_EXPRESS_FREIGHT_MIN = "litemall_express_freight_min";
     // 订单相关配置
-    public final static String LITEMALL_ORDER_UNPAID = "litemall_order_unpaid";
+    public final static String DGUTSHOP_ORDER_UNPAID = "dgutshop_order_unpaid";
     public final static String LITEMALL_ORDER_UNCONFIRM = "litemall_order_unconfirm";
     public final static String LITEMALL_ORDER_COMMENT = "litemall_order_comment";
     // 商场相关配置
@@ -78,16 +78,16 @@ public class SystemConfig {
         return getConfigBoolean(LITEMALL_WX_SHARE);
     }
 
-    public static BigDecimal getFreight() {
-        return getConfigBigDec(LITEMALL_EXPRESS_FREIGHT_VALUE);
+    public static BigDecimal getDelivery() {
+        return getConfigBigDec(DGUTSHOP_DELIVERY_VALUE);
     }
 
-    public static BigDecimal getFreightLimit() {
-        return getConfigBigDec(LITEMALL_EXPRESS_FREIGHT_MIN);
-    }
+//    public static BigDecimal getFreightLimit() {
+//        return getConfigBigDec(LITEMALL_EXPRESS_FREIGHT_MIN);
+//    }
 
     public static Integer getOrderUnpaid() {
-        return getConfigInt(LITEMALL_ORDER_UNPAID);
+        return getConfigInt(DGUTSHOP_ORDER_UNPAID);
     }
 
     public static Integer getOrderUnconfirm() {

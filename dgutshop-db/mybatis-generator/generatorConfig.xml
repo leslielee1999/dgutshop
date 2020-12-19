@@ -121,7 +121,13 @@
 <!--        <table tableName="dgutshop_log">-->
 <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
 <!--        </table>-->
-        <table tableName="dgutshop_system">
+<!--        <table tableName="dgutshop_system">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="dgutshop_cart">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+        <table tableName="dgutshop_delivery">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
     </context>

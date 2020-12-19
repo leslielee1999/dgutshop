@@ -4,21 +4,16 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.dgutstu.dgutshop.db.dao.DgutshopOrderMapper;
 import org.dgutstu.dgutshop.db.dao.OrderMapper;
-import org.dgutstu.dgutshop.db.domain.DgutshopCategory;
-import org.dgutstu.dgutshop.db.domain.DgutshopCategoryExample;
-import org.dgutstu.dgutshop.db.domain.DgutshopOrderExample;
-import org.dgutstu.dgutshop.db.domain.OrderVo;
+import org.dgutstu.dgutshop.db.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Author: leesk
@@ -28,12 +23,17 @@ import java.util.Map;
 @Service
 public class DgutshopOrderService {
     @Resource
-    DgutshopOrderMapper dgutshopOrderMapperorderMapper;
+    DgutshopOrderMapper dgutshopOrderMapper;
     @Resource
     private OrderMapper orderMapper;
     @Autowired
     DgutshopUserService userService;
 
+    public int create(DgutshopOrder order) {
+        order.setCreateTime(LocalDateTime.now());
+        order.setUpdateTime(LocalDateTime.now());
+        return dgutshopOrderMapper.insertSelective(order);
+    }
 
     public Map<String, Object> queryVoSelective(String nickname, String consignee, String code, LocalDateTime start,
                                                 LocalDateTime end, List<Short> orderStatusArray, Integer page, Integer limit,
@@ -90,5 +90,64 @@ public class DgutshopOrderService {
         data.put("limit", limit);
 //        data.put("pages", list1.getPages());
         return data;
+    }
+
+    public List<DgutshopOrder> list(Integer userId, String sort, String order){
+        DgutshopOrderExample example = new DgutshopOrderExample();
+        example.setOrderByClause(DgutshopOrder.Column.createTime.desc());
+        DgutshopOrderExample.Criteria criteria = example.or();
+        criteria.andUserIdEqualTo(userId);
+        criteria.andDeletedEqualTo(false);
+        if (!StringUtils.isEmpty(sort) && !StringUtils.isEmpty(order)) {
+            example.setOrderByClause(sort + " " + order);
+        }
+        return dgutshopOrderMapper.selectByExample(example);
+    }
+
+    //  获得随机数
+    private String getRandomNum(Integer num) {
+        String base = "0123456789";
+        Random random = new Random();
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < num; i++) {
+            int number = random.nextInt(base.length());
+            sb.append(base.charAt(number));
+        }
+        return sb.toString();
+    }
+
+    //  判断订单是否已存在
+    public int countByOrderCode(Integer userId, String orderCode){
+        DgutshopOrderExample example = new DgutshopOrderExample();
+        example.or().andUserIdEqualTo(userId).andCodeEqualTo(orderCode).andDeletedEqualTo(false);
+        return (int)dgutshopOrderMapper.countByExample(example);
+    }
+
+    //  生成唯一的订单
+    //  TODO 这里存在两个订单相同的可能性
+    public String generateOrderCode(Integer id){
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyyMMdd");
+        String now = df.format(LocalDate.now());
+        String orderCode = now + getRandomNum(6);
+        while (countByOrderCode(id, orderCode) != 0){
+            orderCode = now + getRandomNum(6);
+        }
+        return orderCode;
+    }
+
+    public DgutshopOrder findById(Integer orderId) {
+        return dgutshopOrderMapper.selectByPrimaryKey(orderId);
+    }
+
+    public DgutshopOrder findById(Integer userId, Integer orderId) {
+        DgutshopOrderExample example = new DgutshopOrderExample();
+        example.or().andIdEqualTo(orderId).andUserIdEqualTo(userId).andDeletedEqualTo(false);
+        return dgutshopOrderMapper.selectOneByExample(example);
+    }
+
+    public int updateWithOptimisticLocker(DgutshopOrder order) {
+        LocalDateTime preUpdateTime = order.getUpdateTime();
+        order.setUpdateTime(LocalDateTime.now());
+        return orderMapper.updateWithOptimisticLocker(preUpdateTime, order);
     }
 }

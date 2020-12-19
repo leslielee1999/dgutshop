@@ -95,4 +95,12 @@ public class ResponseUtil {
     public static Object badArgumentValue() {
         return fail(402, "参数值不对");
     }
+
+    public static Object unlogin() {
+        return fail(501, "请登录");
+    }
+
+    public static Object updatedDateExpired() {
+        return fail(504, "更新数据已经失效");
+    }
 }

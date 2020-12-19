@@ -1,24 +1,24 @@
-package org.dgutstu.dgutshop.admin.controller;
+package org.dgutstu.dgutshop.wechat.controller;
 
-import org.dgutstu.dgutshop.core.system.SystemConfig;
-import org.dgutstu.dgutshop.core.util.JacksonUtil;
 import org.dgutstu.dgutshop.core.util.ResponseUtil;
 import org.dgutstu.dgutshop.db.service.DgutshopSystemConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
 /**
  * @Author: leesk
  * @Description:
- * @Date: Create in 14:20 2020/12/18
+ * @Date: Create in 19:26 2020/12/19
  */
 @RestController
-@RequestMapping("/admin/config")
+@RequestMapping("/wechat/config")
 @Validated
-public class AdminConfigController {
+public class WechatConfigController {
 
     @Autowired
     private DgutshopSystemConfigService systemConfigService;
@@ -31,13 +31,5 @@ public class AdminConfigController {
     public Object listMall() {
         Map<String, String> data = systemConfigService.listMall();
         return ResponseUtil.ok(data);
-    }
-
-    @PostMapping("/mall")
-    public Object updateMall(@RequestBody String body) {
-        Map<String, String> data = JacksonUtil.toMap(body);
-        systemConfigService.updateConfig(data);
-        SystemConfig.updateConfigs(data);
-        return ResponseUtil.ok();
     }
 }

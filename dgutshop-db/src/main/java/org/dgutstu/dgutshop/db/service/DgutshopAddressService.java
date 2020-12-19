@@ -61,8 +61,16 @@ public class DgutshopAddressService {
             example.setOrderByClause(sort + " " + order);
         }
 
+
+
         //  设置分页
         PageHelper.startPage(page, limit);
         return addressMapper.selectByExample(example);
+    }
+
+    public DgutshopAddress query(Integer userId, Integer id){
+        DgutshopAddressExample example = new DgutshopAddressExample();
+        example.or().andIdEqualTo(id).andUserIdEqualTo(userId).andDeletedEqualTo(false);
+        return addressMapper.selectOneByExample(example);
     }
 }

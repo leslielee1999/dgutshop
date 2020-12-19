@@ -10,17 +10,14 @@ import org.dgutstu.dgutshop.db.service.DgutshopOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 /**
  * @Author: leesk
- * @Description:
+ * @Description: 订单状态 【101待支付、201制作中、301待取货、401派送中、501已完成】
  * @Date: Create in 9:14 2020/12/16
  */
 @RestController
@@ -56,6 +53,17 @@ public class AdminOrderController {
                        @Sort @RequestParam(defaultValue = "create_time") String sort,
                        @Order @RequestParam(defaultValue = "desc") String order){
         return adminOrderService.list(nickname, consignee, code, start, end, orderStatusArray, page, limit, sort, order);
+    }
+
+    /**
+     * 发货
+     *
+     * @param body 订单信息，{ orderId：xxx, orderCode: xxx, , deliverymanName：xxx, deliverymanPhone：xxx }
+     * @return 订单操作结果
+     */
+    @PostMapping("/delivery")
+    public Object delivery(@RequestBody String body) {
+        return adminOrderService.delivery(body);
     }
 
 
