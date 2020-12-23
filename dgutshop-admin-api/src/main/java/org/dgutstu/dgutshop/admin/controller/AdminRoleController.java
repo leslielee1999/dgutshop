@@ -10,6 +10,7 @@ import org.dgutstu.dgutshop.db.service.DgutshopAdminService;
 import org.dgutstu.dgutshop.db.service.DgutshopRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +34,7 @@ public class AdminRoleController {
     @Autowired
     private DgutshopAdminService adminService;
 
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @GetMapping("/list")
     public Object list(String name,
                        @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime start,
@@ -57,6 +59,7 @@ public class AdminRoleController {
         return null;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @PostMapping("/create")
     public Object create(@RequestBody DgutshopRole role){
         Object error = validate(role);
@@ -73,6 +76,7 @@ public class AdminRoleController {
         return ResponseUtil.ok(role);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @PostMapping("/update")
     public Object update(@RequestBody DgutshopRole role){
         Object error = validate(role);
@@ -84,8 +88,9 @@ public class AdminRoleController {
         return ResponseUtil.ok(role);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @PostMapping("/delete")
-    public Object delete(@RequestParam Integer id){
+    public Object delete(@RequestParam Long id){
         if (id == null){
             return ResponseUtil.badArgument();
         }
@@ -93,7 +98,7 @@ public class AdminRoleController {
         //  如果当前角色所对应管理员仍存在，那么拒绝删除角色
         List<DgutshopAdmin> adminList = adminService.all();
         for (DgutshopAdmin admin : adminList) {
-            Integer roleId = admin.getRoleId();
+            Long roleId = admin.getRoleId();
             if (id.equals(roleId)){
                 return ResponseUtil.fail(ROLE_USER_EXIST, "当前角色存在管理员，无法删除");
             }

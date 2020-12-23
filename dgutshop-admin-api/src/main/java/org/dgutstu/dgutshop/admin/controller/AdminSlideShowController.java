@@ -8,6 +8,7 @@ import org.dgutstu.dgutshop.db.domain.DgutshopTopping;
 import org.dgutstu.dgutshop.db.service.DgutshopSlideShowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +29,7 @@ public class AdminSlideShowController {
     @Autowired
     private AdminSlideShowService slideShowService;
 
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @GetMapping("/list")
     public Object list(Integer id, Integer index,
                        @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime start,
@@ -39,11 +41,13 @@ public class AdminSlideShowController {
         return slideShowService.list(id, index, start, end, page, limit, sort, order);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @PostMapping("/create")
     public Object create(@RequestBody DgutshopSlideshow slideshow){
         return slideShowService.create(slideshow);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @PostMapping("/delete")
     public Object delete(@RequestParam Integer id){
         return slideShowService.delete(id);
@@ -54,6 +58,7 @@ public class AdminSlideShowController {
      * @param slideshowList
      * @return
      */
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @PostMapping("/update")
     public Object update(@RequestBody List<DgutshopSlideshow> slideshowList){
         return slideShowService.update(slideshowList);

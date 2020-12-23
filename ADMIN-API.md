@@ -1,4 +1,5 @@
 ## Admin-Api
+
 ### 一、饮品管理
 #### 1.1 查询功能
 1.  列举所有饮品：<br/>
@@ -1723,4 +1724,47 @@ Content-Type: application/json
     {
       "errno": 0,
       "errmsg": "成功"
+    }
+    
+### 十二、登录验证
+
+接口链接
+
+    POST http://localhost:8083/login/userLogin
+    
+请求参数
+    
+    username：管理员的昵称
+    password：管理员的密码
+    
+响应内容
+
+    {"msg":"登录成功","code":"200","token":"Leesk-eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiI2Iiwic3ViIjoibGVlc2siLCJpYXQiOjE2MDg3MDYwOTQsImlzcyI6ImxlZXNrIiwiYXV0aG9yaXRpZXMiOiJbe1wiYXV0aG9yaXR5XCI6XCJST0xFX0FETUlOXCJ9XSIsImV4cCI6MTYwODc5MjQ5NH0.YlTVtXvyLkuelJteZ1V35SccccDHhZZENvfKbH6Vc4av6cv-0TsKGlkMtbpBhEuXtYp1FWciVLBCMJ3VxZefPQ"}
+
+### 十三、上传图片
+
+接口链接
+
+    POST http://localhost:8083/admin/storage/create
+    
+请求参数
+    
+    file：选择的文件
+    
+响应内容
+
+    {
+        "errno": 0,
+        "data": {
+            "id": 3,
+            "key": "fv2d93sde21dq9enxnbb.jpg",
+            "name": "1.jpg",
+            "type": "image/jpeg",
+            "size": 827705,
+            "url": "qlqwnyjmi.hn-bkt.clouddn.com/fv2d93sde21dq9enxnbb.jpg",
+            "createTime": "2020-12-23T14:53:48.733",
+            "updateTime": "2020-12-23T14:53:48.733",
+            "deleted": null
+        },
+        "errmsg": "成功"
     }

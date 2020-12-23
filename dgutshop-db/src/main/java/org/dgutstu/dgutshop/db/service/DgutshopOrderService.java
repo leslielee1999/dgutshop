@@ -124,7 +124,7 @@ public class DgutshopOrderService {
     }
 
     //  生成唯一的订单
-    //  TODO 这里存在两个订单相同的可能性
+    //  TODO 这里存在两个单号相同的可能性
     public String generateOrderCode(Integer id){
         DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyyMMdd");
         String now = df.format(LocalDate.now());

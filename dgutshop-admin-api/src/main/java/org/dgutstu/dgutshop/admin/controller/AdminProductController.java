@@ -8,6 +8,7 @@ import org.dgutstu.dgutshop.core.validator.Sort;
 import org.dgutstu.dgutshop.db.domain.DgutshopProduct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,6 +39,7 @@ public class AdminProductController {
      * @param order
      * @return
      */
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @GetMapping("/list")
     public Object list(Integer productId, String name,
                        @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime start,
@@ -54,6 +56,7 @@ public class AdminProductController {
      * @param product
      * @return
      */
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @PostMapping("/create")
     public Object create(@RequestBody DgutshopProduct product){
         System.out.println(product.getBigOriginalPrice());
@@ -65,6 +68,7 @@ public class AdminProductController {
      * @param id
      * @return
      */
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @PostMapping("/delete")
     public Object delete(@RequestParam Integer id){
         System.out.println(id);
@@ -76,6 +80,7 @@ public class AdminProductController {
      * @param product
      * @return
      */
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @PostMapping("/update")
     public Object update(@RequestBody DgutshopProduct product){
         return productService.update(product);

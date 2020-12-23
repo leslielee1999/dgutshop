@@ -4,14 +4,12 @@ import com.github.pagehelper.PageHelper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.dgutstu.dgutshop.db.dao.DgutshopAdminMapper;
-import org.dgutstu.dgutshop.db.domain.DgutshopAdmin;
-import org.dgutstu.dgutshop.db.domain.DgutshopAdminExample;
-import org.dgutstu.dgutshop.db.domain.DgutshopProduct;
+import org.dgutstu.dgutshop.db.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.dgutstu.dgutshop.db.domain.DgutshopAdmin.Column;
-
+import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -21,11 +19,13 @@ import java.util.List;
  * @Date: Create in 20:41 2020/12/14
  */
 @Service
-public class DgutshopAdminService {
+public class DgutshopAdminService{
     //  限制返回前台的数据，不允许展示密码等私人信息
     private final Column[] result = new Column[]{Column.id, Column.name, Column.nickname, Column.code, Column.picture, Column.roleId, Column.createTime, Column.updateTime, Column.lastLoginIp, Column.lastLoginTime};
-    @Autowired
+    @Resource
     private DgutshopAdminMapper adminMapper;
+    @Autowired
+    private DgutshopRoleService roleService;
 
     /**
      * 列出管理员（可根据姓名查询）
@@ -82,7 +82,7 @@ public class DgutshopAdminService {
      * 删除第id个管理员
      * @param id
      */
-    public void deleteById(Integer id){
+    public void deleteById(Long id){
         adminMapper.logicalDeleteByPrimaryKey(id);
     }
 
@@ -101,20 +101,32 @@ public class DgutshopAdminService {
      * @param id
      * @return
      */
-    public DgutshopAdmin findById(Integer id){
+    public DgutshopAdmin findById(Long id){
         return adminMapper.selectByPrimaryKeySelective(id, result);
     }
 
     /**
      * 返回昵称为name的管理员
-     * @param name
+     * @param nickname
      * @return
      */
-    public List<DgutshopAdmin> findAdmin(String name){
+    public List<DgutshopAdmin> findAdmin(String nickname){
         DgutshopAdminExample example = new DgutshopAdminExample();
-        example.or().andNameEqualTo(name).andDeletedEqualTo(false);
+        example.or().andNicknameEqualTo(nickname).andDeletedEqualTo(false);
         return adminMapper.selectByExample(example);
     }
+
+    /**
+     * 返回昵称为name的管理员
+     * @param nickname
+     * @return
+     */
+    public DgutshopAdmin findAdminByNickName(String nickname){
+        DgutshopAdminExample example = new DgutshopAdminExample();
+        example.or().andNicknameEqualTo(nickname).andDeletedEqualTo(false);
+        return adminMapper.selectOneByExample(example);
+    }
+
 
     public List<DgutshopAdmin> all(){
         DgutshopAdminExample example = new DgutshopAdminExample();
@@ -122,5 +134,29 @@ public class DgutshopAdminService {
         return adminMapper.selectByExample(example);
     }
 
+    public DgutshopRole findRoleById(Long id){
+        DgutshopAdminExample example = new DgutshopAdminExample();
+        example.or().andIdEqualTo(id).andDeletedEqualTo(false);
+        Long roleId = adminMapper.selectOneByExample(example).getRoleId();
+        return roleService.findById(roleId);
+    }
+
+    /**
+     * 根据用户ID查询权限集合
+     * @Param  userId 用户ID
+     * @Return List<DgutshopPermission> 权限名集合
+     */
+    public List<DgutshopPermission> selectPermissionByUserId(Long userId){
+        return adminMapper.selectPermissionByUserId(userId);
+    }
+
+    /**
+     * 根据用户ID查询角色集合
+     * @Param  userId 用户ID
+     * @Return List<DgutshopRole> 角色名集合
+     */
+    public List<DgutshopRole> selectRoleByUserId(Long userId){
+        return adminMapper.selectRoleByUserId(userId);
+    }
 
 }

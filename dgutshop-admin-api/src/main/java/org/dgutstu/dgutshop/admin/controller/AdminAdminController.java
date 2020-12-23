@@ -12,6 +12,7 @@ import org.dgutstu.dgutshop.db.domain.DgutshopAdmin;
 import org.dgutstu.dgutshop.db.service.DgutshopAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +38,7 @@ public class AdminAdminController {
     @Autowired
     private LogHelper logHelper;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/list")
     public Object list(String name, String nickname,
                        @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime start,
@@ -75,6 +77,7 @@ public class AdminAdminController {
         return null;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create")
     public Object create(@RequestBody DgutshopAdmin admin) {
         Object error = validate(admin);
@@ -82,8 +85,8 @@ public class AdminAdminController {
             return error;
         }
 
-        String name = admin.getNickname();
-        List<DgutshopAdmin> adminList = adminService.findAdmin(name);
+        String nickname = admin.getNickname();
+        List<DgutshopAdmin> adminList = adminService.findAdmin(nickname);
         if (adminList.size() > 0) {
             return ResponseUtil.fail(ADMIN_NAME_EXIST, "管理员已经存在");
         }
@@ -101,8 +104,9 @@ public class AdminAdminController {
         return ResponseUtil.ok(admin);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/delete")
-    public Object delete(@RequestParam Integer id) {
+    public Object delete(@RequestParam Long id) {
         if (id == null) {
             return ResponseUtil.badArgument();
         }
@@ -125,6 +129,7 @@ public class AdminAdminController {
         return ResponseUtil.ok();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/update")
     public Object update(@RequestBody DgutshopAdmin admin) {
         Object error = validate(admin);
@@ -132,7 +137,7 @@ public class AdminAdminController {
             return error;
         }
 
-        Integer adminId = admin.getId();
+        Long adminId = admin.getId();
         if (adminId == null) {
             return ResponseUtil.badArgument();
         }

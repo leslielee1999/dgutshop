@@ -20,4 +20,12 @@ public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
+
+    //  让重复执行的filter实现一次执行过程的解决方案
+//    @Bean
+//    public FilterRegistrationBean registration(JwtAuthenticationTokenFilter filter) {
+//        FilterRegistrationBean registration = new FilterRegistrationBean(filter);
+//        registration.setEnabled(false);
+//        return registration;
+//    }
 }

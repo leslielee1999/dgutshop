@@ -7,6 +7,7 @@ import org.dgutstu.dgutshop.db.domain.DgutshopUser;
 import org.dgutstu.dgutshop.db.service.DgutshopUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +27,7 @@ public class AdminUserController {
     @Autowired
     private DgutshopUserService userService;
 
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @GetMapping("/list")
     public Object list(Integer id, String name, String phone, String wechatId, String nickname,
                        @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime start,
@@ -43,12 +45,14 @@ public class AdminUserController {
      * @param id
      * @return
      */
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @GetMapping("/detail")
     public Object userDetail(@NotNull Integer id) {
         DgutshopUser user=userService.findById(id);
         return ResponseUtil.ok(user);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @PostMapping("/update")
     public Object userUpdate(@RequestBody DgutshopUser user) {
         return ResponseUtil.ok(userService.update(user));

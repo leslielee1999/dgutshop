@@ -45,8 +45,41 @@ public class WechatOrderController {
     }
 
     /**
-     * 确认收货
+     * 取消订单
+     *  TODO
+     *      1. 在订单状态为待支付状态下支持用户点击取消订单
+     *          101【待支付】-->102【下单后未支付用户取消】
+     *      2. 在订单状态为待支付状态下超时，系统自动取消
+     *          101【待支付】-->103【下单后未支付超时，系统自动取消】
      *
+     * @param userId 用户ID
+     * @param body   订单信息，{ orderId：xxx }
+     * @return 取消订单操作结果
+     */
+//    @PostMapping("cancel")
+//    public Object cancel(@LoginUser Integer userId, @RequestBody String body) {
+//        return wechatOrderService.cancel(userId, body);
+//    }
+//
+    /**
+     * 支付功能
+     * TODO
+     *      1. 完成微信支付
+     *      2. 支付后订单状态改变
+     *          101【待支付】-->201【制作中】
+     *
+     */
+
+
+    /**
+     * 确认收货
+     *  TODO
+     *      1. 完成用户点击确认收货的操作
+     *          301【待取货】-->501【已完成】
+     *          402【骑手已到达】-->501【已完成】
+     *      2. 另外，待取货或骑手到达后的时间阈值一旦超过则自动确认收货：
+     *          301【待取货】-->502【已完成】
+     *          402【骑手已到达】-->502【已完成】
      * @param userId 用户ID
      * @param body   订单信息，{ orderId：xxx }
      * @return 订单操作结果
@@ -55,4 +88,7 @@ public class WechatOrderController {
 //    public Object confirm(@LoginUser Integer userId, @RequestBody String body) {
 //        return wechatOrderService.confirm(userId, body);
 //    }
+
+
+
 }

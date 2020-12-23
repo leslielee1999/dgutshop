@@ -7,6 +7,7 @@ import org.dgutstu.dgutshop.db.domain.DgutshopAddress;
 import org.dgutstu.dgutshop.db.service.DgutshopAddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,7 @@ public class AdminAddressController {
     @Autowired
     private DgutshopAddressService addressService;
 
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @GetMapping("/list")
     public Object list(Integer userId, String wechatId, String userName, String phone,
                        @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime start,

@@ -9,6 +9,7 @@ import org.dgutstu.dgutshop.db.service.DgutshopOrderItemService;
 import org.dgutstu.dgutshop.db.service.DgutshopOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,6 +44,7 @@ public class AdminOrderController {
      * @param order
      * @return
      */
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @GetMapping("/list")
     public Object list(String nickname, String consignee, String code,
                        @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime start,
@@ -61,6 +63,7 @@ public class AdminOrderController {
      * @param body 订单信息，{ orderId：xxx, orderCode: xxx, , deliverymanName：xxx, deliverymanPhone：xxx }
      * @return 订单操作结果
      */
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @PostMapping("/delivery")
     public Object delivery(@RequestBody String body) {
         return adminOrderService.delivery(body);

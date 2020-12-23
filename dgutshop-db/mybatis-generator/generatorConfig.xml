@@ -127,7 +127,20 @@
 <!--        <table tableName="dgutshop_cart">-->
 <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
 <!--        </table>-->
-        <table tableName="dgutshop_delivery">
+<!--        <table tableName="dgutshop_delivery">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+
+<!--        <table tableName="dgutshop_permission">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="dgutshop_role_permission">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+<!--        <table tableName="dgutshop_user_role">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
+        <table tableName="dgutshop_storage">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
     </context>

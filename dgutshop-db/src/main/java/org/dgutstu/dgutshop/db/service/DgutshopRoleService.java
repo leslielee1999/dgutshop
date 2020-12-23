@@ -79,7 +79,11 @@ public class DgutshopRoleService {
      * 删除第id个角色
      * @param id
      */
-    public void deleteById(Integer id){
+    public void deleteById(Long id){
         roleMapper.logicalDeleteByPrimaryKey(id);
+    }
+
+    public DgutshopRole findById(Long id){
+        return roleMapper.selectByPrimaryKey(id);
     }
 }

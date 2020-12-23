@@ -11,6 +11,7 @@ import org.dgutstu.dgutshop.db.service.DgutshopCategoryService;
 import org.dgutstu.dgutshop.db.service.DgutshopProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -43,6 +44,7 @@ public class AdminCategoryController {
     @Autowired
     private DgutshopProductService productService;
 
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @GetMapping("/list")
     public Object list(String name, Integer index,
                        @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime start,
@@ -78,6 +80,7 @@ public class AdminCategoryController {
         return null;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @PostMapping("/create")
     public Object create(@RequestBody DgutshopCategory category) {
         Object error = validate(category);
@@ -99,6 +102,7 @@ public class AdminCategoryController {
         return ResponseUtil.ok(category);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @PostMapping("/delete")
     public Object delete(@RequestParam Integer id) {
         if (id == null) {
@@ -114,6 +118,7 @@ public class AdminCategoryController {
         return ResponseUtil.ok();
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @PostMapping("/update")
     public Object update(@RequestBody List<DgutshopCategory> categoryList) {
         for (DgutshopCategory category : categoryList) {
@@ -155,6 +160,7 @@ public class AdminCategoryController {
         return null;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @PostMapping("/categoryitem/create")
     public Object create(@RequestBody OrderItemVo orderItemVo){
         Object error = validate(orderItemVo);
@@ -197,6 +203,7 @@ public class AdminCategoryController {
         return ResponseUtil.okList(categoryItemList);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @PostMapping("/categoryitem/update")
     public Object updateCategoryItem(@RequestBody List<DgutshopCategoryItem> categoryItemList){
         for (DgutshopCategoryItem categoryItem : categoryItemList) {
@@ -211,6 +218,7 @@ public class AdminCategoryController {
         return ResponseUtil.okList(categoryItemList);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @PostMapping("/categoryitem/delete")
     public Object deleteCategoryItem(@RequestParam Integer id) {
         if (id == null) {
