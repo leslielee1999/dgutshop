@@ -129,6 +129,11 @@ public class AdminAdminController {
         return ResponseUtil.ok();
     }
 
+    /**
+     * 修改个人信息
+     * @param admin
+     * @return
+     */
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/update")
     public Object update(@RequestBody DgutshopAdmin admin) {
@@ -155,47 +160,4 @@ public class AdminAdminController {
         return ResponseUtil.ok(admin);
     }
 
-    /**
-     * 获取个人信息
-     * @param id
-     * @return
-     */
-    @PreAuthorize("hasAnyRole('ADMIN','USER')")
-    @PostMapping("/getinfo")
-    public Object getInfo(@RequestParam Long id){
-        if (id == null) {
-            return ResponseUtil.badArgument();
-        }
-        DgutshopAdmin admin = adminService.findById(id);
-        return ResponseUtil.ok(admin);
-    }
-
-    /**
-     * 修改个人信息
-     * @param admin
-     * @return
-     */
-    @PreAuthorize("hasAnyRole('ADMIN','USER')")
-    @PostMapping("/updateinfo")
-    public Object updateInfo(@RequestBody DgutshopAdmin admin){
-        Object error = validate(admin);
-        if (error != null) {
-            return error;
-        }
-        Long adminId = admin.getId();
-        if (adminId == null) {
-            return ResponseUtil.badArgument();
-        }
-        //  不允许管理员通过编辑接口修改密码
-        //  返回前台数据也需不可见
-        admin.setPassword(null);
-
-        if (adminService.update(admin) == 0) {
-            return ResponseUtil.updatedDataFailed();
-        }
-        //  记录日志
-        //  用spring security 实现
-//        logHelper.logAuthSucceed("编辑管理员", admin.getNickname());
-        return ResponseUtil.ok(admin);
-    }
 }

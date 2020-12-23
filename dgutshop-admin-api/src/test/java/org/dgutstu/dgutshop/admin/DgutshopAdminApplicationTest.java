@@ -38,14 +38,14 @@ public class DgutshopAdminApplicationTest {
     public void contextLoads() {
         // 注册用户
         DgutshopAdmin admin = new DgutshopAdmin();
-        admin.setNickname("leesk");
+        admin.setNickname("leslie");
         admin.setPassword(bCryptPasswordEncoder.encode("123456"));
         admin.setStatus("NORMAL");
-        admin.setRoleId(2L);
+        admin.setRoleId(1L);
         adminService.add(admin);
         // 分配角色 1:ADMIN 2:USER
         DgutshopUserRole userRole = new DgutshopUserRole();
-        userRole.setRoleId(2L);
+        userRole.setRoleId(1L);
         userRole.setUserId(admin.getId());
         userRoleService.add(userRole);
     }

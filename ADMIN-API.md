@@ -1790,5 +1790,110 @@ Content-Type: application/json
         "errmsg": "成功"
     }
     
-2. 更改文件
+### 十三、个人信息管理
 
+#### 1. 查看个人信息
+
+接口链接
+
+    http://localhost:8083/admin/profile/getinfo
+    
+请求参数
+    
+    无
+    
+响应内容
+
+    {
+        "errno": 0,
+        "data": {
+            "id": 6,
+            "roleId": 1,
+            "name": "",
+            "nickname": "leesk",
+            "password": null,
+            "code": "dgut-7",
+            "picture": "http://yanxuan.nosdn.127.net/8ab2d3287af0cefa2cc539e40600621d.png",
+            "createTime": "2020-12-22T01:35:14",
+            "updateTime": "2020-12-23T22:25:29",
+            "lastLoginIp": "",
+            "lastLoginTime": null,
+            "status": null,
+            "deleted": null
+        },
+        "errmsg": "成功"
+    }
+    
+#### 2. 修改个人信息
+
+接口链接
+
+    http://localhost:8083/admin/admin/update
+    
+请求参数（没有id，没有password）
+    
+    {
+        "id":,
+        "roleId": 2,
+        "name": "leeeeeeeesk",
+        "nickname": "lesile",
+        "password": "",
+        "code": "dgut-11",
+        "picture": "http://asdasdasdasdas.nosdn.127.net/8ab2d3287af0cefa2cc539e40600621d.png",
+        "createTime": "2020-12-12T23:11:10",
+        "updateTime": "2020-12-12T22:17:52",
+        "lastLoginIp": "",
+        "lastLoginTime": null,
+        "status": "NORMAL",
+        "deleted": null
+    }
+
+    
+响应内容
+
+    {
+        "errno": 0,
+        "data": {
+            "id": 6,
+            "roleId": 2,
+            "name": "leeeeeeeesk",
+            "nickname": "lesile",
+            "password": null,
+            "code": "dgut-11",
+            "picture": "http://asdasdasdasdas.nosdn.127.net/8ab2d3287af0cefa2cc539e40600621d.png",
+            "createTime": "2020-12-12T23:11:10",
+            "updateTime": "2020-12-23T23:11:10.053",
+            "lastLoginIp": "",
+            "lastLoginTime": null,
+            "status": "NORMAL",
+            "deleted": null
+        },
+        "errmsg": "成功"
+    }
+    
+#### 3. 修改个人密码
+
+接口链接
+
+    http://localhost:8083/admin/profile/password
+    
+请求参数
+    
+    {
+        "oldPassword": "wwqwwwqw",
+        "newPassword": "pppppppppp"
+    }
+    
+响应内容
+
+    {
+        "errno": 0,
+        "errmsg": "成功"
+    }
+    
+    {
+        "errno": 605,
+        "errmsg": "账号密码不对"
+    }
+    
+    
