@@ -12,9 +12,12 @@ import java.util.stream.Stream;
 
 /**
  * 提供存储服务类，所有存储服务均由该类对外提供
+ * 对象存储：本地、阿里云、腾讯、七牛云
  */
 public class StorageService {
+    //  标志使用的对象存储
     private String active;
+    //  对象存储类型
     private Storage storage;
     @Autowired
     private DgutshopStorageService dgutshopStorageService;
@@ -42,11 +45,15 @@ public class StorageService {
      * @param contentLength 文件长度
      * @param contentType   文件类型
      * @param fileName      文件索引名
+     *
+     * @return 组装好的对象存储model
      */
     public DgutshopStorage store(InputStream inputStream, long contentLength, String contentType, String fileName) {
+        //  生成唯一的文件索引
         String key = generateKey(fileName);
+        //  将文件存储到对应的对象存储中
         storage.store(inputStream, contentLength, contentType, key);
-
+        //  生成文件的访问链接
         String url = generateUrl(key);
         DgutshopStorage storageInfo = new DgutshopStorage();
         storageInfo.setName(fileName);
@@ -54,6 +61,7 @@ public class StorageService {
         storageInfo.setType(contentType);
         storageInfo.setKey(key);
         storageInfo.setUrl(url);
+        //  将对象存储的信息转换为一个model并存储数据库对应的表里
         dgutshopStorageService.add(storageInfo);
 
         return storageInfo;
@@ -66,11 +74,13 @@ public class StorageService {
         String key = null;
         DgutshopStorage storageInfo = null;
 
+        /*
+        *    查找索引是否已存在
+        */
         do {
             key = CharUtil.getRandomString(20) + suffix;
             storageInfo = dgutshopStorageService.findByKey(key);
-        }
-        while (storageInfo != null);
+        } while (storageInfo != null);
 
         return key;
     }

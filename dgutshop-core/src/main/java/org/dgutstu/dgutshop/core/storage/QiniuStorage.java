@@ -121,6 +121,6 @@ public class QiniuStorage implements Storage {
 
     @Override
     public String generateUrl(String keyName) {
-        return endpoint + "/" + keyName;
+        return "http://" + endpoint + "/" + keyName;
     }
 }

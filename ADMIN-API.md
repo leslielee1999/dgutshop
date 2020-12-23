@@ -1726,7 +1726,9 @@ Content-Type: application/json
       "errmsg": "成功"
     }
     
-### 十二、登录验证
+### 十二、登录登出
+
+#### 1. 登录验证
 
 接口链接
 
@@ -1741,7 +1743,26 @@ Content-Type: application/json
 
     {"msg":"登录成功","code":"200","token":"Leesk-eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiI2Iiwic3ViIjoibGVlc2siLCJpYXQiOjE2MDg3MDYwOTQsImlzcyI6ImxlZXNrIiwiYXV0aG9yaXRpZXMiOiJbe1wiYXV0aG9yaXR5XCI6XCJST0xFX0FETUlOXCJ9XSIsImV4cCI6MTYwODc5MjQ5NH0.YlTVtXvyLkuelJteZ1V35SccccDHhZZENvfKbH6Vc4av6cv-0TsKGlkMtbpBhEuXtYp1FWciVLBCMJ3VxZefPQ"}
 
-### 十三、上传图片
+#### 2. 退出登录（前端清除token）
+
+接口链接
+
+    POST http://localhost:8083/login/userLogout
+    
+请求参数
+    
+    无
+    
+响应内容
+
+    {
+        "code": 401,
+        "message": "未登录"
+    }
+
+### 十三、图片功能
+
+#### 1. 上传文件
 
 接口链接
 
@@ -1768,3 +1789,6 @@ Content-Type: application/json
         },
         "errmsg": "成功"
     }
+    
+2. 更改文件
+
