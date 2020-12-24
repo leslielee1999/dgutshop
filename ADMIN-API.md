@@ -1896,4 +1896,25 @@ Content-Type: application/json
         "errmsg": "账号密码不对"
     }
     
+### 十四、接入腾讯防水墙
+
+接口链接
+
+    GET http://localhost:8083/login/verify
     
+请求参数
+    
+    ticket：t03pLjGAnrKqw_URetrG1If6VAiz96Fn4gHizVw4ccL9t033g6iL9AJXLMXJaC5wboTch7AftSuE6OGU6HQeXzX2nvAjqjo7n9eFIDSz5Z7wow*
+    randstr：@ouR
+    
+响应内容
+    
+    正常：
+    
+    {
+        "evilLevel": 0,
+        "code": 1
+    }
+    
+    错误：
+    -1

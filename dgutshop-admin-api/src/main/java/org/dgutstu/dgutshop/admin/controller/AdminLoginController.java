@@ -16,6 +16,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URLEncoder;
@@ -73,12 +74,13 @@ public class AdminLoginController {
     }
 
     private static final String APP_ID = "2071933573";
-    private static final String APP_SECRET = "00c_Af-kyLHqBn-mMRl2rsg** ";
-    private static final String VERIFY_URI = "https://ssl.captcha.qq.com/ticket/verify?aid=%s&AppSecretKey=%s&Ticket=%s&Randstr=%s&UserIP=%s";
+    private static final String APP_SECRET = "00c_Af-kyLHqBn-mMRl2rsg**";
+    private static final String VERIFY_URI = "https://ssl.captcha.qq.com/ticket/verify?aid=%s&AppSecretKey=%s&Ticket=%s&Randstr=%s";
 
-    @PreAuthorize("hasAnyRole('ADMIN','USER')")
-    @RequestMapping(value = "verify",method = RequestMethod.GET)
-    public static int verifyTicket(String ticket, String rand, String userIp) {
+    @PreAuthorize("permitAll")
+    @RequestMapping(value = "login/verify",method = RequestMethod.GET)
+    public Object verifyTicket(@RequestParam String ticket, @RequestParam String randstr) {
+        Map<String, Object> data = new HashMap<String, Object>();
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpGet httpGet;
         CloseableHttpResponse response = null;
@@ -87,8 +89,7 @@ public class AdminLoginController {
                     APP_ID,
                     APP_SECRET,
                     URLEncoder.encode(ticket, "UTF-8"),
-                    URLEncoder.encode(rand, "UTF-8"),
-                    URLEncoder.encode(userIp, "UTF-8")
+                    URLEncoder.encode(randstr, "UTF-8")
             ));
             response = httpclient.execute(httpGet);
 
@@ -102,9 +103,10 @@ public class AdminLoginController {
                 int code = result.getInteger("response");
                 // 恶意等级
                 int evilLevel = result.getInteger("evil_level");
-
+                data.put("code", code);
+                data.put("evilLevel", evilLevel);
                 // 验证成功
-                if (code == 1) return evilLevel;
+                if (code == 1) return data;
             }
         } catch (java.io.IOException e) {
             // 忽略
@@ -119,6 +121,6 @@ public class AdminLoginController {
     }
 
     public static void main(String[] args) throws Exception {
-        verifyTicket("", "", "");
+//        verifyTicket("t0329uSGz62dA3oqXKteHR3d_Skcb_g_2mu8a2oCB55BtqMlzcArIh-nV_hhInzTtGR8eK4v87N1WYMTNu-ANyXfYvsoXUJhyxxUPfNisgv2Dc*", "@Q3f");
     }
 }
