@@ -26,6 +26,8 @@ public class DgutshopSlideShowService {
 
     public List<DgutshopSlideshow> list(){
         DgutshopSlideshowExample example = new DgutshopSlideshowExample();
+        DgutshopSlideshowExample.Criteria criteria = example.createCriteria();
+        criteria.andLogicalDeleted(true);
         return slideshowMapper.selectByExample(example);
     }
 

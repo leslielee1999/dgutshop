@@ -6,9 +6,9 @@ public class OrderHandleOption {
     private boolean pay = false;         // 支付操作
     private boolean comment = false;    // 评论操作
     private boolean confirm = false;    // 确认收货操作
-    private boolean refund = false;     // 取消订单并退款操作
+//    private boolean refund = false;     // 取消订单并退款操作
     private boolean rebuy = false;        // 再次购买
-    private boolean aftersale = false;        // 售后操作
+//    private boolean aftersale = false;        // 售后操作
 
     public boolean isCancel() {
         return cancel;
@@ -50,13 +50,13 @@ public class OrderHandleOption {
         this.confirm = confirm;
     }
 
-    public boolean isRefund() {
-        return refund;
-    }
-
-    public void setRefund(boolean refund) {
-        this.refund = refund;
-    }
+//    public boolean isRefund() {
+//        return refund;
+//    }
+//
+//    public void setRefund(boolean refund) {
+//        this.refund = refund;
+//    }
 
     public boolean isRebuy() {
         return rebuy;
@@ -66,11 +66,11 @@ public class OrderHandleOption {
         this.rebuy = rebuy;
     }
 
-    public boolean isAftersale() {
-        return aftersale;
-    }
-
-    public void setAftersale(boolean aftersale) {
-        this.aftersale = aftersale;
-    }
+//    public boolean isAftersale() {
+//        return aftersale;
+//    }
+//
+//    public void setAftersale(boolean aftersale) {
+//        this.aftersale = aftersale;
+//    }
 }

@@ -96,22 +96,25 @@ public class OrderUtil {
             handleOption.setDelete(true);
         } else if (status == 201) {
             // 如果订单已付款，没有发货，则可退款
-            handleOption.setRefund(true);
+            System.out.println("买奶茶不可线上退款");
+//            handleOption.setRefund(true);
         } else if (status == 202 || status == 204) {
+            System.out.println("买奶茶不可线上退款");
             // 如果订单申请退款中，没有相关操作
         } else if (status == 203) {
+            System.out.println("买奶茶不可线上退款");
             // 如果订单已经退款，则可删除
-            handleOption.setDelete(true);
-        } else if (status == 301) {
+//            handleOption.setDelete(true);
+        } else if (status == 301 || status == 402) {
             // 如果订单已经发货，没有收货，则可收货操作,
             // 此时不能取消订单
             handleOption.setConfirm(true);
-        } else if (status == 401 || status == 402) {
+        } else if (status == 501 || status == 502) {
             // 如果订单已经支付，且已经收货，则可删除、去评论、申请售后和再次购买
             handleOption.setDelete(true);
             handleOption.setComment(true);
             handleOption.setRebuy(true);
-            handleOption.setAftersale(true);
+//            handleOption.setAftersale(true);
         } else {
             throw new IllegalStateException("status不支持");
         }

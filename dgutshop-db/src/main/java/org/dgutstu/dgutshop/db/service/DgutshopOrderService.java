@@ -150,4 +150,8 @@ public class DgutshopOrderService {
         order.setUpdateTime(LocalDateTime.now());
         return orderMapper.updateWithOptimisticLocker(preUpdateTime, order);
     }
+
+    public void deleteById(Integer id) {
+        dgutshopOrderMapper.logicalDeleteByPrimaryKey(id);
+    }
 }

@@ -22,6 +22,36 @@ public class DgutshopAddressService {
     @Resource
     private DgutshopAddressMapper addressMapper;
 
+    public List<DgutshopAddress> queryByUid(Integer uid) {
+        DgutshopAddressExample example = new DgutshopAddressExample();
+        example.or().andUserIdEqualTo(uid).andDeletedEqualTo(false);
+        return addressMapper.selectByExample(example);
+    }
+
+    public void resetDefault(Integer userId) {
+        DgutshopAddress address = new DgutshopAddress();
+        address.setIsDefault(Byte.parseByte("1"));
+        address.setUpdateTime(LocalDateTime.now());
+        DgutshopAddressExample example = new DgutshopAddressExample();
+        example.or().andUserIdEqualTo(userId).andDeletedEqualTo(false);
+        addressMapper.updateByExampleSelective(address, example);
+    }
+
+    public int add(DgutshopAddress address) {
+        address.setCreateTime(LocalDateTime.now());
+        address.setUpdateTime(LocalDateTime.now());
+        return addressMapper.insertSelective(address);
+    }
+
+    public int update(DgutshopAddress address) {
+        address.setUpdateTime(LocalDateTime.now());
+        return addressMapper.updateByPrimaryKeySelective(address);
+    }
+
+    public void delete(Integer id) {
+        addressMapper.logicalDeleteByPrimaryKey(id);
+    }
+
     public List<DgutshopAddress> querySelective(Integer userId, String wechatId, String userName, String phone, LocalDateTime start, LocalDateTime end,
                                                 Integer page, Integer limit, String sort, String order){
         DgutshopAddressExample example = new DgutshopAddressExample();

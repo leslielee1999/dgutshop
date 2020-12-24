@@ -1,6 +1,14 @@
 package org.dgutstu.dgutshop.admin.controller;
 
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.dgutstu.dgutshop.core.domain.LoginUser;
 import org.dgutstu.dgutshop.core.security.util.ResultUtil;
 import org.dgutstu.dgutshop.core.security.util.SecurityUtil;
@@ -9,6 +17,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -60,5 +70,55 @@ public class AdminLoginController {
         result.put("title","用户端信息");
         result.put("data",userDetails);
         return ResultUtil.resultSuccess(result);
+    }
+
+    private static final String APP_ID = "2071933573";
+    private static final String APP_SECRET = "00c_Af-kyLHqBn-mMRl2rsg** ";
+    private static final String VERIFY_URI = "https://ssl.captcha.qq.com/ticket/verify?aid=%s&AppSecretKey=%s&Ticket=%s&Randstr=%s&UserIP=%s";
+
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    @RequestMapping(value = "verify",method = RequestMethod.GET)
+    public static int verifyTicket(String ticket, String rand, String userIp) {
+        CloseableHttpClient httpclient = HttpClients.createDefault();
+        HttpGet httpGet;
+        CloseableHttpResponse response = null;
+        try {
+            httpGet = new HttpGet(String.format(VERIFY_URI,
+                    APP_ID,
+                    APP_SECRET,
+                    URLEncoder.encode(ticket, "UTF-8"),
+                    URLEncoder.encode(rand, "UTF-8"),
+                    URLEncoder.encode(userIp, "UTF-8")
+            ));
+            response = httpclient.execute(httpGet);
+
+            HttpEntity entity = response.getEntity();
+            if (entity != null) {
+                String res = EntityUtils.toString(entity);
+                System.out.println(res); // 临时输出
+
+                JSONObject result = JSON.parseObject(res);
+                // 返回码
+                int code = result.getInteger("response");
+                // 恶意等级
+                int evilLevel = result.getInteger("evil_level");
+
+                // 验证成功
+                if (code == 1) return evilLevel;
+            }
+        } catch (java.io.IOException e) {
+            // 忽略
+        } finally {
+            try {
+                response.close();
+            } catch (Exception ignore) {
+            }
+        }
+
+        return -1;
+    }
+
+    public static void main(String[] args) throws Exception {
+        verifyTicket("", "", "");
     }
 }
