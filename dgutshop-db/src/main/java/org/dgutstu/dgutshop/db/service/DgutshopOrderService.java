@@ -92,6 +92,13 @@ public class DgutshopOrderService {
         return data;
     }
 
+    public List<DgutshopOrder> list(){
+        DgutshopOrderExample example = new DgutshopOrderExample();
+        DgutshopOrderExample.Criteria criteria = example.or();
+        criteria.andCreateTimeBetween(LocalDateTime.now().plusDays(-7), LocalDateTime.now()).andDeletedEqualTo(false);
+        return dgutshopOrderMapper.selectByExample(example);
+    }
+
     public List<DgutshopOrder> list(Integer userId, String sort, String order){
         DgutshopOrderExample example = new DgutshopOrderExample();
         example.setOrderByClause(DgutshopOrder.Column.createTime.desc());

@@ -1918,3 +1918,27 @@ Content-Type: application/json
     
     错误：
     -1
+    
+### 十五、获取echart数据
+
+接口链接
+
+    GET http://localhost:8083/admin/stat/list
+    
+请求参数
+    
+    无
+    
+响应内容
+
+    {
+        "errno": 0,
+        "data": {
+            "untaken": 1,
+            "delivering": 1,
+            "finished": 1,
+            "unpaid": 3,
+            "producting": 1
+        },
+        "errmsg": "成功"
+    }
