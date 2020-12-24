@@ -1151,3 +1151,269 @@
       },
       "errmsg": "成功"
     }
+    
+
+#### 6.3 取消订单
+
+接口链接
+
+    http://localhost:8082/wechat/order/cancel
+    
+请求参数
+
+    参数：
+        userId
+        
+    json：
+        {
+        "orderId":11
+        }
+    
+响应内容
+
+    {
+        "errno": 0,
+        "errmsg": "成功"
+    }
+    
+注
+    
+         1. 在订单状态为待支付状态下支持用户点击取消订单
+                101【待支付】-->102【下单后未支付用户取消】
+         2. 在订单状态为待支付状态下超时，系统自动取消
+                101【待支付】-->103【下单后未支付超时，系统自动取消】
+                
+#### 6.4 确认订单
+
+接口链接
+
+    http://localhost:8082/wechat/order/confirm
+    
+请求参数
+
+    参数：
+        userId
+        
+    json：
+        {
+        "orderId":11
+        }
+    
+响应内容
+
+    {
+        "errno": 0,
+        "errmsg": "成功"
+    }
+    
+注
+    
+     1. 完成用户点击确认收货的操作
+               301【待取货】-->501【已完成】
+               402【骑手已到达】-->501【已完成】
+     2. 另外，待取货或骑手到达后的时间阈值一旦超过则自动确认收货：
+               301【待取货】-->502【已完成】
+               402【骑手已到达】-->502【已完成】
+               
+#### 6.5 删除订单
+
+接口链接
+
+    http://localhost:8082/wechat/order/delete
+    
+请求参数
+
+    参数：
+        userId
+        
+    json：
+        {
+        "orderId":11
+        }
+    
+响应内容
+
+    {
+        "errno": 0,
+        "errmsg": "成功"
+    }
+    
+注
+    
+     1. 如果订单已经取消【102/103】或是已完成【501/502】，则可删除
+               
+### 七、用户地址
+
+注
+
+    1. isDeafult
+        0：默认地址
+        1：非默认地址
+        
+    2. 增加地址与修改地址api相同
+        不同之处：
+            增加地址时封装在json中的地址信息中的地址id设为null或0（表示最新添加的）；
+            修改地址时封装在json中的地址信息具有原来的地址id       
+
+#### 7.1 地址列表
+
+接口链接
+
+    GET http://localhost:8082/wechat/address/list
+    
+请求参数
+
+    参数：
+        userId
+    
+响应内容
+
+    {
+        "errno": 0,
+        "data": {
+            "total": 2,
+            "pages": 1,
+            "limit": 2,
+            "page": 1,
+            "list": [
+                {
+                    "id": 1,
+                    "userId": 1,
+                    "wechatId": "kk545771383",
+                    "userName": "小卡",
+                    "userPhone": "13333333333",
+                    "userAddress": "广东东莞松山湖",
+                    "userRoom": "东莞理工学院大学路1号",
+                    "latitude": null,
+                    "longitude": null,
+                    "isDefault": 0,
+                    "createTime": "2020-12-13T09:51:50",
+                    "updateTime": null,
+                    "deleted": false
+                },
+                {
+                    "id": 2,
+                    "userId": 1,
+                    "wechatId": "kk545771383",
+                    "userName": "琳琳",
+                    "userPhone": "19999999999",
+                    "userAddress": "北京",
+                    "userRoom": "胡同1号",
+                    "latitude": null,
+                    "longitude": null,
+                    "isDefault": 1,
+                    "createTime": "2020-11-13T09:51:50",
+                    "updateTime": null,
+                    "deleted": false
+                }
+            ]
+        },
+        "errmsg": "成功"
+    }
+    
+#### 7.2 增加地址
+        
+接口链接
+
+    POST http://localhost:8082/wechat/address/save
+    
+请求参数
+
+    参数：
+        userId
+    
+    json：
+        {
+            "userId": 1,
+            "wechatId": "kk545771383",
+            "userName": "钢铁加鲁鲁",
+            "userPhone": "12322212312",
+            "userAddress": "广东",
+            "userRoom": "东莞",
+            "latitude": null,
+            "longitude": null,
+            "isDefault": 1,
+            "createTime": null,
+            "updateTime": null,
+            "deleted": false
+        }  
+        
+响应内容
+
+    {
+        "errno": 0,
+        "data": 6,
+        "errmsg": "成功"
+    }
+    
+#### 7.3 修改地址
+        
+接口链接
+
+    POST http://localhost:8082/wechat/address/save
+    
+请求参数
+
+    参数：
+        userId
+    
+    json：
+        {
+            "id": 5,
+            "userId": 1,
+            "wechatId": "kk545771383",
+            "userName": "亚古兽",
+            "userPhone": "13333333333",
+            "userAddress": "广东东莞松山湖",
+            "userRoom": "东莞理工学院大学路1号",
+            "latitude": null,
+            "longitude": null,
+            "isDefault": 0,
+            "createTime": "2020-12-13T09:51:50",
+            "updateTime": null,
+            "deleted": false
+        }
+        
+响应内容
+
+    {
+        "errno": 0,
+        "data": 5,
+        "errmsg": "成功"
+    }
+    
+#### 7.4 删除地址
+        
+接口链接
+
+    POST http://localhost:8082/wechat/address/delete
+    
+请求参数
+
+    参数：
+        userId
+    
+    json：
+        {
+            "id": 5,
+            "userId": 1,
+            "wechatId": "kk545771383",
+            "userName": "钢铁加鲁鲁",
+            "userPhone": "12322212312",
+            "userAddress": "广东",
+            "userRoom": "东莞",
+            "latitude": null,
+            "longitude": null,
+            "isDefault": 1,
+            "createTime": null,
+            "updateTime": null,
+            "deleted": false
+        }  
+        
+响应内容
+
+    {
+        "errno": 0,
+        "errmsg": "成功"
+    }
+    

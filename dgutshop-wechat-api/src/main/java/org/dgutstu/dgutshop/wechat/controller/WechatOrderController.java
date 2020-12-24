@@ -46,7 +46,6 @@ public class WechatOrderController {
 
     /**
      * 取消订单
-     *  TODO
      *      1. 在订单状态为待支付状态下支持用户点击取消订单
      *          101【待支付】-->102【下单后未支付用户取消】
      *      2. 在订单状态为待支付状态下超时，系统自动取消
@@ -56,11 +55,10 @@ public class WechatOrderController {
      * @param body   订单信息，{ orderId：xxx }
      * @return 取消订单操作结果
      */
-//    @PostMapping("cancel")
-//    public Object cancel(@LoginUser Integer userId, @RequestBody String body) {
-//        return wechatOrderService.cancel(userId, body);
-//    }
-//
+    @PostMapping("cancel")
+    public Object cancel(@LoginUser Integer userId, @RequestBody String body) {
+        return wechatOrderService.cancel(userId, body);
+    }
     /**
      * 支付功能
      * TODO
@@ -73,7 +71,6 @@ public class WechatOrderController {
 
     /**
      * 确认收货
-     *  TODO
      *      1. 完成用户点击确认收货的操作
      *          301【待取货】-->501【已完成】
      *          402【骑手已到达】-->501【已完成】
@@ -84,10 +81,32 @@ public class WechatOrderController {
      * @param body   订单信息，{ orderId：xxx }
      * @return 订单操作结果
      */
-//    @PostMapping("confirm")
-//    public Object confirm(@LoginUser Integer userId, @RequestBody String body) {
-//        return wechatOrderService.confirm(userId, body);
-//    }
+    @PostMapping("confirm")
+    public Object confirm(@LoginUser Integer userId, @RequestBody String body) {
+        return wechatOrderService.confirm(userId, body);
+    }
+
+    /**
+     *      1、用户收货地址crud，设置默认（增加、修改时）
+     *      TODO：
+     *          微信小程序登录
+     *
+     */
+
+    /**
+     * 删除订单
+     *
+     *      1. 如果订单已经取消【102/103】或是已完成【501/502】，则可删除
+     *      2. 如果订单已经支付，且已经收货，则可删除
+     *
+     * @param userId 用户ID
+     * @param body   订单信息，{ orderId：xxx }
+     * @return 订单操作结果
+     */
+    @PostMapping("delete")
+    public Object delete(@LoginUser Integer userId, @RequestBody String body) {
+        return wechatOrderService.delete(userId, body);
+    }
 
 
 

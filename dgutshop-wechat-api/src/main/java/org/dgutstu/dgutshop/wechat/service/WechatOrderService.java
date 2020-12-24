@@ -70,77 +70,10 @@ public class WechatOrderService {
     }
 
     /**
-     * @param userId
-     * @param body
+     * 微信用户提交订单
+     * @param orderListVo
      * @return
      */
-//    @Transactional
-//    public Object submit(Integer userId, String body){
-//        if (userId == null){
-//            return ResponseUtil.unlogin();
-//        }
-//        if (body == null) {
-//            return ResponseUtil.badArgument();
-//        }
-//        Integer cartId = JacksonUtil.parseInteger(body, "cartId");
-//        String type = JacksonUtil.parseString(body, "type");
-//        Integer addressId = JacksonUtil.parseInteger(body, "addressId");
-//        String message = JacksonUtil.parseString(body, "message");
-//        if (cartId == null || addressId == null) {
-//            return ResponseUtil.badArgument();
-//        }
-//        //  运费，根据是否外送来决定是否添加
-//        DgutshopAddress checkAddress = null;
-//        BigDecimal delivery = new BigDecimal(0);
-//        if (!type.equals("自取")){
-//            //  收货地址
-//            checkAddress = addressService.query(userId, addressId);
-//            if (checkAddress == null){
-//                return ResponseUtil.badArgument();
-//            }
-//            //  运费，根据是否外送来决定是否添加
-//            delivery = SystemConfig.getDelivery();
-//        }
-//
-//        //  饮品价格
-//        List<DgutshopCart> checkedProductsList = null;
-//        if (cartId.equals(0)){
-//            checkedProductsList = cartService.queryByUidAndChecked(userId);
-//        }else {
-//            DgutshopCart cart = cartService.findById(cartId);
-//            checkedProductsList = new ArrayList<>(1);
-//            checkedProductsList.add(cart);
-//        }
-//        if (checkedProductsList.size() == 0){
-//            return ResponseUtil.badArgumentValue();
-//        }
-//        BigDecimal checkedProductsPrice = new BigDecimal(0);
-//        for (DgutshopCart checkProducts : checkedProductsList) {
-//            checkedProductsPrice = checkedProductsPrice.add(checkProducts.getPrice().multiply(new BigDecimal(checkProducts.getNumber())));
-//        }
-//
-//
-//        //  最终支付费用
-//        BigDecimal actualPrice = checkedProductsPrice.add(delivery);
-//
-//        Integer orderId = null;
-//        DgutshopOrder order = null;
-//        //  订单
-//        order = new DgutshopOrder();
-//        order.setUserId(userId);
-//        order.setCode(orderService.generateOrderCode(userId));
-//        order.setOrderStatus(OrderUtil.STATUS_CREATE);
-//        if (!type.equals("自取")){
-//            order.setConsignee(checkAddress.getUserName());
-//            order.setConsigneePhone(checkAddress.getUserPhone());
-//            order.setConsigneeAddress(checkAddress.getUserAddress());
-//            order.setConsigneeRoom(checkAddress.getUserRoom());
-//            order.setDeliveryPrice(delivery);
-//        }
-//        order.setMessage(message);
-//
-//    }
-
     @Transactional
     public Object submit(OrderListVo orderListVo){
         Integer userId = orderListVo.getUserId();
@@ -211,6 +144,56 @@ public class WechatOrderService {
     }
 
     /**
+     * 取消订单
+     * <p>
+     * 1. 检测当前订单是否能够取消；
+     * 2. 设置订单取消状态；
+     * 3. 商品货品库存恢复；
+     * 4. 返还优惠券；
+     *
+     * @param userId 用户ID
+     * @param body   订单信息，{ orderId：xxx }
+     * @return 取消订单操作结果
+     */
+    @Transactional
+    public Object cancel(Integer userId, String body) {
+        if (userId == null) {
+            return ResponseUtil.unlogin();
+        }
+        Integer orderId = JacksonUtil.parseInteger(body, "orderId");
+        if (orderId == null) {
+            return ResponseUtil.badArgument();
+        }
+
+        DgutshopOrder order = orderService.findById(userId, orderId);
+        if (order == null) {
+            return ResponseUtil.badArgumentValue();
+        }
+        if (!order.getUserId().equals(userId)) {
+            return ResponseUtil.badArgumentValue();
+        }
+
+        LocalDateTime preUpdateTime = order.getUpdateTime();
+
+        System.out.println(order.getOrderStatus());
+        // 检测是否能够取消
+        OrderHandleOption handleOption = OrderUtil.build(order);
+        if (!handleOption.isCancel()) {
+            return ResponseUtil.fail(725, "订单不能取消");
+        }
+
+        // 设置订单已取消状态
+        order.setOrderStatus(OrderUtil.STATUS_CANCEL);
+        order.setEndTime(LocalDateTime.now());
+        if (orderService.updateWithOptimisticLocker(order) == 0) {
+            throw new RuntimeException("更新数据已失效");
+        }
+
+        return ResponseUtil.ok();
+    }
+
+
+    /**
      * 确认收货
      * <p>
      * 1. 检测当前订单是否能够确认收货；
@@ -220,36 +203,79 @@ public class WechatOrderService {
      * @param body   订单信息，{ orderId：xxx }
      * @return 订单操作结果
      */
-//    public Object confirm(Integer userId, String body) {
-//        if (userId == null) {
-//            return ResponseUtil.unlogin();
-//        }
-//        Integer orderId = JacksonUtil.parseInteger(body, "orderId");
-//        if (orderId == null) {
-//            return ResponseUtil.badArgument();
-//        }
-//
-//        DgutshopOrder order = orderService.findById(userId, orderId);
-//        if (order == null) {
-//            return ResponseUtil.badArgument();
-//        }
-//        if (!order.getUserId().equals(userId)) {
-//            return ResponseUtil.badArgumentValue();
-//        }
-//
-//        OrderHandleOption handleOption = OrderUtil.build(order);
-//        if (!handleOption.isConfirm()) {
-//            return ResponseUtil.fail(ORDER_INVALID_OPERATION, "订单不能确认收货");
-//        }
-//
+    public Object confirm(Integer userId, String body) {
+        if (userId == null) {
+            return ResponseUtil.unlogin();
+        }
+        Integer orderId = JacksonUtil.parseInteger(body, "orderId");
+        if (orderId == null) {
+            return ResponseUtil.badArgument();
+        }
+
+        DgutshopOrder order = orderService.findById(userId, orderId);
+        if (order == null) {
+            return ResponseUtil.badArgument();
+        }
+        if (!order.getUserId().equals(userId)) {
+            return ResponseUtil.badArgumentValue();
+        }
+
+        OrderHandleOption handleOption = OrderUtil.build(order);
+        if (!handleOption.isConfirm()) {
+            return ResponseUtil.fail(725, "订单不能确认收货");
+        }
+
 //        Short comments = orderGoodsService.getComments(orderId);
 //        order.setComments(comments);
-//
-//        order.setOrderStatus(OrderUtil.STATUS_CONFIRM);
-//        order.setConfirmTime(LocalDateTime.now());
-//        if (orderService.updateWithOptimisticLocker(order) == 0) {
-//            return ResponseUtil.updatedDateExpired();
-//        }
-//        return ResponseUtil.ok();
-//    }
+
+        order.setOrderStatus(OrderUtil.STATUS_CONFIRM);
+        order.setConfirmTime(LocalDateTime.now());
+        if (orderService.updateWithOptimisticLocker(order) == 0) {
+            return ResponseUtil.updatedDateExpired();
+        }
+        return ResponseUtil.ok();
+    }
+
+
+    /**
+     * 删除订单
+     * <p>
+     * 1. 检测当前订单是否可以删除；
+     * 2. 删除订单。
+     *
+     * @param userId 用户ID
+     * @param body   订单信息，{ orderId：xxx }
+     * @return 订单操作结果
+     */
+    public Object delete(Integer userId, String body) {
+        if (userId == null) {
+            return ResponseUtil.unlogin();
+        }
+        Integer orderId = JacksonUtil.parseInteger(body, "orderId");
+        if (orderId == null) {
+            return ResponseUtil.badArgument();
+        }
+
+        DgutshopOrder order = orderService.findById(userId, orderId);
+        if (order == null) {
+            return ResponseUtil.badArgument();
+        }
+        if (!order.getUserId().equals(userId)) {
+            return ResponseUtil.badArgumentValue();
+        }
+
+        OrderHandleOption handleOption = OrderUtil.build(order);
+        if (!handleOption.isDelete()) {
+            return ResponseUtil.fail(725, "订单不能删除");
+        }
+
+        // 订单order_status没有字段用于标识删除
+        // 而是存在专门的delete字段表示是否删除
+        orderService.deleteById(orderId);
+        // 售后也同时删除
+//        aftersaleService.deleteByOrderId(userId, orderId);
+
+        return ResponseUtil.ok();
+    }
+
 }
