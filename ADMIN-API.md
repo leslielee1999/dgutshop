@@ -176,7 +176,7 @@
 `GET http://localhost:8083/admin/category/list`
     * 获取到的数据
     > 根据`categoryItems`可以获取分类单项，另外分类单项也有个index字段可用来排序
-    ```$xslt
+    ```
     {
       "errno": 0,
       "data": {
@@ -1931,14 +1931,60 @@ Content-Type: application/json
     
 响应内容
 
+    注：从上往下依次是unpaid、producing、untaken、delivering、finished
+
     {
         "errno": 0,
         "data": {
-            "untaken": 1,
-            "delivering": 1,
-            "finished": 1,
-            "unpaid": 3,
-            "producting": 1
+            "周一": [
+                0,
+                3,
+                0,
+                0,
+                0
+            ],
+            "周五": [
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "周日": [
+                3,
+                0,
+                0,
+                0,
+                3
+            ],
+            "周四": [
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "周三": [
+                2,
+                1,
+                0,
+                0,
+                1
+            ],
+            "周二": [
+                1,
+                0,
+                0,
+                0,
+                0
+            ],
+            "周六": [
+                6,
+                0,
+                4,
+                0,
+                0
+            ]
         },
         "errmsg": "成功"
     }
