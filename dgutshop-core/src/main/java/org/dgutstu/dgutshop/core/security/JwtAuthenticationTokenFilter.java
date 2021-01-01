@@ -80,7 +80,7 @@ public class JwtAuthenticationTokenFilter extends BasicAuthenticationFilter {
                         //组装参数
                         LoginUser loginUser = new LoginUser();
                         loginUser.setUsername(claims.getSubject());
-                        loginUser.setUserId(Long.parseLong(claims.getId()));
+                        loginUser.setUserId(Integer.parseInt(claims.getId()));
                         loginUser.setAuthorities(authorities);
 //                    System.out.println(loginUser);
                         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(loginUser, userId, authorities);

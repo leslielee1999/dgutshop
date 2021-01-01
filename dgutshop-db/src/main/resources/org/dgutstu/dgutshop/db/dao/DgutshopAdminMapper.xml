@@ -5,7 +5,7 @@
 
   <!-- 查询用户的所有权限 -->
   <select id="selectPermissionByUserId" resultType="org.dgutstu.dgutshop.db.domain.DgutshopRolePermission"
-          parameterType="int">
+          parameterType="Integer">
    SELECT DISTINCT p.* FROM dgutshop_user_role ur
       LEFT JOIN dgutshop_role_permission rp ON ur.role_id = rp.role_id
       LEFT JOIN dgutshop_permission p ON rp.permission_id = p.id
@@ -13,7 +13,7 @@
 </select>
 
   <!-- 查询用户所有角色 -->
-  <select id="selectRoleByUserId" resultType="org.dgutstu.dgutshop.db.domain.DgutshopRole" parameterType="int">
+  <select id="selectRoleByUserId" resultType="org.dgutstu.dgutshop.db.domain.DgutshopRole" parameterType="Integer">
    SELECT dr.* FROM dgutshop_role dr
    LEFT JOIN dgutshop_user_role ur ON ur.role_id = dr.id
    WHERE ur.user_id = #{userId}
@@ -537,23 +537,5 @@
     update dgutshop_admin set deleted = 1
     where id = #{id,jdbcType=INTEGER}
   </update>
-
-    <!--非自动生成-->
-
-    <!-- 查询用户的所有权限 -->
-    <select id="selectPermissionByUserId" parameterType="long" resultType="org.dgutstu.dgutshop.db.domain.DgutshopRolePermission">
-   SELECT DISTINCT p.* FROM dgutshop_user_role ur
-      LEFT JOIN dgutshop_role_permission rp ON ur.role_id = rp.role_id
-      LEFT JOIN dgutshop_permission p ON rp.permission_id = p.id
-   WHERE ur.user_id = #{userId}
-</select>
-
-    <!-- 查询用户所有角色 -->
-    <select id="selectRoleByUserId" parameterType="long" resultType="org.dgutstu.dgutshop.db.domain.DgutshopRole">
-   SELECT dr.* FROM dgutshop_role dr
-   LEFT JOIN dgutshop_user_role ur ON ur.role_id = dr.id
-   WHERE ur.user_id = #{userId}
-</select>
-
 
 </mapper>
