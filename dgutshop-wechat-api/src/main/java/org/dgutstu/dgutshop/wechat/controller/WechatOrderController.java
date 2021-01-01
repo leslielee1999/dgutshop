@@ -11,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotNull;
 import java.util.Map;
 
@@ -33,10 +34,10 @@ public class WechatOrderController {
      * @return
      */
     @GetMapping("list")
-    public Object list(@NotNull HttpServletRequest request,
+    public Object list(HttpServletRequest request, HttpServletResponse response,
                        @Sort @RequestParam(defaultValue = "create_time") String sort,
                        @Order @RequestParam(defaultValue = "desc") String order){
-        Object obj = wechatAuthService.validate(request);
+        Object obj = wechatAuthService.validate(request, response);
         if (obj instanceof Map) {
             return obj;
         }
@@ -65,8 +66,8 @@ public class WechatOrderController {
      * @return 取消订单操作结果
      */
     @PostMapping("cancel")
-    public Object cancel(@NotNull HttpServletRequest request, @RequestBody String body) {
-        Object obj = wechatAuthService.validate(request);
+    public Object cancel(HttpServletRequest request, HttpServletResponse response, @RequestBody String body) {
+        Object obj = wechatAuthService.validate(request, response);
         if (obj instanceof Map) {
             return obj;
         }
@@ -81,6 +82,15 @@ public class WechatOrderController {
      *          101【待支付】-->201【制作中】
      *
      */
+    @PostMapping("pay-notify")
+    public Object payNotify(HttpServletRequest request, HttpServletResponse response, @RequestBody String body){
+        Object obj = wechatAuthService.validate(request, response);
+        if (obj instanceof Map) {
+            return obj;
+        }
+        Integer userId = wechatAuthService.getUserId(obj);
+        return wechatOrderService.pay(userId, body);
+    }
 
 
     /**
@@ -95,8 +105,8 @@ public class WechatOrderController {
      * @return 订单操作结果
      */
     @PostMapping("confirm")
-    public Object confirm(@NotNull HttpServletRequest request, @RequestBody String body) {
-        Object obj = wechatAuthService.validate(request);
+    public Object confirm(HttpServletRequest request, HttpServletResponse response, @RequestBody String body) {
+        Object obj = wechatAuthService.validate(request, response);
         if (obj instanceof Map) {
             return obj;
         }
@@ -120,8 +130,8 @@ public class WechatOrderController {
      * @return 订单操作结果
      */
     @PostMapping("delete")
-    public Object delete(@NotNull HttpServletRequest request,  @RequestBody String body) {
-        Object obj = wechatAuthService.validate(request);
+    public Object delete(HttpServletRequest request, HttpServletResponse response,  @RequestBody String body) {
+        Object obj = wechatAuthService.validate(request, response);
         if (obj instanceof Map) {
             return obj;
         }
@@ -135,8 +145,8 @@ public class WechatOrderController {
      * @return
      */
     @PostMapping("pay")
-    public Object pay(@NotNull HttpServletRequest request,  @RequestBody String body){
-        Object obj = wechatAuthService.validate(request);
+    public Object pay(HttpServletRequest request, HttpServletResponse response,  @RequestBody String body){
+        Object obj = wechatAuthService.validate(request, response);
         if (obj instanceof Map) {
             return obj;
         }

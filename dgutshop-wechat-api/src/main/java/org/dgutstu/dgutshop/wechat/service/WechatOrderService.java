@@ -1,5 +1,6 @@
 package org.dgutstu.dgutshop.wechat.service;
 
+import com.github.binarywang.wxpay.bean.notify.WxPayNotifyResponse;
 import com.github.binarywang.wxpay.bean.order.WxPayMwebOrderResult;
 import com.github.binarywang.wxpay.bean.request.WxPayUnifiedOrderRequest;
 import io.swagger.models.auth.In;
@@ -335,7 +336,9 @@ public class WechatOrderService {
 
         order.setOrderStatus(OrderUtil.STATUS_PAY);
         order.setPayDate(LocalDateTime.now());
-
+        if (orderService.updateWithOptimisticLocker(order) == 0) {
+            return WxPayNotifyResponse.fail("更新数据已失效");
+        }
         return ResponseUtil.ok();
     }
 

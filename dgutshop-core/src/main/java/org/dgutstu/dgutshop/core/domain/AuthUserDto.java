@@ -19,7 +19,7 @@ public class AuthUserDto {
     /**
      * 用户名
      */
-    private String nickname;
+//    private String nickname;
 
     /**
      * 密码
@@ -30,12 +30,12 @@ public class AuthUserDto {
     /**
      * 传入参数：临时登录凭证
      */
-    private String code;
+//    private String code;
 
     /**
      * 用户登录id
      */
-    private String uuid = "";
+//    private String uuid = "";
 
     //**********************************
     //以下为微信类传输字段
@@ -48,28 +48,28 @@ public class AuthUserDto {
     /**
      * 传入参数: 用户非敏感信息
      */
-    private String rawData;
+//    private String rawData;
 
     /**
      * 传入参数: 签名
      */
-    private String signature;
+//    private String signature;
 
     /**
      * 传入参数: 用户敏感信息
      */
-    private String encryptedData;
+//    private String encryptedData;
 
     /**
      * 传入参数: 解密算法的向量
      */
-    private String iv;
+//    private String iv;
 
     /**
      * 会话密钥
      */
-    @JsonIgnore
-    private String sessionKey;
+//    @JsonIgnore
+//    private String sessionKey;
 
     /**
      * 用户在开放平台的唯一标识符
@@ -88,18 +88,18 @@ public class AuthUserDto {
     /**
      * 返回：userName或openId对应的用户
      */
-    private DgutshopUser userInfo;
+//    private DgutshopUser userInfo;
 
-    @Override
-    public String toString() {
-        return "AuthUser{" +
-                "userName='" + nickname + '\'' +
-                ", password='" + "*********" + '\'' +
-                ", code='" + code + '\'' +
-                ", uuid='" + uuid + '\'' +
-                ", openId='" + openId + '\'' +
-                ", token='" + token + '\'' +
-                ", userInfo=" + userInfo +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "AuthUser{" +
+//                "userName='" + nickname + '\'' +
+//                ", password='" + "*********" + '\'' +
+//                ", code='" + code + '\'' +
+//                ", uuid='" + uuid + '\'' +
+//                ", openId='" + openId + '\'' +
+//                ", token='" + token + '\'' +
+//                ", userInfo=" + userInfo +
+//                '}';
+//    }
 }

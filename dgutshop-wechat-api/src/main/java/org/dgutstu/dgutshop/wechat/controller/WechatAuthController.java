@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.dgutstu.dgutshop.core.domain.AuthUserDto;
+import org.dgutstu.dgutshop.core.domain.WechatLoginUser;
 import org.dgutstu.dgutshop.wechat.service.WechatAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,8 +31,8 @@ public class WechatAuthController {
 
     @ApiOperation("登录授权")
     @PostMapping(value = "/wechat")
-    public ResponseEntity login(@RequestBody AuthUserDto authUserDto) {
-        return ResponseEntity.ok(authService.login(authUserDto));
+    public ResponseEntity login(@RequestBody WechatLoginUser wechatLoginUser, HttpServletRequest request) {
+        return ResponseEntity.ok(authService.login(wechatLoginUser, request));
     }
 
 }

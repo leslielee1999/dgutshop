@@ -58,14 +58,6 @@ public class AdminStatController {
         Map<String, Object> data = new HashMap<String, Object>();
         List<DgutshopOrder> orders = orderService.list();       //  获取前7天的订单
         List list = new LinkedList();
-        Map<String, Object> date = new HashMap<String, Object>();
-        int unpaid = 0;
-        int producing = 0;
-        int untaken = 0;
-        int delivering = 0;
-        int finished = 0;
-//        String dayOfWeek = orders.get(0).getCreateTime().getDayOfWeek().toString();
-        String[] dayOfWeek = new String[7];
         int[][] nums = new int[7][5];
         for (int i = 0; i < orders.size(); i++) {
             String day = orders.get(i).getCreateTime().getDayOfWeek().toString();
@@ -162,20 +154,6 @@ public class AdminStatController {
         list.add(nums[4]);
         list.add(nums[5]);
         list.add(nums[6]);
-//        data.put("周一", nums[0]);
-//        data.put("周二", nums[1]);
-//        data.put("周三", nums[2]);
-//        data.put("周四", nums[3]);
-//        data.put("周五", nums[4]);
-//        data.put("周六", nums[5]);
-//        data.put("周日", nums[6]);
-        data.put("周一", list.get(0));
-        data.put("周二",list.get(1));
-        data.put("周三",list.get(2));
-        data.put("周四", list.get(3));
-        data.put("周五", list.get(4));
-        data.put("周六", list.get(5));
-        data.put("周日", list.get(6));
         return ResponseUtil.ok(list);
     }
 

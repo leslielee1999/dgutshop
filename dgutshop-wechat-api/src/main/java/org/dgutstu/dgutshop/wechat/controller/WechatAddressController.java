@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.dgutstu.dgutshop.core.util.RegexUtil;
 import org.dgutstu.dgutshop.core.util.ResponseUtil;
 import org.dgutstu.dgutshop.db.domain.DgutshopAddress;
+import org.dgutstu.dgutshop.db.domain.DgutshopUser;
 import org.dgutstu.dgutshop.db.service.DgutshopAddressService;
 import org.dgutstu.dgutshop.db.service.DgutshopUserService;
 import org.dgutstu.dgutshop.wechat.service.WechatAuthService;
@@ -13,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Map;
@@ -41,8 +43,8 @@ public class WechatAddressController {
      * @return 收货地址列表
      */
     @GetMapping("list")
-    public Object list(@NotNull HttpServletRequest request) {
-        Object obj = wechatAuthService.validate(request);
+    public Object list(HttpServletRequest request, HttpServletResponse response) {
+        Object obj = wechatAuthService.validate(request, response);
         if (obj instanceof Map) {
             return obj;
         }
@@ -58,8 +60,8 @@ public class WechatAddressController {
      * @return 收货地址详情
      */
     @GetMapping("detail")
-    public Object detail(@NotNull HttpServletRequest request, @NotNull Integer id) {
-        Object obj = wechatAuthService.validate(request);
+    public Object detail(HttpServletRequest request, HttpServletResponse response, @NotNull Integer id) {
+        Object obj = wechatAuthService.validate(request, response);
         if (obj instanceof Map) {
             return obj;
         }
@@ -110,8 +112,8 @@ public class WechatAddressController {
      * @return 添加或更新操作结果
      */
     @PostMapping("save")
-    public Object save(@NotNull HttpServletRequest request, @RequestBody DgutshopAddress address) {
-        Object obj = wechatAuthService.validate(request);
+    public Object save(HttpServletRequest request, HttpServletResponse response, @RequestBody DgutshopAddress address) {
+        Object obj = wechatAuthService.validate(request, response);
         if (obj instanceof Map) {
             return obj;
         }
@@ -152,8 +154,8 @@ public class WechatAddressController {
      * @return 删除操作结果
      */
     @PostMapping("delete")
-    public Object delete(@NotNull HttpServletRequest request, @RequestBody DgutshopAddress address) {
-        Object obj = wechatAuthService.validate(request);
+    public Object delete(HttpServletRequest request, HttpServletResponse response, @RequestBody DgutshopAddress address) {
+        Object obj = wechatAuthService.validate(request, response);
         if (obj instanceof Map) {
             return obj;
         }

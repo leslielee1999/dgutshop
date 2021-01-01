@@ -938,7 +938,7 @@
     
 请求参数
 
-    userId
+    无
     
 响应内容
 
@@ -1153,16 +1153,33 @@
     }
     
 
-#### 6.3 取消订单
+#### 6.3 支付订单
+
+接口链接
+
+    http://localhost:8082/wechat/order/pay-notify
+    
+请求参数
+        
+    json：
+        {
+            "orderId": 38
+        }
+    
+响应内容
+
+    {
+        "errno": 0,
+        "errmsg": "成功"
+    }
+
+#### 6.4 取消订单
 
 接口链接
 
     http://localhost:8082/wechat/order/cancel
     
 请求参数
-
-    参数：
-        userId
         
     json：
         {
@@ -1183,16 +1200,13 @@
          2. 在订单状态为待支付状态下超时，系统自动取消
                 101【待支付】-->103【下单后未支付超时，系统自动取消】
                 
-#### 6.4 确认订单
+#### 6.5 确认订单
 
 接口链接
 
     http://localhost:8082/wechat/order/confirm
     
 请求参数
-
-    参数：
-        userId
         
     json：
         {
@@ -1215,16 +1229,13 @@
                301【待取货】-->502【已完成】
                402【骑手已到达】-->502【已完成】
                
-#### 6.5 删除订单
+#### 6.6 删除订单
 
 接口链接
 
     http://localhost:8082/wechat/order/delete
     
 请求参数
-
-    参数：
-        userId
         
     json：
         {
@@ -1417,3 +1428,32 @@
         "errmsg": "成功"
     }
     
+### 八、微信小程序用户登录
+
+接口链接
+
+    POST http://localhost:8082/login/wechat
+    
+请求参数
+    
+    json：
+        {
+            "code": "0733h30w3gdFAV2L1g1w3oJsC113h30B",
+            "encryptedData": "shA5PgImvUfRWY8bt9CsXFf6Xy5cGc3Dl2y8pMZ+5DDFZM/58wrnAKFdO8VRNxg97T/zpWq3Fc8365siVIkk2NcoMChBCebufVaQuZ7YaaAv2KnsXzpbyKHIhaNxTeGdPyRhGUZWkE2GFQUNFLp4b7pd4QJy2hFICCkWjDCbCRF5wi0F2kn3LOyKlmv6SOAdtz3Fwkb2kDXOk0S2KPMjZ+rWHhS42sWTlxRWcrKuxRWnQhQSMgDxrpE/BZs5jMg9iRZEJC60Tbuncey2ZEfgrmQwTJqKXgy4aG2wlwZy+7sgdx2KjbZIK/w9PMcaYGKHGQhFMdvwKVyNb4m5waq/p2X+WINo1sSmpHu7sjZumMQNRNBHGFO9hHptQOowPxKB2JgDifsjTgL6Vcw6G4MQPZRShnX088PQhhLeIJpfkzlPloxZOVejqKldLFG7Iald7mZMS5896mS/UElpgt8aDA==",
+            "iv": "M+EDO/v6EztGcdEeNi7rFg=="
+        }
+        
+响应内容
+
+    {
+        "success": true,
+        "errCode": "ok",
+        "errMsg": null,
+        "module": {
+            "openId": "oD78r4xOwDGT90U8bltXNBqLh_tM",
+            "token": "Leesk-eyJhbGciOiJIUzUxMiIsInppcCI6IkRFRiJ9.eNosjEELgjAYQP_Lzg42-7Zpx1K6aIIpdJOZn7gSLDdRiP57C7q-93hvYpeW7MmUqGiGrViTUxWzOmpHdz0fXtnQuJwERC9umGbjDFofl0WWNsf6UhV5Wnp7d8ZT1gvFJJdUCckpqLCncYeaql4xjdiFXQs-NtqRPZcsFiHnAjywv-eIaB_NirfB-4Dg9vxXADsBny8AAAD__w.YOuIpEdEGKHwRSK4X4im2QoA7ktP5KRyqj7R3Z_RKaKKwMheUQg36tnhyyijWl88v53bgSeeTKP_5n04UZfhPw"
+        }
+    }
+    
+    注：其它功能需要userId参数的都已改为用token获取
+    另：模拟支付完成

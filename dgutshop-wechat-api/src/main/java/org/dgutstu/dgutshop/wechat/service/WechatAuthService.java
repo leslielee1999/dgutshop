@@ -8,8 +8,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.dgutstu.dgutshop.core.domain.AuthUserDto;
 import org.dgutstu.dgutshop.core.domain.Constant;
 import org.dgutstu.dgutshop.core.domain.Result;
+import org.dgutstu.dgutshop.core.domain.WechatLoginUser;
 import org.dgutstu.dgutshop.core.security.config.JwtSecurityProperties;
 import org.dgutstu.dgutshop.core.security.util.JwtTokenUtils;
+import org.dgutstu.dgutshop.core.util.IpUtil;
 import org.dgutstu.dgutshop.core.util.ResponseUtil;
 import org.dgutstu.dgutshop.db.domain.DgutshopUser;
 import org.dgutstu.dgutshop.db.domain.DgutshopUserExample;
@@ -22,6 +24,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,12 +52,13 @@ public class WechatAuthService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public Result<AuthUserDto> login(AuthUserDto authUserDto) {
+    public Result<AuthUserDto> login(WechatLoginUser wechatLoginUser, HttpServletRequest request) {
+        AuthUserDto authUserDto = new AuthUserDto();
         Result<AuthUserDto> result = new Result<>();
-        System.out.println("code："+authUserDto.getCode());
+        System.out.println("code："+wechatLoginUser.getCode());
         //authType=1代表是微信登录
 //        if (!StringUtils.isEmpty(authUserDto.getAuthType()) && authUserDto.getAuthType() == 1) {
-        JSONObject jsonObject = wechatApiService.authCode2Session(appId, secret, authUserDto.getCode());
+        JSONObject jsonObject = wechatApiService.authCode2Session(appId, secret, wechatLoginUser.getCode());
         if (jsonObject == null) {
             throw new RuntimeException("调用微信端授权认证接口错误");
         }
@@ -70,7 +75,8 @@ public class WechatAuthService {
         //判断用户表中是否存在该用户，不存在则进行解密得到用户信息，并进行新增用户
         Result<DgutshopUser> resultUser = findByOpenId(openId);
         if (resultUser.getModule() == null) {
-            String userInfo = WechatUtil.decryptData(authUserDto.getEncryptedData(), sessionKey, authUserDto.getIv());
+            String userInfo = WechatUtil.decryptData(wechatLoginUser.getEncryptedData(), sessionKey, wechatLoginUser.getIv());
+            System.out.println(userInfo);
             if (StringUtils.isEmpty(userInfo)) {
                 throw new RuntimeException("解密用户信息错误");
             }
@@ -79,11 +85,17 @@ public class WechatAuthService {
                 throw new RuntimeException("填充用户对象错误");
             }
 //                user.setUnionId(unionId);
+            user.setName(openId);
+            user.setPassword(openId);
+            user.setStatus("0");
+            user.setLastLoginTime(LocalDateTime.now());
+            user.setLastLoginIp(IpUtil.getIpAddr(request));
+            user.setSessionKey(sessionKey);
             create(user);
-            authUserDto.setUserInfo(user);
+//            authUserDto.setUserInfo(user);
 
         } else {
-            authUserDto.setUserInfo(resultUser.getModule());
+//            authUserDto.setUserInfo(resultUser.getModule());
         }
 
         //创建token
@@ -108,7 +120,7 @@ public class WechatAuthService {
         userService.save(user);
     }
 
-    public String checkLogin(HttpServletRequest request){
+    public String checkLogin(HttpServletRequest request, HttpServletResponse response){
         // 获取请求头中JWT的Token
         String tokenHeader = request.getHeader(JwtSecurityProperties.tokenHeader);
         //  获取登录ip
@@ -138,9 +150,9 @@ public class WechatAuthService {
         return null;
     }
 
-    public Object validate(HttpServletRequest request){
+    public Object validate(HttpServletRequest request, HttpServletResponse response){
         DgutshopUser user = null;
-        String openid = checkLogin(request);
+        String openid = checkLogin(request, response);
         if (openid == null || openid.equals("unlogin")){
             return ResponseUtil.unlogin();
         }
