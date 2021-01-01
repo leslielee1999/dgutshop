@@ -82,7 +82,7 @@ public class DgutshopAdminService{
      * 删除第id个管理员
      * @param id
      */
-    public void deleteById(Long id){
+    public void deleteById(Integer id){
         adminMapper.logicalDeleteByPrimaryKey(id);
     }
 
@@ -101,7 +101,7 @@ public class DgutshopAdminService{
      * @param id
      * @return
      */
-    public DgutshopAdmin findById(Long id){
+    public DgutshopAdmin findById(Integer id){
         return adminMapper.selectByPrimaryKeySelective(id, result);
     }
 
@@ -134,10 +134,10 @@ public class DgutshopAdminService{
         return adminMapper.selectByExample(example);
     }
 
-    public DgutshopRole findRoleById(Long id){
+    public DgutshopRole findRoleById(Integer id){
         DgutshopAdminExample example = new DgutshopAdminExample();
         example.or().andIdEqualTo(id).andDeletedEqualTo(false);
-        Long roleId = adminMapper.selectOneByExample(example).getRoleId();
+        Integer roleId = adminMapper.selectOneByExample(example).getRoleId();
         return roleService.findById(roleId);
     }
 
@@ -146,7 +146,7 @@ public class DgutshopAdminService{
      * @Param  userId 用户ID
      * @Return List<DgutshopPermission> 权限名集合
      */
-    public List<DgutshopPermission> selectPermissionByUserId(Long userId){
+    public List<DgutshopPermission> selectPermissionByUserId(Integer userId){
         return adminMapper.selectPermissionByUserId(userId);
     }
 
@@ -155,7 +155,7 @@ public class DgutshopAdminService{
      * @Param  userId 用户ID
      * @Return List<DgutshopRole> 角色名集合
      */
-    public List<DgutshopRole> selectRoleByUserId(Long userId){
+    public List<DgutshopRole> selectRoleByUserId(Integer userId){
         return adminMapper.selectRoleByUserId(userId);
     }
 

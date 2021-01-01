@@ -106,7 +106,7 @@ public class AdminAdminController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/delete")
-    public Object delete(@RequestParam Long id) {
+    public Object delete(@RequestParam Integer id) {
         if (id == null) {
             return ResponseUtil.badArgument();
         }
@@ -142,7 +142,7 @@ public class AdminAdminController {
             return error;
         }
 
-        Long adminId = admin.getId();
+        Integer adminId = admin.getId();
         if (adminId == null) {
             return ResponseUtil.badArgument();
         }

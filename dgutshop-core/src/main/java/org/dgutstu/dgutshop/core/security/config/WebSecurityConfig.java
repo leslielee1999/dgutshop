@@ -2,11 +2,13 @@ package org.dgutstu.dgutshop.core.security.config;
 
 import org.dgutstu.dgutshop.core.security.UserAuthenticationProvider;
 import org.dgutstu.dgutshop.core.security.UserPermissionEvaluator;
+import org.dgutstu.dgutshop.core.security.WxUserAuthenticationProvider;
 import org.dgutstu.dgutshop.core.security.handler.*;
 import org.dgutstu.dgutshop.core.security.JwtAuthenticationTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -24,7 +26,7 @@ import org.springframework.security.web.access.expression.DefaultWebSecurityExpr
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
     /**
      * 自定义登录成功处理器
@@ -85,54 +87,52 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(userAuthenticationProvider);
     }
 
-    /**
-     * 配置security的逻辑控制
-     * @param httpSecurity
-     * @throws Exception
-     */
-    @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeRequests()
-                // 不进行权限验证的请求或资源(从配置文件中读取)
-                .antMatchers(JwtSecurityProperties.antMatchers.split(",")).permitAll()
-                // 其他的需要登陆后才能访问
-                .anyRequest().authenticated()
-                .and()
-                // 配置未登录自定义处理类
-                .httpBasic().authenticationEntryPoint(jwtAuthenticationEntryPointHandler)
-                .and()
-                // 配置登录地址
-                .formLogin()
-                .loginProcessingUrl("/login/userLogin")
-                // 配置登录成功自定义处理类
-                .successHandler(loginSuccessHandler)
-                // 配置登录失败自定义处理类
-                .failureHandler(loginFailureHandler)
-                .and()
-                // 配置登出地址
-                .logout()
-                .logoutUrl("/login/userLogout")
-                // 配置用户登出自定义处理类
-                .logoutSuccessHandler(logoutSuccessHandler)
-                .and()
-                // 配置没有权限自定义处理类
-                .exceptionHandling().accessDeniedHandler(jwtAccessDeniedHandler)
-                .and()
-                // 开启跨域
-                .cors()
-                .and()
-                // 取消跨站请求伪造防护
-                .csrf().disable();
-        ;
-
-        // 禁用缓存
-        httpSecurity.headers().cacheControl();
-
-        // 添加JWT过滤器
-        httpSecurity.addFilter(new JwtAuthenticationTokenFilter(authenticationManager()));
-
-        // 基于Token不需要session
-        httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-    }
+        /**
+         * 配置security的逻辑控制
+         * @param httpSecurity
+         * @throws Exception
+         */
+        @Override
+        protected void configure(HttpSecurity httpSecurity) throws Exception {
+            httpSecurity
+                    .authorizeRequests()
+                    // 不进行权限验证的请求或资源(从配置文件中读取)
+                    .antMatchers(JwtSecurityProperties.antMatchers.split(",")).permitAll()
+                    // 其他的需要登陆后才能访问
+                    .anyRequest().authenticated()
+                    .and()
+                    // 配置未登录自定义处理类
+                    .httpBasic().authenticationEntryPoint(jwtAuthenticationEntryPointHandler)
+                    .and()
+                    // 配置登录地址
+                    .formLogin()
+                    .loginProcessingUrl("/login/userLogin")
+                    // 配置登录成功自定义处理类
+                    .successHandler(loginSuccessHandler)
+                    // 配置登录失败自定义处理类
+                    .failureHandler(loginFailureHandler)
+                    .and()
+                    // 配置登出地址
+                    .logout()
+                    .logoutUrl("/login/userLogout")
+                    // 配置用户登出自定义处理类
+                    .logoutSuccessHandler(logoutSuccessHandler)
+                    .and()
+                    // 配置没有权限自定义处理类
+                    .exceptionHandling().accessDeniedHandler(jwtAccessDeniedHandler)
+                    .and()
+                    // 开启跨域
+                    .cors()
+                    .and()
+                    // 取消跨站请求伪造防护
+                    .csrf().disable();
+            ;
+            // 禁用缓存
+            httpSecurity.headers().cacheControl();
+            // 添加JWT过滤器
+            httpSecurity.addFilter(new JwtAuthenticationTokenFilter(authenticationManager()));
+            // 基于Token不需要session
+            httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        }
 
 }

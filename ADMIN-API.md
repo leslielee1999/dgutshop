@@ -1921,6 +1921,8 @@ Content-Type: application/json
     
 ### 十五、获取echart数据
 
+#### 1. 获取一周内订单各个状态的数量
+
 接口链接
 
     GET http://localhost:8083/admin/stat/list
@@ -1989,3 +1991,27 @@ Content-Type: application/json
            ],
            "errmsg": "成功"
        }
+       
+#### 2. 获取各种表的数量
+
+接口链接
+
+    GET http://localhost:8083/admin/stat/getNum
+    
+请求参数
+    
+    无
+    
+响应内容
+
+     注：从上往下依次是用户数量、产品数量、小料数量、订单数量
+    {
+        "errno": 0,
+        "data": [
+            3,
+            20,
+            5,
+            36
+        ],
+        "errmsg": "成功"
+    }

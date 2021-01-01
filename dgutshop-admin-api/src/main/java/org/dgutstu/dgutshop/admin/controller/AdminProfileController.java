@@ -80,7 +80,7 @@ public class AdminProfileController {
         LoginUser userInfo = selfUserDetailsService.loadUserByUsername(userDetails.getUsername());
         System.out.println("userDetails："+userDetails.getPassword());
         System.out.println("userInfo："+userInfo.getPassword());
-        Long id = userDetails.getUserId();
+        Integer id = userDetails.getUserId();
         DgutshopAdmin admin = adminService.findById(id);
         return ResponseUtil.ok(admin);
     }

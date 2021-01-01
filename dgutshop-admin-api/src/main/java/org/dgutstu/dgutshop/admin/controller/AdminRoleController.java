@@ -90,7 +90,7 @@ public class AdminRoleController {
 
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @PostMapping("/delete")
-    public Object delete(@RequestParam Long id){
+    public Object delete(@RequestParam Integer id){
         if (id == null){
             return ResponseUtil.badArgument();
         }
@@ -98,7 +98,7 @@ public class AdminRoleController {
         //  如果当前角色所对应管理员仍存在，那么拒绝删除角色
         List<DgutshopAdmin> adminList = adminService.all();
         for (DgutshopAdmin admin : adminList) {
-            Long roleId = admin.getRoleId();
+            Integer roleId = admin.getRoleId();
             if (id.equals(roleId)){
                 return ResponseUtil.fail(ROLE_USER_EXIST, "当前角色存在管理员，无法删除");
             }

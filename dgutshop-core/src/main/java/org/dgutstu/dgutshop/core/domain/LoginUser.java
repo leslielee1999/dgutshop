@@ -25,7 +25,7 @@ public class LoginUser implements Serializable, UserDetails {
     /**
      * 用户ID
      */
-    private Long userId;
+    private Integer userId;
     /**
      * 用户名
      */

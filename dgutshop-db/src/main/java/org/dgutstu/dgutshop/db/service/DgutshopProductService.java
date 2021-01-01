@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import org.dgutstu.dgutshop.db.dao.DgutshopProductMapper;
 import org.dgutstu.dgutshop.db.domain.DgutshopProduct;
 import org.dgutstu.dgutshop.db.domain.DgutshopProductExample;
+import org.dgutstu.dgutshop.db.domain.DgutshopUserExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -144,4 +145,11 @@ public class DgutshopProductService {
         return productMapper.selectByPrimaryKey(id);
     }
 
+
+    public Long countProduct(){
+        DgutshopProductExample example = new DgutshopProductExample();
+        DgutshopProductExample.Criteria criteria = example.createCriteria();
+        criteria.andDeletedEqualTo(false);
+        return productMapper.countByExample(example);
+    }
 }

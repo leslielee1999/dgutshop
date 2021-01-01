@@ -32,7 +32,7 @@ public class DgutshopUserRole {
      *
      * @mbg.generated
      */
-    private Long id;
+    private Integer id;
 
     /**
      * Database Column Remarks:
@@ -43,7 +43,7 @@ public class DgutshopUserRole {
      *
      * @mbg.generated
      */
-    private Long userId;
+    private Integer userId;
 
     /**
      * Database Column Remarks:
@@ -54,7 +54,7 @@ public class DgutshopUserRole {
      *
      * @mbg.generated
      */
-    private Long roleId;
+    private Integer roleId;
 
     /**
      * Database Column Remarks:
@@ -75,7 +75,7 @@ public class DgutshopUserRole {
      *
      * @mbg.generated
      */
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -87,7 +87,7 @@ public class DgutshopUserRole {
      *
      * @mbg.generated
      */
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -99,7 +99,7 @@ public class DgutshopUserRole {
      *
      * @mbg.generated
      */
-    public Long getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
@@ -111,7 +111,7 @@ public class DgutshopUserRole {
      *
      * @mbg.generated
      */
-    public void setUserId(Long userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
@@ -123,7 +123,7 @@ public class DgutshopUserRole {
      *
      * @mbg.generated
      */
-    public Long getRoleId() {
+    public Integer getRoleId() {
         return roleId;
     }
 
@@ -135,7 +135,7 @@ public class DgutshopUserRole {
      *
      * @mbg.generated
      */
-    public void setRoleId(Long roleId) {
+    public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
 
@@ -311,9 +311,9 @@ public class DgutshopUserRole {
      * @mbg.generated
      */
     public enum Column {
-        id("id", "id", "BIGINT", false),
-        userId("user_id", "userId", "BIGINT", false),
-        roleId("role_id", "roleId", "BIGINT", false),
+        id("id", "id", "INTEGER", false),
+        userId("user_id", "userId", "INTEGER", false),
+        roleId("role_id", "roleId", "INTEGER", false),
         deleted("deleted", "deleted", "BIT", false);
 
         /**

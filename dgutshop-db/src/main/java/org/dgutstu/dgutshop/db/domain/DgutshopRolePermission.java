@@ -32,7 +32,7 @@ public class DgutshopRolePermission {
      *
      * @mbg.generated
      */
-    private Long id;
+    private Integer id;
 
     /**
      * Database Column Remarks:
@@ -43,7 +43,7 @@ public class DgutshopRolePermission {
      *
      * @mbg.generated
      */
-    private Long roleId;
+    private Integer roleId;
 
     /**
      * Database Column Remarks:
@@ -54,7 +54,7 @@ public class DgutshopRolePermission {
      *
      * @mbg.generated
      */
-    private Long permissionId;
+    private Integer permissionId;
 
     /**
      * Database Column Remarks:
@@ -75,7 +75,7 @@ public class DgutshopRolePermission {
      *
      * @mbg.generated
      */
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -87,7 +87,7 @@ public class DgutshopRolePermission {
      *
      * @mbg.generated
      */
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -99,7 +99,7 @@ public class DgutshopRolePermission {
      *
      * @mbg.generated
      */
-    public Long getRoleId() {
+    public Integer getRoleId() {
         return roleId;
     }
 
@@ -111,7 +111,7 @@ public class DgutshopRolePermission {
      *
      * @mbg.generated
      */
-    public void setRoleId(Long roleId) {
+    public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
 
@@ -123,7 +123,7 @@ public class DgutshopRolePermission {
      *
      * @mbg.generated
      */
-    public Long getPermissionId() {
+    public Integer getPermissionId() {
         return permissionId;
     }
 
@@ -135,7 +135,7 @@ public class DgutshopRolePermission {
      *
      * @mbg.generated
      */
-    public void setPermissionId(Long permissionId) {
+    public void setPermissionId(Integer permissionId) {
         this.permissionId = permissionId;
     }
 
@@ -311,9 +311,9 @@ public class DgutshopRolePermission {
      * @mbg.generated
      */
     public enum Column {
-        id("id", "id", "BIGINT", false),
-        roleId("role_id", "roleId", "BIGINT", false),
-        permissionId("permission_id", "permissionId", "BIGINT", false),
+        id("id", "id", "INTEGER", false),
+        roleId("role_id", "roleId", "INTEGER", false),
+        permissionId("permission_id", "permissionId", "INTEGER", false),
         deleted("deleted", "deleted", "BIT", false);
 
         /**

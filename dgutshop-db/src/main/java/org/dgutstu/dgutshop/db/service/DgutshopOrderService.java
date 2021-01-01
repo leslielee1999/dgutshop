@@ -161,4 +161,11 @@ public class DgutshopOrderService {
     public void deleteById(Integer id) {
         dgutshopOrderMapper.logicalDeleteByPrimaryKey(id);
     }
+
+    public Long countOrder(){
+        DgutshopOrderExample example = new DgutshopOrderExample();
+        DgutshopOrderExample.Criteria criteria = example.createCriteria();
+        criteria.andDeletedEqualTo(false);
+        return dgutshopOrderMapper.countByExample(example);
+    }
 }

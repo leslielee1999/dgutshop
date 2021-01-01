@@ -6,8 +6,7 @@ import org.dgutstu.dgutshop.core.util.ResponseUtil;
 import org.dgutstu.dgutshop.core.validator.Order;
 import org.dgutstu.dgutshop.core.validator.Sort;
 import org.dgutstu.dgutshop.db.domain.DgutshopOrder;
-import org.dgutstu.dgutshop.db.service.DgutshopOrderItemService;
-import org.dgutstu.dgutshop.db.service.DgutshopOrderService;
+import org.dgutstu.dgutshop.db.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -38,7 +37,12 @@ public class AdminStatController {
 
     @Autowired
     private DgutshopOrderService orderService;
-
+    @Autowired
+    private DgutshopUserService userService;
+    @Autowired
+    private DgutshopProductService productService;
+    @Autowired
+    private DgutshopToppingService toppingService;
     private static short UNPAID = 101;
     private static short PRODUCING = 201;
     private static short UNTAKEN = 301;
@@ -175,4 +179,18 @@ public class AdminStatController {
         return ResponseUtil.ok(list);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    @GetMapping("/getNum")
+    public Object getNum(){
+        Long userNum = userService.countUser();
+        Long productNum = productService.countProduct();
+        Long toppingNum = toppingService.countTopping();
+        Long orderNum = orderService.countOrder();
+        List list = new LinkedList();
+        list.add(userNum);
+        list.add(productNum);
+        list.add(toppingNum);
+        list.add(orderNum);
+        return ResponseUtil.ok(list);
+    }
 }

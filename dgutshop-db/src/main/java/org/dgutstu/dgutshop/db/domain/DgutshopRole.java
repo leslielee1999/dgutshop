@@ -33,7 +33,7 @@ public class DgutshopRole {
      *
      * @mbg.generated
      */
-    private Long id;
+    private Integer id;
 
     /**
      * Database Column Remarks:
@@ -109,7 +109,7 @@ public class DgutshopRole {
      *
      * @mbg.generated
      */
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -121,7 +121,7 @@ public class DgutshopRole {
      *
      * @mbg.generated
      */
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -426,7 +426,7 @@ public class DgutshopRole {
      * @mbg.generated
      */
     public enum Column {
-        id("id", "id", "BIGINT", false),
+        id("id", "id", "INTEGER", false),
         name("name", "name", "VARCHAR", true),
         desc("desc", "desc", "VARCHAR", true),
         enabled("enabled", "enabled", "BIT", false),

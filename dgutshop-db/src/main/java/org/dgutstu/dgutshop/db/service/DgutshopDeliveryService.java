@@ -27,6 +27,7 @@ public class DgutshopDeliveryService {
      */
     public List<DgutshopDelivery> list(){
         DgutshopDeliveryExample example = new DgutshopDeliveryExample();
+        example.or().andLogicalDeleted(false);
         return deliveryMapper.selectByExample(example);
     }
 }

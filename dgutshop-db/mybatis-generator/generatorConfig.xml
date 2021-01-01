@@ -66,13 +66,13 @@
 <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
 <!--        </table>-->
 
-<!--        <table tableName="dgutshop_admin">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
+        <table tableName="dgutshop_admin">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
 
-<!--        <table tableName="dgutshop_role">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
+        <table tableName="dgutshop_role">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
 
 <!--        <table tableName="dgutshop_category">-->
 <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
@@ -90,9 +90,9 @@
 <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
 <!--        </table>-->
 
-<!--        <table tableName="dgutshop_address">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
+        <table tableName="dgutshop_address">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
 
 <!--        <table tableName="dgutshop_order">-->
 <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
@@ -106,13 +106,9 @@
 <!--                            typeHandler="org.dgutstu.dgutshop.db.util.JsonStringArrayTypeHandler"/>-->
 <!--        </table>-->
 
-<!--        <table tableName="dgutshop_user">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-
-<!--        <table tableName="dgutshop_address">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
+        <table tableName="dgutshop_user">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
 
 <!--        <table tableName="dgutshop_slideshow">-->
 <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
@@ -127,22 +123,22 @@
 <!--        <table tableName="dgutshop_cart">-->
 <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
 <!--        </table>-->
-<!--        <table tableName="dgutshop_delivery">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-
-<!--        <table tableName="dgutshop_permission">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="dgutshop_role_permission">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-<!--        <table tableName="dgutshop_user_role">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
-        <table tableName="dgutshop_storage">
+        <table tableName="dgutshop_delivery">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
+
+        <table tableName="dgutshop_permission">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="dgutshop_role_permission">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="dgutshop_user_role">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+<!--        <table tableName="dgutshop_storage">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
     </context>
 
 </generatorConfiguration>

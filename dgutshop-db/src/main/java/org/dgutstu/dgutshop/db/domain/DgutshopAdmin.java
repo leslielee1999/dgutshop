@@ -33,7 +33,7 @@ public class DgutshopAdmin {
      *
      * @mbg.generated
      */
-    private Long id;
+    private Integer id;
 
     /**
      * Database Column Remarks:
@@ -44,7 +44,7 @@ public class DgutshopAdmin {
      *
      * @mbg.generated
      */
-    private Long roleId;
+    private Integer roleId;
 
     /**
      * Database Column Remarks:
@@ -175,7 +175,7 @@ public class DgutshopAdmin {
      *
      * @mbg.generated
      */
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -187,7 +187,7 @@ public class DgutshopAdmin {
      *
      * @mbg.generated
      */
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -199,7 +199,7 @@ public class DgutshopAdmin {
      *
      * @mbg.generated
      */
-    public Long getRoleId() {
+    public Integer getRoleId() {
         return roleId;
     }
 
@@ -211,7 +211,7 @@ public class DgutshopAdmin {
      *
      * @mbg.generated
      */
-    public void setRoleId(Long roleId) {
+    public void setRoleId(Integer roleId) {
         this.roleId = roleId;
     }
 
@@ -654,8 +654,8 @@ public class DgutshopAdmin {
      * @mbg.generated
      */
     public enum Column {
-        id("id", "id", "BIGINT", false),
-        roleId("role_id", "roleId", "BIGINT", false),
+        id("id", "id", "INTEGER", false),
+        roleId("role_id", "roleId", "INTEGER", false),
         name("name", "name", "VARCHAR", true),
         nickname("nickname", "nickname", "VARCHAR", false),
         password("password", "password", "VARCHAR", true),

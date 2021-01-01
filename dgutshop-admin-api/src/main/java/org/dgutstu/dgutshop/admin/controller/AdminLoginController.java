@@ -33,7 +33,7 @@ import java.util.Map;
  *          若失败-->进入自定义用户登录失败处理类JwtLoginFailureHandler（【核心配置类WebSecurityConfig】配置登录失败自定义处理类），生成对应的失败信息（UserAuthenticationProvider中会有相应的逻辑判断进行不同异常的抛出），返回失败信息给前台
  * 权限验证：
  *      前台访问服务器的api接口
- *      -->进入JWT接口请求校验拦截器JwtAuthenticationTokenFilter，进行JWT的token解析，获得登录的用户所具有的角色的权限（可判断Token是否过期或无效）
+ *      -->进入JWT接口请求校验拦截器JwtAuthenticationTokenFilter（【核心配置类WebSecurityConfig】添加过滤链），进行JWT的token解析，获得登录的用户所具有的角色的权限（可判断Token是否过期或无效）
  *      -->判断PreAuthorize注解中的权限表达式，返回true或false（【核心配置类WebSecurityConfig】配置权限校验逻辑），校验当前登录用户是否具有访问该api的权限
  *          若具有权限true-->服务器返回前台所需要的信息
  *          若不具有权限false-->进入自定义无权限访问类JwtAccessDeniedHandler，返回无权限信息，不允许访问该api

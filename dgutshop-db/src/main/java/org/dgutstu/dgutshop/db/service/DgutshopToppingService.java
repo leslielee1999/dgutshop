@@ -109,4 +109,10 @@ public class DgutshopToppingService {
         return toppingMapper.selectByPrimaryKey(id);
     }
 
+    public Long countTopping(){
+        DgutshopToppingExample example = new DgutshopToppingExample();
+        DgutshopToppingExample.Criteria criteria = example.createCriteria();
+        criteria.andDeletedEqualTo(false);
+        return toppingMapper.countByExample(example);
+    }
 }

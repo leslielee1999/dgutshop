@@ -1,5 +1,8 @@
 package org.dgutstu.dgutshop.wechat.service;
 
+import com.github.binarywang.wxpay.bean.order.WxPayMwebOrderResult;
+import com.github.binarywang.wxpay.bean.request.WxPayUnifiedOrderRequest;
+import io.swagger.models.auth.In;
 import org.dgutstu.dgutshop.core.task.TaskService;
 import org.dgutstu.dgutshop.core.util.JacksonUtil;
 import org.dgutstu.dgutshop.core.util.ResponseUtil;
@@ -17,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -274,6 +278,63 @@ public class WechatOrderService {
         orderService.deleteById(orderId);
         // 售后也同时删除
 //        aftersaleService.deleteByOrderId(userId, orderId);
+
+        return ResponseUtil.ok();
+    }
+
+
+    /**
+     * 微信H5支付
+     *
+     * @param userId
+     * @param body
+     * @return
+     */
+    @Transactional
+    public Object pay(Integer userId, String body) {
+        if (userId == null) {
+            return ResponseUtil.unlogin();
+        }
+        Integer orderId = JacksonUtil.parseInteger(body, "orderId");
+        if (orderId == null) {
+            return ResponseUtil.badArgument();
+        }
+
+        DgutshopOrder order = orderService.findById(userId, orderId);
+        if (order == null) {
+            return ResponseUtil.badArgumentValue();
+        }
+        if (!order.getUserId().equals(userId)) {
+            return ResponseUtil.badArgumentValue();
+        }
+
+        // 检测是否能够取消
+        OrderHandleOption handleOption = OrderUtil.build(order);
+        if (!handleOption.isPay()) {
+            return ResponseUtil.fail(725, "订单不能支付");
+        }
+
+//        WxPayMwebOrderResult result = null;
+//        try {
+//            WxPayUnifiedOrderRequest orderRequest = new WxPayUnifiedOrderRequest();
+//            orderRequest.setOutTradeNo(order.getOrderSn());
+//            orderRequest.setTradeType("MWEB");
+//            orderRequest.setBody("订单：" + order.getOrderSn());
+//            // 元转成分
+//            int fee = 0;
+//            BigDecimal actualPrice = order.getActualPrice();
+//            fee = actualPrice.multiply(new BigDecimal(100)).intValue();
+//            orderRequest.setTotalFee(fee);
+//            orderRequest.setSpbillCreateIp(IpUtil.getIpAddr(request));
+//
+//            result = wxPayService.createOrder(orderRequest);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
+        order.setOrderStatus(OrderUtil.STATUS_PAY);
+        order.setPayDate(LocalDateTime.now());
 
         return ResponseUtil.ok();
     }

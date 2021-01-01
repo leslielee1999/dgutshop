@@ -4,10 +4,15 @@ import org.dgutstu.dgutshop.core.validator.Order;
 import org.dgutstu.dgutshop.core.validator.Sort;
 import org.dgutstu.dgutshop.db.domain.OrderListVo;
 import org.dgutstu.dgutshop.wechat.annotation.LoginUser;
+import org.dgutstu.dgutshop.wechat.service.WechatAuthService;
 import org.dgutstu.dgutshop.wechat.service.WechatOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.NotNull;
+import java.util.Map;
 
 /**
  * @Author: leesk
@@ -21,16 +26,21 @@ public class WechatOrderController {
 
     @Autowired
     private WechatOrderService wechatOrderService;
-
+    @Autowired
+    private WechatAuthService wechatAuthService;
     /**
      * 订单列表
-     * @param userId 用户ID
      * @return
      */
     @GetMapping("list")
-    public Object list(@LoginUser Integer userId,
+    public Object list(@NotNull HttpServletRequest request,
                        @Sort @RequestParam(defaultValue = "create_time") String sort,
                        @Order @RequestParam(defaultValue = "desc") String order){
+        Object obj = wechatAuthService.validate(request);
+        if (obj instanceof Map) {
+            return obj;
+        }
+        Integer userId = wechatAuthService.getUserId(obj);
         return wechatOrderService.list(userId, sort, order);
     }
 
@@ -51,12 +61,16 @@ public class WechatOrderController {
      *      2. 在订单状态为待支付状态下超时，系统自动取消
      *          101【待支付】-->103【下单后未支付超时，系统自动取消】
      *
-     * @param userId 用户ID
      * @param body   订单信息，{ orderId：xxx }
      * @return 取消订单操作结果
      */
     @PostMapping("cancel")
-    public Object cancel(@LoginUser Integer userId, @RequestBody String body) {
+    public Object cancel(@NotNull HttpServletRequest request, @RequestBody String body) {
+        Object obj = wechatAuthService.validate(request);
+        if (obj instanceof Map) {
+            return obj;
+        }
+        Integer userId = wechatAuthService.getUserId(obj);
         return wechatOrderService.cancel(userId, body);
     }
     /**
@@ -77,12 +91,16 @@ public class WechatOrderController {
      *      2. 另外，待取货或骑手到达后的时间阈值一旦超过则自动确认收货：
      *          301【待取货】-->502【已完成】
      *          402【骑手已到达】-->502【已完成】
-     * @param userId 用户ID
      * @param body   订单信息，{ orderId：xxx }
      * @return 订单操作结果
      */
     @PostMapping("confirm")
-    public Object confirm(@LoginUser Integer userId, @RequestBody String body) {
+    public Object confirm(@NotNull HttpServletRequest request, @RequestBody String body) {
+        Object obj = wechatAuthService.validate(request);
+        if (obj instanceof Map) {
+            return obj;
+        }
+        Integer userId = wechatAuthService.getUserId(obj);
         return wechatOrderService.confirm(userId, body);
     }
 
@@ -98,16 +116,32 @@ public class WechatOrderController {
      *
      *      1. 如果订单已经取消【102/103】或是已完成【501/502】，则可删除
      *      2. 如果订单已经支付，且已经收货，则可删除
-     *
-     * @param userId 用户ID
      * @param body   订单信息，{ orderId：xxx }
      * @return 订单操作结果
      */
     @PostMapping("delete")
-    public Object delete(@LoginUser Integer userId, @RequestBody String body) {
+    public Object delete(@NotNull HttpServletRequest request,  @RequestBody String body) {
+        Object obj = wechatAuthService.validate(request);
+        if (obj instanceof Map) {
+            return obj;
+        }
+        Integer userId = wechatAuthService.getUserId(obj);
         return wechatOrderService.delete(userId, body);
     }
 
-
+    /**
+     * 模拟付款
+     * @param body
+     * @return
+     */
+    @PostMapping("pay")
+    public Object pay(@NotNull HttpServletRequest request,  @RequestBody String body){
+        Object obj = wechatAuthService.validate(request);
+        if (obj instanceof Map) {
+            return obj;
+        }
+        Integer userId = wechatAuthService.getUserId(obj);
+        return wechatOrderService.pay(userId, body);
+    }
 
 }

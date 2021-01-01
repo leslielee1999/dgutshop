@@ -46,7 +46,7 @@ public class DgutshopUserService {
             criteria.andPhoneLike("%" + phone + "%");
         }
         if (!StringUtils.isEmpty(wechatId)) {
-            criteria.andWechatIdLike("%" + wechatId + "%");
+            criteria.andOpenIdLike("%" + wechatId + "%");
         }
         if (!StringUtils.isEmpty(nickname)) {
             criteria.andNicknameLike("%" + nickname + "%");
@@ -67,4 +67,23 @@ public class DgutshopUserService {
         return userMapper.selectByExample(example);
     }
 
+    public DgutshopUser findByOpenId(String openid){
+        DgutshopUserExample example = new DgutshopUserExample();
+        DgutshopUserExample.Criteria criteria = example.createCriteria();
+        criteria.andOpenIdEqualTo(openid).andDeletedEqualTo(false);
+        return userMapper.selectOneByExample(example);
+    }
+
+    public void save(DgutshopUser user){
+        user.setCreateTime(LocalDateTime.now());
+        user.setUpdateTime(LocalDateTime.now());
+        userMapper.insertSelective(user);
+    }
+
+    public Long countUser(){
+        DgutshopUserExample example = new DgutshopUserExample();
+        DgutshopUserExample.Criteria criteria = example.createCriteria();
+        criteria.andDeletedEqualTo(false);
+        return userMapper.countByExample(example);
+    }
 }

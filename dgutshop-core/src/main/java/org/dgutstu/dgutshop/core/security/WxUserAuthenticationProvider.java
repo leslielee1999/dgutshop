@@ -1,9 +1,12 @@
 package org.dgutstu.dgutshop.core.security;
 
 import org.dgutstu.dgutshop.core.domain.LoginUser;
+import org.dgutstu.dgutshop.core.security.service.CustomerDetailsService;
 import org.dgutstu.dgutshop.core.security.service.SelfUserDetailsService;
 import org.dgutstu.dgutshop.db.domain.DgutshopRole;
+import org.dgutstu.dgutshop.db.domain.DgutshopUser;
 import org.dgutstu.dgutshop.db.service.DgutshopAdminService;
+import org.dgutstu.dgutshop.db.service.DgutshopUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -18,30 +21,27 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
  * @Author: leesk
- * @Description: 自定义登录验证
- * @Date: Create in 17:06 2020/12/21
+ * @Description:
+ * @Date: Create in 23:10 2020/12/25
  */
 @Component
-public class UserAuthenticationProvider implements AuthenticationProvider {
+public class WxUserAuthenticationProvider  implements AuthenticationProvider{
     @Autowired
-    private SelfUserDetailsService selfUserDetailsService;
+    private CustomerDetailsService customerDetailsService;
     @Autowired
-    private DgutshopAdminService adminService;
+    private DgutshopUserService userService;
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         // 获取表单输入中返回的用户名
-        String userName = (String) authentication.getPrincipal();
+        String openid = (String) authentication.getPrincipal();
         // 获取表单中输入的密码
         String password = (String) authentication.getCredentials();
-        //  TODO:
-        //      2. 判断是后台用户登录还是小程序用户登录
         // 查询用户是否存在
-        LoginUser userInfo = selfUserDetailsService.loadUserByUsername(userName);
+        LoginUser userInfo = customerDetailsService.loadUserByUsername(openid);
         if (userInfo == null) {
             throw new UsernameNotFoundException("用户名不存在");
         }
@@ -56,9 +56,9 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
         // 角色集合
         Set<GrantedAuthority> authorities = new HashSet<>();
         // 查询用户角色
-        DgutshopRole role = adminService.findRoleById(userInfo.getUserId());
+//        DgutshopRole role = adminService.findRoleById(userInfo.getUserId());
 
-        authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName()));
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + "CUSTOMER"));
 
         userInfo.setAuthorities(authorities);
         // 进行登录

@@ -1,23 +1,28 @@
 package org.dgutstu.dgutshop.wechat.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.dgutstu.dgutshop.core.util.RegexUtil;
 import org.dgutstu.dgutshop.core.util.ResponseUtil;
 import org.dgutstu.dgutshop.db.domain.DgutshopAddress;
 import org.dgutstu.dgutshop.db.service.DgutshopAddressService;
-import org.dgutstu.dgutshop.wechat.annotation.LoginUser;
+import org.dgutstu.dgutshop.db.service.DgutshopUserService;
+import org.dgutstu.dgutshop.wechat.service.WechatAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: leesk
  * @Description:
  * @Date: Create in 1:04 2020/12/24
  */
+@Slf4j
 @RestController
 @RequestMapping("/wechat/address")
 @Validated
@@ -25,19 +30,23 @@ public class WechatAddressController {
 
     @Autowired
     private DgutshopAddressService addressService;
-
+    @Autowired
+    private DgutshopUserService userService;
+    @Autowired
+    private WechatAuthService wechatAuthService;
 
     /**
      * 用户收货地址列表
      *
-     * @param userId 用户ID
      * @return 收货地址列表
      */
     @GetMapping("list")
-    public Object list(@LoginUser Integer userId) {
-        if (userId == null) {
-            return ResponseUtil.unlogin();
+    public Object list(@NotNull HttpServletRequest request) {
+        Object obj = wechatAuthService.validate(request);
+        if (obj instanceof Map) {
+            return obj;
         }
+        Integer userId = wechatAuthService.getUserId(obj);
         List<DgutshopAddress> addressList = addressService.queryByUid(userId);
         return ResponseUtil.okList(addressList);
     }
@@ -45,16 +54,16 @@ public class WechatAddressController {
     /**
      * 收货地址详情
      *
-     * @param userId 用户ID
-     * @param id     收货地址ID
+     * @param id 收货地址ID
      * @return 收货地址详情
      */
     @GetMapping("detail")
-    public Object detail(@LoginUser Integer userId, @NotNull Integer id) {
-        if (userId == null) {
-            return ResponseUtil.unlogin();
+    public Object detail(@NotNull HttpServletRequest request, @NotNull Integer id) {
+        Object obj = wechatAuthService.validate(request);
+        if (obj instanceof Map) {
+            return obj;
         }
-
+        Integer userId = wechatAuthService.getUserId(obj);
         DgutshopAddress address = addressService.query(userId, id);
         if (address == null) {
             return ResponseUtil.badArgumentValue();
@@ -62,7 +71,7 @@ public class WechatAddressController {
         return ResponseUtil.ok(address);
     }
 
-    private Object validate(DgutshopAddress address) {
+    private Object validateAddress(DgutshopAddress address) {
         String name = address.getUserName();
         if (StringUtils.isEmpty(name)) {
             return ResponseUtil.badArgument();
@@ -97,26 +106,27 @@ public class WechatAddressController {
     /**
      * 添加或更新收货地址
      *
-     * @param userId  用户ID
      * @param address 用户收货地址
      * @return 添加或更新操作结果
      */
     @PostMapping("save")
-    public Object save(@LoginUser Integer userId, @RequestBody DgutshopAddress address) {
-        if (userId == null) {
-            return ResponseUtil.unlogin();
+    public Object save(@NotNull HttpServletRequest request, @RequestBody DgutshopAddress address) {
+        Object obj = wechatAuthService.validate(request);
+        if (obj instanceof Map) {
+            return obj;
         }
-        Object error = validate(address);
+        Integer userId = wechatAuthService.getUserId(obj);
+
+        Object error = validateAddress(address);
         if (error != null) {
             return error;
         }
 
         if (address.getId() == null || address.getId().equals(0)) {     //  添加地址
-            if (address.getIsDefault()  == 0) {                         //  若新添加地址设为默认地址
+            if (address.getIsDefault() == 0) {                         //  若新添加地址设为默认地址
                 // 重置其他收货地址的默认选项
                 addressService.resetDefault(userId);
             }
-
             address.setId(null);
             address.setUserId(userId);
             addressService.add(address);
@@ -125,12 +135,10 @@ public class WechatAddressController {
             if (dgutshopAddress == null) {
                 return ResponseUtil.badArgumentValue();
             }
-
             if (address.getIsDefault() == 0) {
                 // 重置其他收货地址的默认选项
                 addressService.resetDefault(userId);
             }
-
             address.setUserId(userId);
             addressService.update(address);
         }
@@ -140,15 +148,22 @@ public class WechatAddressController {
     /**
      * 删除收货地址
      *
-     * @param userId  用户ID
      * @param address 用户收货地址，{ id: xxx }
      * @return 删除操作结果
      */
     @PostMapping("delete")
-    public Object delete(@LoginUser Integer userId, @RequestBody DgutshopAddress address) {
-        if (userId == null) {
-            return ResponseUtil.unlogin();
+    public Object delete(@NotNull HttpServletRequest request, @RequestBody DgutshopAddress address) {
+        Object obj = wechatAuthService.validate(request);
+        if (obj instanceof Map) {
+            return obj;
         }
+        Integer userId = wechatAuthService.getUserId(obj);
+
+        Object error = validateAddress(address);
+        if (error != null) {
+            return error;
+        }
+
         Integer id = address.getId();
         if (id == null) {
             return ResponseUtil.badArgument();

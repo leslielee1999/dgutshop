@@ -53,7 +53,6 @@ public class WechatProductController {
     public Object list(
             Integer categoryId,
             String keyword,
-            @LoginUser Integer userId,
             @RequestParam(defaultValue = "1") Integer page,
             @RequestParam(defaultValue = "10") Integer limit,
             @Sort(accepts = {"create_time", "big_original_price", "name"}) @RequestParam(defaultValue = "create_time") String sort,
