@@ -155,7 +155,7 @@ public class DgutshopOrderService {
         DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyyMMdd");
         String now = df.format(LocalDate.now());
         String orderTakeCode = now + getRandomNum(4);
-        while (countByOrderCode(id, orderTakeCode) != 0){
+        while (countByOrderTakeCode(id, orderTakeCode) != 0){
             orderTakeCode = now + getRandomNum(4);
         }
         return orderTakeCode;
@@ -188,7 +188,7 @@ public class DgutshopOrderService {
         return dgutshopOrderMapper.countByExample(example);
     }
 
-    public List<DgutshopOrder> queryUnpaid(int minutes) {
+    public List<DgutshopOrder> queryUnpaid() {
         DgutshopOrderExample example = new DgutshopOrderExample();
         example.or().andOrderStatusEqualTo(OrderUtil.STATUS_CREATE).andDeletedEqualTo(false);
         return dgutshopOrderMapper.selectByExample(example);
