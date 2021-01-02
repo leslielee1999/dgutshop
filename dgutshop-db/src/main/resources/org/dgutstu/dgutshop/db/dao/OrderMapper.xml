@@ -67,6 +67,9 @@
             <if test="order.orderPrice != null">
                 order_price = #{order.orderPrice,jdbcType=DECIMAL},
             </if>
+            <if test="order.takeCode != null">
+                take_code = #{order.takeCode,jdbcType=VARCHAR},
+            </if>
             <if test="order.refundAmount != null">
                 refund_amount = #{order.refundAmount,jdbcType=DECIMAL},
             </if>
