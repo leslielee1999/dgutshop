@@ -90,9 +90,9 @@
 <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
 <!--        </table>-->
 
-<!--        <table tableName="dgutshop_address">-->
-<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
-<!--        </table>-->
+        <table tableName="dgutshop_address">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
 
 <!--        <table tableName="dgutshop_order">-->
 <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
@@ -106,9 +106,9 @@
 <!--                            typeHandler="org.dgutstu.dgutshop.db.util.JsonStringArrayTypeHandler"/>-->
 <!--        </table>-->
 
-        <table tableName="dgutshop_user">
-            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
-        </table>
+<!--        <table tableName="dgutshop_user">-->
+<!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->
+<!--        </table>-->
 
 <!--        <table tableName="dgutshop_slideshow">-->
 <!--            <generatedKey column="id" sqlStatement="MySql" identity="true"/>-->

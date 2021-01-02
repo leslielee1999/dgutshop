@@ -41,9 +41,6 @@ public class OrderUnpaidTask extends Task {
         logger.info("系统开始处理延时任务---订单超时未付款---" + this.orderId);
 
         DgutshopOrderService orderService = BeanUtil.getBean(DgutshopOrderService.class);
-        DgutshopOrderItemService orderItemService = BeanUtil.getBean(DgutshopOrderItemService.class);
-        DgutshopProductService productService = BeanUtil.getBean(DgutshopProductService.class);
-        WechatOrderService wechatOrderService = BeanUtil.getBean(WechatOrderService.class);
 
         DgutshopOrder order = orderService.findById(this.orderId);
         if(order == null){

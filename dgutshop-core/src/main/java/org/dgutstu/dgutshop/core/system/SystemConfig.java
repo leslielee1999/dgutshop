@@ -9,13 +9,13 @@ import java.util.Map;
  */
 public class SystemConfig {
     // 小程序相关配置
-    public final static String LITEMALL_WX_INDEX_NEW = "litemall_wx_index_new";
-    public final static String LITEMALL_WX_INDEX_HOT = "litemall_wx_index_hot";
-    public final static String LITEMALL_WX_INDEX_BRAND = "litemall_wx_index_brand";
-    public final static String LITEMALL_WX_INDEX_TOPIC = "litemall_wx_index_topic";
-    public final static String LITEMALL_WX_INDEX_CATLOG_LIST = "litemall_wx_catlog_list";
-    public final static String LITEMALL_WX_INDEX_CATLOG_GOODS = "litemall_wx_catlog_goods";
-    public final static String LITEMALL_WX_SHARE = "litemall_wx_share";
+//    public final static String LITEMALL_WX_INDEX_NEW = "litemall_wx_index_new";
+//    public final static String LITEMALL_WX_INDEX_HOT = "litemall_wx_index_hot";
+//    public final static String LITEMALL_WX_INDEX_BRAND = "litemall_wx_index_brand";
+//    public final static String LITEMALL_WX_INDEX_TOPIC = "litemall_wx_index_topic";
+//    public final static String LITEMALL_WX_INDEX_CATLOG_LIST = "litemall_wx_catlog_list";
+//    public final static String LITEMALL_WX_INDEX_CATLOG_GOODS = "litemall_wx_catlog_goods";
+//    public final static String LITEMALL_WX_SHARE = "litemall_wx_share";
     // 运费相关配置
     public final static String DGUTSHOP_DELIVERY_VALUE = "dgutshop_delivery_value";
 //    public final static String LITEMALL_EXPRESS_FREIGHT_MIN = "litemall_express_freight_min";
@@ -50,33 +50,33 @@ public class SystemConfig {
         return new BigDecimal(SYSTEM_CONFIGS.get(keyName));
     }
 
-    public static Integer getNewLimit() {
-        return getConfigInt(LITEMALL_WX_INDEX_NEW);
-    }
-
-    public static Integer getHotLimit() {
-        return getConfigInt(LITEMALL_WX_INDEX_HOT);
-    }
-
-    public static Integer getBrandLimit() {
-        return getConfigInt(LITEMALL_WX_INDEX_BRAND);
-    }
-
-    public static Integer getTopicLimit() {
-        return getConfigInt(LITEMALL_WX_INDEX_TOPIC);
-    }
-
-    public static Integer getCatlogListLimit() {
-        return getConfigInt(LITEMALL_WX_INDEX_CATLOG_LIST);
-    }
-
-    public static Integer getCatlogMoreLimit() {
-        return getConfigInt(LITEMALL_WX_INDEX_CATLOG_GOODS);
-    }
-
-    public static boolean isAutoCreateShareImage() {
-        return getConfigBoolean(LITEMALL_WX_SHARE);
-    }
+//    public static Integer getNewLimit() {
+//        return getConfigInt(LITEMALL_WX_INDEX_NEW);
+//    }
+//
+//    public static Integer getHotLimit() {
+//        return getConfigInt(LITEMALL_WX_INDEX_HOT);
+//    }
+//
+//    public static Integer getBrandLimit() {
+//        return getConfigInt(LITEMALL_WX_INDEX_BRAND);
+//    }
+//
+//    public static Integer getTopicLimit() {
+//        return getConfigInt(LITEMALL_WX_INDEX_TOPIC);
+//    }
+//
+//    public static Integer getCatlogListLimit() {
+//        return getConfigInt(LITEMALL_WX_INDEX_CATLOG_LIST);
+//    }
+//
+//    public static Integer getCatlogMoreLimit() {
+//        return getConfigInt(LITEMALL_WX_INDEX_CATLOG_GOODS);
+//    }
+//
+//    public static boolean isAutoCreateShareImage() {
+//        return getConfigBoolean(LITEMALL_WX_SHARE);
+//    }
 
     public static BigDecimal getDelivery() {
         return getConfigBigDec(DGUTSHOP_DELIVERY_VALUE);

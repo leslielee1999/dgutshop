@@ -51,8 +51,13 @@ public class WechatOrderController {
      * @return 提交订单操作结果
      */
     @PostMapping("submit")
-    public Object submit(@RequestBody OrderListVo orderListVo){
-        return wechatOrderService.submit(orderListVo);
+    public Object submit(HttpServletRequest request, HttpServletResponse response, @RequestBody OrderListVo orderListVo){
+        Object obj = wechatAuthService.validate(request, response);
+        if (obj instanceof Map) {
+            return obj;
+        }
+        Integer userId = wechatAuthService.getUserId(obj);
+        return wechatOrderService.submit(userId, orderListVo);
     }
 
     /**
@@ -82,14 +87,14 @@ public class WechatOrderController {
      *          101【待支付】-->201【制作中】
      *
      */
-    @PostMapping("pay-notify")
-    public Object payNotify(HttpServletRequest request, HttpServletResponse response, @RequestBody String body){
+    @PostMapping("h5pay")
+    public Object h5pay(HttpServletRequest request, HttpServletResponse response, @RequestBody String body){
         Object obj = wechatAuthService.validate(request, response);
         if (obj instanceof Map) {
             return obj;
         }
         Integer userId = wechatAuthService.getUserId(obj);
-        return wechatOrderService.pay(userId, body);
+        return wechatOrderService.h5pay(userId, body);
     }
 
 
@@ -144,14 +149,14 @@ public class WechatOrderController {
      * @param body
      * @return
      */
-    @PostMapping("pay")
-    public Object pay(HttpServletRequest request, HttpServletResponse response,  @RequestBody String body){
-        Object obj = wechatAuthService.validate(request, response);
-        if (obj instanceof Map) {
-            return obj;
-        }
-        Integer userId = wechatAuthService.getUserId(obj);
-        return wechatOrderService.pay(userId, body);
-    }
+//    @PostMapping("pay")
+//    public Object pay(HttpServletRequest request, HttpServletResponse response,  @RequestBody String body){
+//        Object obj = wechatAuthService.validate(request, response);
+//        if (obj instanceof Map) {
+//            return obj;
+//        }
+//        Integer userId = wechatAuthService.getUserId(obj);
+//        return wechatOrderService.pay(userId, body);
+//    }
 
 }

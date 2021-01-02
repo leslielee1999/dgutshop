@@ -10,7 +10,7 @@ import java.util.List;
  * @Date: Create in 20:59 2020/12/19
  */
 public class OrderListVo {
-    private Integer userId;
+//    private Integer userId;
     private Byte type;
     private BigDecimal productPrice;
     private BigDecimal deliveryPrice;
@@ -25,7 +25,7 @@ public class OrderListVo {
     @Override
     public String toString() {
         return "OrderListVo{" +
-                "userId=" + userId +
+//                "userId=" + userId +
                 ", type='" + type + '\'' +
                 ", productPrice=" + productPrice +
                 ", deliveryPrice=" + deliveryPrice +
@@ -39,13 +39,13 @@ public class OrderListVo {
                 '}';
     }
 
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
+//    public Integer getUserId() {
+//        return userId;
+//    }
+//
+//    public void setUserId(Integer userId) {
+//        this.userId = userId;
+//    }
 
     public Byte getType() {
         return type;

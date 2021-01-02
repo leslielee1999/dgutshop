@@ -172,4 +172,8 @@ public class WechatAuthService {
         return userId;
     }
 
+    public String getOpenId(HttpServletRequest request, HttpServletResponse response){
+        return checkLogin(request, response);
+    }
+
 }

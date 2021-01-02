@@ -21,6 +21,28 @@ public class DgutshopSystemConfigService {
     @Resource
     private DgutshopSystemMapper systemMapper;
 
+    public Map<String, String> queryAll() {
+        DgutshopSystemExample example = new DgutshopSystemExample();
+        example.or().andDeletedEqualTo(false);
+
+        List<DgutshopSystem> systemList = systemMapper.selectByExample(example);
+        Map<String, String> systemConfigs = new HashMap<>();
+        for (DgutshopSystem item : systemList) {
+            systemConfigs.put(item.getKeyName(), item.getKeyValue());
+        }
+
+        return systemConfigs;
+    }
+
+    public void addConfig(String key, String value) {
+        DgutshopSystem system = new DgutshopSystem();
+        system.setKeyName(key);
+        system.setKeyValue(value);
+        system.setCreateTime(LocalDateTime.now());
+        system.setUpdateTime(LocalDateTime.now());
+        systemMapper.insertSelective(system);
+    }
+
     public Map<String, String> listMall() {
         DgutshopSystemExample example = new DgutshopSystemExample();
         example.or().andKeyNameLike("dgutshop_shop_%").andDeletedEqualTo(false);

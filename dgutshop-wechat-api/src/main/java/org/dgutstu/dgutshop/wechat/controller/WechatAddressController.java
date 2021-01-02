@@ -123,7 +123,8 @@ public class WechatAddressController {
         if (error != null) {
             return error;
         }
-
+        String openId = wechatAuthService.getOpenId(request, response);
+        address.setOpenId(openId);
         if (address.getId() == null || address.getId().equals(0)) {     //  添加地址
             if (address.getIsDefault() == 0) {                         //  若新添加地址设为默认地址
                 // 重置其他收货地址的默认选项

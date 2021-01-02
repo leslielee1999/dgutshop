@@ -63,7 +63,7 @@ public class DgutshopAddressService {
         }
 
         if(!StringUtils.isEmpty(wechatId)){
-            criteria.andWechatIdLike("%" + wechatId + "%");
+            criteria.andOpenIdLike("%" + wechatId + "%");
         }
 
         //  查找收货人

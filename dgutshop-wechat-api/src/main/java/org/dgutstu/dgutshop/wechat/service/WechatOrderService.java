@@ -38,11 +38,11 @@ import java.util.Map;
  * 订单状态
  * 自取与外卖服务共有：
  * 101【待支付】：订单生成，未支付：102，下单后未支付用户取消；103，下单后未支付超时系统自动取消
- * 201【制作中】：支付完成，奶茶正在制作中
+ * 201【制作中】：支付完成，生成取件码，奶茶正在制作中
  * 501【已完成】：用户点击已确认收货
  *
  * 自取：
- * 301【待取货】：奶茶已制作完毕，生成取件码
+ * 301【待取货】：奶茶已制作完毕
  *
  * 外卖：
  * 401【派送中】：派送员正在派送；
@@ -80,8 +80,7 @@ public class WechatOrderService {
      * @return
      */
     @Transactional
-    public Object submit(OrderListVo orderListVo){
-        Integer userId = orderListVo.getUserId();
+    public Object submit(Integer userId, OrderListVo orderListVo){
         if (userId == null) {
             return ResponseUtil.unlogin();
         }
@@ -141,7 +140,7 @@ public class WechatOrderService {
         }
 
         //  设置订单支付超期任务
-//        taskService.addTask(new OrderUnpaidTask(orderId));
+        taskService.addTask(new OrderUnpaidTask(orderId));
 
         Map<String, Object> data = new HashMap<>();
         data.put("orderId", orderId);
@@ -292,7 +291,7 @@ public class WechatOrderService {
      * @return
      */
     @Transactional
-    public Object pay(Integer userId, String body) {
+    public Object h5pay(Integer userId, String body) {
         if (userId == null) {
             return ResponseUtil.unlogin();
         }
@@ -333,7 +332,7 @@ public class WechatOrderService {
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
-
+        order.setTakeCode(orderService.generateTakeCode(userId));
         order.setOrderStatus(OrderUtil.STATUS_PAY);
         order.setPayDate(LocalDateTime.now());
         if (orderService.updateWithOptimisticLocker(order) == 0) {

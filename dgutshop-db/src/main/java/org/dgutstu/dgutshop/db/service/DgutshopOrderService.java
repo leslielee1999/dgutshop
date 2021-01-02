@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import org.dgutstu.dgutshop.db.dao.DgutshopOrderMapper;
 import org.dgutstu.dgutshop.db.dao.OrderMapper;
 import org.dgutstu.dgutshop.db.domain.*;
+import org.dgutstu.dgutshop.db.util.OrderUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -142,6 +143,24 @@ public class DgutshopOrderService {
         return orderCode;
     }
 
+    //  判断订单取货码是否已存在
+    public int countByOrderTakeCode(Integer userId, String takeCode){
+        DgutshopOrderExample example = new DgutshopOrderExample();
+        example.or().andUserIdEqualTo(userId).andTakeCodeEqualTo(takeCode).andDeletedEqualTo(false);
+        return (int)dgutshopOrderMapper.countByExample(example);
+    }
+
+    //  生成唯一的取货码
+    public String generateTakeCode(Integer id){
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyyMMdd");
+        String now = df.format(LocalDate.now());
+        String orderTakeCode = now + getRandomNum(4);
+        while (countByOrderCode(id, orderTakeCode) != 0){
+            orderTakeCode = now + getRandomNum(4);
+        }
+        return orderTakeCode;
+    }
+
     public DgutshopOrder findById(Integer orderId) {
         return dgutshopOrderMapper.selectByPrimaryKey(orderId);
     }
@@ -167,5 +186,11 @@ public class DgutshopOrderService {
         DgutshopOrderExample.Criteria criteria = example.createCriteria();
         criteria.andDeletedEqualTo(false);
         return dgutshopOrderMapper.countByExample(example);
+    }
+
+    public List<DgutshopOrder> queryUnpaid(int minutes) {
+        DgutshopOrderExample example = new DgutshopOrderExample();
+        example.or().andOrderStatusEqualTo(OrderUtil.STATUS_CREATE).andDeletedEqualTo(false);
+        return dgutshopOrderMapper.selectByExample(example);
     }
 }
