@@ -1076,7 +1076,6 @@
     Content-Type: application/json
     
       {
-        "userId": 1,
         "type": 0,
         "productPrice": 12.00,
         "deliveryPrice": 2.00,
