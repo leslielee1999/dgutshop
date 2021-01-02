@@ -332,13 +332,17 @@ public class WechatOrderService {
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
+
         order.setTakeCode(orderService.generateTakeCode(userId));
         order.setOrderStatus(OrderUtil.STATUS_PAY);
         order.setPayDate(LocalDateTime.now());
         if (orderService.updateWithOptimisticLocker(order) == 0) {
             return WxPayNotifyResponse.fail("更新数据已失效");
         }
-        return ResponseUtil.ok();
+        // 取消订单超时未支付任务
+        taskService.removeTask(new OrderUnpaidTask(order.getId()));
+        String takeCode = order.getTakeCode().substring(8);
+        return ResponseUtil.ok(takeCode);
     }
 
 }

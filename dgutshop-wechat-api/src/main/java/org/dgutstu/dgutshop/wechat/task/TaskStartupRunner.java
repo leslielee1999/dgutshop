@@ -23,16 +23,18 @@ public class TaskStartupRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        List<DgutshopOrder> orderList = orderService.queryUnpaid(SystemConfig.getOrderUnpaid());
+        List<DgutshopOrder> orderList = orderService.queryUnpaid();
         for(DgutshopOrder order : orderList){
             LocalDateTime add = order.getCreateTime();
             LocalDateTime now = LocalDateTime.now();
             LocalDateTime expire =  add.plusMinutes(SystemConfig.getOrderUnpaid());
             if(expire.isBefore(now)) {
+                System.out.println("expire"+expire);
                 // 已经过期，则加入延迟队列
                 taskService.addTask(new OrderUnpaidTask(order.getId(), 0));
             }
             else{
+                System.out.println("now"+now);
                 // 还没过期，则加入延迟队列
                 long delay = ChronoUnit.MILLIS.between(now, expire);
                 taskService.addTask(new OrderUnpaidTask(order.getId(), delay));

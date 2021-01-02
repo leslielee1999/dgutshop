@@ -38,8 +38,6 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
         String userName = (String) authentication.getPrincipal();
         // 获取表单中输入的密码
         String password = (String) authentication.getCredentials();
-        //  TODO:
-        //      2. 判断是后台用户登录还是小程序用户登录
         // 查询用户是否存在
         LoginUser userInfo = selfUserDetailsService.loadUserByUsername(userName);
         if (userInfo == null) {

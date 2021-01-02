@@ -12,6 +12,7 @@ import org.dgutstu.dgutshop.db.service.DgutshopOrderService;
 import org.dgutstu.dgutshop.db.service.DgutshopProductService;
 import org.dgutstu.dgutshop.db.util.OrderUtil;
 import org.dgutstu.dgutshop.wechat.service.WechatOrderService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -39,7 +40,6 @@ public class OrderUnpaidTask extends Task {
     @Override
     public void run() {
         logger.info("系统开始处理延时任务---订单超时未付款---" + this.orderId);
-
         DgutshopOrderService orderService = BeanUtil.getBean(DgutshopOrderService.class);
 
         DgutshopOrder order = orderService.findById(this.orderId);
@@ -56,7 +56,6 @@ public class OrderUnpaidTask extends Task {
         if (orderService.updateWithOptimisticLocker(order) == 0) {
             throw new RuntimeException("更新数据已失效");
         }
-
 
         logger.info("系统结束处理延时任务---订单超时未付款---" + this.orderId);
     }

@@ -3,12 +3,14 @@ package org.dgutstu.dgutshop.core.util;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Component;
 
 /**
  * @Author: leesk
  * @Description:
  * @Date: Create in 21:54 2020/12/19
  */
+@Component
 public class BeanUtil implements ApplicationContextAware {
     protected static ApplicationContext context;
 

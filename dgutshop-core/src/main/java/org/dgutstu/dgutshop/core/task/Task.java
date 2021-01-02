@@ -10,22 +10,17 @@ import java.util.concurrent.TimeUnit;
  * @Description:
  * @Date: Create in 21:25 2020/12/19
  */
-public class Task implements Delayed, Runnable {
+public abstract class Task implements Delayed, Runnable {
     private String id = "";
     private long start = 0;
 
-    public Task(String id, long start) {
+    public Task(String id, long delayInMilliseconds) {
         this.id = id;
-        this.start = start;
+        this.start = System.currentTimeMillis() + delayInMilliseconds;
     }
 
     public String getId() {
         return id;
-    }
-
-    @Override
-    public void run() {
-
     }
 
     @Override
