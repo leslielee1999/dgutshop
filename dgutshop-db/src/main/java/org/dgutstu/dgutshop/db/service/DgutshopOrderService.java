@@ -68,7 +68,7 @@ public class DgutshopOrderService {
         }
 
         PageHelper.startPage(page, limit);
-        List<Map> list1 = orderMapper.getOrderIds(query, orderByClause);
+        Page<Map> list1 = (Page)orderMapper.getOrderIds(query, orderByClause);
         List<Integer> ids = new ArrayList<>();
         System.out.println(list1.toString());
         for (Map map : list1) {
@@ -86,10 +86,10 @@ public class DgutshopOrderService {
         }
         Map<String, Object> data = new HashMap<>(5);
         data.put("list", list2);
-        data.put("total", list1.size());
-        data.put("page", page);
-        data.put("limit", limit);
-//        data.put("pages", list1.getPages());
+        data.put("total", list1.getTotal());
+        data.put("page", list1.getPageNum());
+        data.put("limit", list1.getPageSize());
+        data.put("pages", list1.getPages());
         return data;
     }
 
