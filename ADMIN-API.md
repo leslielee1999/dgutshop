@@ -467,7 +467,7 @@
     }
     ]
     ```
-<big>注：</big><strong>分类单项只有增加和删除功能</strong>
+
 #### 4.5 分类单项的增加功能
 * 传递JSON
     ```
@@ -2013,5 +2013,64 @@ Content-Type: application/json
             5,
             36
         ],
+        "errmsg": "成功"
+    }
+    
+### 2021/1/4 补充
+
+1. 订单所有的状态如下：
+    
+         * 订单状态
+         * 【101待支付、201制作中、301待取货、401派送中、501已完成】
+         *
+         * 订单状态
+         * 自取与外卖服务共有：
+         * 101【待支付】：订单生成，未支付：102，下单后未支付用户取消；103，下单后未支付超时系统自动取消
+         * 201【制作中】：支付完成，生成取件码，奶茶正在制作中
+         * 501【已完成】：用户点击已确认收货
+         *
+         * 自取：
+         * 301【待取货】：奶茶已制作完毕
+         *
+         * 外卖：
+         * 401【派送中】：派送员正在派送；
+         * 402：骑手已到达
+         * 502：骑手送达或待取货的状态超过一定时间自动确认
+    
+2. 修好订单页面无页数的Bug
+
+3. 增加侧边栏图标的修改功能
+
+接口链接
+
+    POST http://localhost:8083/admin/category/updateOne
+    
+请求参数
+    
+    json
+    {
+        "id": 1,
+        "index": 6,
+        "name": "热销",
+        "icon": "http://yanxuan.nosdn.127.net/8ab2d3287af0cefa2cc539e40600621d.png",
+        "createTime": null,
+        "updateTime": null,
+        "deleted": false
+    }
+    
+响应内容
+
+    {
+        "errno": 0,
+        "data": {
+            "categoryItems": null,
+            "id": 1,
+            "index": 6,
+            "name": "热销",
+            "icon": "http://yanxuan.nosdn.127.net/8ab2d3287af0cefa2cc539e40600621d.png",
+            "createTime": null,
+            "updateTime": "2021-01-04T09:02:04.544",
+            "deleted": false
+        },
         "errmsg": "成功"
     }

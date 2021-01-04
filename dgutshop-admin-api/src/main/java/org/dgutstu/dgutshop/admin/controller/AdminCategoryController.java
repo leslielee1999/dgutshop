@@ -140,6 +140,27 @@ public class AdminCategoryController {
         return ResponseUtil.okList(categoryList);
     }
 
+    /**
+     * 用于修改侧边栏图标
+     * @param id
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    @PostMapping("/updateOne")
+    public Object updateOne(@RequestBody DgutshopCategory category) {
+        Integer id = category.getId();
+        if (id == null) {
+            return ResponseUtil.badArgument();
+        }
+        if (categoryService.update(category) == 0) {
+            return ResponseUtil.updatedDataFailed();
+        }
+        //  记录日志
+        //  用spring security 实现
+        //  logHelper.logAuthSucceed("编辑分类", admin.getName());
+        return ResponseUtil.ok(category);
+    }
+
 
     //  校验添加分类项所提交数据
     private Object validate(OrderItemVo orderItemVo) {
