@@ -1,0 +1,138 @@
+{
+	"pages": [{
+			"path": "pages/index/index",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/store/store",
+			"style": {
+				// "navigationStyle": "custom"
+				"navigationBarTitleText": ""
+			}
+		},
+
+		{
+			"path": "pages/user/user",
+			"style": {
+				"navigationBarTitleText": "个人信息",
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		}, {
+
+			"path": "pages/orderPreview/orderPreview",
+			"style": {
+				"navigationBarTitleText": "订单结算",
+				"enablePullDownRefresh": false
+			}
+		}
+
+		, {
+			"path": "pages/selectAddress/selectAddress",
+			"style": {
+				"navigationBarTitleText": "选择收货地址",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/editAddress/editAddress",
+			"style": {
+				"navigationBarTitleText": "编辑地址",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/orderDetail/orderDetail",
+			"style": {
+				"navigationBarTitleText": "订单详情",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/order/order",
+			"style": {
+				"navigationBarTitleText": "订单列表"
+			}
+		}, {
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/setting/setting",
+			"style": {
+				"navigationBarTitleText": "设置",
+				"enablePullDownRefresh": false
+			}
+
+		}
+	    ,{
+            "path" : "pages/address/address",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "地址列表",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/shopInfo/shopInfo",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "店铺信息",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
+	"window": {
+		"backgroundTextStyle": "light",
+		"navigationBarBackgroundColor": "#fff",
+		"navigationBarTitleText": "WeChat",
+		"navigationBarTextStyle": "black"
+	},
+	"tabBar": {
+		"color": "#cdcdcd",
+		"selectedColor": "#2c2c2c",
+		"backgroundColor": "#fff",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/tabBar/index.png",
+				"selectedIconPath": "static/tabBar/index_selected.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/store/store",
+				"iconPath": "static/tabBar/cup.png",
+				"selectedIconPath": "static/tabBar/cup_selected.png",
+				"text": "点单"
+			},
+			{
+				"pagePath": "pages/order/order",
+				"iconPath": "static/tabBar/order.png",
+				"selectedIconPath": "static/tabBar/order_selected.png",
+				"text": "订单"
+			},
+			{
+				"pagePath": "pages/user/user",
+				"iconPath": "static/tabBar/user.png",
+				"selectedIconPath": "static/tabBar/user_selected.png",
+				"text": "我的"
+			}
+		]
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8",
+		"app-plus": {
+			"background": "#efeff4"
+		}
+	}
+
+}

@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "订单结算",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "uni-icons": "/components/uni-icons/uni-icons"
+  }
+}

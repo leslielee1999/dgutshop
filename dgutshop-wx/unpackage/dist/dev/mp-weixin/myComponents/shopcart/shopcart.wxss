@@ -1,0 +1,352 @@
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.scroll {
+  background-color: #FFFFFF;
+}
+.scroll .list {
+  background-color: #FFFFFF;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+}
+.scroll .list > view {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+}
+.scroll .list .list-item {
+  background-color: #FFFFFF;
+  padding-top: 5px;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  height: 110px;
+  width: 100%;
+  border-bottom: #E9E9E9 solid 1px;
+}
+.scroll .list .list-item .image-box {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  margin-right: 16rpx;
+  margin-left: 2px;
+  width: 25%;
+}
+.scroll .list .list-item .image-box > image {
+  width: 60px;
+  height: 60px;
+}
+.scroll .list .list-item .main {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  width: 75%;
+}
+.scroll .list .list-item .main .name {
+  color: #000000;
+  font-size: 30rpx;
+  font-weight: 700;
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+}
+.scroll .list .list-item .main .note {
+  font-size: 24rpx;
+  width: 90%;
+  color: #999;
+  overflow: hidden;
+  word-break: break-all;
+  /* break-all(允许在单词内换行。) */
+  text-overflow: ellipsis;
+  /* 超出部分省略号 */
+  display: -webkit-box;
+  /** 对象作为伸缩盒子模型显示 **/
+  -webkit-box-orient: vertical;
+  /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+  -webkit-line-clamp: 2;
+  /** 显示的行数 **/
+}
+.scroll .list .list-item .main .bottom {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  width: 100%;
+  margin-top: 8px;
+}
+.scroll .list .list-item .main .bottom .price {
+  width: 100px;
+  font-size: 35rpx;
+  font-weight: 700;
+  color: #000000;
+}
+.scroll .list .list-item .main .bottom .control {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-justify-content: space-around;
+          justify-content: space-around;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  width: 30%;
+  height: 100%;
+  margin-right: 10px;
+}
+.scroll .list .list-item .main .bottom .control .des {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  width: 32px;
+  height: 32px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-border-radius: 100%;
+          border-radius: 100%;
+}
+.scroll .list .list-item .main .bottom .control .add {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  width: 25px;
+  height: 25px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-border-radius: 100%;
+          border-radius: 100%;
+}
+.scroll .fillHeight {
+  height: 80px;
+}
+.shopcart .cartBottom {
+  margin-bottom: 0px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 54px;
+  z-index: 99;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  background-color: #F0F0F1;
+}
+.carIcon {
+  -webkit-box-flex: 2;
+  -webkit-flex: 2;
+          flex: 2;
+}
+.iconBox {
+  position: absolute;
+  bottom: 15px;
+  left: 18px;
+  z-index: 101;
+  background-color: #FFFFFF;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
+  height: 55px;
+  width: 55px;
+  line-height: 55px;
+  /* border: 6px solid #141d27; */
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-shadow: 0px 3px 3px #c5c5c5;
+  box-shadow: 0px 3px 3px #c5c5c5;
+}
+.iconBox .allcount {
+  position: absolute;
+  right: -6px;
+  top: 0;
+  display: inline-block;
+  padding: 0 6px;
+  font-size: 9px;
+  line-height: 16px;
+  font-weight: 400;
+  -webkit-border-radius: 10px;
+          border-radius: 10px;
+  background-color: #DBA871;
+  color: #ffffff;
+}
+.img {
+  font-size: 24px;
+  line-height: 24px;
+  width: 30px;
+  height: 30px;
+  padding: 6px;
+  color: #cccccc;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
+}
+.carIcon .active {
+  background-color: #FFFFFF;
+}
+.middle {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-flex: 4;
+  -webkit-flex: 4;
+          flex: 4;
+  font-size: 20px;
+  font-weight: 600;
+}
+.middle .price {
+  color: #000000;
+}
+.middle .delivery {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  font-size: 14px;
+  margin-right: 7px;
+  font-weight: 400;
+}
+.BtnRight {
+  -webkit-box-flex: 2;
+  -webkit-flex: 2;
+          flex: 2;
+  background-color: #DBA871;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  font-size: 17px;
+  color: #FFFFFF;
+}
+.cartList {
+  position: fixed;
+  bottom: 54px;
+  left: 0;
+  right: 0;
+  z-index: 90;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+}
+.cartList .title .clear {
+  background: #FFFFFF;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+          justify-content: flex-end;
+  padding: 10px 10px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-border-top-left-radius: 5px;
+          border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+          border-top-right-radius: 5px;
+  border-bottom: #E9E9E9 solid 1px;
+}
+/* 遮布 */
+.listMask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 89;
+  opacity: 0.5;
+  background: #6a7076;
+}
+

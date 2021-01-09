@@ -1,0 +1,669 @@
+
+.food-control.data-v-432a1c68 {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	        flex: 1;
+	-webkit-justify-content: space-around;
+	        justify-content: space-around;
+}
+.cont.data-v-432a1c68 {
+	width: 22px;
+	height: 22px;
+	-webkit-box-sizing: border-box;
+	        box-sizing: border-box;
+	-webkit-border-radius: 50%;
+	        border-radius: 50%;
+	text-align: center;
+}
+
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+page {
+  height: 100%;
+}
+.content {
+  top: 0;
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  overflow: hidden;
+}
+.content .box {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 99;
+  -webkit-flex: 99;
+          flex: 99;
+  height: 333px;
+  border-style: solid;
+  -webkit-box-shadow: 0px 2px 2px 1px #DDDDDD;
+          box-shadow: 0px 2px 2px 1px #DDDDDD;
+  border-width: 0rpx;
+  border-bottom: #E9E9E9 solid 1px;
+}
+.content .box .shop-name {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  margin: 0rpx 30rpx 0rpx 30rpx;
+}
+.content .box .shop-name .name {
+  font-size: 35rpx;
+}
+.content .box .shop-name .select {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  font-size: 25rpx;
+  width: 180rpx;
+  height: 50rpx;
+  -webkit-border-radius: 32rpx;
+          border-radius: 32rpx;
+  background-color: #f6f6f6;
+  padding: 2px;
+  border: 1px solid #dedede;
+  margin-top: 8px;
+}
+.content .box .shop-name .select .on {
+  width: 90rpx;
+  height: 60rpx;
+  background-color: #343434;
+  color: #ffffff;
+  -webkit-border-radius: 32rpx;
+          border-radius: 32rpx;
+  text-align: center;
+  line-height: 60rpx;
+}
+.content .box .shop-name .select .off {
+  width: 90rpx;
+  height: 60rpx;
+  color: #d2d2d2;
+  -webkit-border-radius: 25rpx;
+          border-radius: 25rpx;
+  text-align: center;
+  line-height: 60rpx;
+}
+.content .box .distance-bar {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  margin: 30rpx;
+}
+.content .box .distance-bar .distance {
+  font-size: 28rpx;
+}
+.content .box .distance-bar .shop-message {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.content .box .distance-bar .shop-message .message {
+  font-size: 26rpx;
+}
+.content .box .distance-bar .shop-message .go {
+  height: 32rpx;
+  width: 32rpx;
+}
+.scroll-panel {
+  height: 100%;
+}
+.scroll-panel .list-box {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+          align-items: flex-start;
+  -webkit-align-content: flex-start;
+          align-content: flex-start;
+  font-size: 28rpx;
+  height: 100%;
+  margin-bottom: 0px;
+}
+.scroll-panel .list-box .left {
+  width: 180rpx;
+  background-color: #f6f6f6;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  overflow: hidden;
+  height: 100%;
+}
+.scroll-panel .list-box .left .menu {
+  border-left: 5px #f6f6f6 solid;
+  padding-top: 9px;
+  padding-bottom: 9px;
+}
+.scroll-panel .list-box .left .menu.active {
+  color: #343434;
+  background-color: #fff;
+  border-left: 5px #DBA871 solid;
+}
+.scroll-panel .list-box .left .menu.active .icon {
+  background-color: #fff;
+}
+.scroll-panel .list-box .left .menu.active .name {
+  color: #343434;
+  font-weight: 700;
+}
+.scroll-panel .list-box .left .menu .icon {
+  margin-left: 32px;
+  width: 25px;
+  height: 25px;
+  background-color: #f6f6f6;
+}
+.scroll-panel .list-box .left .menu .name {
+  color: #cdcdcd;
+  font-size: 15px;
+  font-weight: 400;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+.scroll-panel .list-box .left .fill-last {
+  height: 0;
+  width: 100%;
+  background: none;
+}
+.scroll-panel .list-box .main {
+  height: 100%;
+  background-color: #fff;
+  padding-left: 20rpx;
+  width: 0;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  overflow: hidden;
+}
+.scroll-panel .list-box .main .ads {
+  height: calc(300 / 550 * 510rpx);
+}
+.scroll-panel .list-box .main .ads image {
+  width: 100%;
+  height: 100%;
+  -webkit-border-radius: 8rpx;
+          border-radius: 8rpx;
+}
+.scroll-panel .list-box .main .title {
+  line-height: 64rpx;
+  font-size: 26rpx;
+  font-weight: 500;
+  color: #626262;
+  background-color: #fff;
+  top: 0;
+  z-index: 19;
+}
+.scroll-panel .list-box .main .item {
+  padding-bottom: 10rpx;
+  border-bottom: #E9E9E9 solid 1px;
+}
+.scroll-panel .list-box .main .goods {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-align-content: center;
+          align-content: center;
+  margin-top: 15rpx;
+  margin-bottom: 40rpx;
+}
+.scroll-panel .list-box .main .goods > image {
+  width: 120rpx;
+  height: 120rpx;
+  margin-right: 16rpx;
+  margin-left: 2px;
+}
+.scroll-panel .list-box .main .goods .title {
+  color: #000000;
+  font-size: 30rpx;
+  font-weight: 700;
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+}
+.scroll-panel .list-box .main .goods .heated {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+          justify-content: flex-start;
+}
+.scroll-panel .list-box .main .goods .describe {
+  font-size: 24rpx;
+  width: 360rpx;
+  color: #999;
+  overflow: hidden;
+  word-break: break-all;
+  /* break-all(允许在单词内换行。) */
+  text-overflow: ellipsis;
+  /* 超出部分省略号 */
+  display: -webkit-box;
+  /** 对象作为伸缩盒子模型显示 **/
+  -webkit-box-orient: vertical;
+  /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+  -webkit-line-clamp: 2;
+  /** 显示的行数 **/
+}
+.scroll-panel .list-box .main .goods .bottom {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  -webkit-align-content: space-between;
+          align-content: space-between;
+}
+.scroll-panel .list-box .main .goods .bottom .price {
+  width: 70%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: end;
+  -webkit-align-items: flex-end;
+          align-items: flex-end;
+  margin-top: 10px;
+  font-size: 35rpx;
+  font-weight: 600;
+  color: #000000;
+}
+.scroll-panel .list-box .main .goods .bottom .price .originalPrice {
+  text-decoration: line-through;
+  margin-left: 5px;
+  font-size: 28rpx;
+  color: #737373;
+  margin-bottom: 1px;
+}
+.scroll-panel .list-box .main .goods .bottom .button {
+  width: 30%;
+  margin-top: 10px;
+  font-size: 13px;
+  color: #FFFFFF;
+  background-color: #DBA871;
+  width: 100rpx;
+  height: 40rpx;
+  padding-left: 2px;
+  padding-right: 2px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-border-radius: 30px;
+  border-radius: 30px;
+  -webkit-transition: all 0.15s ease;
+  transition: all 0.15s ease;
+}
+.product-card {
+  z-index: 200;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 0px;
+}
+.product-card .card-content {
+  height: 100vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+.product-card .card-content .product-form {
+  background-color: #FFFFFF;
+  width: 660rpx;
+  height: 65%;
+  -webkit-border-top-left-radius: 5px;
+          border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+          border-top-right-radius: 5px;
+}
+.product-card .card-content .product-form .product-image {
+  height: 150px;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  position: relative;
+}
+.product-card .card-content .product-form .ring {
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 28px;
+  height: 28px;
+  -webkit-border-radius: 100%;
+          border-radius: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  font-size: 16px;
+}
+.product-card .card-content .product-form .ctn {
+  z-index: 2;
+  /* border: 1px solid #e3e3e3; */
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+          justify-content: flex-end;
+  overflow: hidden;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  position: fixed;
+}
+.product-card .card-content .product-form .ctn .leftBox {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  width: 60px;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  -webkit-box-flex: 0;
+  -webkit-flex: none;
+          flex: none;
+  margin-top: 10px;
+  margin-right: 30px;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.product-card .card-content .product-form .ctn .jrNull {
+  width: 95px;
+  -webkit-box-flex: 0;
+  -webkit-flex: none;
+          flex: none;
+}
+.product-card .card-content .product-form .fillHeight {
+  height: 50px;
+}
+.product-card .card-content .product-form .formContent {
+  margin-left: 18px;
+  margin-right: 18px;
+  font-size: 13px;
+}
+.product-card .card-content .product-form .formContent .name {
+  font-size: 20px;
+  font-weight: 800;
+  color: #000000;
+}
+.product-card .card-content .product-form .formContent .describe {
+  font-size: 13px;
+  color: #898989;
+}
+.product-card .card-content .product-form .formContent .sort {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: auto;
+  display: inline-block !important;
+  display: inline;
+  background-color: #F6F6F6;
+  color: #BABABA;
+}
+.product-card .card-content .product-form .formContent .ice {
+  margin-top: 10px;
+}
+.product-card .card-content .product-form .formContent .sweet {
+  margin-top: 25px;
+}
+.product-card .card-content .product-form .formContent .size {
+  margin-top: 25px;
+}
+.product-card .card-content .formBottom {
+  width: 660rpx;
+  height: 15%;
+  max-height: 130px;
+  background-color: #FFFFFF;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: stretch;
+  -webkit-align-items: stretch;
+          align-items: stretch;
+  -webkit-border-bottom-left-radius: 5px;
+          border-bottom-left-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+          border-bottom-right-radius: 5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+}
+.product-card .card-content .formBottom .textAndcontrol {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+}
+.product-card .card-content .formBottom .textAndcontrol .bottomText {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  height: 40%;
+  width: 70%;
+}
+.product-card .card-content .formBottom .textAndcontrol .bottomText .price {
+  width: 90%;
+  height: 20%;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 18px;
+  color: #DBA871;
+}
+.product-card .card-content .formBottom .textAndcontrol .bottomText .mark {
+  font-size: 10px;
+  color: #878787;
+  height: 80%;
+  width: 90%;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 10px;
+}
+.product-card .card-content .formBottom .textAndcontrol .control {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-justify-content: space-around;
+          justify-content: space-around;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  width: 30%;
+  height: 100%;
+}
+.product-card .card-content .formBottom .textAndcontrol .control .des {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  width: 32px;
+  height: 32px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-border-radius: 100%;
+          border-radius: 100%;
+}
+.product-card .card-content .formBottom .textAndcontrol .control .add {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  width: 25px;
+  height: 25px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -webkit-border-radius: 100%;
+          border-radius: 100%;
+}
+.product-card .card-content .formBottom none::after {
+  border: none;
+}
+.product-card .card-content .formBottom .formButton {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  height: 30%;
+  width: 85%;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  background-color: #DBA871;
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: #FFFFFF;
+}
+
