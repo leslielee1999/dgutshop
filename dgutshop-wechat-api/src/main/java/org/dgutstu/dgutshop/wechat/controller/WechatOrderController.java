@@ -2,10 +2,12 @@ package org.dgutstu.dgutshop.wechat.controller;
 
 import org.dgutstu.dgutshop.core.validator.Order;
 import org.dgutstu.dgutshop.core.validator.Sort;
+import org.dgutstu.dgutshop.core.websocket.service.impl.SocketClient;
 import org.dgutstu.dgutshop.db.domain.OrderListVo;
 import org.dgutstu.dgutshop.wechat.annotation.LoginUser;
 import org.dgutstu.dgutshop.wechat.service.WechatAuthService;
 import org.dgutstu.dgutshop.wechat.service.WechatOrderService;
+import org.java_websocket.server.WebSocketServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +31,8 @@ public class WechatOrderController {
     private WechatOrderService wechatOrderService;
     @Autowired
     private WechatAuthService wechatAuthService;
+//    @Autowired
+//    private SocketClient socketClient;
     /**
      * 订单列表
      * @return
@@ -57,6 +61,7 @@ public class WechatOrderController {
             return obj;
         }
         Integer userId = wechatAuthService.getUserId(obj);
+//        socketClient.appointSending("kkk", "有新的订单~");
         return wechatOrderService.submit(userId, orderListVo);
     }
 

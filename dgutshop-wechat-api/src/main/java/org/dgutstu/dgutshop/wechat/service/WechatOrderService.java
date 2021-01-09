@@ -9,11 +9,9 @@ import org.dgutstu.dgutshop.core.util.JacksonUtil;
 import org.dgutstu.dgutshop.core.util.ResponseUtil;
 import org.dgutstu.dgutshop.db.domain.DgutshopOrder;
 import org.dgutstu.dgutshop.db.domain.DgutshopOrderItem;
+import org.dgutstu.dgutshop.db.domain.DgutshopProduct;
 import org.dgutstu.dgutshop.db.domain.OrderListVo;
-import org.dgutstu.dgutshop.db.service.DgutshopAddressService;
-import org.dgutstu.dgutshop.db.service.DgutshopCartService;
-import org.dgutstu.dgutshop.db.service.DgutshopOrderItemService;
-import org.dgutstu.dgutshop.db.service.DgutshopOrderService;
+import org.dgutstu.dgutshop.db.service.*;
 import org.dgutstu.dgutshop.db.util.OrderHandleOption;
 import org.dgutstu.dgutshop.db.util.OrderUtil;
 import org.dgutstu.dgutshop.wechat.task.OrderUnpaidTask;
@@ -59,9 +57,7 @@ public class WechatOrderService {
     @Autowired
     private DgutshopOrderItemService orderItemService;
     @Autowired
-    private DgutshopAddressService addressService;
-    @Autowired
-    private DgutshopCartService cartService;
+    private DgutshopProductService productService;
     @Autowired
     private TaskService taskService;
 
@@ -70,6 +66,9 @@ public class WechatOrderService {
             return ResponseUtil.unlogin();
         }
         List<DgutshopOrder> list = orderService.list(userId, sort, order);
+        for (DgutshopOrder dgutshopOrder : list) {
+            System.out.println(dgutshopOrder.getCreateTime());
+        }
         orderItemService.fill(list);
         return list;
     }
@@ -339,6 +338,19 @@ public class WechatOrderService {
         if (orderService.updateWithOptimisticLocker(order) == 0) {
             return WxPayNotifyResponse.fail("更新数据已失效");
         }
+
+        List<DgutshopOrderItem> orderItemList = orderItemService.getOrderItemByOid(orderId);
+
+
+        for (DgutshopOrderItem orderItem : orderItemList) {
+            Integer pid = orderItem.getPid();
+            DgutshopProduct product = productService.get(pid);
+            Integer oldSales = product.getSales();
+            Integer newSales = oldSales + orderItem.getSum();
+            product.setSales(newSales);
+            productService.update(product);
+        }
+
         // 取消订单超时未支付任务
         taskService.removeTask(new OrderUnpaidTask(order.getId()));
         String takeCode = order.getTakeCode().substring(8);

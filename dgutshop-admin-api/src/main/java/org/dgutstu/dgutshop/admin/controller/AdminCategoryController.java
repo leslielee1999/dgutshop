@@ -58,6 +58,14 @@ public class AdminCategoryController {
         return ResponseUtil.okList(categoryList);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    @GetMapping("/getAllCategory")
+    public Object getAllCategory() {
+        List<DgutshopCategory> categoryList = categoryService.list();
+        categoryItemService.fill(categoryList);
+        return categoryList;
+    }
+
     //  校验添加分类所提交数据
     private Object validate(DgutshopCategory dgutshopCategory) {
         String name = dgutshopCategory.getName();//分类名
@@ -142,7 +150,6 @@ public class AdminCategoryController {
 
     /**
      * 用于修改侧边栏图标
-     * @param id
      * @return
      */
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
@@ -253,5 +260,21 @@ public class AdminCategoryController {
 //        logHelper.logAuthSucceed("删除分类", category.getName());
 
         return ResponseUtil.ok();
+    }
+
+    /**
+     * 获取所有上架的饮品
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    @GetMapping("/getProducts")
+    public Object getProducts( @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime start,
+                               @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime end,
+                               @RequestParam(defaultValue = "1") Integer page,
+                               @RequestParam(defaultValue = "10") Integer limit,
+                               @Sort @RequestParam(defaultValue = "id") String sort,
+                               @Order @RequestParam(defaultValue = "desc") String order){
+        List<DgutshopProduct> productList = productService.getProducts(start, end,page,limit,sort,order);
+        return ResponseUtil.okList(productList);
     }
 }

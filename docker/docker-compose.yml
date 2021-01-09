@@ -1,0 +1,38 @@
+version: "3.5"
+services:
+  mysql:
+    image: mysql:latest
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: dgutshop
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: dev
+      MYSQL_PASSWORD: password
+    restart: always
+    networks:
+      default:
+        ipv4_address: 10.100.0.2
+  spring:
+    image: adoptopenjdk/openjdk8:jdk8u275-b01-alpine-slim
+    volumes:
+      - ./dgutshop-all/target/dgutshop-all-0.0.1-SNAPSHOT-exec.jar:/app.jar
+      - ./dgutshop-all/src/main/resources/application.yml:/application.yml
+      - ./tomcat.keystore:/tomcat.keystore
+    ports:
+      - 8080:8080
+      - 8082:8082
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/dgutshop?useTimezone=true&serverTimezone=GMT
+    entrypoint: ["java","-jar","/app.jar"]
+    depends_on:
+      - mysql
+    networks:
+      default:
+        ipv4_address: 10.100.0.3
+networks:
+  default:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: "10.100.0.0/24"

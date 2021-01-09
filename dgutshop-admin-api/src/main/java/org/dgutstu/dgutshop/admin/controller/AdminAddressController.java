@@ -4,6 +4,7 @@ import org.dgutstu.dgutshop.core.util.ResponseUtil;
 import org.dgutstu.dgutshop.core.validator.Order;
 import org.dgutstu.dgutshop.core.validator.Sort;
 import org.dgutstu.dgutshop.db.domain.DgutshopAddress;
+import org.dgutstu.dgutshop.db.domain.DgutshopCategory;
 import org.dgutstu.dgutshop.db.service.DgutshopAddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -42,5 +43,12 @@ public class AdminAddressController {
                        @Order @RequestParam(defaultValue = "desc") String order){
         List<DgutshopAddress> addressList = addressService.querySelective(userId, wechatId, userName, phone, start, end, page, limit, sort, order);
         return ResponseUtil.okList(addressList);
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    @GetMapping("/getAllAddress")
+    public Object getAllAddress() {
+        List<DgutshopAddress> addressList = addressService.list();
+        return addressList;
     }
 }

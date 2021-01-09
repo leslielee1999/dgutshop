@@ -119,10 +119,19 @@ jwt:
   # 过期时间 单位秒 1天后过期=86400 7天后过期=604800
   expiration: 23200
   # 配置不需要认证的接口
-  antMatchers: /index/**,/login/**,/favicon.ico,/wechat/**/**
+  antMatchers: /index/**,/login/**,/favicon.ico,/wechat/**/**,/websocket/**
   wechat:
     expiration: 60
 
 wx:
   appid: wxef709d5567f6386c
   secret: 11ad804814985f5265abba1e638e4916
+
+#端口号
+#server.port: 8080
+#你生成的证书名字
+#server.ssl.key-store: /tomcat.keystore
+#密钥库密码
+#server.ssl.key-store-password: LSK0709***
+#server.ssl.keyStoreType: JKS
+#server.ssl.keyAlias: tomcat

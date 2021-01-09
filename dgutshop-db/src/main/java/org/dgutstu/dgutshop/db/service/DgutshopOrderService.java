@@ -100,6 +100,13 @@ public class DgutshopOrderService {
         return dgutshopOrderMapper.selectByExample(example);
     }
 
+    public List<DgutshopOrder> listAll(){
+        DgutshopOrderExample example = new DgutshopOrderExample();
+        DgutshopOrderExample.Criteria criteria = example.or();
+        criteria.andDeletedEqualTo(false);
+        return dgutshopOrderMapper.selectByExample(example);
+    }
+
     public List<DgutshopOrder> list(Integer userId, String sort, String order){
         DgutshopOrderExample example = new DgutshopOrderExample();
         example.setOrderByClause(DgutshopOrder.Column.createTime.desc());

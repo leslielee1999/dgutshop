@@ -3,6 +3,7 @@ package org.dgutstu.dgutshop.admin.controller;
 import org.dgutstu.dgutshop.core.util.ResponseUtil;
 import org.dgutstu.dgutshop.core.validator.Order;
 import org.dgutstu.dgutshop.core.validator.Sort;
+import org.dgutstu.dgutshop.db.domain.DgutshopTopping;
 import org.dgutstu.dgutshop.db.domain.DgutshopUser;
 import org.dgutstu.dgutshop.db.service.DgutshopUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,11 +35,19 @@ public class AdminUserController {
                        @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime end,
                        @RequestParam(defaultValue = "1") Integer page,
                        @RequestParam(defaultValue = "10") Integer limit,
-                       @Sort @RequestParam(defaultValue = "create_time") String sort,
+                       @Sort @RequestParam(defaultValue = "id") String sort,
                        @Order @RequestParam(defaultValue = "desc") String order) {
         List<DgutshopUser> userList = userService.querySelective(id, name, phone, wechatId, nickname, start, end, page, limit, sort, order);
         return ResponseUtil.okList(userList);
     }
+
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    @GetMapping("/getAllUser")
+    public Object getAllUser() {
+        List<DgutshopUser> userList = userService.list();
+        return userList;
+    }
+
 
     /**
      * 根据id查询某个用户具体信息

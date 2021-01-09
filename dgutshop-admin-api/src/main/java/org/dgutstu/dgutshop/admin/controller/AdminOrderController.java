@@ -4,6 +4,7 @@ import org.checkerframework.checker.units.qual.A;
 import org.dgutstu.dgutshop.admin.service.AdminOrderService;
 import org.dgutstu.dgutshop.core.validator.Order;
 import org.dgutstu.dgutshop.core.validator.Sort;
+import org.dgutstu.dgutshop.db.domain.DgutshopAddress;
 import org.dgutstu.dgutshop.db.domain.DgutshopOrder;
 import org.dgutstu.dgutshop.db.service.DgutshopOrderItemService;
 import org.dgutstu.dgutshop.db.service.DgutshopOrderService;
@@ -29,6 +30,8 @@ public class AdminOrderController {
     @Autowired
     private AdminOrderService adminOrderService;
     @Autowired
+    private DgutshopOrderService orderService;
+    @Autowired
     private DgutshopOrderItemService orderItemService;
     /**
      * 查询订单
@@ -52,9 +55,17 @@ public class AdminOrderController {
                        @RequestParam(required = false) List<Short> orderStatusArray,
                        @RequestParam(defaultValue = "1") Integer page,
                        @RequestParam(defaultValue = "10") Integer limit,
-                       @Sort @RequestParam(defaultValue = "create_time") String sort,
+                       @Sort @RequestParam(defaultValue = "id") String sort,
                        @Order @RequestParam(defaultValue = "desc") String order){
         return adminOrderService.list(nickname, consignee, code, start, end, orderStatusArray, page, limit, sort, order);
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    @GetMapping("/getAllOrder")
+    public Object getAllOrder() {
+        List<DgutshopOrder> orderList = orderService.listAll();
+        orderItemService.fill(orderList);
+        return orderList;
     }
 
     /**
@@ -69,5 +80,15 @@ public class AdminOrderController {
         return adminOrderService.delivery(body);
     }
 
+    /**
+     * 制作完成
+     *
+     * @return
+     */
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    @PostMapping("/completed")
+    public Object completed(@RequestBody String body){
+        return adminOrderService.completed(body);
+    }
 
 }

@@ -47,8 +47,8 @@ class SystemInistService {
 //        DEFAULT_CONFIGS.put(SystemConfig.LITEMALL_EXPRESS_FREIGHT_MIN, "88");
         // 订单相关配置默认值
         DEFAULT_CONFIGS.put(SystemConfig.DGUTSHOP_ORDER_UNPAID, "30");
-        DEFAULT_CONFIGS.put(SystemConfig.LITEMALL_ORDER_UNCONFIRM, "7");
-        DEFAULT_CONFIGS.put(SystemConfig.LITEMALL_ORDER_COMMENT, "7");
+        DEFAULT_CONFIGS.put(SystemConfig.DGUTSHOP_ORDER_UNCONFIRM, "7");
+        DEFAULT_CONFIGS.put(SystemConfig.DGUTSHOP_ORDER_COMMENT, "7");
         // 商城相关配置默认值
         DEFAULT_CONFIGS.put(SystemConfig.DGUTSHOP_SHOP_NAME, "请你喝");
         DEFAULT_CONFIGS.put(SystemConfig.DGUTSHOP_SHOP_ADDRESS, "东莞理工学院");

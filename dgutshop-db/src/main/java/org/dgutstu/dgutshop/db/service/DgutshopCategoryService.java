@@ -75,6 +75,8 @@ public class DgutshopCategoryService {
      */
     public List<DgutshopCategory> list(){
         DgutshopCategoryExample example = new DgutshopCategoryExample();
+        DgutshopCategoryExample.Criteria criteria = example.createCriteria();
+        criteria.andDeletedEqualTo(false);
         return categoryMapper.selectByExample(example);
     }
 

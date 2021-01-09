@@ -31,6 +31,15 @@ public class DgutshopOrderItemService {
         orderItemMapper.insertSelective(orderItem);
     }
 
+    public List<DgutshopOrderItem> getOrderItemByOid(Integer oid){
+        DgutshopOrderItemExample example = new DgutshopOrderItemExample();
+        DgutshopOrderItemExample.Criteria criteria = example.createCriteria();
+        criteria.andDeletedEqualTo(false).andOidEqualTo(oid);
+
+        return orderItemMapper.selectByExample(example);
+    }
+
+
     /**
      * 删除第id个订单单项
      * @param id

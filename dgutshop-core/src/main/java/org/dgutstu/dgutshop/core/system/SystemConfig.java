@@ -21,8 +21,8 @@ public class SystemConfig {
 //    public final static String LITEMALL_EXPRESS_FREIGHT_MIN = "litemall_express_freight_min";
     // 订单相关配置
     public final static String DGUTSHOP_ORDER_UNPAID = "dgutshop_order_unpaid";
-    public final static String LITEMALL_ORDER_UNCONFIRM = "litemall_order_unconfirm";
-    public final static String LITEMALL_ORDER_COMMENT = "litemall_order_comment";
+    public final static String DGUTSHOP_ORDER_UNCONFIRM = "dgutshop_order_unconfirm";
+    public final static String DGUTSHOP_ORDER_COMMENT = "dgutshop_order_comment";
     // 商场相关配置
     public final static String DGUTSHOP_SHOP_NAME = "dgutshop_shop_name";
     public final static String DGUTSHOP_SHOP_ADDRESS = "dgutshop_shop_address";
@@ -91,11 +91,11 @@ public class SystemConfig {
     }
 
     public static Integer getOrderUnconfirm() {
-        return getConfigInt(LITEMALL_ORDER_UNCONFIRM);
+        return getConfigInt(DGUTSHOP_ORDER_UNCONFIRM);
     }
 
     public static Integer getOrderComment() {
-        return getConfigInt(LITEMALL_ORDER_COMMENT);
+        return getConfigInt(DGUTSHOP_ORDER_COMMENT);
     }
 
     public static String getShopName() {

@@ -4,6 +4,8 @@ import com.github.pagehelper.PageHelper;
 import org.dgutstu.dgutshop.db.dao.DgutshopAddressMapper;
 import org.dgutstu.dgutshop.db.domain.DgutshopAddress;
 import org.dgutstu.dgutshop.db.domain.DgutshopAddressExample;
+import org.dgutstu.dgutshop.db.domain.DgutshopCategory;
+import org.dgutstu.dgutshop.db.domain.DgutshopCategoryExample;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -102,5 +104,12 @@ public class DgutshopAddressService {
         DgutshopAddressExample example = new DgutshopAddressExample();
         example.or().andIdEqualTo(id).andUserIdEqualTo(userId).andDeletedEqualTo(false);
         return addressMapper.selectOneByExample(example);
+    }
+
+    public List<DgutshopAddress> list(){
+        DgutshopAddressExample example = new DgutshopAddressExample();
+        DgutshopAddressExample.Criteria criteria = example.createCriteria();
+        criteria.andDeletedEqualTo(false);
+        return addressMapper.selectByExample(example);
     }
 }

@@ -3,6 +3,7 @@ package org.dgutstu.dgutshop.admin.service;
 import org.dgutstu.dgutshop.core.util.JacksonUtil;
 import org.dgutstu.dgutshop.core.util.ResponseUtil;
 import org.dgutstu.dgutshop.db.domain.DgutshopOrder;
+import org.dgutstu.dgutshop.db.domain.DgutshopOrderExample;
 import org.dgutstu.dgutshop.db.service.DgutshopOrderService;
 import org.dgutstu.dgutshop.db.util.OrderUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
-import static org.dgutstu.dgutshop.admin.util.AdminResponseCode.ORDER_CONFIRM_NOT_ALLOWED;
+import static org.dgutstu.dgutshop.admin.util.AdminResponseCode.*;
 
 /**
  * @Author: leesk
@@ -71,7 +72,7 @@ public class AdminOrderService {
 
         // 如果订单不是已付款状态，则不能发货
         if (!order.getOrderStatus().equals(OrderUtil.STATUS_PAY)) {
-            return ResponseUtil.fail(ORDER_CONFIRM_NOT_ALLOWED, "订单不能确认收货");
+            return ResponseUtil.fail(ORDER_DELIVERY_NOT_ALLOWED, "订单不能发货");
         }
 
         String deliveryCompany = "自家配送";
@@ -80,7 +81,7 @@ public class AdminOrderService {
         order.setDeliverymanName(deliverymanName);
         order.setDeliverymanPhone(deliverymanPhone);
         order.setDeliveryTime(LocalDateTime.now());
-
+//        order.setUpdateTime(LocalDateTime.now());
         /*
         *
         * 采用基于update_time的乐观锁机制来处理并发更新问题
@@ -97,6 +98,48 @@ public class AdminOrderService {
 //        notifyService.notifySmsTemplate(order.getMobile(), NotifyType.SHIP, new String[]{shipChannel, shipSn});
 
 //        logHelper.logOrderSucceed("发货", "订单编号 " + order.getOrderSn());
+        return ResponseUtil.ok();
+    }
+
+    /**
+     * 奶茶制作完毕
+     * 1. 检测当前订单是否能够制作完毕
+     * 2. 设置订单制作完毕状态，填充取货码
+     *
+     * @param body 订单信息，{ orderId：xxx, deliverymanName：xxx, deliverymanPhone：xxx }
+     * @return 订单操作结果
+     * 成功则 { errno: 0, errmsg: '成功' }
+     * 失败则 { errno: XXX, errmsg: XXX }
+     */
+    public Object completed(String body) {
+        Integer orderId = JacksonUtil.parseInteger(body, "orderId");
+        if (orderId == null) {
+            return ResponseUtil.badArgument();
+        }
+
+        DgutshopOrder order = orderService.findById(orderId);
+        if (order == null) {
+            return ResponseUtil.badArgument();
+        }
+
+        // 如果订单不是已付款状态，则不能发货
+        if (!order.getOrderStatus().equals(OrderUtil.STATUS_PAY)) {
+            return ResponseUtil.fail(ORDER_COMPLETED_NOT_ALLOWED, "订单不能完成制作");
+        }
+
+        order.setOrderStatus(OrderUtil.STATUS_GET);
+//        order.setUpdateTime(LocalDateTime.now());
+
+        /*
+         *
+         * 采用基于update_time的乐观锁机制来处理并发更新问题
+         *  不过这里是奶茶店一般不会有这种需求，先作保留，后续若有库存等问题可以直接使用
+         *
+         */
+        if (orderService.updateWithOptimisticLocker(order) == 0) {
+            return ResponseUtil.updatedDateExpired();
+        }
+
         return ResponseUtil.ok();
     }
 }

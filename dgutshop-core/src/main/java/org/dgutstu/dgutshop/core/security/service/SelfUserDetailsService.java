@@ -32,11 +32,8 @@ public class SelfUserDetailsService implements UserDetailsService {
     @Override
     public LoginUser loadUserByUsername(String username) throws UsernameNotFoundException {
         // 查询用户信息
-//        System.out.println("SelfUserDetailsService："+username);
         DgutshopAdmin admin = adminService.findAdminByNickName(username);
-//        System.out.println("SelfUserDetailsService："+admin);
         if (admin != null){
-//            System.out.println(admin.getId());
             // 组装参数
             LoginUser loginUser = new LoginUser();
             loginUser.setUserId(admin.getId());
@@ -44,7 +41,6 @@ public class SelfUserDetailsService implements UserDetailsService {
             loginUser.setPassword(admin.getPassword());
             loginUser.setStatus(admin.getStatus());
 //            BeanUtils.copyProperties(admin,loginUser);
-//            System.out.println("SelfUserDetailsService的loginUser："+loginUser);
             return loginUser;
         }
         return null;

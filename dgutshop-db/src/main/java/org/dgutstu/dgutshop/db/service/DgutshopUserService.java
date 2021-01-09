@@ -67,6 +67,13 @@ public class DgutshopUserService {
         return userMapper.selectByExample(example);
     }
 
+    public List<DgutshopUser> list(){
+        DgutshopUserExample example = new DgutshopUserExample();
+        DgutshopUserExample.Criteria criteria = example.createCriteria();
+        criteria.andDeletedEqualTo(false);
+        return userMapper.selectByExample(example);
+    }
+
     public DgutshopUser findByOpenId(String openid){
         DgutshopUserExample example = new DgutshopUserExample();
         DgutshopUserExample.Criteria criteria = example.createCriteria();

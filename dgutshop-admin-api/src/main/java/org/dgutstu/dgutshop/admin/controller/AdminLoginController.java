@@ -77,6 +77,12 @@ public class AdminLoginController {
     private static final String APP_SECRET = "00c_Af-kyLHqBn-mMRl2rsg**";
     private static final String VERIFY_URI = "https://ssl.captcha.qq.com/ticket/verify?aid=%s&AppSecretKey=%s&Ticket=%s&Randstr=%s";
 
+    /**
+     * 防水墙
+     * @param ticket
+     * @param randstr
+     * @return
+     */
     @PreAuthorize("permitAll")
     @RequestMapping(value = "login/verify",method = RequestMethod.GET)
     public Object verifyTicket(@RequestParam String ticket, @RequestParam String randstr) {

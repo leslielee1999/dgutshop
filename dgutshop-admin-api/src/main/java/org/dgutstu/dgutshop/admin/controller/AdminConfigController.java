@@ -44,4 +44,24 @@ public class AdminConfigController {
         SystemConfig.updateConfigs(data);
         return ResponseUtil.ok();
     }
+
+    /**
+     *  订单配置
+     * @return
+     */
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/order")
+    public Object listOrder() {
+        Map<String, String> data = systemConfigService.listOrder();
+        return ResponseUtil.ok(data);
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/order")
+    public Object updateOrder(@RequestBody String body) {
+        Map<String, String> data = JacksonUtil.toMap(body);
+        systemConfigService.updateConfig(data);
+        SystemConfig.updateConfigs(data);
+        return ResponseUtil.ok();
+    }
 }

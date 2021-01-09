@@ -48,13 +48,12 @@ public class DgutshopCategoryItemService {
 
 
     /**
-     * 根据index查询某个分类单项
-     * @param index
+     * @param pid
      * @return
      */
-    public List<DgutshopCategoryItem> findByIndex(Integer index){
+    public List<DgutshopCategoryItem> findByPid(Integer pid){
         DgutshopCategoryItemExample example = new DgutshopCategoryItemExample();
-        example.or().andIndexEqualTo(index).andDeletedEqualTo(false);
+        example.or().andPidEqualTo(pid).andDeletedEqualTo(false);
         return categoryItemMapper.selectByExample(example);
     }
 
@@ -95,7 +94,9 @@ public class DgutshopCategoryItemService {
 
     public void setProduct(DgutshopCategoryItem categoryItem){
         DgutshopProduct product = productService.get(categoryItem.getPid());
-        categoryItem.setProduct(product);
+        if (product.getStatus()){
+            categoryItem.setProduct(product);
+        }
     }
 
     /**

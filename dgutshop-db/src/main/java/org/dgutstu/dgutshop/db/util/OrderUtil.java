@@ -105,7 +105,7 @@ public class OrderUtil {
             System.out.println("买奶茶不可线上退款");
             // 如果订单已经退款，则可删除
 //            handleOption.setDelete(true);
-        } else if (status == 301 || status == 402) {
+        } else if (status == 301 || status == 401) {
             // 如果订单已经发货，没有收货，则可收货操作,
             // 此时不能取消订单
             handleOption.setConfirm(true);

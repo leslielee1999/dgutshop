@@ -21,7 +21,7 @@ import java.util.List;
 @Service
 public class DgutshopAdminService{
     //  限制返回前台的数据，不允许展示密码等私人信息
-    private final Column[] result = new Column[]{Column.id, Column.name, Column.nickname, Column.code, Column.picture, Column.roleId, Column.createTime, Column.updateTime, Column.lastLoginIp, Column.lastLoginTime};
+    private final Column[] result = new Column[]{Column.id, Column.name, Column.nickname, Column.code, Column.picture, Column.roleId, Column.status, Column.createTime, Column.updateTime, Column.lastLoginIp, Column.lastLoginTime};
     @Resource
     private DgutshopAdminMapper adminMapper;
     @Autowired
@@ -66,6 +66,13 @@ public class DgutshopAdminService{
         PageHelper.startPage(page, limit);
 
         return adminMapper.selectByExampleSelective(example, result);
+    }
+
+    public List<DgutshopAdmin> list(){
+        DgutshopAdminExample example = new DgutshopAdminExample();
+        DgutshopAdminExample.Criteria criteria = example.createCriteria();
+        criteria.andDeletedEqualTo(false);
+        return adminMapper.selectByExample(example);
     }
 
     /**

@@ -1456,3 +1456,27 @@
     
     注：其它功能需要userId参数的都已改为用token获取
     另：模拟支付完成
+    
+### 2021.1.9补充
+
+获取订单配置
+
+接口链接
+
+    GET http://59.110.50.181:8080/wechat/config/order
+    
+请求参数
+    
+    无
+    
+响应内容
+
+    {
+        "errno": 0,
+        "data": {
+            "dgutshop_order_delivery": "6",
+            "dgutshop_order_unpaid": "30",
+            "dgutshop_order_unconfirmed": "7"
+        },
+        "errmsg": "成功"
+    }

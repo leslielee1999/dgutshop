@@ -25,6 +25,8 @@ public class DgutshopToppingService {
 
     public List<DgutshopTopping> list(){
         DgutshopToppingExample example = new DgutshopToppingExample();
+        DgutshopToppingExample.Criteria criteria = example.createCriteria();
+        criteria.andDeletedEqualTo(false).andStatusEqualTo(new Byte("1"));
         return toppingMapper.selectByExample(example);
     }
 

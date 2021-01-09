@@ -54,6 +54,17 @@ public class DgutshopSystemConfigService {
         return data;
     }
 
+    public Map<String, String> listOrder() {
+        DgutshopSystemExample example = new DgutshopSystemExample();
+        example.or().andKeyNameLike("dgutshop_order_%").andDeletedEqualTo(false);
+        List<DgutshopSystem> systemList = systemMapper.selectByExample(example);
+        Map<String, String> data = new HashMap<>();
+        for(DgutshopSystem system : systemList){
+            data.put(system.getKeyName(), system.getKeyValue());
+        }
+        return data;
+    }
+
     public void updateConfig(Map<String, String> data) {
         for (Map.Entry<String, String> entry : data.entrySet()) {
             DgutshopSystemExample example = new DgutshopSystemExample();
@@ -65,6 +76,5 @@ public class DgutshopSystemConfigService {
             system.setUpdateTime(LocalDateTime.now());
             systemMapper.updateByExampleSelective(system, example);
         }
-
     }
 }

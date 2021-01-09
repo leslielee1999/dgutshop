@@ -8,6 +8,7 @@ import org.dgutstu.dgutshop.core.util.ResponseUtil;
 import org.dgutstu.dgutshop.core.util.bcrypt.BCryptPasswordEncoder;
 import org.dgutstu.dgutshop.core.validator.Order;
 import org.dgutstu.dgutshop.core.validator.Sort;
+import org.dgutstu.dgutshop.db.domain.DgutshopAddress;
 import org.dgutstu.dgutshop.db.domain.DgutshopAdmin;
 import org.dgutstu.dgutshop.db.service.DgutshopAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,13 @@ public class AdminAdminController {
         return ResponseUtil.okList(adminList);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/getAllAdmin")
+    public Object getAllAdmin() {
+        List<DgutshopAdmin> adminList = adminService.list();
+        return adminList;
+    }
+
     //  校验添加管理员所提交数据
     private Object validate(DgutshopAdmin dgutshopAdmin) {
         String name = dgutshopAdmin.getNickname();//管理员昵称
@@ -91,12 +99,14 @@ public class AdminAdminController {
             return ResponseUtil.fail(ADMIN_NAME_EXIST, "管理员已经存在");
         }
 
-
         String rawPassword = admin.getPassword();
+        System.out.println("rawPassword："+rawPassword);
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encoderPassword = encoder.encode(rawPassword);
-        System.out.println(encoderPassword);
+        System.out.println("encoderPassword："+encoderPassword);
         admin.setPassword(encoderPassword);
+
+        admin.setStatus("NORMAL");
         adminService.add(admin);
         //  记录日志
         //  改用spring security实现

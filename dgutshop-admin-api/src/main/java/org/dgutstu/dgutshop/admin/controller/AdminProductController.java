@@ -5,7 +5,9 @@ import org.apache.commons.logging.LogFactory;
 import org.dgutstu.dgutshop.admin.service.AdminProductService;
 import org.dgutstu.dgutshop.core.validator.Order;
 import org.dgutstu.dgutshop.core.validator.Sort;
+import org.dgutstu.dgutshop.db.domain.DgutshopOrder;
 import org.dgutstu.dgutshop.db.domain.DgutshopProduct;
+import org.dgutstu.dgutshop.db.service.DgutshopProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,6 +15,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @Author: leesk
@@ -28,6 +31,8 @@ public class AdminProductController {
     @Autowired
     private AdminProductService productService;
 
+    @Autowired
+    private DgutshopProductService dgutshopProductService;
 
     /**
      * 查询饮品
@@ -49,6 +54,13 @@ public class AdminProductController {
                        @Sort @RequestParam(defaultValue = "id") String sort,
                        @Order @RequestParam(defaultValue = "desc") String order){
         return productService.list(productId, name, start, end, page, limit, sort, order);
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    @GetMapping("/getAllProduct")
+    public Object getAllProduct() {
+        List<DgutshopProduct> productList = dgutshopProductService.list();
+        return productList;
     }
 
     /**

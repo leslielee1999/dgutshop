@@ -27,6 +27,8 @@ import java.util.List;
 public class AdminToppingController {
     @Autowired
     private AdminToppingService toppingService;
+    @Autowired
+    private DgutshopToppingService dgutshopToppingService;
 
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @GetMapping("/list")
@@ -38,6 +40,13 @@ public class AdminToppingController {
                        @Sort @RequestParam(defaultValue = "id") String sort,
                        @Order @RequestParam(defaultValue = "desc") String order){
         return toppingService.list(toppingId, code, name, status, start, end, page, limit, sort, order);
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    @GetMapping("/getAllTopping")
+    public Object getAllTopping() {
+        List<DgutshopTopping> toppingList = dgutshopToppingService.list();
+        return toppingList;
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','USER')")

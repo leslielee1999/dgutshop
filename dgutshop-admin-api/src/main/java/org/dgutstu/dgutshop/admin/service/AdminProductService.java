@@ -3,7 +3,11 @@ package org.dgutstu.dgutshop.admin.service;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.dgutstu.dgutshop.core.util.ResponseUtil;
+import org.dgutstu.dgutshop.db.domain.DgutshopCategory;
+import org.dgutstu.dgutshop.db.domain.DgutshopCategoryItem;
 import org.dgutstu.dgutshop.db.domain.DgutshopProduct;
+import org.dgutstu.dgutshop.db.service.DgutshopCategoryItemService;
+import org.dgutstu.dgutshop.db.service.DgutshopCategoryService;
 import org.dgutstu.dgutshop.db.service.DgutshopProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +29,8 @@ public class AdminProductService {
 
     @Autowired
     private DgutshopProductService productService;
+    @Autowired
+    private DgutshopCategoryItemService categoryItemService;
 
     public Object list(Integer productId, String name, LocalDateTime start, LocalDateTime end,
                        Integer page, Integer limit, String sort, String order){
@@ -73,6 +79,13 @@ public class AdminProductService {
         Object error = validate(product);
         if (error != null){
             return error;
+        }
+        Integer productId = product.getId();
+        if (productService.get(productId).getStatus().equals(true) && product.getStatus().equals(false)){
+            List<DgutshopCategoryItem> categoryItemList = categoryItemService.findByPid(productId);
+            for (DgutshopCategoryItem categoryItem : categoryItemList) {
+                categoryItemService.deleteById(categoryItem.getId());
+            }
         }
         productService.update(product);
         return ResponseUtil.ok();

@@ -3,6 +3,7 @@ package org.dgutstu.dgutshop.wechat.controller;
 import org.dgutstu.dgutshop.core.util.ResponseUtil;
 import org.dgutstu.dgutshop.db.service.DgutshopSystemConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,16 @@ public class WechatConfigController {
     @GetMapping("/mall")
     public Object listMall() {
         Map<String, String> data = systemConfigService.listMall();
+        return ResponseUtil.ok(data);
+    }
+
+    /**
+     *  订单配置
+     * @return
+     */
+    @GetMapping("/order")
+    public Object listOrder() {
+        Map<String, String> data = systemConfigService.listOrder();
         return ResponseUtil.ok(data);
     }
 }

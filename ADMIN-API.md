@@ -2074,3 +2074,1015 @@ Content-Type: application/json
         },
         "errmsg": "成功"
     }
+    
+### 2021/1/8 补充
+
+#### 一、获取所有信息，无分页
+
+1.订单：
+
+接口链接
+
+    GET http://59.110.50.181:8080/admin/order/getAllOrder
+    
+请求参数
+    
+    无
+    
+响应内容
+
+    [
+        {
+            "orderItemList": [
+                {
+                    "product": {
+                        "id": 1,
+                        "code": "aaa",
+                        "name": "QQㄋㄟㄋㄟ好喝到咩噗茶",
+                        "bigOriginalPrice": 30.00,
+                        "bigPromotePrice": 9.00,
+                        "mediumOriginalPrice": 25.00,
+                        "mediumPromotePrice": 7.00,
+                        "description": "QQㄋㄟㄋㄟ好喝到咩噗茶",
+                        "status": true,
+                        "picture": "http://qlqwnyjmi.hn-bkt.clouddn.com/lv6dlsj9qwivoqrujswf.jpg",
+                        "sales": 1,
+                        "createTime": "2018-02-01 00:00:00",
+                        "updateTime": "2021-01-04 13:33:37",
+                        "heated": false,
+                        "deleted": false
+                    },
+                    "id": 16,
+                    "oid": 1,
+                    "pid": 1,
+                    "productName": "",
+                    "size": 0,
+                    "productOriginalPrice": 10.00,
+                    "productPromotePrice": 8.00,
+                    "toppingId": null,
+                    "toppingName": null,
+                    "toppingPrice": 4.00,
+                    "productActualPrice": 12.00,
+                    "productPicture": "",
+                    "sum": 3,
+                    "note": "",
+                    "createTime": "2020-12-19 23:52:33",
+                    "updateTime": "2020-12-19 23:52:33",
+                    "deleted": false
+                },
+                {
+                    "product": {
+                        "id": 5,
+                        "code": "ccc",
+                        "name": "芝芝满陇金桂",
+                        "bigOriginalPrice": 26.00,
+                        "bigPromotePrice": null,
+                        "mediumOriginalPrice": 22.00,
+                        "mediumPromotePrice": null,
+                        "description": "冷热皆宜，甄选当季“春见”柑橘，手剥先制，肉质饱满多汁，融合鲜爽绿研茶汤，搭配嫩滑桂花冻和Q弹脆波波，酸甜又沁口。",
+                        "status": true,
+                        "picture": "http://qlqwnyjmi.hn-bkt.clouddn.com/ti98x9x4abv4b762pvwq.jpg",
+                        "sales": 1,
+                        "createTime": "2020-12-13 00:26:31",
+                        "updateTime": "2021-01-04 13:31:28",
+                        "heated": false,
+                        "deleted": false
+                    },
+                    "id": 4,
+                    "oid": 1,
+                    "pid": 5,
+                    "productName": "抹茶奶盖4",
+                    "size": 0,
+                    "productOriginalPrice": 10.00,
+                    "productPromotePrice": 8.00,
+                    "toppingId": [
+                        1,
+                        2
+                    ],
+                    "toppingName": [
+                        "珍珠",
+                        "仙草"
+                    ],
+                    "toppingPrice": 0.00,
+                    "productActualPrice": 8.00,
+                    "productPicture": "",
+                    "sum": 2,
+                    "note": "",
+                    "createTime": null,
+                    "updateTime": null,
+                    "deleted": false
+                },
+                {
+                    "product": {
+                        "id": 1,
+                        "code": "aaa",
+                        "name": "QQㄋㄟㄋㄟ好喝到咩噗茶",
+                        "bigOriginalPrice": 30.00,
+                        "bigPromotePrice": 9.00,
+                        "mediumOriginalPrice": 25.00,
+                        "mediumPromotePrice": 7.00,
+                        "description": "QQㄋㄟㄋㄟ好喝到咩噗茶",
+                        "status": true,
+                        "picture": "http://qlqwnyjmi.hn-bkt.clouddn.com/lv6dlsj9qwivoqrujswf.jpg",
+                        "sales": 1,
+                        "createTime": "2018-02-01 00:00:00",
+                        "updateTime": "2021-01-04 13:33:37",
+                        "heated": false,
+                        "deleted": false
+                    },
+                    "id": 2,
+                    "oid": 1,
+                    "pid": 1,
+                    "productName": "抹茶奶盖2",
+                    "size": 0,
+                    "productOriginalPrice": 10.00,
+                    "productPromotePrice": 8.00,
+                    "toppingId": [
+                        1,
+                        2
+                    ],
+                    "toppingName": [
+                        "珍珠",
+                        "冰沙"
+                    ],
+                    "toppingPrice": 4.00,
+                    "productActualPrice": 12.00,
+                    "productPicture": "",
+                    "sum": 2,
+                    "note": "",
+                    "createTime": null,
+                    "updateTime": null,
+                    "deleted": false
+                }
+            ],
+            "id": 1,
+            "userId": 2,
+            "code": "reqww",
+            "type": 1,
+            "orderStatus": 401,
+            "aftersaleStatus": 0,
+            "consignee": "小王",
+            "consigneePhone": "12222222222",
+            "consigneeAddress": "广东东莞",
+            "consigneeRoom": "松山湖",
+            "message": "不错",
+            "payId": "31111",
+            "payDate": "2020-12-16 18:57:53",
+            "deliveryCode": "123333",
+            "deliveryCompany": "自家配送",
+            "deliverymanName": "林一",
+            "deliverymanPhone": "16432234546",
+            "deliveryTime": "2020-12-19 17:15:17",
+            "productPrice": 200.00,
+            "deliveryPrice": 10.00,
+            "orderPrice": 210.00,
+            "takeCode": "3111",
+            "createTime": "2020-12-29 21:30:13",
+            "updateTime": "2020-12-19 17:15:17",
+            "refundAmount": null,
+            "refundType": "",
+            "refundContent": "",
+            "refundTime": null,
+            "confirmTime": "2020-12-17 18:59:22",
+            "comments": null,
+            "endTime": "2018-12-19 21:30:13",
+            "deleted": false
+        },
+        {
+                "orderItemList": [],
+                "id": 4,
+                "userId": 1,
+                "code": "20201219392568",
+                "type": 0,
+                "orderStatus": 103,
+                "aftersaleStatus": 0,
+                "consignee": "小卡",
+                "consigneePhone": "13333333333",
+                "consigneeAddress": "广东东莞松山湖",
+                "consigneeRoom": "东莞理工学院大学路1号",
+                "message": "加糖",
+                "payId": "",
+                "payDate": "1900-01-01 01:01:01",
+                "deliveryCode": "",
+                "deliveryCompany": "",
+                "deliverymanName": "",
+                "deliverymanPhone": "",
+                "deliveryTime": null,
+                "productPrice": 12.00,
+                "deliveryPrice": 2.00,
+                "orderPrice": 14.00,
+                "takeCode": "",
+                "createTime": "2020-12-31 23:16:08",
+                "updateTime": "2021-01-02 21:24:36",
+                "refundAmount": null,
+                "refundType": "",
+                "refundContent": "",
+                "refundTime": null,
+                "confirmTime": null,
+                "comments": null,
+                "endTime": "2021-01-02 21:24:36",
+                "deleted": false
+        }
+        ,....
+    ]
+
+2.小料：
+
+接口链接
+
+    GET http://59.110.50.181:8080/admin/toppings/getAllTopping
+    
+请求参数
+    
+    无
+    
+响应内容
+
+    [
+        {
+            "id": 1,
+            "code": "xxaaqq",
+            "name": "红豆",
+            "price": 2.00,
+            "description": "甜度适中",
+            "status": 0,
+            "picture": "",
+            "createTime": "2020-11-18 10:25:44",
+            "updateTime": null,
+            "deleted": false
+        },
+        {
+            "id": 2,
+            "code": "oowiak",
+            "name": "布丁",
+            "price": 2.00,
+            "description": "韧性好",
+            "status": 1,
+            "picture": "",
+            "createTime": "2020-10-18 10:25:44",
+            "updateTime": "2021-01-08 10:33:01",
+            "deleted": false
+        },
+        {
+            "id": 3,
+            "code": "ssqqsa",
+            "name": "珍珠",
+            "price": 2.00,
+            "description": "黑糖的",
+            "status": 0,
+            "picture": "",
+            "createTime": "2020-09-18 10:25:44",
+            "updateTime": null,
+            "deleted": false
+        },
+        {
+            "id": 5,
+            "code": "iuuuou",
+            "name": "仙草",
+            "price": 2.00,
+            "description": "黑色的，非常好吃",
+            "status": 1,
+            "picture": "",
+            "createTime": "2020-12-18 10:40:32",
+            "updateTime": "2020-12-18 10:43:21",
+            "deleted": false
+        },
+        {
+            "id": 6,
+            "code": "wwwwww",
+            "name": "草莓",
+            "price": 2.00,
+            "description": "红色",
+            "status": 1,
+            "picture": "http://qlqwnyjmi.hn-bkt.clouddn.com/bketpmq3g2rnatyob5jr.png",
+            "createTime": "2020-12-18 23:55:53",
+            "updateTime": "2021-01-04 09:54:25",
+            "deleted": false
+        }
+    ]
+    
+3.管理员：
+
+接口链接
+
+    GET http://59.110.50.181:8080/admin/admin/getAllAdmin
+    
+请求参数
+    
+    无
+    
+响应内容
+
+    [
+        {
+            "id": 1,
+            "roleId": 2,
+            "name": "SSSSAsaw",
+            "nickname": "ENDNKQ",
+            "password": "123456",
+            "code": "dgut-10",
+            "picture": "http://qlqwnyjmi.hn-bkt.clouddn.com/2ep026nv2xsz0qd8ezhh.png",
+            "createTime": "2020-12-12 23:11:10",
+            "updateTime": "2021-01-08 10:28:15",
+            "lastLoginIp": "",
+            "lastLoginTime": null,
+            "status": "NORMAL",
+            "deleted": false
+        },
+        {
+            "id": 2,
+            "roleId": 1,
+            "name": "ssssss",
+            "nickname": "fafafqwqe",
+            "password": "111111",
+            "code": "dgut-2",
+            "picture": "http://yanxuan.nosdn.127.net/8ab2d3287af0cefa2cc539e40600621d.png",
+            "createTime": "2020-11-14 23:11:10",
+            "updateTime": "2020-12-12 23:36:26",
+            "lastLoginIp": "",
+            "lastLoginTime": null,
+            "status": null,
+            "deleted": false
+        },
+        {
+            "id": 3,
+            "roleId": 1,
+            "name": "asdassaw",
+            "nickname": "linyiia",
+            "password": "$2a$10$ZAQP3/SvGEUyLItAYYwYduimRHPOZCETVAt8cwx6qR/iNYFHaE7He",
+            "code": "dgut-5",
+            "picture": "http://yanxuan.nosdn.127.net/8ab2d3287af0cefa2cc539e40600621d.png",
+            "createTime": "2020-12-14 23:11:10",
+            "updateTime": "2020-12-12 22:19:37",
+            "lastLoginIp": "",
+            "lastLoginTime": null,
+            "status": null,
+            "deleted": false
+        },
+        {
+            "id": 5,
+            "roleId": 1,
+            "name": "asdassaw",
+            "nickname": "linyiic",
+            "password": "$2a$10$J08qrSeluE1XfoaenU5WHOrqSiLcXEDK.HKuFYvc9yDpSLmTmIBge",
+            "code": "dgut-6",
+            "picture": "http://qlqwnyjmi.hn-bkt.clouddn.com/pejvxm9say762xdqy41d.JPG",
+            "createTime": "2020-12-15 20:27:11",
+            "updateTime": "2021-01-05 23:57:09",
+            "lastLoginIp": "",
+            "lastLoginTime": null,
+            "status": null,
+            "deleted": false
+        },
+        {
+            "id": 6,
+            "roleId": 2,
+            "name": "leeeeeeeesk",
+            "nickname": "lesile",
+            "password": "ASDSAD",
+            "code": "dgut-11",
+            "picture": "http://qlqwnyjmi.hn-bkt.clouddn.com/wyzdbwdb5ulfavb5skky.png",
+            "createTime": "2020-12-12 23:11:10",
+            "updateTime": "2021-01-04 11:10:16",
+            "lastLoginIp": "",
+            "lastLoginTime": null,
+            "status": "NORMAL",
+            "deleted": false
+        },
+        {
+            "id": 7,
+            "roleId": 1,
+            "name": "leesk",
+            "nickname": "leslie",
+            "password": "$2a$10$krcLWFqnZqq8/N8GLcHuUezDSNt3UbQBHkB1Q/bNH0agTgvr805TW",
+            "code": "dgut-1",
+            "picture": "http://qlqwnyjmi.hn-bkt.clouddn.com/eg6sqwf8hpmtop9beath.png",
+            "createTime": "2020-12-23 23:18:46",
+            "updateTime": "2021-01-08 11:02:53",
+            "lastLoginIp": "",
+            "lastLoginTime": null,
+            "status": "NORMAL",
+            "deleted": false
+        }
+    ]
+
+4.地址：
+
+接口链接
+
+    GET http://59.110.50.181:8080/admin/address/getAllAddress
+    
+请求参数
+    
+    无
+    
+响应内容
+
+    [
+        {
+            "id": 3,
+            "userId": 2,
+            "openId": "efdasdasd",
+            "userName": "冰冰",
+            "userPhone": "12222222222",
+            "userAddress": "内蒙古",
+            "userRoom": "胡同2号",
+            "latitude": null,
+            "longitude": null,
+            "isDefault": 1,
+            "createTime": "2020-10-13 09:51:50",
+            "updateTime": null,
+            "deleted": false
+        },
+        {
+            "id": 4,
+            "userId": 4,
+            "openId": "kk545771383",
+            "userName": "皮卡丘",
+            "userPhone": "12322212312",
+            "userAddress": "广东",
+            "userRoom": "东莞",
+            "latitude": "",
+            "longitude": "",
+            "isDefault": 1,
+            "createTime": "2020-12-24 15:14:51",
+            "updateTime": "2020-12-24 15:36:30",
+            "deleted": false
+        },
+        {
+            "id": 5,
+            "userId": 4,
+            "openId": "kk545771383",
+            "userName": "亚古兽",
+            "userPhone": "13333333333",
+            "userAddress": "广东东莞松山湖",
+            "userRoom": "东莞理工学院大学路1号",
+            "latitude": "",
+            "longitude": "",
+            "isDefault": 0,
+            "createTime": "2020-12-13 09:51:50",
+            "updateTime": "2020-12-24 15:36:30",
+            "deleted": false
+        },
+        {
+            "id": 7,
+            "userId": 4,
+            "openId": "kk545771383",
+            "userName": "钢铁加鲁鲁",
+            "userPhone": "12322212312",
+            "userAddress": "广东",
+            "userRoom": "东莞",
+            "latitude": "",
+            "longitude": "",
+            "isDefault": 1,
+            "createTime": "2020-12-24 15:33:03",
+            "updateTime": "2020-12-24 15:36:30",
+            "deleted": false
+        },
+        {
+            "id": 8,
+            "userId": 1,
+            "openId": "oD78r4xOwDGT90U8bltXNBqLh_tM",
+            "userName": "李树康",
+            "userPhone": "11111111111",
+            "userAddress": "广东省深圳市龙华区观澜大道419号兴万达广场",
+            "userRoom": "啊啊啊啊啊",
+            "latitude": "22.71878",
+            "longitude": "114.058258",
+            "isDefault": 1,
+            "createTime": "2021-01-06 12:15:57",
+            "updateTime": "2021-01-06 12:15:57",
+            "deleted": false
+        },
+        {
+            "id": 9,
+            "userId": 1,
+            "openId": "oD78r4xOwDGT90U8bltXNBqLh_tM",
+            "userName": "李树康",
+            "userPhone": "11111111111",
+            "userAddress": "广东省东莞市大学路1号东莞理工学院",
+            "userRoom": "莞博21407",
+            "latitude": "22.902684",
+            "longitude": "113.875159",
+            "isDefault": 1,
+            "createTime": "2021-01-07 23:26:23",
+            "updateTime": "2021-01-07 23:26:23",
+            "deleted": false
+        }
+    ]
+    
+5.饮品：
+
+接口链接
+
+    GET http://59.110.50.181:8080/admin/products/getAllProduct
+    
+请求参数
+    
+    无
+    
+响应内容
+
+    [
+        {
+            "id": 1,
+            "code": "aaa",
+            "name": "QQㄋㄟㄋㄟ好喝到咩噗茶",
+            "bigOriginalPrice": 30.00,
+            "bigPromotePrice": 9.00,
+            "mediumOriginalPrice": 25.00,
+            "mediumPromotePrice": 7.00,
+            "description": "QQㄋㄟㄋㄟ好喝到咩噗茶",
+            "status": true,
+            "picture": "http://qlqwnyjmi.hn-bkt.clouddn.com/lv6dlsj9qwivoqrujswf.jpg",
+            "sales": 1,
+            "createTime": "2018-02-01 00:00:00",
+            "updateTime": "2021-01-04 13:33:37",
+            "heated": false,
+            "deleted": false
+        },
+        {
+            "id": 2,
+            "code": "bbb",
+            "name": "芝芝金玉",
+            "bigOriginalPrice": 28.00,
+            "bigPromotePrice": 10.00,
+            "mediumOriginalPrice": 22.00,
+            "mediumPromotePrice": 8.00,
+            "description": "冷热皆宜，甄选当季“春见”柑橘，手剥先制，肉质饱满多汁，融合鲜爽绿研茶汤，搭配嫩滑桂花冻和Q弹脆波波，酸甜又沁口。",
+            "status": true,
+            "picture": "http://qlqwnyjmi.hn-bkt.clouddn.com/r52kzvc41nkok4oumyca.jpg",
+            "sales": 1,
+            "createTime": "2018-02-02 00:00:00",
+            "updateTime": "2021-01-04 13:32:42",
+            "heated": false,
+            "deleted": false
+        },
+        ...
+    ]
+    
+6.用户：
+
+接口链接
+
+    GET http://59.110.50.181:8080/admin/user/getAllUser
+    
+请求参数
+    
+    无
+    
+响应内容
+
+    [
+        {
+            "id": 1,
+            "name": "leesk",
+            "password": "123",
+            "gender": 1,
+            "phone": "18025534180",
+            "openId": "oD78r4xOwDGT90U8bltXNBqLh_tM",
+            "nickname": "kseel",
+            "sessionKey": "asdasdqa",
+            "status": "0",
+            "avatarUrl": "",
+            "createTime": "2020-11-14 23:11:10",
+            "updateTime": null,
+            "lastLoginTime": null,
+            "lastLoginIp": "",
+            "deleted": false
+        },
+        {
+            "id": 2,
+            "name": "qwqwe",
+            "password": "123123",
+            "gender": 0,
+            "phone": "21312312312",
+            "openId": "efdasdasd",
+            "nickname": "bbbbbb",
+            "sessionKey": "sdsd11",
+            "status": "2",
+            "avatarUrl": "",
+            "createTime": "2020-10-14 23:11:10",
+            "updateTime": "2021-01-08 10:29:18",
+            "lastLoginTime": null,
+            "lastLoginIp": "",
+            "deleted": false
+        },
+        {
+            "id": 4,
+            "name": "oD78r4xOwDGT90U8bltXNBqLh_tM",
+            "password": "oD78r4xOwDGT90U8bltXNBqLh_tM",
+            "gender": 1,
+            "phone": "",
+            "openId": "oD78r4xOwDGT90U8bltXNBqLh_tM",
+            "nickname": "嘿嘿嘿",
+            "sessionKey": "NAQxfb9WUt9I6vLKx8FHew==",
+            "status": "0",
+            "avatarUrl": "https://thirdwx.qlogo.cn/mmopen/vi_32/c4l6MLKejkxGVlpQkRzhIfzHI1In3IaCLJtVRKymTDSCjoUHywibrjkTOzZUibTIvTcjdj7wywLnAjLzOiaylPs5g/132",
+            "createTime": "2021-01-02 01:12:34",
+            "updateTime": "2021-01-02 01:12:34",
+            "lastLoginTime": "2021-01-02 01:12:34",
+            "lastLoginIp": "0:0:0:0:0:0:0:1",
+            "deleted": false
+        }
+    ]
+    
+7.侧边栏：
+
+接口链接
+
+    GET http://59.110.50.181:8080/admin/category/getAllCategory
+    
+请求参数
+    
+    无
+    
+响应内容
+
+    [
+        {
+                "categoryItems": [],
+                "id": 3,
+                "index": 3,
+                "name": "纯茶",
+                "icon": "http://qlqwnyjmi.hn-bkt.clouddn.com/prxoijcdcl8ka19bqmde.png",
+                "createTime": "2020-12-15 20:01:13",
+                "updateTime": "2021-01-06 00:06:30",
+                "deleted": false
+        },
+        {
+                "categoryItems": [
+                    {
+                        "product": {
+                            "id": 9,
+                            "code": "ccc",
+                            "name": "芋泥波波牛乳",
+                            "bigOriginalPrice": 30.00,
+                            "bigPromotePrice": null,
+                            "mediumOriginalPrice": 27.00,
+                            "mediumPromotePrice": null,
+                            "description": "冷热皆宜，甄选当季“春见”柑橘，手剥先制，肉质饱满多汁，融合鲜爽绿研茶汤，搭配嫩滑桂花冻和Q弹脆波波，酸甜又沁口。",
+                            "status": true,
+                            "picture": "http://qlqwnyjmi.hn-bkt.clouddn.com/389ktgcraxau9hdsb35h.jpg",
+                            "sales": 1,
+                            "createTime": "2020-12-13 00:39:56",
+                            "updateTime": "2021-01-04 13:27:20",
+                            "heated": false,
+                            "deleted": false
+                        },
+                        "id": 45,
+                        "index": 3,
+                        "cid": 4,
+                        "pid": 9,
+                        "createTime": "2021-01-04 14:15:34",
+                        "updateTime": "2021-01-04 14:15:34",
+                        "deleted": false
+                    },
+                    {
+                        "product": {
+                            "id": 7,
+                            "code": "ccc",
+                            "name": "烤黑糖啵啵牛乳",
+                            "bigOriginalPrice": 25.00,
+                            "bigPromotePrice": null,
+                            "mediumOriginalPrice": 21.00,
+                            "mediumPromotePrice": null,
+                            "description": "冷热皆宜，甄选当季“春见”柑橘，手剥先制，肉质饱满多汁，融合鲜爽绿研茶汤，搭配嫩滑桂花冻和Q弹脆波波，酸甜又沁口。",
+                            "status": true,
+                            "picture": "http://qlqwnyjmi.hn-bkt.clouddn.com/c6hhgx38nkbmmm6529wa.jpg",
+                            "sales": 1,
+                            "createTime": "2020-12-13 00:35:00",
+                            "updateTime": "2021-01-04 13:29:39",
+                            "heated": false,
+                            "deleted": false
+                        },
+                        "id": 44,
+                        "index": 2,
+                        "cid": 4,
+                        "pid": 7,
+                        "createTime": "2021-01-04 14:15:34",
+                        "updateTime": "2021-01-04 14:15:34",
+                        "deleted": false
+                    },
+                    {
+                        "product": {
+                            "id": 13,
+                            "code": "ddd",
+                            "name": "考黑糖波波牛乳",
+                            "bigOriginalPrice": 25.00,
+                            "bigPromotePrice": null,
+                            "mediumOriginalPrice": 21.00,
+                            "mediumPromotePrice": null,
+                            "description": "冷热皆宜，甄选当季“春见”柑橘，手剥先制，肉质饱满多汁，融合鲜爽绿研茶汤，搭配嫩滑桂花冻和Q弹脆波波，酸甜又沁口。",
+                            "status": true,
+                            "picture": "http://qlqwnyjmi.hn-bkt.clouddn.com/ig93tqfqhwxtg6ine4ef.jpg",
+                            "sales": 1,
+                            "createTime": "2020-12-13 00:48:19",
+                            "updateTime": "2021-01-04 13:24:10",
+                            "heated": false,
+                            "deleted": false
+                        },
+                        "id": 43,
+                        "index": 1,
+                        "cid": 4,
+                        "pid": 13,
+                        "createTime": "2021-01-04 14:15:22",
+                        "updateTime": "2021-01-04 14:15:22",
+                        "deleted": false
+                    },
+                    {
+                        "product": {
+                            "id": 19,
+                            "code": "mmm",
+                            "name": "厚牛乳芋泥波波",
+                            "bigOriginalPrice": 35.00,
+                            "bigPromotePrice": null,
+                            "mediumOriginalPrice": 28.00,
+                            "mediumPromotePrice": null,
+                            "description": "冷热皆宜，甄选当季“春见”柑橘，手剥先制，肉质饱满多汁，融合鲜爽绿研茶汤，搭配嫩滑桂花冻和Q弹脆波波，酸甜又沁口。",
+                            "status": true,
+                            "picture": "http://qlqwnyjmi.hn-bkt.clouddn.com/o20g3lfu2d5z5pm9t19t.jpg",
+                            "sales": 1,
+                            "createTime": "2020-12-13 10:30:49",
+                            "updateTime": "2021-01-04 13:18:54",
+                            "heated": false,
+                            "deleted": false
+                        },
+                        "id": 42,
+                        "index": 0,
+                        "cid": 4,
+                        "pid": 19,
+                        "createTime": "2021-01-04 14:15:22",
+                        "updateTime": "2021-01-04 14:15:22",
+                        "deleted": false
+                    }
+                ],
+                "id": 4,
+                "index": 6,
+                "name": "牛乳茶",
+                "icon": "http://qlqwnyjmi.hn-bkt.clouddn.com/5pg9ca3oqc8km34snt28.png",
+                "createTime": "2020-12-15 20:19:46",
+                "updateTime": "2021-01-06 00:06:30",
+                "deleted": false
+        },
+        ....
+    ]
+    
+#### 二、增加api
+
+获得已上架饮品
+
+接口链接
+
+    GET http://59.110.50.181:8080/admin/category/getProducts
+    
+请求参数
+    
+    无
+    
+响应内容
+
+    {
+        "errno": 0,
+        "data": {
+            "total": 20,
+            "pages": 2,
+            "limit": 10,
+            "page": 2,
+            "list": [
+                {
+                    "id": 11,
+                    "code": "ccc",
+                    "name": "生打椰奶冻",
+                    "bigOriginalPrice": 30.00,
+                    "bigPromotePrice": null,
+                    "mediumOriginalPrice": 25.00,
+                    "mediumPromotePrice": null,
+                    "description": "冷热皆宜，甄选当季“春见”柑橘，手剥先制，肉质饱满多汁，融合鲜爽绿研茶汤，搭配嫩滑桂花冻和Q弹脆波波，酸甜又沁口。",
+                    "status": true,
+                    "picture": "http://qlqwnyjmi.hn-bkt.clouddn.com/2iuvho87bh5owm76ci8m.jpg",
+                    "sales": 1,
+                    "createTime": "2020-12-13 00:46:49",
+                    "updateTime": "2021-01-04 13:29:24",
+                    "heated": false,
+                    "deleted": false
+                },
+                {
+                    "id": 10,
+                    "code": "ccc",
+                    "name": "芝芝芒芒",
+                    "bigOriginalPrice": 35.00,
+                    "bigPromotePrice": null,
+                    "mediumOriginalPrice": 32.00,
+                    "mediumPromotePrice": null,
+                    "description": "冷热皆宜，甄选当季“春见”柑橘，手剥先制，肉质饱满多汁，融合鲜爽绿研茶汤，搭配嫩滑桂花冻和Q弹脆波波，酸甜又沁口。",
+                    "status": true,
+                    "picture": "http://qlqwnyjmi.hn-bkt.clouddn.com/z9e7ig7sl80afvm2ezmz.jpg",
+                    "sales": 1,
+                    "createTime": "2020-12-13 00:41:13",
+                    "updateTime": "2021-01-04 13:26:49",
+                    "heated": false,
+                    "deleted": false
+                },
+                {
+                    "id": 9,
+                    "code": "ccc",
+                    "name": "芋泥波波牛乳",
+                    "bigOriginalPrice": 30.00,
+                    "bigPromotePrice": null,
+                    "mediumOriginalPrice": 27.00,
+                    "mediumPromotePrice": null,
+                    "description": "冷热皆宜，甄选当季“春见”柑橘，手剥先制，肉质饱满多汁，融合鲜爽绿研茶汤，搭配嫩滑桂花冻和Q弹脆波波，酸甜又沁口。",
+                    "status": true,
+                    "picture": "http://qlqwnyjmi.hn-bkt.clouddn.com/389ktgcraxau9hdsb35h.jpg",
+                    "sales": 1,
+                    "createTime": "2020-12-13 00:39:56",
+                    "updateTime": "2021-01-04 13:27:20",
+                    "heated": false,
+                    "deleted": false
+                },
+                {
+                    "id": 8,
+                    "code": "ccc",
+                    "name": "芋泥啵啵奶茶",
+                    "bigOriginalPrice": 33.00,
+                    "bigPromotePrice": null,
+                    "mediumOriginalPrice": 28.00,
+                    "mediumPromotePrice": null,
+                    "description": "冷热皆宜，甄选当季“春见”柑橘，手剥先制，肉质饱满多汁，融合鲜爽绿研茶汤，搭配嫩滑桂花冻和Q弹脆波波，酸甜又沁口。",
+                    "status": true,
+                    "picture": "http://qlqwnyjmi.hn-bkt.clouddn.com/5xff2w2fo2pg4vsu5p2h.jpg",
+                    "sales": 1,
+                    "createTime": "2020-12-13 00:35:34",
+                    "updateTime": "2021-01-04 13:29:34",
+                    "heated": false,
+                    "deleted": false
+                },
+                {
+                    "id": 7,
+                    "code": "ccc",
+                    "name": "烤黑糖啵啵牛乳",
+                    "bigOriginalPrice": 25.00,
+                    "bigPromotePrice": null,
+                    "mediumOriginalPrice": 21.00,
+                    "mediumPromotePrice": null,
+                    "description": "冷热皆宜，甄选当季“春见”柑橘，手剥先制，肉质饱满多汁，融合鲜爽绿研茶汤，搭配嫩滑桂花冻和Q弹脆波波，酸甜又沁口。",
+                    "status": true,
+                    "picture": "http://qlqwnyjmi.hn-bkt.clouddn.com/c6hhgx38nkbmmm6529wa.jpg",
+                    "sales": 1,
+                    "createTime": "2020-12-13 00:35:00",
+                    "updateTime": "2021-01-04 13:29:39",
+                    "heated": false,
+                    "deleted": false
+                },
+                {
+                    "id": 6,
+                    "code": "kkk",
+                    "name": "雪山满陇金桂",
+                    "bigOriginalPrice": 27.00,
+                    "bigPromotePrice": null,
+                    "mediumOriginalPrice": 23.00,
+                    "mediumPromotePrice": null,
+                    "description": "冷热皆宜，甄选当季“春见”柑橘，手剥先制，肉质饱满多汁，融合鲜爽绿研茶汤，搭配嫩滑桂花冻和Q弹脆波波，酸甜又沁口。",
+                    "status": true,
+                    "picture": "http://qlqwnyjmi.hn-bkt.clouddn.com/rz99o9sm3vhckvst5owy.jpg",
+                    "sales": 1,
+                    "createTime": "2020-12-13 00:31:02",
+                    "updateTime": "2021-01-04 13:30:33",
+                    "heated": false,
+                    "deleted": false
+                },
+                {
+                    "id": 5,
+                    "code": "ccc",
+                    "name": "芝芝满陇金桂",
+                    "bigOriginalPrice": 26.00,
+                    "bigPromotePrice": null,
+                    "mediumOriginalPrice": 22.00,
+                    "mediumPromotePrice": null,
+                    "description": "冷热皆宜，甄选当季“春见”柑橘，手剥先制，肉质饱满多汁，融合鲜爽绿研茶汤，搭配嫩滑桂花冻和Q弹脆波波，酸甜又沁口。",
+                    "status": true,
+                    "picture": "http://qlqwnyjmi.hn-bkt.clouddn.com/ti98x9x4abv4b762pvwq.jpg",
+                    "sales": 1,
+                    "createTime": "2020-12-13 00:26:31",
+                    "updateTime": "2021-01-04 13:31:28",
+                    "heated": false,
+                    "deleted": false
+                },
+                {
+                    "id": 4,
+                    "code": "mmm",
+                    "name": "芝芝绿妍",
+                    "bigOriginalPrice": 25.00,
+                    "bigPromotePrice": 14.00,
+                    "mediumOriginalPrice": 19.00,
+                    "mediumPromotePrice": 12.00,
+                    "description": "冷热皆宜，甄选当季“春见”柑橘，手剥先制，肉质饱满多汁，融合鲜爽绿研茶汤，搭配嫩滑桂花冻和Q弹脆波波，酸甜又沁口。",
+                    "status": true,
+                    "picture": "http://qlqwnyjmi.hn-bkt.clouddn.com/54egdywe2q76hj8pywaq.jpg",
+                    "sales": 1,
+                    "createTime": "2020-12-13 00:26:10",
+                    "updateTime": "2021-01-04 13:32:04",
+                    "heated": true,
+                    "deleted": false
+                },
+                {
+                    "id": 3,
+                    "code": "ccc",
+                    "name": "波波奶绿",
+                    "bigOriginalPrice": 20.00,
+                    "bigPromotePrice": 15.00,
+                    "mediumOriginalPrice": 14.00,
+                    "mediumPromotePrice": 10.00,
+                    "description": "波波好吃",
+                    "status": true,
+                    "picture": "http://yanxuan.nosdn.127.net/8ab2d3287af0cefa2cc539e40600621d.png",
+                    "sales": 1,
+                    "createTime": "2020-12-13 00:25:46",
+                    "updateTime": "2020-12-13 00:25:46",
+                    "heated": false,
+                    "deleted": false
+                },
+                {
+                    "id": 2,
+                    "code": "bbb",
+                    "name": "芝芝金玉",
+                    "bigOriginalPrice": 28.00,
+                    "bigPromotePrice": 10.00,
+                    "mediumOriginalPrice": 22.00,
+                    "mediumPromotePrice": 8.00,
+                    "description": "冷热皆宜，甄选当季“春见”柑橘，手剥先制，肉质饱满多汁，融合鲜爽绿研茶汤，搭配嫩滑桂花冻和Q弹脆波波，酸甜又沁口。",
+                    "status": true,
+                    "picture": "http://qlqwnyjmi.hn-bkt.clouddn.com/r52kzvc41nkok4oumyca.jpg",
+                    "sales": 1,
+                    "createTime": "2018-02-02 00:00:00",
+                    "updateTime": "2021-01-04 13:32:42",
+                    "heated": false,
+                    "deleted": false
+                }
+            ]
+        },
+        "errmsg": "成功"
+    }
+    
+奶茶制作完成
+
+接口链接
+
+    POST http://59.110.50.181:8080/admin/order/completed
+    
+请求参数
+    
+    {
+        "orderId": 2
+    }
+    
+响应内容
+
+    {
+        "errno": 0,
+        "errmsg": "成功"
+    }
+    
+获取订单配置
+
+接口链接
+
+    GET http://59.110.50.181:8080/admin/config/order
+    
+请求参数
+    
+    无
+    
+响应内容
+
+    {
+        "errno": 0,
+        "data": {
+            "dgutshop_order_delivery": "6",
+            "dgutshop_order_unpaid": "30",
+            "dgutshop_order_unconfirmed": "7"
+        },
+        "errmsg": "成功"
+    }
+    
+修改订单配置
+
+接口链接
+
+    POST http://59.110.50.181:8080/admin/config/order
+    
+请求参数
+    
+    {
+        "dgutshop_order_delivery": "6",
+        "dgutshop_order_unpaid": "30",
+        "dgutshop_order_unconfirmed": "7"
+    }
+    
+响应内容
+
+    {
+        "errno": 0,
+        "errmsg": "成功"
+    }

@@ -1,6 +1,7 @@
 package org.dgutstu.dgutshop.admin.service;
 
 import org.dgutstu.dgutshop.core.util.ResponseUtil;
+import org.dgutstu.dgutshop.db.domain.DgutshopCategory;
 import org.dgutstu.dgutshop.db.domain.DgutshopSlideshow;
 import org.dgutstu.dgutshop.db.domain.DgutshopTopping;
 import org.dgutstu.dgutshop.db.service.DgutshopSlideShowService;
@@ -47,6 +48,14 @@ public class AdminSlideShowService {
         if (error != null){
             return error;
         }
+        int index = -1;
+        List<DgutshopSlideshow> slideshowList = slideShowService.list();
+        for (DgutshopSlideshow dgutshopSlideshow : slideshowList) {
+            if (index < dgutshopSlideshow.getIndex()){
+                index = dgutshopSlideshow.getIndex();
+            }
+        }
+        slideshow.setIndex(++index);
         slideShowService.add(slideshow);
         return ResponseUtil.ok();
     }

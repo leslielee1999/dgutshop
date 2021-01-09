@@ -12,11 +12,6 @@ import org.dgutstu.dgutshop.db.domain.DgutshopUser;
 @Data
 public class AuthUserDto {
     /**
-     * 授权类型：0--WEB端 1--微信端
-     */
-//    private Integer authType;
-
-    /**
      * 用户名
      */
 //    private String nickname;
@@ -84,6 +79,8 @@ public class AuthUserDto {
      * 返回:服务器jwt token
      */
     private String token;
+
+    private String staus;
 
     /**
      * 返回：userName或openId对应的用户

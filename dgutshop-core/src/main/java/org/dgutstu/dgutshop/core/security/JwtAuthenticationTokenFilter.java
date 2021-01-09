@@ -44,31 +44,23 @@ public class JwtAuthenticationTokenFilter extends BasicAuthenticationFilter {
         String tokenHeader = request.getHeader(JwtSecurityProperties.tokenHeader);
         //  获取登录ip
         String requestRri = request.getRequestURI();
-//        System.out.println("filter：" + tokenHeader.startsWith(JwtSecurityProperties.tokenPrefix));
         if (null != tokenHeader && tokenHeader.startsWith(JwtSecurityProperties.tokenPrefix)) {
             try {
                 // 截取JWT前缀
                 String token = tokenHeader.replace(JwtSecurityProperties.tokenPrefix, "");
-//                System.out.println("filter：" + token);
                 // 解析JWT
                 Claims claims = Jwts.parser()
                         .setSigningKey(JwtSecurityProperties.secret)
                         .parseClaimsJws(token)
                         .getBody();
-                //                System.out.println(claims.toString());
                 String authority = claims.get("authorities").toString();
-//                System.out.println("filter authority：" + authority);
-//                System.out.println("filter issuer" + claims.getIssuer());
                 if (claims.getIssuer().equals("leesk_web")) {       //  后台管理系统端token验证
                     // 获取用户名
                     String username = claims.getSubject();
                     String userId = claims.getId();
-//                System.out.println("filter："+username + " " + userId);
                     if (!StringUtils.isEmpty(username) && !StringUtils.isEmpty(userId)) {
                         // 获取角色
                         List<GrantedAuthority> authorities = new ArrayList<>();
-
-//                    System.out.println(authority);
                         if (!StringUtils.isEmpty(authority)) {
                             List<Map<String, String>> authorityMap = JSONObject.parseObject(authority, List.class);
                             for (Map<String, String> role : authorityMap) {
@@ -82,9 +74,7 @@ public class JwtAuthenticationTokenFilter extends BasicAuthenticationFilter {
                         loginUser.setUsername(claims.getSubject());
                         loginUser.setUserId(Integer.parseInt(claims.getId()));
                         loginUser.setAuthorities(authorities);
-//                    System.out.println(loginUser);
                         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(loginUser, userId, authorities);
-//                    System.out.println(authentication);
                         SecurityContextHolder.getContext().setAuthentication(authentication);
                     }
                 } else if (claims.getIssuer().equals("leesk_wechat")) {     //  微信小程序端token验证

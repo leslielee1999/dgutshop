@@ -55,18 +55,13 @@ public class WechatAuthService {
     public Result<AuthUserDto> login(WechatLoginUser wechatLoginUser, HttpServletRequest request) {
         AuthUserDto authUserDto = new AuthUserDto();
         Result<AuthUserDto> result = new Result<>();
-        System.out.println("code："+wechatLoginUser.getCode());
-        //authType=1代表是微信登录
-//        if (!StringUtils.isEmpty(authUserDto.getAuthType()) && authUserDto.getAuthType() == 1) {
+
         JSONObject jsonObject = wechatApiService.authCode2Session(appId, secret, wechatLoginUser.getCode());
         if (jsonObject == null) {
             throw new RuntimeException("调用微信端授权认证接口错误");
         }
         String openId = jsonObject.getString(Constant.OPEN_ID);
-        System.out.println("openid："+openId);
         String sessionKey = jsonObject.getString(Constant.SESSION_KEY);
-        System.out.println("sessionKey："+sessionKey);
-//        String unionId = jsonObject.getString(Constant.UNION_ID);
         if (StringUtils.isEmpty(openId)) {
             return result.error(jsonObject.getString(Constant.ERR_CODE), jsonObject.getString(Constant.ERR_MSG));
         }
@@ -84,7 +79,7 @@ public class WechatAuthService {
             if (user == null) {
                 throw new RuntimeException("填充用户对象错误");
             }
-//                user.setUnionId(unionId);
+
             user.setName(openId);
             user.setPassword(openId);
             user.setStatus("0");
@@ -92,10 +87,16 @@ public class WechatAuthService {
             user.setLastLoginIp(IpUtil.getIpAddr(request));
             user.setSessionKey(sessionKey);
             create(user);
-//            authUserDto.setUserInfo(user);
-
+            authUserDto.setStaus(user.getStatus());
         } else {
-//            authUserDto.setUserInfo(resultUser.getModule());
+            DgutshopUser user = userService.findByOpenId(openId);
+            user.setName(openId);
+            user.setPassword(openId);
+            user.setLastLoginTime(LocalDateTime.now());
+            user.setLastLoginIp(IpUtil.getIpAddr(request));
+            user.setSessionKey(sessionKey);
+            update(user);
+            authUserDto.setStaus(user.getStatus());
         }
 
         //创建token
@@ -118,6 +119,11 @@ public class WechatAuthService {
     @Transactional(rollbackFor = Exception.class)
     public void create(DgutshopUser user) {
         userService.save(user);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public void update(DgutshopUser user) {
+        userService.update(user);
     }
 
     public String checkLogin(HttpServletRequest request, HttpServletResponse response){
