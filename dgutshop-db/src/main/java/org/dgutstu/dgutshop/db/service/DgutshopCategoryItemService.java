@@ -94,8 +94,10 @@ public class DgutshopCategoryItemService {
 
     public void setProduct(DgutshopCategoryItem categoryItem){
         DgutshopProduct product = productService.get(categoryItem.getPid());
-        if (product.getStatus()){
-            categoryItem.setProduct(product);
+        if(product != null){
+            if (product.getStatus()){
+                categoryItem.setProduct(product);
+            }
         }
     }
 
