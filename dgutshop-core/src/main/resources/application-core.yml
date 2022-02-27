@@ -82,7 +82,7 @@ dgutshop:
   # 对象存储配置
   storage:
     # 当前工作的对象存储模式，分别是local、aliyun、tencent、qiniu
-    active: qiniu
+    active: tencent
     # 本地对象存储配置信息
     local:
       storagePath: storage
@@ -97,10 +97,10 @@ dgutshop:
     # 腾讯对象存储配置信息
     # 请参考 https://cloud.tencent.com/document/product/436/6249
     tencent:
-      secretId: AKIDOccMr856uoU1Tsa2MQL5aqseBUWRrb5i
-      secretKey: XqtgEhIdrupTs4ygaWlkUUXv3w3FiwuD
-      region: ap-shanghai
-      bucketName: vytech-1300096589
+      secretId: AKIDtb2D7j49xTigOp0uXswjGadPt62h5C2c
+      secretKey: KOAftpVv4wXrynNfgQt4ybx3sPfeLlul
+      region: ap-guangzhou
+      bucketName: dgutshop-1304570519
     # 七牛云对象存储配置信息
     qiniu:
       endpoint: qlqwnyjmi.hn-bkt.clouddn.com
