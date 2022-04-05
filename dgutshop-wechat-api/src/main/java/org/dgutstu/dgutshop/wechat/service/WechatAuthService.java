@@ -80,6 +80,7 @@ public class WechatAuthService {
                 throw new RuntimeException("填充用户对象错误");
             }
 
+            user.setOpenId(openId);
             user.setName(openId);
             user.setPassword(openId);
             user.setStatus("0");
