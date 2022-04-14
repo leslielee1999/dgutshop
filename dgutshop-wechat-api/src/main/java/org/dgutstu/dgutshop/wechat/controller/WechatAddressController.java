@@ -85,7 +85,7 @@ public class WechatAddressController {
             return ResponseUtil.badArgument();
         }
         if (!RegexUtil.isMobileSimple(mobile)) {
-            return ResponseUtil.badArgument();
+            return ResponseUtil.fail(801, "不符合规范的手机号码格式，请重新输入");
         }
 
         String userAddress = address.getUserAddress();
