@@ -97,6 +97,9 @@ public class WechatOrderService {
         String consigneeAddress = orderListVo.getConsigneeAddress();
         String consigneeRoom = orderListVo.getConsigneeRoom();
         BigDecimal deliveryPrice = orderListVo.getDeliveryPrice();
+        String shopName = orderListVo.getShopName();
+        String shopAddress = orderListVo.getShopAddress();
+        String note = orderListVo.getNote();
 
         Integer orderId = null;
         DgutshopOrder order = null;
@@ -115,6 +118,9 @@ public class WechatOrderService {
         order.setOrderPrice(orderPrice);
         order.setOrderItemList(itemList);
         order.setPayDate(LocalDateTime.of(1900,01,01,1,1,1));
+        order.setShopName(shopName);
+        order.setShopAddress(shopAddress);
+        order.setNote(note);
 
         //  添加订单表项
         orderService.create(order);
