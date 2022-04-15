@@ -29,4 +29,7 @@ public class OrderVo {
     private LocalDateTime endTime;
     private LocalDateTime payDate;
     private List<DgutshopOrderItem> orderItemList;
+    private String shopName;
+    private String shopAddress;
+    private String note;
 }

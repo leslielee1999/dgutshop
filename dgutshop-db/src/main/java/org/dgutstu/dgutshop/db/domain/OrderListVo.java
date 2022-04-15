@@ -20,13 +20,15 @@ public class OrderListVo {
     private String consigneeRoom;
     private String consigneePhone;
     private String message;
+    private String shopName;
+    private String shopAddress;
+    private String note;
     private List<DgutshopOrderItem> orderItemList;
 
     @Override
     public String toString() {
         return "OrderListVo{" +
-//                "userId=" + userId +
-                ", type='" + type + '\'' +
+                "type=" + type +
                 ", productPrice=" + productPrice +
                 ", deliveryPrice=" + deliveryPrice +
                 ", orderPrice=" + orderPrice +
@@ -35,6 +37,9 @@ public class OrderListVo {
                 ", consigneeRoom='" + consigneeRoom + '\'' +
                 ", consigneePhone='" + consigneePhone + '\'' +
                 ", message='" + message + '\'' +
+                ", shopName='" + shopName + '\'' +
+                ", shopAddress='" + shopAddress + '\'' +
+                ", note='" + note + '\'' +
                 ", orderItemList=" + orderItemList +
                 '}';
     }
@@ -125,5 +130,29 @@ public class OrderListVo {
 
     public void setOrderItemList(List<DgutshopOrderItem> orderItemList) {
         this.orderItemList = orderItemList;
+    }
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
+    }
+
+    public String getShopAddress() {
+        return shopAddress;
+    }
+
+    public void setShopAddress(String shopAddress) {
+        this.shopAddress = shopAddress;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 }

@@ -37,6 +37,7 @@
     <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
     <result column="status" jdbcType="VARCHAR" property="status" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
+    <result column="temperature" jdbcType="DECIMAL" property="temperature" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <!--
@@ -234,12 +235,12 @@
     insert into dgutshop_admin (role_id, `name`, nickname, 
       `password`, code, picture, 
       create_time, update_time, last_login_ip, 
-      last_login_time, `status`, deleted
+      last_login_time, `status`, deleted, temperature
       )
     values (#{roleId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{lastLoginIp,jdbcType=VARCHAR}, 
-      #{lastLoginTime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, #{deleted,jdbcType=BIT}
+      #{lastLoginTime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, #{deleted,jdbcType=BIT}, #{temperature,jdbcType=DECIMAL}
       )
   </insert>
   <insert id="insertSelective" parameterType="org.dgutstu.dgutshop.db.domain.DgutshopAdmin">
@@ -288,6 +289,9 @@
       <if test="deleted != null">
         deleted,
       </if>
+      <if test="temperature != null">
+        temperature,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="roleId != null">
@@ -325,6 +329,9 @@
       </if>
       <if test="deleted != null">
         #{deleted,jdbcType=BIT},
+      </if>
+      <if test="temperature != null">
+        #{temperature,jdbcType=DECIMAL},
       </if>
     </trim>
   </insert>
@@ -384,6 +391,9 @@
       <if test="record.deleted != null">
         deleted = #{record.deleted,jdbcType=BIT},
       </if>
+      <if test="record.temperature != null">
+        temperature = #{record.temperature,jdbcType=DECIMAL},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -407,7 +417,8 @@
       last_login_ip = #{record.lastLoginIp,jdbcType=VARCHAR},
       last_login_time = #{record.lastLoginTime,jdbcType=TIMESTAMP},
       `status` = #{record.status,jdbcType=VARCHAR},
-      deleted = #{record.deleted,jdbcType=BIT}
+      deleted = #{record.deleted,jdbcType=BIT},
+    temperature = #{record.temperature,jdbcType=DECIMAL}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -455,6 +466,9 @@
       <if test="deleted != null">
         deleted = #{deleted,jdbcType=BIT},
       </if>
+      <if test="temperature != null">
+        temperature = #{temperature,jdbcType=DECIMAL},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -475,7 +489,8 @@
       last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
       last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
       `status` = #{status,jdbcType=VARCHAR},
-      deleted = #{deleted,jdbcType=BIT}
+      deleted = #{deleted,jdbcType=BIT},
+    temperature = #{temperature,jdbcType=DECIMAL}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectOneByExample" parameterType="org.dgutstu.dgutshop.db.domain.DgutshopAdminExample" resultMap="BaseResultMap">
