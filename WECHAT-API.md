@@ -746,21 +746,22 @@
       "errno": 0,
       "data": {
         "info": {
-          "id": 1,
-          "code": "aaa",
-          "name": "珍珠奶茶",
-          "bigOriginalPrice": 10.00,
-          "bigPromotePrice": 9.00,
-          "mediumOriginalPrice": 8.00,
-          "mediumPromotePrice": 7.00,
-          "description": "黑珍珠",
-          "status": true,
-          "picture": "",
-          "sales": 1,
-          "createTime": "2018-02-01T00:00:00",
-          "updateTime": "2018-02-01T00:00:00",
-          "heated": false,
-          "deleted": false
+            "id": 1,
+            "code": "aaa",
+            "name": "珍珠奶茶",
+            "bigOriginalPrice": 10.00,
+            "bigPromotePrice": 9.00,
+            "mediumOriginalPrice": 8.00,
+            "mediumPromotePrice": 7.00,
+            "description": "黑珍珠",
+            "status": true,
+            "picture": "https://dgutshop-1304570519.cos.ap-guangzhou.myqcloud.com/3i17lsvrec4wknd184mm.jpg",
+            "pictureDetail": "https://dgutshop-1304570519.cos.ap-guangzhou.myqcloud.com/3i17lsvrec4wknd184mm.jpg",
+            "sales": 2,
+            "createTime": "2018-02-01T00:00:00",
+            "updateTime": "2022-03-02T23:08:36",
+            "heated": false,
+            "deleted": false
         }
       },
       "errmsg": "成功"
@@ -919,11 +920,13 @@
       "data": {
         "dgutshop_shop_latitude": "31.201900",
         "dgutshop_shop_longitude": "121.587839",
-        "dgutshop_shop_qq": "545771383",
-        "dgutshop_shop_address": "东莞",
-        "dgutshop_shop_phone": "021-xxxx-xxxx",
-        "dgutshop_shop_businesshours": "周一至周五，早上9点~晚上9点",
-        "dgutshop_shop_name": "dgutshop"
+        "dgutshop_shop_qq": "878994561",
+        "dgutshop_shop_address": "东莞松山湖大学路1号",
+        "dgutshop_shop_isclosed": "1",
+        "dgutshop_shop_phone": "021-1234-2222",
+        "dgutshop_shop_businesshours": "周一至周日，早上9点~晚上9点",
+        "dgutshop_shop_name": "高仿喜茶",
+        "dgutshop_shop_closedreason": "因疫情防控需要，本店暂不营业，如有给您带来不便，敬请谅解！"
       },
       "errmsg": "成功"
     }
@@ -1085,6 +1088,9 @@
         "consigneeRoom": "东莞理工学院大学路1号",
         "consigneePhone": "13333333333",
         "message": "加糖",
+        "shopName": "店铺1",
+        "shopAddress": "深圳",
+        "note": "哈哈哈",
         "orderItemList": [
           {
             "product": {
