@@ -76,6 +76,23 @@
                     <i v-else class="el-icon-plus avatar-uploader-icon" />
                   </el-upload>
                 </el-form-item>
+                <el-form-item label="是否关店" prop="dgutshop_shop_isclosed">
+                  <template>
+                    <el-switch
+                          v-model="dataForm.dgutshop_shop_isclosed"
+                          :active-value="1"
+                          :inactive-value="2"
+                          active-color="#FF3030"
+                          inactive-color="#B9B9B9"
+                          />
+                  </template>
+                </el-form-item>
+                <el-form-item label="关店原因" prop="dgutshop_shop_closedreason" v-if="dataForm.dgutshop_shop_isclosed===1">
+                  <el-input
+                    auto-complete="off"
+                    v-model="dataForm.dgutshop_shop_closedreason"
+                  ></el-input>
+                  </el-form-item>
               </el-form>
               <div
                 slot="footer"
@@ -107,6 +124,8 @@ export default {
         dgutshop_shop_phone: "",
         dgutshop_shop_qq: "",
         dgutshop_shop_poster: "",
+        dgutshop_shop_isclosed: "",
+        dgutshop_shop_closedreason: "",
       },
     };
   },
@@ -124,6 +143,8 @@ export default {
       this.dataForm.dgutshop_shop_name = res.data.dgutshop_shop_name;
       this.dataForm.dgutshop_shop_qq = res.data.dgutshop_shop_qq;
       this.dataForm.dgutshop_shop_poster = res.data.dgutshop_shop_poster;
+      this.dataForm.dgutshop_shop_isclosed = res.data.dgutshop_shop_isclosed == "1" ? 1 : 2;
+      this.dataForm.dgutshop_shop_closedreason = res.data.dgutshop_shop_closedreason;
     },
     async handleUpdate() {
       this.$confirm("此操作将修改该店信息, 是否继续?", "提示", {

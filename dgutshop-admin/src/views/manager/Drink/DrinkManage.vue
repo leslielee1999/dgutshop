@@ -68,9 +68,14 @@
         label="名称"
         prop="name"
       />
-      <el-table-column align="center" property="picture" label="图片" sortable>
+      <el-table-column align="center" property="picture" label="缩略图" sortable>
         <template slot-scope="scope">
           <img :src="scope.row.picture" width="40" />
+        </template>
+      </el-table-column>
+            <el-table-column align="center" property="picture" label="详情页图" sortable>
+        <template slot-scope="scope">
+          <img :src="scope.row.pictureDetail" width="40" />
         </template>
       </el-table-column>
       <el-table-column
@@ -184,7 +189,7 @@
           </el-radio-group>
         </el-form-item>
 
-        <el-form-item label="奶茶图片" prop="picture">
+        <el-form-item label="奶茶缩略图" prop="picture">
           <el-upload
             :headers="headers"
             action="/api/admin/storage/create"
@@ -198,6 +203,19 @@
           </el-upload>
         </el-form-item>
 
+        <el-form-item label="奶茶详情页图" prop="pictureDetail">
+          <el-upload
+            :headers="headers"
+            action="/api/admin/storage/create"
+            :show-file-list="false"
+            :on-success="uploadPicDetUrl"
+            class="avatar-uploader"
+            accept=".jpg,.jpeg,.png,.gif"
+          >
+            <img v-if="drink.pictureDetail" :src="drink.pictureDetail" class="avatar" />
+            <i v-else class="el-icon-plus avatar-uploader-icon" />
+          </el-upload>
+        </el-form-item>
         
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -245,7 +263,7 @@
         <el-form-item label="奶茶描述" prop="description">
           <el-input v-model="drink.description" />
         </el-form-item>
-        <el-form-item label="奶茶图片" prop="picture">
+        <el-form-item label="奶茶缩略图" prop="picture">
           <el-upload
             :headers="headers"
             action="/api/admin/storage/create"
@@ -255,6 +273,19 @@
             accept=".jpg,.jpeg,.png,.gif"
           >
             <img v-if="drink.picture" :src="drink.picture" class="avatar" />
+            <i v-else class="el-icon-plus avatar-uploader-icon" />
+          </el-upload>
+        </el-form-item>
+        <el-form-item label="奶茶详情页图" prop="pictureDetail">
+          <el-upload
+            :headers="headers"
+            action="/api/admin/storage/create"
+            :show-file-list="false"
+            :on-success="uploadPicDetUrl"
+            class="avatar-uploader"
+            accept=".jpg,.jpeg,.png,.gif"
+          >
+            <img v-if="drink.pictureDetail" :src="drink.pictureDetail" class="avatar" />
             <i v-else class="el-icon-plus avatar-uploader-icon" />
           </el-upload>
         </el-form-item>
@@ -386,6 +417,7 @@ export default {
         description: "",
         status: 1,
         picture: "",
+        pictureDetail: "",
         sales: 0,
         create_time: null,
         update_time: null,
@@ -492,6 +524,7 @@ export default {
         description: "",
         status: 1,
         picture: "",
+        pictureDetail: "",
         sales: 0,
         create_time: null,
         update_time: null,
@@ -501,6 +534,10 @@ export default {
     uploadPicUrl: function (response) {
       console.log(response);
       this.drink.picture = response.data.url;
+    },
+    uploadPicDetUrl: function (response) {
+      console.log(response);
+      this.drink.pictureDetail = response.data.url;
     },
     hiddnForm() {
       this.isShowForm = false;
@@ -670,7 +707,8 @@ export default {
           "ID",
           "奶茶编号",
           "名称",
-          "图片",
+          "缩略图片",
+          "详情页图片",
           "大杯原售价",
           "大杯现售价",
           "中杯原售价",
@@ -684,6 +722,7 @@ export default {
           "code",
           "name",
           "picture",
+          "pictureDetail",
           "bigOriginalPrice",
           "bigPromotePrice",
           "mediumOriginalPrice",
@@ -731,7 +770,8 @@ export default {
           "ID",
           "奶茶编号",
           "名称",
-          "图片",
+          "缩略图片",
+          "详情页图片",
           "大杯原售价",
           "大杯现售价",
           "中杯原售价",
@@ -745,6 +785,7 @@ export default {
           "code",
           "name",
           "picture",
+          "pictureDetail",
           "bigOriginalPrice",
           "bigPromotePrice",
           "mediumOriginalPrice",

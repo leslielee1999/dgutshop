@@ -3,7 +3,7 @@
     <div id="dateTime" style="display: none"></div>
     <div class="login_box">
       <div class="avatar_box">
-        <img src="../assets/img/login.jpg" alt="" />
+        <img src="../assets/img/head.jpg" alt="" />
       </div>
 
       <el-form
@@ -144,7 +144,7 @@ export default {
 <style lang="less" scoped>
 .login_container {
   
-  background: url("../assets/img/Koi_carp_2 .svg");
+  background: url("../assets/img/background2.jpg");
   background-repeat:no-repeat ;
 
 background-size:100% 100%; 
