@@ -1090,7 +1090,6 @@
         "message": "加糖",
         "shopName": "店铺1",
         "shopAddress": "深圳",
-        "note": "哈哈哈",
         "orderItemList": [
           {
             "product": {
