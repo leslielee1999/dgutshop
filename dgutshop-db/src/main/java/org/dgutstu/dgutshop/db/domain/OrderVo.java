@@ -31,5 +31,4 @@ public class OrderVo {
     private List<DgutshopOrderItem> orderItemList;
     private String shopName;
     private String shopAddress;
-    private String note;
 }

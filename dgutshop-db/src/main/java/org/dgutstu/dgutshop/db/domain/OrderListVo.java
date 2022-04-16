@@ -22,7 +22,6 @@ public class OrderListVo {
     private String message;
     private String shopName;
     private String shopAddress;
-    private String note;
     private List<DgutshopOrderItem> orderItemList;
 
     @Override
@@ -39,7 +38,6 @@ public class OrderListVo {
                 ", message='" + message + '\'' +
                 ", shopName='" + shopName + '\'' +
                 ", shopAddress='" + shopAddress + '\'' +
-                ", note='" + note + '\'' +
                 ", orderItemList=" + orderItemList +
                 '}';
     }
@@ -146,13 +144,5 @@ public class OrderListVo {
 
     public void setShopAddress(String shopAddress) {
         this.shopAddress = shopAddress;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
     }
 }

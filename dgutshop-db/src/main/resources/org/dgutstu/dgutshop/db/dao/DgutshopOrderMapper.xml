@@ -38,7 +38,6 @@
     <result column="comments" jdbcType="SMALLINT" property="comments" />
     <result column="shop_name" jdbcType="VARCHAR" property="shopName" />
     <result column="shop_address" jdbcType="VARCHAR" property="shopAddress" />
-    <result column="note" jdbcType="VARCHAR" property="note" />
     <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
   </resultMap>
@@ -117,7 +116,7 @@
     consignee_address, consignee_room, message, pay_id, pay_date, delivery_code, delivery_company, 
     deliveryman_name, deliveryman_phone, delivery_time, product_price, delivery_price, 
     order_price, take_code, create_time, update_time, refund_amount, refund_type, refund_content, 
-    refund_time, confirm_time, comments, end_time, shop_name, shop_address, note, deleted
+    refund_time, confirm_time, comments, end_time, shop_name, shop_address, deleted
   </sql>
   <select id="selectByExample" parameterType="org.dgutstu.dgutshop.db.domain.DgutshopOrderExample" resultMap="BaseResultMap">
     <!--
@@ -247,7 +246,7 @@
       delivery_price, order_price, take_code, 
       create_time, update_time, refund_amount, 
       refund_type, refund_content, refund_time, 
-      confirm_time, comments, end_time, shop_name, shop_address, note,
+      confirm_time, comments, end_time, shop_name, shop_address,
       deleted)
     values (#{userId,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, 
       #{orderStatus,jdbcType=SMALLINT}, #{aftersaleStatus,jdbcType=SMALLINT}, #{consignee,jdbcType=VARCHAR}, 
@@ -259,7 +258,7 @@
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{refundAmount,jdbcType=DECIMAL}, 
       #{refundType,jdbcType=VARCHAR}, #{refundContent,jdbcType=VARCHAR}, #{refundTime,jdbcType=TIMESTAMP}, 
       #{confirmTime,jdbcType=TIMESTAMP}, #{comments,jdbcType=SMALLINT}, #{endTime,jdbcType=TIMESTAMP},
-      #{shop_name,jdbcType=VARCHAR}, #{shop_address,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR},
+      #{shop_name,jdbcType=VARCHAR}, #{shop_address,jdbcType=VARCHAR},
       #{deleted,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="org.dgutstu.dgutshop.db.domain.DgutshopOrder">
@@ -368,9 +367,6 @@
       <if test="shopAddress != null">
         shop_address,
       </if>
-      <if test="note != null">
-        note,
-      </if>
       <if test="deleted != null">
         deleted,
       </if>
@@ -471,9 +467,6 @@
       </if>
       <if test="shopAddress != null">
         #{shopAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="note != null">
-        #{note,jdbcType=VARCHAR},
       </if>
       <if test="deleted != null">
         #{deleted,jdbcType=BIT},
@@ -596,9 +589,6 @@
       <if test="record.shopAddress != null">
         shop_address = #{record.shopAddress,jdbcType=VARCHAR},
       </if>
-      <if test="record.note != null">
-        note = #{record.note,jdbcType=VARCHAR},
-      </if>
       <if test="record.deleted != null">
         deleted = #{record.deleted,jdbcType=BIT},
       </if>
@@ -644,9 +634,8 @@
       confirm_time = #{record.confirmTime,jdbcType=TIMESTAMP},
       comments = #{record.comments,jdbcType=SMALLINT},
       end_time = #{record.endTime,jdbcType=TIMESTAMP},
-    shop_name = #{record.shopName,jdbcType=VARCHAR},
-    shop_address = #{record.shopAddress,jdbcType=VARCHAR},
-    note = #{record.note,jdbcType=VARCHAR},
+      shop_name = #{record.shopName,jdbcType=VARCHAR},
+      shop_address = #{record.shopAddress,jdbcType=VARCHAR},
       deleted = #{record.deleted,jdbcType=BIT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -755,9 +744,6 @@
       <if test="shopAddress != null">
         shop_address = #{shopAddress,jdbcType=VARCHAR},
       </if>
-      <if test="note != null">
-        note = #{note,jdbcType=VARCHAR},
-      </if>
       <if test="deleted != null">
         deleted = #{deleted,jdbcType=BIT},
       </if>
@@ -802,7 +788,6 @@
       end_time = #{endTime,jdbcType=TIMESTAMP},
       shop_name = #{shopName,jdbcType=VARCHAR},
       shop_address = #{shopAddress,jdbcType=VARCHAR},
-      note = #{note,jdbcType=VARCHAR},
       deleted = #{deleted,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
