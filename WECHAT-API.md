@@ -1161,7 +1161,7 @@
 
 接口链接
 
-    http://localhost:8082/wechat/order/pay-notify
+    http://localhost:8082/wechat/order/h5pay
     
 请求参数
         

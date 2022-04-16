@@ -92,10 +92,10 @@
                 end_time = #{order.endTime,jdbcType=TIMESTAMP},
             </if>
             <if test="order.shopName != null">
-                shopName = #{order.shopName,jdbcType=VARCHAR},
+                shop_name = #{order.shopName,jdbcType=VARCHAR},
             </if>
             <if test="order.shopAddress != null">
-                shopAddress = #{order.shopAddress,jdbcType=VARCHAR},
+                shop_address = #{order.shopAddress,jdbcType=VARCHAR},
             </if>
             <if test="order.createTime != null">
                 create_time = #{order.createTime,jdbcType=TIMESTAMP},
