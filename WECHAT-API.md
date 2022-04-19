@@ -1464,7 +1464,7 @@
     
 ### 2021.1.9补充
 
-获取订单配置
+## 获取订单配置
 
 接口链接
 
@@ -1485,3 +1485,130 @@
         },
         "errmsg": "成功"
     }
+
+## 获取员工数据
+
+接口链接
+
+    GET  http://localhost:8082/wechat/config/getAllAdmin
+
+请求参数
+
+    无
+
+响应内容
+    
+    [
+        {
+            "id": 1,
+            "roleId": 2,
+            "name": "SSSSAsaw",
+            "nickname": "QWEQWEQQ",
+            "password": null,
+            "code": "dgut-10",
+            "picture": "http://yanxuan.nosdn.127.net/8ab2d3287af0cefa2cc539e40600621d.png",
+            "createTime": "2020-12-12T23:11:10",
+            "updateTime": "2020-12-23T20:50:30",
+            "lastLoginIp": "",
+            "lastLoginTime": null,
+            "status": "NORMAL",
+            "deleted": null,
+            "temperature": 37.1
+        },
+        {
+            "id": 2,
+            "roleId": 1,
+            "name": "ssssss",
+            "nickname": "fafafqwqe",
+            "password": null,
+            "code": "dgut-2",
+            "picture": "http://yanxuan.nosdn.127.net/8ab2d3287af0cefa2cc539e40600621d.png",
+            "createTime": "2020-11-14T23:11:10",
+            "updateTime": "2020-12-12T23:36:26",
+            "lastLoginIp": "",
+            "lastLoginTime": null,
+            "status": null,
+            "deleted": null,
+            "temperature": 36.8
+        },
+        {
+        "id": 3,
+        "roleId": 1,
+        "name": "asdassaw",
+        "nickname": "linyiia",
+        "password": null,
+        "code": "dgut-5",
+        "picture": "http://yanxuan.nosdn.127.net/8ab2d3287af0cefa2cc539e40600621d.png",
+        "createTime": "2020-12-14T23:11:10",
+        "updateTime": "2020-12-12T22:19:37",
+        "lastLoginIp": "",
+        "lastLoginTime": null,
+        "status": null,
+        "deleted": null,
+        "temperature": null
+        },
+        {
+        "id": 5,
+        "roleId": 1,
+        "name": "asdassaw",
+        "nickname": "linyiic",
+        "password": null,
+        "code": "dgut-6",
+        "picture": "http://qlqwnyjmi.hn-bkt.clouddn.com/f9972a8d7jt8z7zvpjll.jpg",
+        "createTime": "2020-12-15T20:27:11",
+        "updateTime": "2021-01-03T22:41:48",
+        "lastLoginIp": "",
+        "lastLoginTime": null,
+        "status": null,
+        "deleted": null,
+        "temperature": null
+        },
+        {
+        "id": 6,
+        "roleId": 2,
+        "name": "leeeeeeeesk",
+        "nickname": "people",
+        "password": null,
+        "code": "dgut-11",
+        "picture": "https://dgutshop-1304570519.cos.ap-guangzhou.myqcloud.com/fboxfzbi36bq4v3trcun.jpg",
+        "createTime": "2020-12-12T23:11:10",
+        "updateTime": "2022-04-14T14:11:53",
+        "lastLoginIp": "",
+        "lastLoginTime": null,
+        "status": "NORMAL",
+        "deleted": null,
+        "temperature": 36.5
+        },
+        {
+        "id": 7,
+        "roleId": 1,
+        "name": "",
+        "nickname": "leslie",
+        "password": null,
+        "code": "dgut-10",
+        "picture": "https://dgutshop-1304570519.cos.ap-guangzhou.myqcloud.com/orp6vasoshmej85ptszv.JPG",
+        "createTime": "2020-12-23T23:18:46",
+        "updateTime": "2022-03-02T22:23:47",
+        "lastLoginIp": "",
+        "lastLoginTime": null,
+        "status": "NORMAL",
+        "deleted": null,
+        "temperature": 37.0
+        },
+        {
+        "id": 8,
+        "roleId": 1,
+        "name": "BBFeng",
+        "nickname": "qweqwe",
+        "password": null,
+        "code": "dgut-99",
+        "picture": "https://dgutshop-1304570519.cos.ap-guangzhou.myqcloud.com/nseuqoqgdj44ub5smdqk.png",
+        "createTime": "2022-04-19T13:25:48",
+        "updateTime": "2022-04-19T13:25:48",
+        "lastLoginIp": "",
+        "lastLoginTime": null,
+        "status": "NORMAL",
+        "deleted": null,
+        "temperature": null
+        }
+    ]

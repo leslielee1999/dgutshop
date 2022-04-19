@@ -72,7 +72,7 @@ public class DgutshopAdminService{
         DgutshopAdminExample example = new DgutshopAdminExample();
         DgutshopAdminExample.Criteria criteria = example.createCriteria();
         criteria.andDeletedEqualTo(false);
-        return adminMapper.selectByExample(example);
+        return adminMapper.selectByExampleSelective(example, result);
     }
 
     /**
