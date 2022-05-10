@@ -25,36 +25,26 @@
 /* 透明度 */
 /* 文章场景相关 */
 .uni-tag.data-v-3f606880 {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
   padding: 0px 16px;
   height: 30px;
   line-height: 30px;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-          justify-content: center;
+  justify-content: center;
   color: #333;
-  -webkit-border-radius: 3px;
-          border-radius: 3px;
+  border-radius: 3px;
   background-color: #f8f8f8;
   border-width: 1rpx;
   border-style: solid;
   border-color: #f8f8f8;
 }
 .uni-tag--circle.data-v-3f606880 {
-  -webkit-border-radius: 15px;
-          border-radius: 15px;
+  border-radius: 15px;
 }
 .uni-tag--mark.data-v-3f606880 {
-  -webkit-border-top-left-radius: 0;
-          border-top-left-radius: 0;
-  -webkit-border-bottom-left-radius: 0;
-          border-bottom-left-radius: 0;
-  -webkit-border-top-right-radius: 15px;
-          border-top-right-radius: 15px;
-  -webkit-border-bottom-right-radius: 15px;
-          border-bottom-right-radius: 15px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
 }
 .uni-tag--disabled.data-v-3f606880 {
   opacity: 0.5;

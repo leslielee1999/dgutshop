@@ -1,127 +1,128 @@
 <template>
   <div class="content">
-      <div class="filter-container">
-        <el-date-picker
-          v-model="listQuery.timeArray"
-          type="datetimerange"
-          value-format="yyyy-MM-dd HH:mm:ss"
-          class="filter-item"
-          range-separator="至"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-          :picker-options="pickerOptions"
-        />
-        <el-button
-          class="filter-item"
-          type="primary"
-          icon="el-icon-search"
-          @click="handleFilter"
-          >查找</el-button
-        >
-
-        <el-button
-          class="filter-item"
-          type="primary"
-          icon="el-icon-edit"
-          @click="showForm()"
-          >添加</el-button
-        >
-
-        <el-button
-          class="filter-item"
-          type="success"
-          icon="el-icon-edit"
-          @click="changeSort"
-          >改变类目在侧边栏的顺序</el-button
-        >
-        <el-button
-          :loading="downloadLoading"
-          class="filter-item"
-          type="success"
-          icon="el-icon-download"
-          @click="handleDownload"
-          >导出</el-button
-        >
-      </div>
-      <br />
-      <br />
-      <!-- 查询结果 -->
-      <el-table
-        :data="list"
-        element-loading-text="正在查询中。。。"
-        border
-        fit
-        highlight-current-row
-        ref="refTable"
-        :row-key="getRowKeys"
-        :expand-row-keys="expands"
+    <div class="filter-container">
+      <el-date-picker
+        v-model="listQuery.timeArray"
+        type="datetimerange"
+        value-format="yyyy-MM-dd HH:mm:ss"
+        class="filter-item"
+        range-separator="至"
+        start-placeholder="开始日期"
+        end-placeholder="结束日期"
+        :picker-options="pickerOptions"
+      />
+      <el-button
+        class="filter-item"
+        type="primary"
+        icon="el-icon-search"
+        @click="handleFilter"
+        >查找</el-button
       >
-        >
 
-        <!-- <el-table v-loading="listLoading" :data="list" element-loading-text="正在查询中。。。" border fit highlight-current-row row-key="id"> -->
+      <el-button
+        class="filter-item"
+        type="primary"
+        icon="el-icon-edit"
+        @click="showForm()"
+        >添加</el-button
+      >
 
-        <el-table-column align="center" label="轮播图ID" prop="id"/>
+      <el-button
+        class="filter-item"
+        type="success"
+        icon="el-icon-edit"
+        @click="changeSort"
+        >改变类目在侧边栏的顺序</el-button
+      >
+      <el-button
+        :loading="downloadLoading"
+        class="filter-item"
+        type="success"
+        icon="el-icon-download"
+        @click="handleDownload"
+        >导出</el-button
+      >
+    </div>
+    <br />
+    <br />
+    <!-- 查询结果 -->
+    <el-table
+      :data="list"
+      element-loading-text="正在查询中。。。"
+      border
+      fit
+      highlight-current-row
+      ref="refTable"
+      :row-key="getRowKeys"
+      :expand-row-keys="expands"
+    >
+      >
 
-        <el-table-column
-          align="center"
-          label="在小程序的位置顺序"
-          prop="index"
-          sortable
-        />
+      <!-- <el-table v-loading="listLoading" :data="list" element-loading-text="正在查询中。。。" border fit highlight-current-row row-key="id"> -->
 
-        <el-table-column
-          align="center"
-          property="picture"
-          label="轮播图片"
-        >
-          <template slot-scope="scope">
-            <img v-if="scope.row.picture" :src="scope.row.picture" width="40" />
-          </template>
-        </el-table-column>
+      <el-table-column align="center" label="轮播图ID" prop="id" />
 
-        <el-table-column
-          align="center"
-          label="操作"
-          width="200"
-          class-name="small-padding fixed-width"
-        >
-          <template slot-scope="scope">
-            <el-button
-              size="mini"
-              :disabled="scope.$index === 0"
-              @click.stop="moveUp(scope.$index, scope.row)"
-              ><i class="el-icon-arrow-up"></i
-            ></el-button>
-            <el-button
-              size="mini"
-              :disabled="scope.$index === list.length - 1"
-              @click.stop="moveDown(scope.$index, scope.row)"
-              ><i class="el-icon-arrow-down"></i
-            ></el-button>
-            <!-- <el-button
+      <el-table-column
+        align="center"
+        label="在小程序的位置顺序"
+        prop="index"
+        sortable
+      />
+
+      <el-table-column align="center" label="在小程序的页面">
+        <template slot-scope="scope">
+          {{scope.row.page==0?"首页":"点餐页"}}
+        </template>
+      </el-table-column>
+
+      <el-table-column align="center" property="picture" label="轮播图片">
+        <template slot-scope="scope">
+          <img v-if="scope.row.picture" :src="scope.row.picture" width="40" />
+        </template>
+      </el-table-column>
+
+      <el-table-column
+        align="center"
+        label="操作"
+        width="200"
+        class-name="small-padding fixed-width"
+      >
+        <template slot-scope="scope">
+          <el-button
+            size="mini"
+            :disabled="scope.$index === 0"
+            @click.stop="moveUp(scope.$index, scope.row)"
+            ><i class="el-icon-arrow-up"></i
+          ></el-button>
+          <el-button
+            size="mini"
+            :disabled="scope.$index === list.length - 1"
+            @click.stop="moveDown(scope.$index, scope.row)"
+            ><i class="el-icon-arrow-down"></i
+          ></el-button>
+          <!-- <el-button
               type="primary"
               size="mini"
               @click="handleUpdate(scope.row)"
               >编辑</el-button
             > -->
-            <el-button
-              type="danger"
-              size="mini"
-              @click.stop="handleDelete(scope.row)"
-              >删除</el-button
-            >
-          </template>
-        </el-table-column>
-      </el-table>
+          <el-button
+            type="danger"
+            size="mini"
+            @click.stop="handleDelete(scope.row)"
+            >删除</el-button
+          >
+        </template>
+      </el-table-column>
+    </el-table>
 
-      <pagination
-        v-show="total > 0"
-        :total="total"
-        :page.sync="listQuery.page"
-        :limit.sync="listQuery.limit"
-        @pagination="getList"
-      />
-
+    <pagination
+      v-show="total > 0"
+      :total="total"
+      :page.sync="listQuery.page"
+      :limit.sync="listQuery.limit"
+      @pagination="getList"
+    />
 
     <el-dialog :visible.sync="isShowForm" title="增加轮播图">
       <!-- <h3>增加轮播图</h3> -->
@@ -131,31 +132,45 @@
         :model="slideList"
         label-width="150px"
       >
-
         <el-form-item label="轮播图片">
-            <el-upload
-                          :headers="headers"
-              action="/api/admin/storage/create"
-              :show-file-list="false"
+          <el-upload
+            :headers="headers"
+            action="/api/admin/storage/create"
+            :show-file-list="false"
+            :on-success="uploadPicUrl"
+            class="avatar-uploader"
+            accept=".jpg,.jpeg,.png,.gif"
+          >
+            <img
+              v-if="slideList.picture"
+              :src="slideList.picture"
+              class="avatar"
+            />
+            <i v-else class="el-icon-plus avatar-uploader-icon" />
+          </el-upload>
+        </el-form-item>
 
-              :on-success="uploadPicUrl"
-              class="avatar-uploader"
-              accept=".jpg,.jpeg,.png,.gif"
-            >
-              <img v-if="slideList.picture" :src="slideList.picture" class="avatar" />
-              <i v-else class="el-icon-plus avatar-uploader-icon" />
-            </el-upload>
-          </el-form-item>
+        <el-form-item label="页面">
+          <el-select
+            style="width: 200px"
+            class="filter-item"
+            placeholder="请选择页面"
+            v-model="slideList.page"
+          >
+            <el-option
+              v-for="(value, index) in pages"
+              :key="value"
+              :label="value"
+              :value="index"
+            />
+          </el-select>
+        </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
-      <el-button type="info" @click="hiddnForm()"
-        >取消</el-button
-      >
-      <el-button
-        type="success"
-        @click="handleCreate('slideList')"
-        >添加</el-button
-      >
+        <el-button type="info" @click="hiddnForm()">取消</el-button>
+        <el-button type="success" @click="handleCreate('slideList')"
+          >添加</el-button
+        >
       </span>
     </el-dialog>
   </div>
@@ -168,7 +183,7 @@ export default {
   components: { Pagination },
   data() {
     return {
-            token:"",
+      token: "",
       expands: [],
       getRowKeys(row) {
         return row.id;
@@ -191,7 +206,7 @@ export default {
         id: "",
         code: "",
         name: "",
-        timeArray: [],
+        timeArray: []
         // sort: "add_time",
         // order: "desc",
       },
@@ -204,7 +219,7 @@ export default {
               const start = new Date();
               start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
               picker.$emit("pick", [start, end]);
-            },
+            }
           },
           {
             text: "最近一个月",
@@ -213,7 +228,7 @@ export default {
               const start = new Date();
               start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
               picker.$emit("pick", [start, end]);
-            },
+            }
           },
           {
             text: "最近三个月",
@@ -222,32 +237,33 @@ export default {
               const start = new Date();
               start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
               picker.$emit("pick", [start, end]);
-            },
-          },
-        ],
+            }
+          }
+        ]
       },
       listDrinkQuery: {
         page: 1,
         limit: 10,
         id: undefined,
         code: undefined,
-        name: undefined,
+        name: undefined
         // sort: "add_time",
         // order: "desc",
       },
       slideList: {
         id: 0,
         index: 0,
-        picture:"",
+        picture: "",
+        page: ""
       },
       dialogFormVisible: false,
       dialogStatus: "",
       textMap: {
         update: "编辑",
-        create: "创建",
+        create: "创建"
       },
       rules: {
-        name: [{ required: true, message: "类目名不能为空", trigger: "blur" }],
+        name: [{ required: true, message: "类目名不能为空", trigger: "blur" }]
       },
 
       //下拉框的数据
@@ -257,12 +273,15 @@ export default {
       //右边表的数据
       tableData: [],
       multipleSelection: [],
+
+      // 轮播图页面
+      pages: ["首页", "点餐页"]
     };
   },
-    computed:{
-        headers() {
-      return {'Authorization' : this.token};
-    },
+  computed: {
+    headers() {
+      return { Authorization: this.token };
+    }
   },
   created() {
     this.getList();
@@ -362,7 +381,7 @@ export default {
     },
     //TODO
 
-    expandSelect: function (row, expandedRows) {
+    expandSelect: function(row, expandedRows) {
       if (expandedRows.length) {
         this.expands = [];
         if (row) {
@@ -375,29 +394,28 @@ export default {
       this.getList();
       this.list_categoryItems = row.categoryItems;
     },
-         fastSort(arr){
-          //  console.log(arr)
-            if(arr<=1){
-                return arr;
-            }
-            var index = parseInt(arr.length / 2);
-            var item = arr.splice(index,1);
-                var left = [];
-                var right = [];
-            for(var i = 0;i<arr.length;i++){
-               if(arr[i].index<item[0].index){
-                   left.push(arr[i]);
-               }
-               if(arr[i].index>item[0].index){
-                   right.push(arr[i]);
-               }
-
-            }
-            // console.log(left)
-            // console.log(right)
-            // console.log(item)
-            return  this.fastSort(left).concat(item,this.fastSort(right));
-        },
+    fastSort(arr) {
+      //  console.log(arr)
+      if (arr <= 1) {
+        return arr;
+      }
+      var index = parseInt(arr.length / 2);
+      var item = arr.splice(index, 1);
+      var left = [];
+      var right = [];
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i].index < item[0].index) {
+          left.push(arr[i]);
+        }
+        if (arr[i].index > item[0].index) {
+          right.push(arr[i]);
+        }
+      }
+      // console.log(left)
+      // console.log(right)
+      // console.log(item)
+      return this.fastSort(left).concat(item, this.fastSort(right));
+    },
     async getList() {
       this.token = this.$store.state.token;
       this.category = [];
@@ -411,13 +429,13 @@ export default {
         });
 
       this.list = res.data.list;
-      console.log(this.list)
-            this.list = this.fastSort(this.list)
+      console.log("11111",this.list);
+      this.list = this.fastSort(this.list);
 
       this.total = res.data.total;
       this.listLoading = false;
     },
- 
+
     handleSelectionChange(val) {
       this.multipleSelection = val;
     },
@@ -428,7 +446,7 @@ export default {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
-        center: true,
+        center: true
       })
         .then(async () => {
           console.log(this.list);
@@ -440,21 +458,19 @@ export default {
 
           this.$message({
             type: "success",
-            message: "修改成功!",
+            message: "修改成功!"
           });
         })
         .catch(() => {
           this.$message({
             type: "info",
-            message: "已取消",
+            message: "已取消"
           });
         });
       this.isShowUpdate = false;
     },
 
-
-
-    onLevelChange: function (value) {
+    onLevelChange: function(value) {
       // if (value === 'L1') {
       //   this.dataForm.pid = 0
       // }
@@ -463,7 +479,8 @@ export default {
       this.slideList = {
         id: 0,
         index: 0,
-        picture:"",
+        picture: "",
+        page: ""
       };
     },
     hiddnForm() {
@@ -474,13 +491,26 @@ export default {
       this.isShowForm = true;
     },
     handleCreate(formName) {
-      this.$refs[formName].validate((valid) => {
+      this.$refs[formName].validate(valid => {
         if (valid) {
+          if (!this.slideList.picture) {
+            this.$message({
+              type: "info",
+              message: "请添加一张图片"
+            });
+            return;
+          } else if (!this.slideList.page) {
+            this.$message({
+              type: "info",
+              message: "请选择一个页面"
+            });
+            return;
+          }
           this.$confirm("此操作将创建新轮播图, 是否继续?", "提示", {
             confirmButtonText: "确定",
             cancelButtonText: "取消",
             type: "warning",
-            center: true,
+            center: true
           })
             .then(async () => {
               const { data: res } = await this.$http.post(
@@ -492,13 +522,13 @@ export default {
               // this.getList_categoryItems();
               this.$message({
                 type: "success",
-                message: "创建成功!",
+                message: "创建成功!"
               });
             })
             .catch(() => {
               this.$message({
                 type: "info",
-                message: "已取消",
+                message: "已取消"
               });
             });
           this.isShowForm = false;
@@ -535,8 +565,8 @@ export default {
       this.listLoading = false;
       console.log(res.data);
     },
-    uploadPicUrl: function (response) {
-      this.slideList.picture = response.data.url
+    uploadPicUrl: function(response) {
+      this.slideList.picture = response.data.url;
     },
     createData() {
       // this.$refs['dataForm'].validate(valid => {
@@ -598,7 +628,7 @@ export default {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
-        center: true,
+        center: true
       })
         .then(async () => {
           const { data: res } = await this.$http.post(
@@ -608,13 +638,13 @@ export default {
           // this.getList_categoryItems();
           this.$message({
             type: "success",
-            message: "删除成功!",
+            message: "删除成功!"
           });
         })
         .catch(() => {
           this.$message({
             type: "info",
-            message: "已取消",
+            message: "已取消"
           });
 
           // this.getList_categoryItems();
@@ -624,16 +654,20 @@ export default {
 
     handleDownload() {
       this.downloadLoading = true;
-      import("@/vendor/Export2Excel").then((excel) => {
+      import("@/vendor/Export2Excel").then(excel => {
         const tHeader = ["轮播图ID", "在小程序的位置顺序", "轮播图片"];
-        const filterVal = ["id",  "index", "picture"];
-        excel.export_json_to_excel2(tHeader, this.list, filterVal, "轮播图信息");
+        const filterVal = ["id", "index", "picture"];
+        excel.export_json_to_excel2(
+          tHeader,
+          this.list,
+          filterVal,
+          "轮播图信息"
+        );
         this.downloadLoading = false;
       });
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

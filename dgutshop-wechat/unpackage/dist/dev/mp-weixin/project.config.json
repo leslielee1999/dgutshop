@@ -8,22 +8,31 @@
   },
   "compileType": "miniprogram",
   "libVersion": "",
-  "appid": "wxef709d5567f6386c",
+  "appid": "wx6d999608c898a1e9",
   "projectname": "CoffeeShop",
-  "simulatorType": "wechat",
-  "simulatorPluginLibVersion": {},
   "condition": {
     "search": {
+      "current": -1,
       "list": []
     },
     "conversation": {
+      "current": -1,
       "list": []
     },
     "game": {
+      "current": -1,
       "list": []
     },
     "miniprogram": {
-      "list": []
+      "current": 0,
+      "list": [
+        {
+          "id": 0,
+          "name": "pages/shopInfo/shopInfo",
+          "pathName": "pages/shopInfo/shopInfo",
+          "query": ""
+        }
+      ]
     }
   }
 }

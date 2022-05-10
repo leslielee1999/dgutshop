@@ -1,5 +1,5 @@
 <template>
-  <div style="text-align: center">
+  <div style="text-align: left">
     <el-row :gutter="20" style="margin-top: 50px">
       <el-col :span="24">
         <div>
@@ -31,7 +31,7 @@
                     v-model="dataForm.dgutshop_shop_longitude"
                   ></el-input>
                 </el-form-item>
-                                <el-form-item label="纬度" prop="dgutshop_shop_latitude">
+                <el-form-item label="纬度" prop="dgutshop_shop_latitude">
                   <el-input
                     disabled
                     auto-complete="off"
@@ -42,10 +42,31 @@
                   label="营业时间"
                   prop="dgutshop_shop_businesshours"
                 >
-                  <el-input
-                    auto-complete="off"
+                  <input
                     v-model="dataForm.dgutshop_shop_businesshours"
-                  ></el-input>
+                    hidden
+                  />
+                  <el-time-select
+                    placeholder="起始时间"
+                    v-model="startTime"
+                    :picker-options="{
+                      start: '08:30',
+                      step: '00:15',
+                      end: '10:30'
+                    }"
+                  >
+                  </el-time-select>
+                  <el-time-select
+                    placeholder="结束时间"
+                    v-model="endTime"
+                    :picker-options="{
+                      start: '21:30',
+                      step: '00:15',
+                      end: '23:00',
+                      minTime: startTime
+                    }"
+                  >
+                  </el-time-select>
                 </el-form-item>
                 <el-form-item label="联系电话" prop="dgutshop_shop_phone">
                   <el-input
@@ -59,7 +80,7 @@
                     v-model="dataForm.dgutshop_shop_qq"
                   ></el-input>
                 </el-form-item>
-                <el-form-item label="首页海报" prop="dgutshop_shop_poster">
+                <el-form-item label="商家图片" prop="dgutshop_shop_poster">
                   <el-upload
                     :headers="headers"
                     action="/api/admin/storage/create"
@@ -77,28 +98,26 @@
                   </el-upload>
                 </el-form-item>
                 <el-form-item label="是否关店" prop="dgutshop_shop_isclosed">
-                  <template>
-                    <el-switch
-                          v-model="dataForm.dgutshop_shop_isclosed"
-                          :active-value="1"
-                          :inactive-value="2"
-                          active-color="#FF3030"
-                          inactive-color="#B9B9B9"
-                          />
-                  </template>
+                  <el-switch
+                    v-model="dataForm.dgutshop_shop_isclosed"
+                    :active-value="1"
+                    :inactive-value="2"
+                    active-color="#008080"
+                    inactive-color="#B9B9B9"
+                  />
                 </el-form-item>
-                <el-form-item label="关店原因" prop="dgutshop_shop_closedreason" v-if="dataForm.dgutshop_shop_isclosed===1">
+                <el-form-item
+                  label="关店原因"
+                  prop="dgutshop_shop_closedreason"
+                  v-if="dataForm.dgutshop_shop_isclosed === 1"
+                >
                   <el-input
                     auto-complete="off"
                     v-model="dataForm.dgutshop_shop_closedreason"
                   ></el-input>
-                  </el-form-item>
+                </el-form-item>
               </el-form>
-              <div
-                slot="footer"
-                class="dialog-footer"
-                style="text-align: center"
-              >
+              <div slot="footer" class="dialog-footer">
                 <el-button size="mini" type="primary" @click="handleUpdate"
                   >提交修改</el-button
                 >
@@ -125,35 +144,42 @@ export default {
         dgutshop_shop_qq: "",
         dgutshop_shop_poster: "",
         dgutshop_shop_isclosed: "",
-        dgutshop_shop_closedreason: "",
+        dgutshop_shop_closedreason: ""
       },
+      startTime: "",
+      endTime: ""
     };
   },
   methods: {
     async getList() {
       this.token = this.$store.state.token;
       const { data: res } = await this.$http.get("/admin/config/mall");
-      console.log(res);
+      // console.log("123123",res);
       this.dataForm.dgutshop_shop_address = res.data.dgutshop_shop_address;
       this.dataForm.dgutshop_shop_businesshours =
         res.data.dgutshop_shop_businesshours;
+      this.startTime = res.data.dgutshop_shop_businesshours.split("~")[0];
+      this.endTime = res.data.dgutshop_shop_businesshours.split("~")[1];
       this.dataForm.dgutshop_shop_latitude = res.data.dgutshop_shop_latitude;
       this.dataForm.dgutshop_shop_longitude = res.data.dgutshop_shop_longitude;
       this.dataForm.dgutshop_shop_phone = res.data.dgutshop_shop_phone;
       this.dataForm.dgutshop_shop_name = res.data.dgutshop_shop_name;
       this.dataForm.dgutshop_shop_qq = res.data.dgutshop_shop_qq;
       this.dataForm.dgutshop_shop_poster = res.data.dgutshop_shop_poster;
-      this.dataForm.dgutshop_shop_isclosed = res.data.dgutshop_shop_isclosed == "1" ? 1 : 2;
-      this.dataForm.dgutshop_shop_closedreason = res.data.dgutshop_shop_closedreason;
+      this.dataForm.dgutshop_shop_isclosed =
+        res.data.dgutshop_shop_isclosed == "1" ? 1 : 2;
+      this.dataForm.dgutshop_shop_closedreason =
+        res.data.dgutshop_shop_closedreason;
     },
     async handleUpdate() {
       this.$confirm("此操作将修改该店信息, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
-        center: true,
+        center: true
       })
         .then(async () => {
+          this.dataForm.dgutshop_shop_businesshours = this.businesshours;
           const { data: res } = await this.$http.post(
             "/admin/config/mall",
             this.dataForm
@@ -161,30 +187,34 @@ export default {
           this.getList();
           this.$message({
             type: "success",
-            message: "修改成功!",
+            message: "修改成功!"
           });
         })
         .catch(() => {
           this.$message({
             type: "info",
-            message: "已取消",
+            message: "已取消"
           });
         });
       this.isShowUpdate = false;
     },
-    uploadPicUrl: function (response) {
-      console.log(response);
+    uploadPicUrl: function(response) {
+      // console.log(response);
       this.dataForm.dgutshop_shop_poster = response.data.url;
-    },
+    }
   },
   computed: {
     headers() {
       return { Authorization: this.token };
     },
+    businesshours() {
+        return this.startTime + "~" + this.endTime;
+    }
   },
-  created: function () {
+  created: function() {
     this.getList();
-  },
+    // console.info(this.dataForm);
+  }
 };
 </script>
 
@@ -263,5 +293,12 @@ export default {
 .row-bg {
   padding: 10px 0;
   background-color: #f9fafc;
+}
+.avatar-uploader {
+  margin: 0;
+}
+.avatar-uploader img {
+  width: 100%;
+  height: 100%;
 }
 </style>

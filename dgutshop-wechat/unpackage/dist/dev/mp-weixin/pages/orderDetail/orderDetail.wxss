@@ -28,16 +28,9 @@ page {
   background-color: #f5f5f5f5;
 }
 .content {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
+  flex-direction: column;
+  align-items: center;
 }
 .content .header {
   width: 80%;
@@ -45,21 +38,13 @@ page {
   padding-bottom: 20px;
   padding-left: 20px;
   padding-right: 20px;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
+  flex-direction: column;
+  align-items: center;
   background-color: #FFFFFF;
   margin-top: 15px;
   margin-bottom: 10px;
-  -webkit-border-radius: 10px;
-          border-radius: 10px;
+  border-radius: 10px;
 }
 .content .header .title {
   font-size: 19px;
@@ -72,16 +57,10 @@ page {
 }
 .content .card {
   width: 80%;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
   background-color: #FFFFFF;
-  -webkit-border-radius: 10px;
-          border-radius: 10px;
+  border-radius: 10px;
   padding-top: 17px;
   padding-left: 20px;
   padding-right: 20px;
@@ -99,23 +78,12 @@ page {
 .content .card .itemList .item {
   padding-top: 15px;
   padding-bottom: 10px;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-          flex-direction: row;
-  -webkit-flex-wrap: nowrap;
-          flex-wrap: nowrap;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-          justify-content: flex-start;
-  -webkit-box-align: start;
-  -webkit-align-items: flex-start;
-          align-items: flex-start;
-  -webkit-align-content: center;
-          align-content: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: center;
 }
 .content .card .itemList .item > image {
   width: 20%;
@@ -139,19 +107,10 @@ page {
   color: #999;
 }
 .content .card .itemList .item .priceAndNum {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-          justify-content: flex-start;
-  -webkit-box-align: end;
-  -webkit-align-items: flex-end;
-          align-items: flex-end;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
   width: 20%;
 }
 .content .card .itemList .item .priceAndNum .price {
@@ -165,35 +124,19 @@ page {
   color: #999999;
 }
 .content .card .totalPriceRow {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-          justify-content: space-between;
+  flex-direction: row;
+  justify-content: space-between;
   padding-top: 20px;
   padding-bottom: 20px;
   border-bottom: #f0f0f0 solid 1rpx;
   font-size: 27rpx;
 }
 .content .card .bottom {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: end;
-  -webkit-justify-content: flex-end;
-          justify-content: flex-end;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
   padding-top: 20px;
   padding-bottom: 20px;
   font-size: 27rpx;
@@ -204,16 +147,9 @@ page {
   margin-left: 3px;
 }
 .content .card .row {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-          justify-content: flex-start;
+  flex-direction: row;
+  justify-content: flex-start;
   margin-top: 10px;
   margin-bottom: 10px;
   font-size: 26rpx;
@@ -227,15 +163,9 @@ page {
   width: 70%;
 }
 .content .cancel-btn {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-          justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   margin-top: 10px;
   font-size: 17px;
   font-weight: 500;
@@ -245,15 +175,9 @@ page {
   height: 40px;
 }
 .content .comfire-btn {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-          justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   margin-top: 10px;
   font-size: 17px;
   font-weight: 500;

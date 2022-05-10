@@ -15,7 +15,7 @@
                     v-model="dataForm.dgutshop_order_delivery"
                     placeholder="0.00"
                   >
-                  <template slot="append">元</template>
+                    <template slot="append">元</template>
                   </el-input>
                 </el-form-item>
                 <el-form-item
@@ -35,7 +35,7 @@
                 >
                   <el-input
                     auto-complete="off"
-                    v-model="dataForm.dgutshop_order_unconfirmed"
+                    v-model="dataForm.dgutshop_order_unconfirm"
                     placeholder="0"
                     ><template slot="append">时</template></el-input
                   >
@@ -65,8 +65,8 @@ export default {
       dataForm: {
         dgutshop_order_delivery: "",
         dgutshop_order_unpaid: "",
-        dgutshop_order_unconfirmed: "",
-      },
+        dgutshop_order_unconfirm: ""
+      }
     };
   },
   methods: {
@@ -76,15 +76,15 @@ export default {
       console.log(res);
       this.dataForm.dgutshop_order_delivery = res.data.dgutshop_order_delivery;
       this.dataForm.dgutshop_order_unpaid = res.data.dgutshop_order_unpaid;
-      this.dataForm.dgutshop_order_unconfirmed =
-        res.data.dgutshop_order_unconfirmed;
+      this.dataForm.dgutshop_order_unconfirm =
+        res.data.dgutshop_order_unconfirm;
     },
     async handleUpdate() {
       this.$confirm("此操作将修改该店信息, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
-        center: true,
+        center: true
       })
         .then(async () => {
           const { data: res } = await this.$http.post(
@@ -94,30 +94,30 @@ export default {
           this.getList();
           this.$message({
             type: "success",
-            message: "修改成功!",
+            message: "修改成功!"
           });
         })
         .catch(() => {
           this.$message({
             type: "info",
-            message: "已取消",
+            message: "已取消"
           });
         });
       this.isShowUpdate = false;
     },
-    uploadPicUrl: function (response) {
+    uploadPicUrl: function(response) {
       console.log(response);
       this.dataForm.dgutshop_shop_poster = response.data.url;
-    },
+    }
   },
   computed: {
     headers() {
       return { Authorization: this.token };
-    },
+    }
   },
-  created: function () {
+  created: function() {
     this.getList();
-  },
+  }
 };
 </script>
 

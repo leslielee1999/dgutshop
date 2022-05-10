@@ -61,6 +61,13 @@
         @click="handleDownloadPage"
         >导出</el-button
       >
+      <el-button
+        class="filter-item"
+        type="success"
+        icon="el-icon-refresh"
+        @click="handleReflash"
+        >刷新</el-button
+      >
       <!-- <el-button
         class="filter-item"
         type="success"
@@ -162,12 +169,7 @@
         label="订单编号"
         prop="code"
       />
-            <el-table-column
-        align="center"
-        label="用户ID"
-        prop="userId"
-        sortable
-      />
+      <el-table-column align="center" label="用户ID" prop="userId" sortable />
       <el-table-column
         align="center"
         label="下单用户"
@@ -433,7 +435,7 @@ const statusMap = {
   401: "派送中",
   402: "骑车到达",
   501: "已完成",
-  502: "自动确认",
+  502: "自动确认"
 };
 import Pagination from "@/components/Pagination";
 export default {
@@ -442,7 +444,7 @@ export default {
   filters: {
     orderStatusFilter(status) {
       return statusMap[status];
-    },
+    }
   },
   data() {
     return {
@@ -469,7 +471,7 @@ export default {
         timeArray: [],
         orderStatusArray: [],
         sort: "add_time",
-        order: "desc",
+        order: "desc"
       },
       statusStr: "",
       pickerOptions: {
@@ -481,7 +483,7 @@ export default {
               const start = new Date();
               start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
               picker.$emit("pick", [start, end]);
-            },
+            }
           },
           {
             text: "最近一个月",
@@ -490,7 +492,7 @@ export default {
               const start = new Date();
               start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
               picker.$emit("pick", [start, end]);
-            },
+            }
           },
           {
             text: "最近三个月",
@@ -499,22 +501,22 @@ export default {
               const start = new Date();
               start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
               picker.$emit("pick", [start, end]);
-            },
-          },
-        ],
+            }
+          }
+        ]
       },
       statusMap,
       orderDialogVisible: false,
       orderDetail: {
         order: {},
         user: {},
-        orderGoods: [],
+        orderGoods: []
       },
       shipForm: {
         orderId: undefined,
         orderCode: undefined,
         deliverymanName: undefined,
-        deliverymanPhone: undefined,
+        deliverymanPhone: undefined
       },
       shipDialogVisible: false,
       payForm: {
@@ -522,16 +524,16 @@ export default {
         orderSn: "",
         oldMoney: 0,
         newMoney: 0,
-        goodsList: [],
+        goodsList: []
       },
       payDialogVisible: false,
       refundForm: {
         orderId: undefined,
-        refundMoney: undefined,
+        refundMoney: undefined
       },
       refundDialogVisible: false,
       downloadLoading: false,
-      channels: [],
+      channels: []
     };
   },
   created() {
@@ -560,11 +562,11 @@ export default {
             this.total_delivery = 0;
             this.listLoading = false;
           });
-          console.log(res_delivery)
+        console.log(res_delivery);
         this.list_delivery = res_delivery.data.list;
         this.total_delivery = res_delivery.data.total;
         this.listLoading = false;
-        
+
         this.statusStr = "";
         if (this.listQuery.timeArray && this.listQuery.timeArray.length === 2) {
           this.listQuery.start = this.listQuery.timeArray[0];
@@ -596,7 +598,7 @@ export default {
               this.listQuery.start +
               "&end=" +
               this.listQuery.end +
-              this.statusStr+
+              this.statusStr +
               "&sort=create_time"
           )
           .catch(() => {
@@ -616,13 +618,18 @@ export default {
             this.total_delivery = 0;
             this.listLoading = false;
           });
-          console.log(res_delivery)
+        console.log(res_delivery);
         this.list_delivery = res_delivery.data.list;
         this.total_delivery = res_delivery.data.total;
         this.listLoading = false;
 
         const { data: res } = await this.$http
-          .get("/admin/order/list?page=" + this.listQuery.page + "&order=desc"+"&sort=create_time")
+          .get(
+            "/admin/order/list?page=" +
+              this.listQuery.page +
+              "&order=desc" +
+              "&sort=create_time"
+          )
           .catch(() => {
             this.list = [];
             this.total = 0;
@@ -641,7 +648,7 @@ export default {
     getList_orderItems(row, column, cell, event) {
       this.list_orderItems = row.orderItemList;
     },
-    expandSelect: function (row, expandedRows) {
+    expandSelect: function(row, expandedRows) {
       if (expandedRows.length) {
         this.expands = [];
         if (row) {
@@ -650,6 +657,9 @@ export default {
       } else {
         this.expands = [];
       }
+    },
+    handleReflash() {
+      this.getList();
     },
     handleChoice(row) {
       this.shipForm.deliverymanName = row.name;
@@ -671,13 +681,13 @@ export default {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
-        center: true,
+        center: true
       })
         .then(async () => {
           const { data: res } = await this.$http.post(
             "/admin/order/completed",
             {
-              orderId: row.id,
+              orderId: row.id
             }
           );
           this.getList();
@@ -687,32 +697,32 @@ export default {
           if (res.errno == 0) {
             this.$message({
               type: "success",
-              message: "修改成功!",
+              message: "修改成功!"
             });
           } else {
             this.$message({
               type: "danger",
-              message: "发生错误!",
+              message: "发生错误!"
             });
           }
         })
         .catch(() => {
           this.$message({
             type: "info",
-            message: "发生错误",
+            message: "发生错误"
           });
           this.shipDialogVisible = false;
         });
     },
     confirmShip() {
-      this.$refs["shipForm"].validate((valid) => {
+      this.$refs["shipForm"].validate(valid => {
         console.log(this.shipForm);
         if (valid) {
           this.$confirm("此操作将触发发货操作, 是否继续?", "提示", {
             confirmButtonText: "确定",
             cancelButtonText: "取消",
             type: "warning",
-            center: true,
+            center: true
           })
             .then(async () => {
               const { data: res } = await this.$http.post(
@@ -726,19 +736,19 @@ export default {
               if (res.errno == 0) {
                 this.$message({
                   type: "success",
-                  message: "修改成功!",
+                  message: "修改成功!"
                 });
               } else {
                 this.$message({
                   type: "danger",
-                  message: "发生错误!",
+                  message: "发生错误!"
                 });
               }
             })
             .catch(() => {
               this.$message({
                 type: "info",
-                message: "发生错误",
+                message: "发生错误"
               });
               this.shipDialogVisible = false;
             });
@@ -754,7 +764,7 @@ export default {
       );
       this.excelData = res_excel;
       this.downloadLoading = true;
-      import("@/vendor/Export2Excel").then((excel) => {
+      import("@/vendor/Export2Excel").then(excel => {
         const tHeader = [
           "订单编号",
           "下单用户",
@@ -771,7 +781,7 @@ export default {
           "下单渠道",
           "配送费用",
           "奶茶费用",
-          "总费用",
+          "总费用"
         ];
         const filterVal = [
           "code",
@@ -789,7 +799,7 @@ export default {
           "deliveryCompany",
           "deliveryPrice",
           "productPrice",
-          "orderPrice",
+          "orderPrice"
         ];
         excel.export_json_to_excel2(
           tHeader,
@@ -827,8 +837,8 @@ export default {
               this.listQuery.end +
               this.statusStr +
               "&limit=" +
-              this.total+
-              "&sort=create_time"+
+              this.total +
+              "&sort=create_time" +
               "&order=desc"
           )
           // .get("/admin/order/list?orderStatusArray=101")
@@ -841,7 +851,7 @@ export default {
       }
 
       this.downloadLoading = true;
-      import("@/vendor/Export2Excel").then((excel) => {
+      import("@/vendor/Export2Excel").then(excel => {
         const tHeader = [
           "订单编号",
           "下单用户",
@@ -858,7 +868,7 @@ export default {
           "下单渠道",
           "配送费用",
           "奶茶费用",
-          "总费用",
+          "总费用"
         ];
         const filterVal = [
           "code",
@@ -876,7 +886,7 @@ export default {
           "deliveryCompany",
           "deliveryPrice",
           "productPrice",
-          "orderPrice",
+          "orderPrice"
         ];
         // if (this.listAll.length == 0) {
         //   console.log("list")
@@ -889,20 +899,20 @@ export default {
         //   this.downloadLoading = false;
         // }
         // if (this.listAll.length != 0) {
-          excel.export_json_to_excel2(
-            tHeader,
-            this.listAll,
-            filterVal,
-            "订单信息"
-          );
-          this.downloadLoading = false;
+        excel.export_json_to_excel2(
+          tHeader,
+          this.listAll,
+          filterVal,
+          "订单信息"
+        );
+        this.downloadLoading = false;
         // }
       });
     },
     printOrder() {
       //   this.$print(this.$refs.print)
       //   this.orderDialogVisible = false
-    },
-  },
+    }
+  }
 };
 </script>

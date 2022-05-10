@@ -1,21 +1,14 @@
 
 .food-control.data-v-432a1c68 {
-	display: -webkit-box;
-	display: -webkit-flex;
 	display: flex;
-	-webkit-box-flex: 1;
-	-webkit-flex: 1;
-	        flex: 1;
-	-webkit-justify-content: space-around;
-	        justify-content: space-around;
+	flex: 1;
+	justify-content: space-around;
 }
 .cont.data-v-432a1c68 {
 	width: 22px;
 	height: 22px;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
-	-webkit-border-radius: 50%;
-	        border-radius: 50%;
+	box-sizing: border-box;
+	border-radius: 50%;
 	text-align: center;
 }
 
@@ -51,63 +44,37 @@ page {
 .content {
   top: 0;
   height: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-          justify-content: center;
+  flex-direction: column;
+  justify-content: center;
   overflow: hidden;
 }
 .content .box {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-flex: 99;
-  -webkit-flex: 99;
-          flex: 99;
+  flex-direction: column;
+  flex: 99;
   height: 333px;
   border-style: solid;
-  -webkit-box-shadow: 0px 2px 2px 1px #DDDDDD;
-          box-shadow: 0px 2px 2px 1px #DDDDDD;
+  box-shadow: 0px 2px 2px 1px #DDDDDD;
   border-width: 0rpx;
   border-bottom: #E9E9E9 solid 1px;
 }
 .content .box .shop-name {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-          justify-content: space-between;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
+  justify-content: space-between;
+  align-items: center;
   margin: 0rpx 30rpx 0rpx 30rpx;
 }
 .content .box .shop-name .name {
   font-size: 35rpx;
 }
 .content .box .shop-name .select {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
+  align-items: center;
   font-size: 25rpx;
   width: 180rpx;
   height: 50rpx;
-  -webkit-border-radius: 32rpx;
-          border-radius: 32rpx;
+  border-radius: 32rpx;
   background-color: #f6f6f6;
   padding: 2px;
   border: 1px solid #dedede;
@@ -118,8 +85,7 @@ page {
   height: 60rpx;
   background-color: #343434;
   color: #ffffff;
-  -webkit-border-radius: 32rpx;
-          border-radius: 32rpx;
+  border-radius: 32rpx;
   text-align: center;
   line-height: 60rpx;
 }
@@ -127,30 +93,21 @@ page {
   width: 90rpx;
   height: 60rpx;
   color: #d2d2d2;
-  -webkit-border-radius: 25rpx;
-          border-radius: 25rpx;
+  border-radius: 25rpx;
   text-align: center;
   line-height: 60rpx;
 }
 .content .box .distance-bar {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-          justify-content: space-between;
+  justify-content: space-between;
   margin: 30rpx;
 }
 .content .box .distance-bar .distance {
   font-size: 28rpx;
 }
 .content .box .distance-bar .shop-message {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
+  align-items: center;
 }
 .content .box .distance-bar .shop-message .message {
   font-size: 26rpx;
@@ -163,23 +120,12 @@ page {
   height: 100%;
 }
 .scroll-panel .list-box {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-          flex-direction: row;
-  -webkit-flex-wrap: nowrap;
-          flex-wrap: nowrap;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-          justify-content: flex-start;
-  -webkit-box-align: start;
-  -webkit-align-items: flex-start;
-          align-items: flex-start;
-  -webkit-align-content: flex-start;
-          align-content: flex-start;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
   font-size: 28rpx;
   height: 100%;
   margin-bottom: 0px;
@@ -187,8 +133,7 @@ page {
 .scroll-panel .list-box .left {
   width: 180rpx;
   background-color: #f6f6f6;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   overflow: hidden;
   height: 100%;
 }
@@ -219,16 +164,9 @@ page {
   color: #cdcdcd;
   font-size: 15px;
   font-weight: 400;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-          justify-content: center;
+  flex-direction: row;
+  justify-content: center;
 }
 .scroll-panel .list-box .left .fill-last {
   height: 0;
@@ -240,11 +178,8 @@ page {
   background-color: #fff;
   padding-left: 20rpx;
   width: 0;
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-          flex: 1;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  flex: 1;
+  box-sizing: border-box;
   overflow: hidden;
 }
 .scroll-panel .list-box .main .ads {
@@ -253,8 +188,7 @@ page {
 .scroll-panel .list-box .main .ads image {
   width: 100%;
   height: 100%;
-  -webkit-border-radius: 8rpx;
-          border-radius: 8rpx;
+  border-radius: 8rpx;
 }
 .scroll-panel .list-box .main .title {
   line-height: 64rpx;
@@ -270,23 +204,12 @@ page {
   border-bottom: #E9E9E9 solid 1px;
 }
 .scroll-panel .list-box .main .goods {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-          flex-direction: row;
-  -webkit-flex-wrap: nowrap;
-          flex-wrap: nowrap;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-          justify-content: flex-start;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
-  -webkit-align-content: center;
-          align-content: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
   margin-top: 15rpx;
   margin-bottom: 40rpx;
 }
@@ -304,16 +227,9 @@ page {
   margin-bottom: 10rpx;
 }
 .scroll-panel .list-box .main .goods .heated {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-          justify-content: flex-start;
+  flex-direction: row;
+  justify-content: flex-start;
 }
 .scroll-panel .list-box .main .goods .describe {
   font-size: 24rpx;
@@ -333,31 +249,16 @@ page {
 }
 .scroll-panel .list-box .main .goods .bottom {
   width: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-          justify-content: space-between;
-  -webkit-align-content: space-between;
-          align-content: space-between;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: space-between;
 }
 .scroll-panel .list-box .main .goods .bottom .price {
   width: 70%;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-align: end;
-  -webkit-align-items: flex-end;
-          align-items: flex-end;
+  flex-direction: row;
+  align-items: flex-end;
   margin-top: 10px;
   font-size: 35rpx;
   font-weight: 600;
@@ -380,24 +281,14 @@ page {
   height: 40rpx;
   padding-left: 2px;
   padding-right: 2px;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-          justify-content: center;
-  -webkit-border-radius: 30px;
+  align-items: center;
+  justify-content: center;
   border-radius: 30px;
-  -webkit-transition: all 0.15s ease;
   transition: all 0.15s ease;
 }
 .product-card {
   z-index: 200;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
   width: 100%;
   height: 100%;
@@ -405,96 +296,57 @@ page {
 }
 .product-card .card-content {
   height: 100vh;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-          justify-content: center;
+  flex-direction: column;
+  justify-content: center;
 }
 .product-card .card-content .product-form {
   background-color: #FFFFFF;
   width: 660rpx;
   height: 65%;
-  -webkit-border-top-left-radius: 5px;
-          border-top-left-radius: 5px;
-  -webkit-border-top-right-radius: 5px;
-          border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 .product-card .card-content .product-form .product-image {
   height: 150px;
   width: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
+  flex-direction: column;
+  align-items: center;
   position: relative;
 }
 .product-card .card-content .product-form .ring {
   background-color: rgba(0, 0, 0, 0.3);
   width: 28px;
   height: 28px;
-  -webkit-border-radius: 100%;
-          border-radius: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
+  border-radius: 100%;
   display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
   font-size: 16px;
 }
 .product-card .card-content .product-form .ctn {
   z-index: 2;
   /* border: 1px solid #e3e3e3; */
   width: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-pack: end;
-  -webkit-justify-content: flex-end;
-          justify-content: flex-end;
+  justify-content: flex-end;
   overflow: hidden;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
+  align-items: center;
   position: fixed;
 }
 .product-card .card-content .product-form .ctn .leftBox {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
   width: 60px;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-          justify-content: space-between;
-  -webkit-box-flex: 0;
-  -webkit-flex: none;
-          flex: none;
+  justify-content: space-between;
+  flex: none;
   margin-top: 10px;
   margin-right: 30px;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
+  align-items: center;
 }
 .product-card .card-content .product-form .ctn .jrNull {
   width: 95px;
-  -webkit-box-flex: 0;
-  -webkit-flex: none;
-          flex: none;
+  flex: none;
 }
 .product-card .card-content .product-form .fillHeight {
   height: 50px;
@@ -536,44 +388,21 @@ page {
   height: 15%;
   max-height: 130px;
   background-color: #FFFFFF;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: stretch;
-  -webkit-align-items: stretch;
-          align-items: stretch;
-  -webkit-border-bottom-left-radius: 5px;
-          border-bottom-left-radius: 5px;
-  -webkit-border-bottom-right-radius: 5px;
-          border-bottom-right-radius: 5px;
-  display: -webkit-box;
-  display: -webkit-flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
   display: flex;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-          justify-content: space-between;
+  justify-content: space-between;
 }
 .product-card .card-content .formBottom .textAndcontrol {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-          justify-content: space-between;
+  flex-direction: row;
+  justify-content: space-between;
 }
 .product-card .card-content .formBottom .textAndcontrol .bottomText {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
   height: 40%;
   width: 70%;
 }
@@ -597,70 +426,40 @@ page {
   margin-top: 10px;
 }
 .product-card .card-content .formBottom .textAndcontrol .control {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-          flex-direction: row;
-  -webkit-justify-content: space-around;
-          justify-content: space-around;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
   width: 30%;
   height: 100%;
 }
 .product-card .card-content .formBottom .textAndcontrol .control .des {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
   width: 32px;
   height: 32px;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  -webkit-border-radius: 100%;
-          border-radius: 100%;
+  box-sizing: border-box;
+  border-radius: 100%;
 }
 .product-card .card-content .formBottom .textAndcontrol .control .add {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
   width: 25px;
   height: 25px;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  -webkit-border-radius: 100%;
-          border-radius: 100%;
+  box-sizing: border-box;
+  border-radius: 100%;
 }
 .product-card .card-content .formBottom none::after {
   border: none;
 }
 .product-card .card-content .formBottom .formButton {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
   height: 30%;
   width: 85%;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-          justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   background-color: #DBA871;
   font-size: 14px;
   margin-bottom: 10px;

@@ -189,7 +189,7 @@ a:visited {text-decoration:none;color:black;}
   display: flex;
   flex-direction: row;
   align-items: center;
-  background-color:#3F51B5;
+  background-color: var(--themeColor);
   box-sizing: border-box;
   width: 100%;
   height: 70px;

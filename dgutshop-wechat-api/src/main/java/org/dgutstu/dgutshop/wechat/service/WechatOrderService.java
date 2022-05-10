@@ -99,7 +99,7 @@ public class WechatOrderService {
         BigDecimal deliveryPrice = orderListVo.getDeliveryPrice();
         String shopName = orderListVo.getShopName();
         String shopAddress = orderListVo.getShopAddress();
-        String note = orderListVo.getNote();
+//        String note = orderListVo.getNote();
 
         Integer orderId = null;
         DgutshopOrder order = null;
@@ -120,7 +120,7 @@ public class WechatOrderService {
         order.setPayDate(LocalDateTime.of(1900,01,01,1,1,1));
         order.setShopName(shopName);
         order.setShopAddress(shopAddress);
-        order.setNote(note);
+//        order.setNote(note);
 
         //  添加订单表项
         orderService.create(order);

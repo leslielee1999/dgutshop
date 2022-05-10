@@ -10,47 +10,22 @@
       unique-opened
       router
     >
-      <!-- 信息页 -->
-      <!-- <el-submenu index="1"> -->
-      <!-- 一级菜单的模板区 -->
-      <!-- <template slot="title">
-
-          <i class="el-icon-menu" style=""></i>
-
-          <span>用户信息</span>
-        </template> -->
-      <!-- 二级菜单 -->
-            <!-- <el-menu-item index="/Test">
-        <template slot="title">
-          <i class="el-icon-menu" style=""></i>
-          <span>测试</span>
-        </template>
-      </el-menu-item> -->
-
       <el-menu-item index="/Main">
-        <template slot="title">
-          <!-- 图标 -->
-          <i class="el-icon-menu" style=""></i>
-          <!-- 文本 -->
-          <span>首页</span>
-        </template>
+        <!-- 图标 -->
+        <i class="el-icon-s-home" style=""></i>
+        <!-- 文本 -->
+        <span>首页</span>
       </el-menu-item>
 
       <el-menu-item
         index="/MallManage"
-        v-if="
-          MallManageActive &&
-          this.obj.roleId === 1
-        "
+        v-if="MallManageActive && this.obj.roleId === 1"
       >
-        <template slot="title">
-          <!-- 图标 -->
-          <i class="el-icon-menu" style=""></i>
-          <!-- 文本 -->
-          <span>商家信息管理</span>
-        </template>
+        <!-- 图标 -->
+        <i class="el-icon-s-shop" style=""></i>
+        <!-- 文本 -->
+        <span>商家信息管理</span>
       </el-menu-item>
-      <!-- </el-submenu> -->
 
       <!-- 超级管理员 -->
       <!-- 一级菜单 -->
@@ -58,21 +33,18 @@
         <!-- 一级菜单的模板区 -->
         <template slot="title">
           <!-- 图标 -->
-          <i class="el-icon-menu" style=""></i>
+          <i class="el-icon-user-solid" style=""></i>
           <!-- 文本 -->
           <span>人员信息管理</span>
         </template>
         <!-- 二级菜单 -->
         <el-menu-item
           index="/ManagerManage"
-          v-if="
-            ManagerManageActive &&
-            this.obj.roleId === 1
-          "
+          v-if="ManagerManageActive && this.obj.roleId === 1"
         >
           <template slot="title">
             <!-- 图标 -->
-            <i class="el-icon-location" style=""></i>
+            <i class="el-icon-coordinate" style=""></i>
             <!-- 文本 -->
             <span>管理员管理</span>
           </template>
@@ -80,7 +52,7 @@
         <el-menu-item index="/UserManage" v-if="UserManageActive">
           <template slot="title">
             <!-- 图标 -->
-            <i class="el-icon-location" style=""></i>
+            <i class="el-icon-user" style=""></i>
             <!-- 文本 -->
             <span>用户管理</span>
           </template>
@@ -88,7 +60,7 @@
         <el-menu-item index="/AddressManage" v-if="AddressManageActive">
           <template slot="title">
             <!-- 图标 -->
-            <i class="el-icon-location" style=""></i>
+            <i class="el-icon-map-location" style=""></i>
             <!-- 文本 -->
             <span>用户地址管理</span>
           </template>
@@ -100,15 +72,18 @@
         <!-- 一级菜单的模板区 -->
         <template slot="title">
           <!-- 图标 -->
-          <i class="el-icon-menu" style=""></i>
+          <i class="el-icon-s-order" style=""></i>
           <!-- 文本 -->
           <span>订单管理</span>
         </template>
         <!-- 二级菜单 -->
-                <el-menu-item index="/OrderConfiguration" v-if="OrderConfigurationActive">
+        <el-menu-item
+          index="/OrderConfiguration"
+          v-if="OrderConfigurationActive"
+        >
           <template slot="title">
             <!-- 图标 -->
-            <i class="el-icon-location" style=""></i>
+            <i class="el-icon-document-add" style=""></i>
             <!-- 文本 -->
             <span>订单配置</span>
           </template>
@@ -116,7 +91,7 @@
         <el-menu-item index="/SolveOrder" v-if="SolveOrderActive">
           <template slot="title">
             <!-- 图标 -->
-            <i class="el-icon-location" style=""></i>
+            <i class="el-icon-tickets" style=""></i>
             <!-- 文本 -->
             <span>处理订单</span>
           </template>
@@ -133,31 +108,26 @@
         <!-- 一级菜单的模板区 -->
         <template slot="title">
           <!-- 图标 -->
-          <i class="el-icon-menu" style=""></i>
+          <i class="el-icon-s-goods" style=""></i>
           <!-- 文本 -->
           <span>饮品</span>
         </template>
         <!-- 二级菜单 -->
         <el-menu-item index="/DrinkManage" v-if="DrinkManageActive">
           <template slot="title">
-            <!-- 图标 -->
-            <i class="el-icon-location" style=""></i>
-            <!-- 文本 -->
+            <i class="el-icon-ice-drink" style=""></i>
             <span>饮品管理</span>
           </template>
         </el-menu-item>
         <el-menu-item index="/ToppingsManage" v-if="ToppingsManageActive">
           <template slot="title">
-            <!-- 图标 -->
-            <i class="el-icon-location" style=""></i>
-            <!-- 文本 -->
+            <i class="el-icon-cherry" style=""></i>
             <span>小料管理</span>
           </template>
         </el-menu-item>
       </el-submenu>
 
-
- <el-submenu index="5">
+      <el-submenu index="5">
         <!-- 一级菜单的模板区 -->
         <template slot="title">
           <!-- 图标 -->
@@ -169,7 +139,7 @@
         <el-menu-item index="/DrinkSortManage" v-if="DrinkSortManageActive">
           <template slot="title">
             <!-- 图标 -->
-            <i class="el-icon-location" style=""></i>
+            <i class="el-icon-bangzhu" style=""></i>
             <!-- 文本 -->
             <span>小程序侧边栏分类管理</span>
           </template>
@@ -177,13 +147,12 @@
         <el-menu-item index="/SlideShowManage" v-if="SlideShowActive">
           <template slot="title">
             <!-- 图标 -->
-            <i class="el-icon-location" style=""></i>
+            <i class="el-icon-film" style=""></i>
             <!-- 文本 -->
             <span>轮播图管理</span>
           </template>
         </el-menu-item>
       </el-submenu>
-
 
       <!-- <el-submenu index="5">
         <template slot="title">
@@ -202,18 +171,17 @@
 </template>
 
 <script>
-import storage from '@/storage'
+import storage from "@/storage";
 import bus from "../Home/bus.js";
 export default {
-  created: function () {
-
+  created: function() {
     // 通过 Event Bus 进行组件间通信，来折叠侧边栏
-    bus.$on("collapse", (msg) => {
+    bus.$on("collapse", msg => {
       this.collapse = msg;
       bus.$emit("collapse-content", msg);
     });
-           var obj=JSON.parse(localStorage.getItem("user"));
-        console.log(obj.roleId)
+    var obj = JSON.parse(localStorage.getItem("user"));
+    console.log(obj.roleId);
     if (obj.roleId === 1) {
       this.TestActive = true;
       this.SlideShowActive = true;
@@ -247,14 +215,14 @@ export default {
   computed: {
     onRoutes() {
       return this.$route.path.replace("/", "");
-    },
+    }
   },
-  data: function () {
+  data: function() {
     return {
-      obj:JSON.parse(localStorage.getItem("user")),
+      obj: JSON.parse(localStorage.getItem("user")),
       collapse: false,
-      OrderConfigurationActive:false,
-      TestActive:false,
+      OrderConfigurationActive: false,
+      TestActive: false,
       SlideShowActive: false,
       MallManageActive: false,
       UserManageActive: false,
@@ -266,9 +234,9 @@ export default {
       CheckActiveActive: false,
       DrinkSortManageActive: false,
       AddressManageActive: false,
-      ToppingsManageActive: false,
+      ToppingsManageActive: false
     };
-  },
+  }
 };
 </script>
 <style scoped>

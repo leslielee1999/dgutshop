@@ -29,43 +29,25 @@
 }
 .scroll .list {
   background-color: #FFFFFF;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
 }
 .scroll .list > view {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
 }
 .scroll .list .list-item {
   background-color: #FFFFFF;
   padding-top: 5px;
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
   display: inline-flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-          flex-direction: row;
+  flex-direction: row;
   height: 110px;
   width: 100%;
   border-bottom: #E9E9E9 solid 1px;
 }
 .scroll .list .list-item .image-box {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
   margin-right: 16rpx;
   margin-left: 2px;
   width: 25%;
@@ -75,13 +57,8 @@
   height: 60px;
 }
 .scroll .list .list-item .main {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
   width: 75%;
 }
 .scroll .list .list-item .main .name {
@@ -108,19 +85,10 @@
   /** 显示的行数 **/
 }
 .scroll .list .list-item .main .bottom {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-          justify-content: space-between;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   margin-top: 8px;
 }
@@ -131,55 +99,31 @@
   color: #000000;
 }
 .scroll .list .list-item .main .bottom .control {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-          flex-direction: row;
-  -webkit-justify-content: space-around;
-          justify-content: space-around;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
   width: 30%;
   height: 100%;
   margin-right: 10px;
 }
 .scroll .list .list-item .main .bottom .control .des {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
   width: 32px;
   height: 32px;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  -webkit-border-radius: 100%;
-          border-radius: 100%;
+  box-sizing: border-box;
+  border-radius: 100%;
 }
 .scroll .list .list-item .main .bottom .control .add {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
   width: 25px;
   height: 25px;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  -webkit-border-radius: 100%;
-          border-radius: 100%;
+  box-sizing: border-box;
+  border-radius: 100%;
 }
 .scroll .fillHeight {
   height: 80px;
@@ -192,15 +136,11 @@
   right: 0;
   height: 54px;
   z-index: 99;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
   background-color: #F0F0F1;
 }
 .carIcon {
-  -webkit-box-flex: 2;
-  -webkit-flex: 2;
-          flex: 2;
+  flex: 2;
 }
 .iconBox {
   position: absolute;
@@ -208,22 +148,14 @@
   left: 18px;
   z-index: 101;
   background-color: #FFFFFF;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
   height: 55px;
   width: 55px;
   line-height: 55px;
   /* border: 6px solid #141d27; */
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-          justify-content: center;
-  -webkit-box-shadow: 0px 3px 3px #c5c5c5;
+  align-items: center;
+  justify-content: center;
   box-shadow: 0px 3px 3px #c5c5c5;
 }
 .iconBox .allcount {
@@ -235,8 +167,7 @@
   font-size: 9px;
   line-height: 16px;
   font-weight: 400;
-  -webkit-border-radius: 10px;
-          border-radius: 10px;
+  border-radius: 10px;
   background-color: #DBA871;
   color: #ffffff;
 }
@@ -247,29 +178,17 @@
   height: 30px;
   padding: 6px;
   color: #cccccc;
-  -webkit-border-radius: 50%;
-          border-radius: 50%;
+  border-radius: 50%;
 }
 .carIcon .active {
   background-color: #FFFFFF;
 }
 .middle {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-          justify-content: space-between;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
-  -webkit-box-flex: 4;
-  -webkit-flex: 4;
-          flex: 4;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex: 4;
   font-size: 20px;
   font-weight: 600;
 }
@@ -277,31 +196,18 @@
   color: #000000;
 }
 .middle .delivery {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-          flex-direction: row;
+  flex-direction: row;
   font-size: 14px;
   margin-right: 7px;
   font-weight: 400;
 }
 .BtnRight {
-  -webkit-box-flex: 2;
-  -webkit-flex: 2;
-          flex: 2;
+  flex: 2;
   background-color: #DBA871;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
   font-size: 17px;
   color: #FFFFFF;
 }
@@ -311,31 +217,17 @@
   left: 0;
   right: 0;
   z-index: 90;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
 }
 .cartList .title .clear {
   background: #FFFFFF;
-  -webkit-box-pack: end;
-  -webkit-justify-content: flex-end;
-          justify-content: flex-end;
+  justify-content: flex-end;
   padding: 10px 10px;
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-          flex-direction: row;
-  -webkit-border-top-left-radius: 5px;
-          border-top-left-radius: 5px;
-  -webkit-border-top-right-radius: 5px;
-          border-top-right-radius: 5px;
+  flex-direction: row;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
   border-bottom: #E9E9E9 solid 1px;
 }
 /* 遮布 */

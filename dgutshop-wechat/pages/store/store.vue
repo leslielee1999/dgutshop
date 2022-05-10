@@ -619,8 +619,6 @@
 					console.log("avtive change")
 				}
 
-
-
 			},
 			calcSize() {
 				let h = 0
