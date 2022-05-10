@@ -166,7 +166,7 @@
     }
 
     .tags-li.active .tags-li-title {
-        color: #1E90FF;
+        color: var(--themeColor);
     }
 
     .tags-close-box {

@@ -612,29 +612,26 @@ export default {
     this.getAllList();
   },
   methods: {
-    //上移
-    moveUp(index, row) {
-      var that = this;
-      // console.log('上移',  row);
-
-      // console.log(that.list[index]);
-      if (index > 0) {
-        let upDate = that.list[index - 1];
-        that.list.splice(index - 1, 1);
-        that.list.splice(index, 0, upDate);
-
-        row.index = index;
-
-        for (var i = 0; i < index; i++) {
-          that.list[i].index = i;
-        }
-        for (var i = index; i < that.total; i++) {
-          that.list[i].index = i;
-        }
-      } else {
-        alert("已经是第一条，不可上移");
-      }
-    },
+//上移
+moveUp(index, row) {
+  var that = this;
+  // console.log('上移',  row)
+  // console.log(that.list[index]);
+  if (index > 0) {
+    let upDate = that.list[index - 1];
+    that.list.splice(index - 1, 1);
+    that.list.splice(index, 0, upDate)
+    row.index = index
+    for (var i = 0; i < index; i++) {
+      that.list[i].index = i;
+    }
+    for (var i = index; i < that.total; i++) {
+      that.list[i].index = i;
+    }
+  } else {
+    alert("已经是第一条，不可上移");
+  }
+},
     //上移
     moveUpItem(index, row) {
       var that = this;

@@ -2,7 +2,7 @@
   <div class="app-container">
     <!-- 查询和其他操作 -->
     <div class="filter-container">
-            <el-input
+      <el-input
         v-model="listQuery.userId"
         clearable
         class="filter-item"
@@ -47,12 +47,19 @@
         @click="getList"
         >查找</el-button
       >
-            <el-button
+      <el-button
         class="filter-item"
         type="success"
         icon="el-icon-download"
         @click="handleDownloadPage"
         >导出</el-button
+      >
+      <el-button
+        class="filter-item"
+        type="success"
+        icon="el-icon-refresh"
+        @click="handleReflash"
+        >刷新</el-button
       >
       <!-- <el-button
         class="filter-item"
@@ -131,7 +138,6 @@
         </template>
       </el-table-column> -->
     </el-table>
-    
 
     <pagination
       v-show="total > 0"
@@ -178,8 +184,8 @@ export default {
   components: { Pagination },
   data() {
     return {
-      listAll:[],
-      excelData:[],
+      listAll: [],
+      excelData: [],
       // uploadPath,
       isShowUpdate: false,
       isShowForm: false,
@@ -192,11 +198,11 @@ export default {
         page: 1,
         limit: 10,
         userName: "",
-        userId:"",
+        userId: "",
         wechatId: "",
         phone: "",
         sort: "add_time",
-        order: "desc",
+        order: "desc"
       },
       pickerOptions: {
         shortcuts: [
@@ -207,7 +213,7 @@ export default {
               const start = new Date();
               start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
               picker.$emit("pick", [start, end]);
-            },
+            }
           },
           {
             text: "最近一个月",
@@ -216,7 +222,7 @@ export default {
               const start = new Date();
               start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
               picker.$emit("pick", [start, end]);
-            },
+            }
           },
           {
             text: "最近三个月",
@@ -225,9 +231,9 @@ export default {
               const start = new Date();
               start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
               picker.$emit("pick", [start, end]);
-            },
-          },
-        ],
+            }
+          }
+        ]
       },
       statusAddress: ["默认地址", "非默认地址"],
       address: {
@@ -241,7 +247,7 @@ export default {
         create_time: null,
         update_time: null,
         isDefault: 0,
-        deleted: 0,
+        deleted: 0
       },
       dialogFormVisible: false,
       dialogStatus: "",
@@ -255,25 +261,23 @@ export default {
       //     { min: 12, max: 20, message: "长度在 12 到 20 个字符" },
       //   ],
       // },
-      downloadLoading: false,
+      downloadLoading: false
     };
   },
   created() {
     this.getList();
-
   },
   methods: {
-//      async getAllList(){
-//  const { data: res_excel } = await this.$http
-//         .get("/admin/address/getAllAddress")
-//         // console.log(res_excel)
-//         this.excelData = res_excel
-//         },
+    //      async getAllList(){
+    //  const { data: res_excel } = await this.$http
+    //         .get("/admin/address/getAllAddress")
+    //         // console.log(res_excel)
+    //         this.excelData = res_excel
+    //         },
     async getList() {
       this.listLoading = true;
-            
 
-             if (this.listQuery.timeArray && this.listQuery.timeArray.length === 2) {
+      if (this.listQuery.timeArray && this.listQuery.timeArray.length === 2) {
         this.listQuery.start = this.listQuery.timeArray[0];
         this.listQuery.end = this.listQuery.timeArray[1];
       } else {
@@ -284,8 +288,8 @@ export default {
       const { data: res } = await this.$http
         .get(
           "/admin/address/list?page=" +
-              this.listQuery.page +
-              "&userName="+
+            this.listQuery.page +
+            "&userName=" +
             this.listQuery.userName +
             "&wechatId=" +
             this.listQuery.wechatId +
@@ -294,9 +298,10 @@ export default {
             "&start=" +
             this.listQuery.start +
             "&end=" +
-            this.listQuery.end+
-            "&order=asc"+
-            "&userId="+this.listQuery.userId
+            this.listQuery.end +
+            "&order=asc" +
+            "&userId=" +
+            this.listQuery.userId
         )
         .catch(() => {
           this.list = [];
@@ -307,7 +312,9 @@ export default {
       this.total = res.data.total;
       this.listLoading = false;
       console.log(res.data);
-
+    },
+    handleReflash() {
+      this.getList();
     },
     resetForm() {
       this.address = {
@@ -321,7 +328,7 @@ export default {
         create_time: null,
         update_time: null,
         isDefault: 0,
-        deleted: 0,
+        deleted: 0
       };
     },
 
@@ -340,13 +347,13 @@ export default {
       this.isShowUpdate = false;
     },
     handleUpdate(formName) {
-      this.$refs[formName].validate((valid) => {
+      this.$refs[formName].validate(valid => {
         if (valid) {
           this.$confirm("此操作将修改该用户状态, 是否继续?", "提示", {
             confirmButtonText: "确定",
             cancelButtonText: "取消",
             type: "warning",
-            center: true,
+            center: true
           })
             .then(async () => {
               console.log(this.user);
@@ -359,13 +366,13 @@ export default {
               this.isShowUpdate = false;
               this.$message({
                 type: "success",
-                message: "修改成功!",
+                message: "修改成功!"
               });
             })
             .catch(() => {
               this.$message({
                 type: "info",
-                message: "发生错误",
+                message: "发生错误"
               });
               this.isShowUpdate = false;
             });
@@ -382,7 +389,7 @@ export default {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
-        center: true,
+        center: true
       })
         .then(async () => {
           const { data: res } = await this.$http.post(
@@ -391,25 +398,26 @@ export default {
           this.getList();
           this.$message({
             type: "success",
-            message: "删除成功!",
+            message: "删除成功!"
           });
         })
         .catch(() => {
           this.$message({
             type: "info",
-            message: "已取消",
+            message: "已取消"
           });
           this.getList();
         });
     },
-   async handleDownload() {
-       const { data: res_excel } = await this.$http
-        .get("/admin/address/getAllAddress")
-        // console.log(res_excel)
-        this.excelData = res_excel
+    async handleDownload() {
+      const { data: res_excel } = await this.$http.get(
+        "/admin/address/getAllAddress"
+      );
+      // console.log(res_excel)
+      this.excelData = res_excel;
       this.downloadLoading = true;
-          // this.getAllList();
-      import("@/vendor/Export2Excel").then((excel) => {
+      // this.getAllList();
+      import("@/vendor/Export2Excel").then(excel => {
         const tHeader = [
           "ID",
           "用户ID",
@@ -417,7 +425,7 @@ export default {
           "用户联系方式",
           "用户地址",
           "房间号",
-          "地址状态",
+          "地址状态"
         ];
         const filterVal = [
           "id",
@@ -426,7 +434,7 @@ export default {
           "userPhone",
           "userAddress",
           "userRoom",
-          "isDefault",
+          "isDefault"
         ];
         excel.export_json_to_excel2(
           tHeader,
@@ -437,8 +445,8 @@ export default {
         this.downloadLoading = false;
       });
     },
-       async handleDownloadPage() {
-          if (this.listQuery.timeArray && this.listQuery.timeArray.length === 2) {
+    async handleDownloadPage() {
+      if (this.listQuery.timeArray && this.listQuery.timeArray.length === 2) {
         this.listQuery.start = this.listQuery.timeArray[0];
         this.listQuery.end = this.listQuery.timeArray[1];
       } else {
@@ -457,9 +465,12 @@ export default {
             "&start=" +
             this.listQuery.start +
             "&end=" +
-            this.listQuery.end+"&limit=" +
-              this.total+"&order=asc"+
-            "&userId="+this.listQuery.userId
+            this.listQuery.end +
+            "&limit=" +
+            this.total +
+            "&order=asc" +
+            "&userId=" +
+            this.listQuery.userId
         )
         .catch(() => {
           this.list = [];
@@ -471,11 +482,8 @@ export default {
       this.listLoading = false;
       console.log(res.data);
 
-
-
-
       this.downloadLoading = true;
-      import("@/vendor/Export2Excel").then((excel) => {
+      import("@/vendor/Export2Excel").then(excel => {
         const tHeader = [
           "ID",
           "用户ID",
@@ -483,7 +491,7 @@ export default {
           "用户联系方式",
           "用户地址",
           "房间号",
-          "地址状态",
+          "地址状态"
         ];
         const filterVal = [
           "id",
@@ -492,7 +500,7 @@ export default {
           "userPhone",
           "userAddress",
           "userRoom",
-          "isDefault",
+          "isDefault"
         ];
         excel.export_json_to_excel2(
           tHeader,
@@ -502,7 +510,7 @@ export default {
         );
         this.downloadLoading = false;
       });
-    },
-  },
+    }
+  }
 };
 </script>

@@ -45,11 +45,7 @@
 					}
 				})
 			},
-
-
-
 			//提交
-
 			onShow() {
 				this.shopInfo = uni.getStorageSync('shopInfo')
 			},

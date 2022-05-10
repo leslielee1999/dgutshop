@@ -6,12 +6,10 @@
 	padding: 0 22rpx;
 	background: #f7f7f7;
 	border: 1px solid #FFFFFF;
-	-webkit-border-radius: 10rpx;
-	        border-radius: 10rpx;
+	border-radius: 10rpx;
 	font-size: 26rpx;
 	color: #F5F5F7;
-	-webkit-box-sizing: border-box;
-	        box-sizing: border-box;
+	box-sizing: border-box;
 }
 .radio:not(:last-child) {
 	margin: 0 20rpx 30rpx 0;

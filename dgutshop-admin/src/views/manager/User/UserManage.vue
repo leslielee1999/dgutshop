@@ -9,7 +9,7 @@
         style="width: 200px"
         placeholder="请输入用户的名字"
       /> -->
-            <el-input
+      <el-input
         v-model="listQuery.nickname"
         clearable
         class="filter-item"
@@ -34,12 +34,19 @@
         >查找</el-button
       >
 
-            <el-button
+      <el-button
         class="filter-item"
         type="success"
         icon="el-icon-download"
         @click="handleDownloadPage"
         >导出</el-button
+      >
+      <el-button
+        class="filter-item"
+        type="success"
+        icon="el-icon-refresh"
+        @click="handleReflash"
+        >刷新</el-button
       >
       <!-- <el-button
         class="filter-item"
@@ -59,22 +66,41 @@
       fit
       highlight-current-row
     >
-      <el-table-column align="center" label="ID" prop="id" sortable/>
-
+      <el-table-column align="center" label="ID" prop="id" sortable />
 
       <!-- <el-table-column align="center" label="用户姓名" prop="name" sortable/> -->
-      <el-table-column align="center" label="openId" prop="openId" sortable/>
-      <el-table-column align="center" label="微信昵称" prop="nickname" sortable/>
+      <!-- <el-table-column align="center" label="openId" prop="openId" sortable /> -->
+      <el-table-column
+        align="center"
+        label="微信昵称"
+        prop="nickname"
+        sortable
+      />
       <el-table-column align="center" label="用户性别" prop="gender" sortable>
         <template slot-scope="scope">
           <el-tag>{{ genderUser[scope.row.gender] }}</el-tag>
         </template>
-      </el-table-column>    
-        <el-table-column align="center" label="注册时间" prop="createTime" sortable/>
-        
-        <!-- <el-table-column align="center" label="用户微信号" prop="wechatId" sortable/> -->
-        <el-table-column align="center" label="用户最近一次的登陆时间" prop="lastLoginTime" sortable/>
-        <el-table-column align="center" label="用户最近一次的登陆IP" prop="lastLoginIp" sortable/>
+      </el-table-column>
+      <el-table-column
+        align="center"
+        label="注册时间"
+        prop="createTime"
+        sortable
+      />
+
+      <!-- <el-table-column align="center" label="用户微信号" prop="wechatId" sortable/> -->
+      <el-table-column
+        align="center"
+        label="用户最近一次的登陆时间"
+        prop="lastLoginTime"
+        sortable
+      />
+      <el-table-column
+        align="center"
+        label="用户最近一次的登陆IP"
+        prop="lastLoginIp"
+        sortable
+      />
 
       <el-table-column align="center" label="用户状态" prop="status" sortable>
         <template slot-scope="scope">
@@ -106,9 +132,8 @@
       @pagination="getList"
     />
 
-
     <!-- 修改对话框 -->
-    <el-dialog :visible.sync="isShowUpdate"  title="修改用户的状态">
+    <el-dialog :visible.sync="isShowUpdate" title="修改用户的状态">
       <!-- <h3>修改用户的状态</h3> -->
       <br />
       <el-form
@@ -128,21 +153,12 @@
           </el-radio-group>
         </el-form-item>
 
-        
         <br />
       </el-form>
       <span slot="footer" class="dialog-footer">
-      <el-button
-        type="info"
-        @click="hiddnUpdateForm()"
-        >取消</el-button
-      >
-      <el-button
-        type="success"
-        @click="handleUpdate('user')"
-        >修改</el-button
-      >
-       </span>
+        <el-button type="info" @click="hiddnUpdateForm()">取消</el-button>
+        <el-button type="success" @click="handleUpdate('user')">修改</el-button>
+      </span>
     </el-dialog>
   </div>
 </template>
@@ -182,8 +198,8 @@ export default {
   components: { Pagination },
   data() {
     return {
-      listAll:[],
-      excelData:[],
+      listAll: [],
+      excelData: [],
       // uploadPath,
       isShowUpdate: false,
       isShowForm: false,
@@ -196,10 +212,10 @@ export default {
         page: 1,
         limit: 10,
         name: "",
-        nickname:"",
-        wechatId:"",
+        nickname: "",
+        wechatId: "",
         sort: "add_time",
-        order: "desc",
+        order: "desc"
       },
       pickerOptions: {
         shortcuts: [
@@ -210,7 +226,7 @@ export default {
               const start = new Date();
               start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
               picker.$emit("pick", [start, end]);
-            },
+            }
           },
           {
             text: "最近一个月",
@@ -219,7 +235,7 @@ export default {
               const start = new Date();
               start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
               picker.$emit("pick", [start, end]);
-            },
+            }
           },
           {
             text: "最近三个月",
@@ -228,9 +244,9 @@ export default {
               const start = new Date();
               start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
               picker.$emit("pick", [start, end]);
-            },
-          },
-        ],
+            }
+          }
+        ]
       },
       genderUser: ["未知", "男", "女"],
       statusUser: ["可用", "不可登陆", "不可交易"],
@@ -240,35 +256,34 @@ export default {
         nickname: "",
         password: "",
         gender: "",
-        phone:"",
-        wechatId:"",
-        sessionKey:"",
+        phone: "",
+        wechatId: "",
+        sessionKey: "",
         create_time: null,
         update_time: null,
         lastLoginIp: null,
         lastLoginTime: null,
-        status:0,
-        lastLoginIp:"",
-        deleted: 0,
+        status: 0,
+        lastLoginIp: "",
+        deleted: 0
       },
       dialogFormVisible: false,
       dialogStatus: "",
       rules: {
         nickname: [
           { required: true, message: "管理员账号不能为空", trigger: "blur" },
-          { min: 6, max: 20, message: "长度在 6 到 20 个字符" },
+          { min: 6, max: 20, message: "长度在 6 到 20 个字符" }
         ],
         password: [
           { required: true, message: "密码不能为空", trigger: "blur" },
-          { min: 12, max: 20, message: "长度在 12 到 20 个字符" },
-        ],
+          { min: 12, max: 20, message: "长度在 12 到 20 个字符" }
+        ]
       },
-      downloadLoading: false,
+      downloadLoading: false
     };
   },
   created() {
     this.getList();
-
   },
   methods: {
     //     fastSort(arr) {
@@ -293,16 +308,16 @@ export default {
     //   // console.log(item)
     //   return this.fastSort(left).concat(item, this.fastSort(right));
     // },
-//         async getAllList(){
-// const { data: res_excel } = await this.$http
-//         .get("/admin/user/getAllUser")
-        
-//         this.excelData = res_excel
-//         console.log(this.excelData)
-//         },
+    //         async getAllList(){
+    // const { data: res_excel } = await this.$http
+    //         .get("/admin/user/getAllUser")
+
+    //         this.excelData = res_excel
+    //         console.log(this.excelData)
+    //         },
     async getList() {
       this.listLoading = true;
-       
+
       if (this.listQuery.timeArray && this.listQuery.timeArray.length === 2) {
         this.listQuery.start = this.listQuery.timeArray[0];
         this.listQuery.end = this.listQuery.timeArray[1];
@@ -314,17 +329,17 @@ export default {
       const { data: res } = await this.$http
         .get(
           "/admin/user/list?page=" +
-              this.listQuery.page +
-              "&name="+
+            this.listQuery.page +
+            "&name=" +
             this.listQuery.name +
-            "&nickname="+
-            this.listQuery.nickname+
-            "&wechatId="+
-            this.listQuery.wechatId+
+            "&nickname=" +
+            this.listQuery.nickname +
+            "&wechatId=" +
+            this.listQuery.wechatId +
             "&start=" +
             this.listQuery.start +
             "&end=" +
-            this.listQuery.end+
+            this.listQuery.end +
             "&order=asc"
         )
         .catch(() => {
@@ -337,6 +352,9 @@ export default {
       this.listLoading = false;
       console.log(res.data);
     },
+    handleReflash() {
+      this.getList();
+    },
     resetForm() {
       this.user = {
         id: 0,
@@ -344,16 +362,16 @@ export default {
         nickname: "",
         password: "",
         gender: "",
-        phone:"",
-        wechatId:"",
-        sessionKey:"",
+        phone: "",
+        wechatId: "",
+        sessionKey: "",
         create_time: null,
         update_time: null,
         lastLoginIp: null,
         lastLoginTime: null,
-        status:0,
-        lastLoginIp:"",
-        deleted: 0,
+        status: 0,
+        lastLoginIp: "",
+        deleted: 0
       };
     },
 
@@ -367,16 +385,16 @@ export default {
     },
     hiddnUpdateForm() {
       this.isShowUpdate = false;
-      this.getList()
+      this.getList();
     },
     handleUpdate(formName) {
-      this.$refs[formName].validate((valid) => {
+      this.$refs[formName].validate(valid => {
         if (valid) {
           this.$confirm("此操作将修改该用户状态, 是否继续?", "提示", {
             confirmButtonText: "确定",
             cancelButtonText: "取消",
             type: "warning",
-            center: true,
+            center: true
           })
             .then(async () => {
               console.log(this.user);
@@ -389,13 +407,13 @@ export default {
               this.isShowUpdate = false;
               this.$message({
                 type: "success",
-                message: "修改成功!",
+                message: "修改成功!"
               });
             })
             .catch(() => {
               this.$message({
                 type: "info",
-                message: "发生错误",
+                message: "发生错误"
               });
               this.isShowUpdate = false;
             });
@@ -412,7 +430,7 @@ export default {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
-        center: true,
+        center: true
       })
         .then(async () => {
           const { data: res } = await this.$http.post(
@@ -421,39 +439,58 @@ export default {
           this.getList();
           this.$message({
             type: "success",
-            message: "删除成功!",
+            message: "删除成功!"
           });
         })
         .catch(() => {
           this.$message({
             type: "info",
-            message: "已取消",
+            message: "已取消"
           });
           this.getList();
         });
     },
     async handleDownload() {
-      this.downloadLoading = true
-          // this.getAllList();
-          const { data: res_excel } = await this.$http
-        .get("/admin/user/getAllUser")
-        
-        this.excelData = res_excel
-          console.log(this.excelData)
-      import('@/vendor/Export2Excel').then(excel => {
-        const tHeader = ['ID', '用户姓名', '用户账号','用户性别', '用户联系方式',  '用户最近一次的登陆时间', '用户最近一次的登陆IP','用户状态']
-        const filterVal = ['id', 'name', 'nickname','gender', 'phone','lastLoginTime', 'lastLoginIp','status']
+      this.downloadLoading = true;
+      // this.getAllList();
+      const { data: res_excel } = await this.$http.get(
+        "/admin/user/getAllUser"
+      );
+
+      this.excelData = res_excel;
+      console.log(this.excelData);
+      import("@/vendor/Export2Excel").then(excel => {
+        const tHeader = [
+          "ID",
+          "用户姓名",
+          "用户账号",
+          "用户性别",
+          "用户联系方式",
+          "用户最近一次的登陆时间",
+          "用户最近一次的登陆IP",
+          "用户状态"
+        ];
+        const filterVal = [
+          "id",
+          "name",
+          "nickname",
+          "gender",
+          "phone",
+          "lastLoginTime",
+          "lastLoginIp",
+          "status"
+        ];
         excel.export_json_to_excel2(
           tHeader,
           this.excelData,
           filterVal,
-          '用户信息'
-        )
-        this.downloadLoading = false
-      })
+          "用户信息"
+        );
+        this.downloadLoading = false;
+      });
     },
-      async  handleDownloadPage() {
-           if (this.listQuery.timeArray && this.listQuery.timeArray.length === 2) {
+    async handleDownloadPage() {
+      if (this.listQuery.timeArray && this.listQuery.timeArray.length === 2) {
         this.listQuery.start = this.listQuery.timeArray[0];
         this.listQuery.end = this.listQuery.timeArray[1];
       } else {
@@ -465,15 +502,17 @@ export default {
         .get(
           "/admin/user/list?name=" +
             this.listQuery.name +
-            "&nickname="+
-            this.listQuery.nickname+
-            "&wechatId="+
-            this.listQuery.wechatId+
+            "&nickname=" +
+            this.listQuery.nickname +
+            "&wechatId=" +
+            this.listQuery.wechatId +
             "&start=" +
             this.listQuery.start +
             "&end=" +
-            this.listQuery.end+"&limit=" +
-              this.total+"&order=asc"
+            this.listQuery.end +
+            "&limit=" +
+            this.total +
+            "&order=asc"
         )
         .catch(() => {
           this.list = [];
@@ -485,23 +524,37 @@ export default {
       this.listLoading = false;
       console.log(res.data);
 
-
-
-
-
-      this.downloadLoading = true
-      import('@/vendor/Export2Excel').then(excel => {
-        const tHeader = ['ID', '用户姓名', '用户账号','用户性别', '用户联系方式', '用户最近一次的登陆时间', '用户最近一次的登陆IP','用户状态']
-        const filterVal = ['id', 'name', 'nickname','gender', 'phone','lastLoginTime', 'lastLoginIp','status']
+      this.downloadLoading = true;
+      import("@/vendor/Export2Excel").then(excel => {
+        const tHeader = [
+          "ID",
+          "用户姓名",
+          "用户账号",
+          "用户性别",
+          "用户联系方式",
+          "用户最近一次的登陆时间",
+          "用户最近一次的登陆IP",
+          "用户状态"
+        ];
+        const filterVal = [
+          "id",
+          "name",
+          "nickname",
+          "gender",
+          "phone",
+          "lastLoginTime",
+          "lastLoginIp",
+          "status"
+        ];
         excel.export_json_to_excel2(
           tHeader,
           this.listAll,
           filterVal,
-          '用户信息'
-        )
-        this.downloadLoading = false
-      })
-    },
-  },
+          "用户信息"
+        );
+        this.downloadLoading = false;
+      });
+    }
+  }
 };
 </script>

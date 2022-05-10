@@ -1,3 +1,11 @@
+/*
+ * @Author       : lg
+ * @Date         : 2022-02-27 13:14:26
+ * @LastEditors  : lg
+ * @LastEditTime : 2022-05-10 08:53:36
+ * @FilePath     : \dgutshop-admin\src\store\index.js
+ * @description  : 
+ */
 // 原始数据
 import Vue from 'vue'
 import Vuex from 'vuex'
@@ -7,52 +15,52 @@ Vue.use(Vuex)
 
 
 export default new Vuex.Store({
-  state: {
+    state: {
 
-    user: {},
-    token:'',
-    type:'',
-    userInform:[],
-    announcement:[]
-  },
-  mutations: {
-    setToken(state,token){
-state.token = token
-localStorage.setItem('token',token)
+        user: {},
+        token: '',
+        type: '',
+        userInform: [],
+        announcement: []
     },
-    setUser(state,user){
-      state.user=user
-      var obj = JSON.stringify(user);
-      localStorage.setItem('user',obj)
+    mutations: {
+        setToken(state, token) {
+            state.token = token
+            localStorage.setItem('token', token)
+        },
+        setUser(state, user) {
+            state.user = user
+            var obj = JSON.stringify(user);
+            localStorage.setItem('user', obj)
+        },
+        // setUserType(state,type){
+        //   state.user.type=type
+        //   localStorage.setItem('user',user)
+        // },
+        initUser(state) {
+            let user = window.sessionStorage.getItem('user')
+            if (user) {
+                state.user = JSON.parse(user)
+                state.token = storage.get('token')
+                // state.token = state.user.token
+            }
+        },
+
+        login(state, user) {
+            // 保存登录状态
+            state.user = user
+            state.token = storage.get('token')
+            // 存储到本地存储
+            window.sessionStorage.setItem('user', JSON.stringify(state.user))
+            window.sessionStorage.setItem('token', state.token)
+        },
+
+
     },
-    // setUserType(state,type){
-    //   state.user.type=type
-    //   localStorage.setItem('user',user)
-    // },
-		initUser(state){
-      let user = window.sessionStorage.getItem('user')
-			if(user){
-        state.user= JSON.parse(user)
-        state.token = storage.get('token')
-				// state.token = state.user.token
-			}
-  },
-  
-  login(state,user){
-    // 保存登录状态
-    state.user = user
-    state.token = storage.get('token')
-    // 存储到本地存储
-    window.sessionStorage.setItem('user',JSON.stringify(state.user))
-    window.sessionStorage.setItem('token',state.token)
-  },
-
-
-  },
-  actions: {
-  },
-  modules: {
-  }
+    actions: {
+    },
+    modules: {
+    }
 })
 
 // import Vue from "vue";

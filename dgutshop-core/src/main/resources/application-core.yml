@@ -1,8 +1,8 @@
 dgutshop:
   # 开发者应该设置成自己的wx相关信息
   wx:
-    app-id: wxa5b486c6b918ecfb
-    app-secret: e04004829d4c383b4db7769d88dfbca1
+    app-id: wx6d999608c898a1e9
+    app-secret: e9c44af2548f985dfc7828d5dc104e44
     mch-id: 111111
     mch-key: xxxxxx
     notify-url: http://www.example.com/wx/order/pay-notify
@@ -124,8 +124,8 @@ jwt:
     expiration: 60
 
 wx:
-  appid: wxef709d5567f6386c
-  secret: 11ad804814985f5265abba1e638e4916
+  appid: wx6d999608c898a1e9
+  secret: e9c44af2548f985dfc7828d5dc104e44
 
 #端口号
 #server.port: 8080

@@ -31,32 +31,19 @@ page {
   padding-top: 10px;
 }
 .list-box {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
   background-color: #fff;
-  -webkit-border-radius: 10px;
-          border-radius: 10px;
+  border-radius: 10px;
   overflow: hidden;
   margin: 0 10px;
   padding-left: 15px;
   padding-right: 15px;
 }
 .row {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
+  flex-direction: row;
+  align-items: center;
   height: 110rpx;
   background: #fff;
   border-bottom: #dadada solid 1rpx;
@@ -67,24 +54,16 @@ page {
   font-size: 30rpx;
 }
 .row .input {
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-          flex: 1;
+  flex: 1;
   font-size: 30rpx;
 }
 .row .icon-locationfill {
   font-size: 36rpx;
 }
 .add-btn {
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-          justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center;
+  justify-content: center;
+  align-items: center;
   margin-top: 20px;
   font-size: 20px;
   font-weight: 500;
